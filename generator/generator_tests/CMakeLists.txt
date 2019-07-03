@@ -17,6 +17,7 @@ set(
   feature_merger_test.cpp
   filter_elements_tests.cpp
   intermediate_data_test.cpp
+  language_detector_test.cpp
   maxspeeds_tests.cpp
   merge_collectors_tests.cpp
   metadata_parser_test.cpp
@@ -57,6 +58,7 @@ omim_link_libraries(
   drape_frontend
   shaders
   map
+  cld2
   routing
   search
   storage

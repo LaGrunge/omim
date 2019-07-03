@@ -15,8 +15,6 @@ add_gcc_compile_options("-Wno-deprecated-declarations")
 
 set(CMAKE_PREFIX_PATH ./)
 
-include_directories(common i18n common/unicode ./)
-
 set(
   SRC
   common/appendable.cpp
@@ -817,3 +815,4 @@ set(
 )
 
 add_library(${PROJECT_NAME} ${SRC})
+target_include_directories(${PROJECT_NAME} PUBLIC common i18n common/unicode ./)

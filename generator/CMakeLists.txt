@@ -3,7 +3,11 @@ project(generator)
 include_directories(
   ${OMIM_ROOT}/3party/gflags/src
   ${OMIM_ROOT}/3party/jansson/src
+  ${OMIM_ROOT}/3party/icu/common
+  ${OMIM_ROOT}/3party/icu/i18n
 )
+
+add_definitions(-DU_DISABLE_RENAMING)
 
 set(
   SRC
@@ -104,6 +108,8 @@ set(
   intermediate_elements.hpp
   key_value_storage.cpp
   key_value_storage.hpp
+  language_detector.cpp
+  language_detector.hpp
   locality_sorter.cpp
   locality_sorter.hpp
   maxspeeds_builder.cpp
