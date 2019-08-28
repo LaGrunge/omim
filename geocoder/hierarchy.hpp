@@ -90,7 +90,8 @@ public:
     std::array<NameDictionary::Position, static_cast<size_t>(Type::Count)> m_normalizedAddress{};
   };
 
-  explicit Hierarchy(std::vector<Entry> && entries, NameDictionary && normalizeNameDictionary);
+  Hierarchy(std::vector<Entry> && entries, NameDictionary && normalizeNameDictionary,
+            std::string && dataVersion);
 
   std::vector<Entry> const & GetEntries() const;
   NameDictionary const & GetNormalizedNameDictionary() const;
@@ -98,8 +99,14 @@ public:
   Entry const * GetEntryForOsmId(base::GeoObjectId const & osmId) const;
   bool IsParentTo(Hierarchy::Entry const & entry, Hierarchy::Entry const & toEntry) const;
 
+  std::string const & GetDataVersion() const
+  {
+    return m_dataVersion;
+  }
+
 private:
   std::vector<Entry> m_entries;
   NameDictionary m_normalizedNameDictionary;
+  std::string m_dataVersion;
 };
 }  // namespace geocoder

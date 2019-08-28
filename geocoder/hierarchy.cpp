@@ -177,9 +177,11 @@ Type Hierarchy::Entry::RankToType(uint8_t rank)
 }
 
 // Hierarchy ---------------------------------------------------------------------------------------
-Hierarchy::Hierarchy(vector<Entry> && entries, NameDictionary && normalizedNameDictionary)
+Hierarchy::Hierarchy(vector<Entry> && entries, NameDictionary && normalizedNameDictionary,
+                     std::string && dataVersion)
   : m_entries{move(entries)}
   , m_normalizedNameDictionary{move(normalizedNameDictionary)}
+  , m_dataVersion(move(dataVersion))
 {
   if (!is_sorted(m_entries.begin(), m_entries.end()))
   {
