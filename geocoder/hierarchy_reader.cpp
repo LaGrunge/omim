@@ -63,6 +63,7 @@ Hierarchy HierarchyReader::Read(unsigned int readersCount)
   vector<Entry> entries;
   NameDictionaryBuilder nameDictionaryBuilder;
   ParsingStats stats{};
+  std::string dataVersion;
 
   base::thread_pool::computational::ThreadPool threadPool{readersCount};
   list<future<ParsingResult>> tasks{};
@@ -75,6 +76,15 @@ Hierarchy HierarchyReader::Read(unsigned int readersCount)
     CHECK(!tasks.empty(), ());
     auto & task = tasks.front();
     auto taskResult = task.get();
+    if (!taskResult.m_dataVersion.empty())
+    {
+      if (!dataVersion.empty())
+        LOG(LERROR, ("Duplicate version key"));
+
+      dataVersion = taskResult.m_dataVersion;
+      LOG(LINFO, ("Loaded data version", dataVersion));
+    }
+
     tasks.pop_front();
 
     auto & taskEntries = taskResult.m_entries;
@@ -118,7 +128,7 @@ Hierarchy HierarchyReader::Read(unsigned int readersCount)
       ("Entries whose names do not match their most specific addresses:", stats.m_mismatchedNames));
   LOG(LINFO, ("(End of stats.)"));
 
-  return Hierarchy{move(entries), nameDictionaryBuilder.Release()};
+  return Hierarchy{move(entries), nameDictionaryBuilder.Release(), move(dataVersion)};
 }
 
 void HierarchyReader::CheckDuplicateOsmIds(vector<geocoder::Hierarchy::Entry> const & entries,
@@ -170,6 +180,7 @@ HierarchyReader::ParsingResult HierarchyReader::DeserializeEntries(
   entries.reserve(bufferSize);
   NameDictionaryBuilder nameDictionaryBuilder;
   ParsingStats stats;
+  std::string dataVersion;
 
   for (size_t i = 0; i < bufferSize; ++i)
   {
@@ -179,8 +190,16 @@ HierarchyReader::ParsingResult HierarchyReader::DeserializeEntries(
       continue;
 
     auto const p = line.find(' ');
-    uint64_t encodedId;
-    if (p == string::npos || !DeserializeId(line.substr(0, p), encodedId))
+
+    std::string const & key = line.substr(0, p);
+    if (key == kVersionKey)
+    {
+      dataVersion = line.substr(p + 1);
+      continue;
+    }
+
+    uint64_t encodedId = 0;
+    if (p == string::npos || !DeserializeId(key, encodedId))
     {
       LOG(LWARNING, ("Cannot read osm id. Line:", line));
       ++stats.m_badOsmIds;
@@ -207,7 +226,7 @@ HierarchyReader::ParsingResult HierarchyReader::DeserializeEntries(
     entries.push_back(move(entry));
   }
 
-  return {move(entries), nameDictionaryBuilder.Release(), move(stats)};
+  return {move(entries), nameDictionaryBuilder.Release(), move(stats), move(dataVersion)};
 }
 
 // static

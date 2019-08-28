@@ -18,6 +18,8 @@ namespace geocoder
 {
 class HierarchyReader
 {
+  static constexpr const char * kVersionKey = "version";
+
 public:
   using Entry = Hierarchy::Entry;
   using ParsingStats = Hierarchy::ParsingStats;
@@ -36,6 +38,7 @@ private:
     std::vector<Entry> m_entries;
     NameDictionary m_nameDictionary;
     ParsingStats m_stats;
+    std::string m_dataVersion;
   };
 
   ParsingResult ReadEntries(size_t count);

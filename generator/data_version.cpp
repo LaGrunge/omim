@@ -45,7 +45,7 @@ void DataVersion::DumpToPath(std::string const & path) const
   std::ofstream stream;
   stream.exceptions(std::ios::failbit | std::ios::badbit);
   stream.open(filePath);
-  stream << Key() << " " << GetVersionJson();
+  stream << Key() << " " << GetVersionJson() << std::endl;
 
   LOG(LINFO, ("Version of data has been written in", filePath));
 }
