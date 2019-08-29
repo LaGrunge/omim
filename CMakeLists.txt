@@ -62,7 +62,6 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 option(USE_ASAN "Enable Address Sanitizer" OFF)
 option(USE_TSAN "Enable Thread Sanitizer" OFF)
 option(PYBINDINGS "Create makefiles for building python bindings" OFF)
-option(BUILD_MAPSHOT "Build mapshot tool" OFF)
 option(USE_PCH "Use precompiled headers" OFF)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU" AND
@@ -304,10 +303,6 @@ add_subdirectory(transit)
 add_subdirectory(ugc)
 
 if (PLATFORM_DESKTOP)
-  if (BUILD_MAPSHOT)
-    add_subdirectory(mapshot)
-    add_subdirectory(software_renderer)
-  endif()
   add_subdirectory(feature_list)
   add_subdirectory(generator)
   add_subdirectory(geocoder)
