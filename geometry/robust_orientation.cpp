@@ -10,6 +10,11 @@ extern "C" {
 #pragma clang diagnostic ignored "-Wconditional-uninitialized"
 #include "3party/robust/predicates.c"
 #pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#include "3party/robust/predicates.c"
+#pragma GCC diagnostic pop
 #else
 #include "3party/robust/predicates.c"
 #endif

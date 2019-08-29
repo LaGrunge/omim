@@ -1,7 +1,9 @@
 project(agg)
 
-add_clang_compile_options("-Wno-deprecated-declarations")
-add_gcc_compile_options("-Wno-deprecated-declarations")
+add_clang_compile_options("-Wno-deprecated-declarations"
+                          "-Wno-conditional-uninitialized")
+add_gcc_compile_options("-Wno-deprecated-declarations"
+                        "-Wno-maybe-uninitialized")
 
 set(CMAKE_PREFIX_PATH ./)
 

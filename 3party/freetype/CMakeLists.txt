@@ -12,6 +12,7 @@ add_clang_compile_options("-Wno-unused-function")
 add_gcc_compile_options(
   "-Wno-pointer-to-int-cast"
   "-Wno-unused-function"
+  "-Wno-maybe-uninitialized"
 )
 
 include_directories(include)

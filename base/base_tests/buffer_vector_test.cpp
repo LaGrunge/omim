@@ -48,7 +48,9 @@ UNIT_TEST(BufferVectorBounds)
 UNIT_TEST(BufferVectorSwap)
 {
   typedef buffer_vector<size_t, 2> value_t;
-  buffer_vector<value_t, 2> v1, v2;
+
+  buffer_vector<value_t, 2> v1{};
+  buffer_vector<value_t, 2> v2{};
 
   for (size_t i = 0; i < 5; ++i)
   {

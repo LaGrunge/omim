@@ -10,6 +10,7 @@
 #include <type_traits>
 
 #include <boost/integer.hpp>
+#include <string.h>
 
 namespace math
 {
@@ -46,8 +47,10 @@ bool AlmostEqualULPs(TFloat x, TFloat y, unsigned int maxULPs = 256)
   typedef typename boost::int_t<bits>::exact IntType;
   typedef typename boost::uint_t<bits>::exact UIntType;
 
-  IntType xInt = *reinterpret_cast<IntType const *>(&x);
-  IntType yInt = *reinterpret_cast<IntType const *>(&y);
+  IntType xInt = 0;
+  IntType yInt = 0;
+  memcpy(&xInt, &x, sizeof(IntType));
+  memcpy(&yInt, &y, sizeof(IntType));
 
   // Make xInt and yInt lexicographically ordered as a twos-complement int
   IntType const highestBit = IntType(1) << (bits - 1);
