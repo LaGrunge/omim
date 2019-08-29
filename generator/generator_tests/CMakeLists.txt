@@ -58,7 +58,6 @@ omim_link_libraries(
   platform_tests_support
   map
   generator
-  shaders
   routing
   search
   storage
