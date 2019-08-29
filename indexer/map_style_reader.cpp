@@ -14,15 +14,9 @@ std::string const kSuffixVehicleClear = "_vehicle_clear";
 
 std::string const kStylesOverrideDir = "styles";
 
-#ifdef BUILD_DESIGNER
-std::string const kSuffixDesignTool = "_design";
-#endif // BUILD_DESIGNER
 
 std::string GetStyleRulesSuffix(MapStyle mapStyle)
 {
-#ifdef BUILD_DESIGNER
-  return kSuffixDesignTool;
-#else
   switch (mapStyle)
   {
   case MapStyleDark:
@@ -41,14 +35,10 @@ std::string GetStyleRulesSuffix(MapStyle mapStyle)
   }
   LOG(LWARNING, ("Unknown map style", mapStyle));
   return kSuffixClear;
-#endif // BUILD_DESIGNER
 }
 
 std::string GetStyleResourcesSuffix(MapStyle mapStyle)
 {
-#ifdef BUILD_DESIGNER
-  return kSuffixDesignTool;
-#else
   // We use the same resources for default and vehicle styles
   // to avoid textures duplication and package size increasing.
   switch (mapStyle)
@@ -67,7 +57,6 @@ std::string GetStyleResourcesSuffix(MapStyle mapStyle)
   }
   LOG(LWARNING, ("Unknown map style", mapStyle));
   return kSuffixClear;
-#endif // BUILD_DESIGNER
 }
 }  // namespace
 
@@ -101,12 +90,7 @@ ReaderPtr<Reader> StyleReader::GetDrawingRulesReader() const
   if (GetPlatform().IsFileExistsByFullPath(overriddenRulesFile))
     rulesFile = overriddenRulesFile;
 
-#ifdef BUILD_DESIGNER
-  // For Designer tool we have to look first into the resource folder.
-  return GetPlatform().GetReader(rulesFile, "rwf");
-#else
   return GetPlatform().GetReader(rulesFile);
-#endif
 }
 
 ReaderPtr<Reader> StyleReader::GetResourceReader(std::string const & file,
@@ -120,12 +104,7 @@ ReaderPtr<Reader> StyleReader::GetResourceReader(std::string const & file,
   if (GetPlatform().IsFileExistsByFullPath(overriddenResFile))
     resFile = overriddenResFile;
 
-#ifdef BUILD_DESIGNER
-  // For Designer tool we have to look first into the resource folder.
-  return GetPlatform().GetReader(resFile, "rwf");
-#else
   return GetPlatform().GetReader(resFile);
-#endif
 }
 
 ReaderPtr<Reader> StyleReader::GetDefaultResourceReader(std::string const & file) const

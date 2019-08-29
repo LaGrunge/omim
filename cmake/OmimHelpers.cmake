@@ -20,10 +20,6 @@ endfunction()
 
 macro(find_qt5_desktop_package package)
   find_package(${package})
-  if (NOT ${package}_FOUND)
-    message(FATAL_ERROR "Can't find ${package}, consider to set SKIP_DESKTOP"
-                        " if you don't need desktop app")
-  endif()
 endmacro()
 
 # Functions for using in subdirectories

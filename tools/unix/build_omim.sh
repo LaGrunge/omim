@@ -4,14 +4,11 @@ set -u -e
 OPT_DEBUG=
 OPT_RELEASE=
 OPT_CLEAN=
-OPT_SKIP_DESKTOP=
-OPT_DESIGNER=
 OPT_GCC=
 OPT_TARGET=
 OPT_PATH=
-OPT_STANDALONE=
 OPT_COMPILE_DATABASE=
-while getopts ":cdrstagjp:" opt; do
+while getopts ":cdrgjp:" opt; do
   case $opt in
     d)
       OPT_DEBUG=1
@@ -21,16 +18,6 @@ while getopts ":cdrstagjp:" opt; do
       ;;
     c)
       OPT_CLEAN=1
-      ;;
-    s)
-      OPT_SKIP_DESKTOP=1
-      CMAKE_CONFIG="${CMAKE_CONFIG:-} -DSKIP_DESKTOP=ON"
-      ;;
-    t)
-      OPT_DESIGNER=1
-      ;;
-    a)
-      OPT_STANDALONE=1
       ;;
     g)
       OPT_GCC=1
@@ -49,9 +36,6 @@ while getopts ":cdrstagjp:" opt; do
       echo -e "-d\tBuild omim-debug"
       echo -e "-r\tBuild omim-release"
       echo -e "-c\tClean before building"
-      echo -e "-s\tSkip desktop app building"
-      echo -e "-t\tBuild designer tool (only for MacOS X platform)"
-      echo -e "-a\tBuild standalone desktop app (only for MacOS X platform)"
       echo -e "-g\tForce use GCC (only for MacOS X platform)"
       echo -e "-p\tDirectory for built binaries"
       echo -e "-j\tGenerate compile_commands.json"
@@ -61,13 +45,6 @@ while getopts ":cdrstagjp:" opt; do
   esac
 done
 
-[ -n "$OPT_DESIGNER" -a -n "$OPT_SKIP_DESKTOP" ] &&
-echo "Can't skip desktop and build designer tool simultaneously" &&
-exit 2
-
-[ -n "$OPT_STANDALONE" -a -n "$OPT_SKIP_DESKTOP" ] &&
-echo "Can't skip desktop and build standalone desktop app simultaneously" &&
-exit 2
 
 OPT_TARGET=${@:$OPTIND}
 
@@ -107,12 +84,6 @@ if [ "$(uname -s)" == "Darwin" ]; then
     CMAKE_CONFIG="${CMAKE_CONFIG:-} -DCMAKE_C_COMPILER=/usr/local/bin/$GCC \
                                     -DCMAKE_CXX_COMPILER=/usr/local/bin/$GPP"
   fi
-else
-  [ -n "$OPT_DESIGNER" ] \
-  && echo "Designer tool supported only on MacOS X platform" && exit 2
-  [ -n "$OPT_STANDALONE" ] \
-  && echo "Standalone desktop app supported only on MacOS X platform" && exit 2
-  PROCESSES=$(nproc)
 fi
 
 build()
@@ -130,28 +101,15 @@ build()
   fi
   cd "$DIRNAME"
   TMP_FILE="build_error.log"
-  if [ -z "$OPT_DESIGNER" ]; then
-    if [ -n "$OPT_STANDALONE" ]; then
-      "$CMAKE" "$OMIM_PATH" -DCMAKE_BUILD_TYPE="$CONF" \
-      -DBUILD_STANDALONE:bool=True ${CMAKE_CONFIG:-}
-    else
-      "$CMAKE" "$OMIM_PATH" -DCMAKE_BUILD_TYPE="$CONF" ${CMAKE_CONFIG:-}
-    fi
-    echo ""
-    if ! make $OPT_TARGET -j $PROCESSES 2> "$TMP_FILE"; then
-      echo '--------------------'
-      cat "$TMP_FILE"
-      exit 1
-    fi
-  else
-    "$CMAKE" "$OMIM_PATH" -DCMAKE_BUILD_TYPE="$CONF" \
-    -DBUILD_DESIGNER:bool=True ${CMAKE_CONFIG:-}
-    if ! make package -j $PROCESSES 2> "$TMP_FILE"; then
-      echo '--------------------'
-      cat "$TMP_FILE"
-      exit 1
-    fi
+  PROCESSES=$(nproc)
+  "$CMAKE" "$OMIM_PATH" -DCMAKE_BUILD_TYPE="$CONF" ${CMAKE_CONFIG:-}
+  echo ""
+  if ! make $OPT_TARGET -j $PROCESSES 2> "$TMP_FILE"; then
+    echo '--------------------'
+    cat "$TMP_FILE"
+    exit 1
   fi
+
   if [ -n "$OPT_COMPILE_DATABASE" ]; then
     cp "$DIRNAME/compile_commands.json" "$OMIM_PATH"
   fi

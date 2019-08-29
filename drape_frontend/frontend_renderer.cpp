@@ -696,10 +696,6 @@ void FrontendRenderer::AcceptMessage(ref_ptr<Message> message)
 
   case Message::Type::UpdateMapStyle:
     {
-#ifdef BUILD_DESIGNER
-      classificator::Load();
-#endif // BUILD_DESIGNER
-
       // Clear all graphics.
       for (RenderLayer & layer : m_layers)
       {
