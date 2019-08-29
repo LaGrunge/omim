@@ -308,7 +308,6 @@ if (PLATFORM_DESKTOP)
 endif()
 
 omim_add_test_subdirectory(3party/gmock)
-omim_add_test_subdirectory(qt_tstfrm)
 
 if (PLATFORM_ANDROID)
   add_subdirectory(android/jni)
