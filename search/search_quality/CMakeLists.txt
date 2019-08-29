@@ -15,10 +15,6 @@ set(SRC
 
 omim_add_library(${PROJECT_NAME} ${SRC})
 
-if (NOT SKIP_DESKTOP)
-  add_subdirectory(assessment_tool)
-endif()
-
 add_subdirectory(booking_dataset_generator)
 add_subdirectory(features_collector_tool)
 add_subdirectory(samples_generation_tool)
