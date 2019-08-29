@@ -279,7 +279,7 @@ void BookmarkCatalog::Download(std::string const & id, std::string const & acces
     {
       m_downloadingIds.erase(id);
 
-      DownloadResult downloadResult;
+      DownloadResult downloadResult = DownloadResult::Success;
       switch (result.m_status)
       {
       case platform::RemoteFile::Status::Ok:

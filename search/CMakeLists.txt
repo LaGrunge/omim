@@ -177,7 +177,7 @@ omim_add_pybindings_subdirectory(pysearch)
 omim_add_test_subdirectory(search_tests)
 omim_add_test_subdirectory(search_integration_tests)
 
-target_link_libraries(
+omim_link_libraries(
   ${PROJECT_NAME}
   openlocationcode
 )

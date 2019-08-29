@@ -99,7 +99,8 @@ void ParsePatternsList(string const & patternsFile, ToDo toDo)
     strings::Tokenize(patternStr, " ", [&](string const & token)
     {
       double d = 0.0;
-      VERIFY(strings::to_double(token, d), ());
+      bool ok = strings::to_double(token, d);
+      VERIFY(ok, ());
       pattern.push_back(d);
     });
 

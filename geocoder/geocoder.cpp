@@ -68,8 +68,8 @@ struct ScopedMarkTokens
 
   geocoder::Geocoder::Context & m_context;
   Type const m_type;
-  size_t m_l;
-  size_t m_r;
+  size_t m_l = 0;
+  size_t m_r = 0;
 };
 
 geocoder::Type NextType(geocoder::Type type)
