@@ -19,6 +19,13 @@ set(
   base/text_index/text_index.cpp
   base/text_index/text_index.hpp
   base/text_index/utils.hpp
+  bookmarks/data.cpp
+  bookmarks/data.hpp
+  bookmarks/processor.cpp
+  bookmarks/processor.hpp
+  bookmarks/results.hpp
+  bookmarks/types.cpp
+  bookmarks/types.hpp
   cancel_exception.hpp
   categories_cache.cpp
   categories_cache.hpp
