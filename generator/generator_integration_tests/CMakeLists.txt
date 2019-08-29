@@ -14,12 +14,10 @@ omim_link_libraries(
   generator_tests_support
   platform_tests_support
   generator
-  drape_frontend
   shaders
   routing
   search
   storage
-  drape
   traffic
   routing_common
   descriptions

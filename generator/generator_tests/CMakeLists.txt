@@ -58,12 +58,10 @@ omim_link_libraries(
   platform_tests_support
   map
   generator
-  drape_frontend
   shaders
   routing
   search
   storage
-  drape
   traffic
   routing_common
   descriptions
