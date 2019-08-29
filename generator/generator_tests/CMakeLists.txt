@@ -65,7 +65,6 @@ omim_link_libraries(
   routing_common
   descriptions
   transit
-  kml
   editor
   indexer
   platform
