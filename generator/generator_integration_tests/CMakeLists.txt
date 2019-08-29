@@ -16,7 +16,6 @@ omim_link_libraries(
   generator
   drape_frontend
   shaders
-  map
   routing
   search
   storage

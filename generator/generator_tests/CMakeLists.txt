@@ -56,10 +56,10 @@ omim_link_libraries(
   ${PROJECT_NAME}
   generator_tests_support
   platform_tests_support
+  map
   generator
   drape_frontend
   shaders
-  map
   routing
   search
   storage
