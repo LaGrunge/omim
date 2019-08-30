@@ -62,7 +62,6 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 option(USE_ASAN "Enable Address Sanitizer" OFF)
 option(USE_TSAN "Enable Thread Sanitizer" OFF)
 option(PYBINDINGS "Create makefiles for building python bindings" OFF)
-option(USE_PCH "Use precompiled headers" OFF)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU" AND
     CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.0)
@@ -185,9 +184,6 @@ if (NOT PLATFORM_IPHONE AND NOT PLATFORM_ANDROID)
   endif()
 endif()
 
-if (PLATFORM_LINUX)
-  find_package(OpenGL)
-endif()
 
 find_library(LIBZ NAMES z)
 if (LIBZ STREQUAL "LIBZ-NOTFOUND")
@@ -225,20 +221,10 @@ if (USE_TSAN)
   )
 endif()
 
-if (USE_PCH)
-  message("Precompiled headers are ON")
-  set(OMIM_PCH_TARGET_NAME "omim_pch")
-  add_precompiled_headers(
-    ${OMIM_ROOT}/precompiled_headers.hpp
-    ${OMIM_PCH_TARGET_NAME}
-  )
-endif()
 
 # Include subdirectories
-add_subdirectory(3party/agg)
 add_subdirectory(3party/bsdiff-courgette)
 add_subdirectory(3party/expat)
-add_subdirectory(3party/freetype)
 add_subdirectory(3party/gflags)
 add_subdirectory(3party/icu)
 add_subdirectory(3party/jansson)
@@ -247,15 +233,9 @@ add_subdirectory(3party/minizip)
 add_subdirectory(3party/opening_hours)
 add_subdirectory(3party/protobuf)
 add_subdirectory(3party/pugixml)
-add_subdirectory(3party/sdf_image)
-add_subdirectory(3party/stb_image)
 add_subdirectory(3party/succinct)
 add_subdirectory(3party/open-location-code)
-add_subdirectory(3party/vulkan_wrapper)
-
-if (PLATFORM_DESKTOP)
-  add_subdirectory(3party/libtess2)
-endif()
+add_subdirectory(3party/libtess2)
 
 # Only options related to warnings should be placed here.
 # Other options should be set before all add_subdirectory calls.
@@ -284,31 +264,18 @@ add_subdirectory(generator/mwm_diff)
 add_subdirectory(geometry)
 add_subdirectory(indexer)
 add_subdirectory(map)
-add_subdirectory(metrics)
 add_subdirectory(platform)
 add_subdirectory(routing)
 add_subdirectory(routing_common)
 add_subdirectory(search)
 add_subdirectory(stats)
 add_subdirectory(storage)
-add_subdirectory(tracking)
 add_subdirectory(traffic)
 add_subdirectory(transit)
 add_subdirectory(ugc)
+add_subdirectory(generator)
+add_subdirectory(geocoder)
 
-if (PLATFORM_DESKTOP)
-  add_subdirectory(feature_list)
-  add_subdirectory(generator)
-  add_subdirectory(geocoder)
-  add_subdirectory(track_analyzing)
-  add_subdirectory(track_generator)
-endif()
-
-omim_add_test_subdirectory(3party/gmock)
-
-if (PLATFORM_ANDROID)
-  add_subdirectory(android/jni)
-endif()
 
 add_custom_target(BuildVersion ALL
   COMMAND ${CMAKE_COMMAND}

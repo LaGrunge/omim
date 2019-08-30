@@ -25,7 +25,6 @@ omim_link_libraries(
   coding
   base
   opening_hours
-  freetype
   expat
   icu
   jansson
