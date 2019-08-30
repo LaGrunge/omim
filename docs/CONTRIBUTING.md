@@ -118,7 +118,6 @@ Some of these contain their own README files.
 * `shaders` - shaders for rendering.
 * `skin_generator` - a console app for building skin files with icons and symbols.
 * `software_renderer` -
-* `stats` - Alohalytics statistics.
 * `testing` - common interfaces for tests.
 * `tizen` - Tizen application.
 * `tools` - tools for building packages and maps, for testing etc.

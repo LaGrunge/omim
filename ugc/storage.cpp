@@ -27,7 +27,6 @@
 #include <map>
 #include <utility>
 
-#include "3party/Alohalytics/src/alohalytics.h"
 #include "3party/jansson/myjansson.hpp"
 
 #include <boost/optional/optional.hpp>
@@ -74,9 +73,6 @@ void DeserializeIndexes(string const & jsonData, ugc::UpdateIndexes & res)
   catch (base::Json::Exception const & e)
   {
     LOG(LERROR, ("Exception while indexes deserialization. Reason:", e.what()));
-    map<string, string> const stat = {
-        {"error", "Cannot deserialize indexes. Content: " + jsonData}};
-    alohalytics::Stats::Instance().LogEvent("UGC_File_error", stat);
     res.clear();
   }
 }
@@ -94,17 +90,10 @@ void DeserializeUGCUpdate(vector<uint8_t> const & buf, ugc::UGCUpdate & dst)
   catch (ugc::BadBlob const & e)
   {
     LOG(LERROR, ("BadBlob exception while UGCUpdate deserialization. Reason:", e.what()));
-    map<string, string> const stat = {
-        {"error", "Cannot deserialize UGCUpdate. Bad blob exception. Content: " +
-                      std::string(buf.cbegin(), buf.cend())}};
-    alohalytics::Stats::Instance().LogEvent("UGC_File_error", stat);
   }
   catch (Reader::Exception const & e)
   {
     LOG(LERROR, ("Exception while UGCUpdate deserialization. Reason:", e.what()));
-    map<string, string> const stat = {{"error", "Cannot deserialize UGCUpdate. Content: " +
-                                                    std::string(buf.cbegin(), buf.cend())}};
-    alohalytics::Stats::Instance().LogEvent("UGC_File_error", stat);
   }
 
   dst = {};
@@ -247,8 +236,6 @@ void FindZombieObjects(size_t indexesCount)
     auto const error = "Cannot deserialize ugc.update.bin file during zombie objects search";
     LOG(LERROR, (error));
 
-    map<string, string> errorParams = {{"error", error}};
-    alohalytics::Stats::Instance().LogEvent("UGC_File_error", errorParams);
     return;
   }
 
@@ -257,9 +244,6 @@ void FindZombieObjects(size_t indexesCount)
 
   auto const zombieCount = ugcCount - indexesCount;
   LOG(LERROR, ("Zombie objects are detected. ", zombieCount, "zombie objects are found."));
-
-  map<string, string> errorParams = {{"error", "zombie: " + strings::to_string(zombieCount)}};
-  alohalytics::Stats::Instance().LogEvent("UGC_File_error", errorParams);
 }
 }  // namespace
 
@@ -321,8 +305,6 @@ void Storage::Load()
   if (data.empty())
   {
     ASSERT(false, ());
-    map<string, string> const stat = {{"error", "empty index file"}};
-    alohalytics::Stats::Instance().LogEvent("UGC_File_error", stat);
     return;
   }
 

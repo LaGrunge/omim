@@ -51,7 +51,6 @@
 
 #include <algorithm>
 
-#include "3party/Alohalytics/src/alohalytics.h"
 #include "3party/open-location-code/openlocationcode.h"
 
 using namespace std;
@@ -77,31 +76,6 @@ m2::RectD GetRectAroundPosition(m2::PointD const & position)
 
 void SendStatistics(SearchParams const & params, m2::RectD const & viewport, Results const & res)
 {
-
-  string resultString = strings::to_string(res.GetCount());
-  for (size_t i = 0; i < res.GetCount(); ++i)
-    resultString.append("\t" + res[i].ToStringForStats());
-
-  string posX, posY;
-  if (params.m_position)
-  {
-    auto const position = *params.m_position;
-    posX = strings::to_string(position.x);
-    posY = strings::to_string(position.y);
-  }
-
-  alohalytics::TStringMap const stats = {
-      {"posX", posX},
-      {"posY", posY},
-      {"viewportMinX", strings::to_string(viewport.minX())},
-      {"viewportMinY", strings::to_string(viewport.minY())},
-      {"viewportMaxX", strings::to_string(viewport.maxX())},
-      {"viewportMaxY", strings::to_string(viewport.maxY())},
-      {"query", params.m_query},
-      {"locale", params.m_inputLocale},
-      {"results", resultString},
-  };
-  alohalytics::LogEvent("searchEmitResultsAndCoords", stats);
   GetPlatform().GetMarketingService().SendMarketingEvent(marketing::kSearchEmitResultsAndCoords, {});
 }
 

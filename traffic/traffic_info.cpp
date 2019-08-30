@@ -32,7 +32,6 @@
 
 #include "private.h"
 
-#include "3party/Alohalytics/src/alohalytics.h"
 
 namespace traffic
 {
@@ -122,11 +121,6 @@ TrafficInfo::TrafficInfo(MwmSet::MwmId const & mwmId, int64_t currentDataVersion
         auto const info = mwmId.GetInfo();
         LOG(LINFO, ("Could not read traffic keys from section. MWM:", info->GetCountryName(),
                 "Version:", info->GetVersion()));
-
-              alohalytics::LogEvent(
-        "$TrafficReadSectionError",
-        alohalytics::TStringMap({{"mwm", info->GetCountryName()},
-                                 {"version", strings::to_string(info->GetVersion())}}));        
       }
     }
     else
@@ -470,11 +464,6 @@ TrafficInfo::ServerDataStatus TrafficInfo::ReceiveTrafficValues(string & etag, v
     LOG(LWARNING, ("Could not read traffic values received from server. MWM:",
                    info->GetCountryName(), "Version:", info->GetVersion()));
 
-    alohalytics::LogEvent(
-        "$TrafficReadError",
-        alohalytics::TStringMap({{"mwm", info->GetCountryName()},
-                                 {"version", strings::to_string(info->GetVersion())}}));
-
     return ServerDataStatus::Error;
   }
   // Update ETag for this MWM.
@@ -496,10 +485,7 @@ bool TrafficInfo::UpdateTrafficData(vector<SpeedGroup> const & values)
     LOG(LWARNING,
         ("The number of received traffic values does not correspond to the number of keys:",
          m_keys.size(), "keys", values.size(), "values."));
-    alohalytics::LogEvent(
-        "$TrafficUpdateError",
-        alohalytics::TStringMap({{"keysCount", strings::to_string(m_keys.size())},
-                                 {"valuesCount", strings::to_string(values.size())}}));
+
     m_availability = Availability::NoData;
     return false;
   }
@@ -539,9 +525,6 @@ TrafficInfo::ServerDataStatus TrafficInfo::ProcessFailure(platform::HttpClient c
   }
 
   m_availability = Availability::Unknown;
-  alohalytics::LogEvent(
-                        "$TrafficNetworkError",
-                        alohalytics::TStringMap({{"code", strings::to_string(request.ErrorCode())}}));
 
   return ServerDataStatus::Error;
 }

@@ -111,7 +111,7 @@ Platform::Platform()
   LOG(LDEBUG, ("Settings Directory:", m_settingsDir));
 }
 
-std::string Platform::UniqueClientId() const { return [Alohalytics installationId].UTF8String; }
+std::string Platform::UniqueClientId() const { return {}; }
 
 std::string Platform::AdvertisingId() const
 {
