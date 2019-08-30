@@ -4,8 +4,3 @@
 [submodule "3party/protobuf/protobuf"]
   path = 3party/protobuf/protobuf
   url = git://github.com/mapsme/protobuf.git
-[submodule "3party/boost"]
-  path = 3party/boost
-  url = https://github.com/boostorg/boost.git
-  branch = boost-1.68.0
-  ignore = dirty
