@@ -58,7 +58,6 @@ omim_link_libraries(
   coding
   geometry
   base
-  stats_client
   icu
   jansson
   tess2

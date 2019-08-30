@@ -27,7 +27,6 @@ omim_link_libraries(
   minizip
   jansson
   pugixml
-  stats_client
   opening_hours
   succinct
   oauthcpp
