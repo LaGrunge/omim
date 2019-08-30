@@ -29,7 +29,6 @@ omim_link_libraries(
   base
   expat
   icu
-  agg
   jansson
   protobuf
   stats_client

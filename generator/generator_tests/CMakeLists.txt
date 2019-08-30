@@ -71,10 +71,8 @@ omim_link_libraries(
   geometry
   coding
   base
-  freetype
   expat
   icu
-  agg
   jansson
   protobuf
   stats_client
@@ -85,8 +83,6 @@ omim_link_libraries(
   gflags
   oauthcpp
   opening_hours
-  stb_image
-  sdf_image
   ugc
   # TODO(syershov): Use FindPackage.
   sqlite3
