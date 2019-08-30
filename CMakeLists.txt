@@ -184,9 +184,6 @@ if (NOT PLATFORM_IPHONE AND NOT PLATFORM_ANDROID)
   endif()
 endif()
 
-if (PLATFORM_LINUX)
-  find_package(OpenGL)
-endif()
 
 find_library(LIBZ NAMES z)
 if (LIBZ STREQUAL "LIBZ-NOTFOUND")
@@ -226,10 +223,8 @@ endif()
 
 
 # Include subdirectories
-add_subdirectory(3party/agg)
 add_subdirectory(3party/bsdiff-courgette)
 add_subdirectory(3party/expat)
-add_subdirectory(3party/freetype)
 add_subdirectory(3party/gflags)
 add_subdirectory(3party/icu)
 add_subdirectory(3party/jansson)
@@ -238,15 +233,9 @@ add_subdirectory(3party/minizip)
 add_subdirectory(3party/opening_hours)
 add_subdirectory(3party/protobuf)
 add_subdirectory(3party/pugixml)
-add_subdirectory(3party/sdf_image)
-add_subdirectory(3party/stb_image)
 add_subdirectory(3party/succinct)
 add_subdirectory(3party/open-location-code)
-add_subdirectory(3party/vulkan_wrapper)
-
-if (PLATFORM_DESKTOP)
-  add_subdirectory(3party/libtess2)
-endif()
+add_subdirectory(3party/libtess2)
 
 # Only options related to warnings should be placed here.
 # Other options should be set before all add_subdirectory calls.
@@ -284,20 +273,9 @@ add_subdirectory(storage)
 add_subdirectory(traffic)
 add_subdirectory(transit)
 add_subdirectory(ugc)
+add_subdirectory(generator)
+add_subdirectory(geocoder)
 
-if (PLATFORM_DESKTOP)
-  add_subdirectory(feature_list)
-  add_subdirectory(generator)
-  add_subdirectory(geocoder)
-  add_subdirectory(track_analyzing)
-  add_subdirectory(track_generator)
-endif()
-
-omim_add_test_subdirectory(3party/gmock)
-
-if (PLATFORM_ANDROID)
-  add_subdirectory(android/jni)
-endif()
 
 add_custom_target(BuildVersion ALL
   COMMAND ${CMAKE_COMMAND}

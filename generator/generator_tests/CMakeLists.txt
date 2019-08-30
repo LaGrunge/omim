@@ -88,7 +88,6 @@ omim_link_libraries(
   stb_image
   sdf_image
   ugc
-  vulkan_wrapper
   # TODO(syershov): Use FindPackage.
   sqlite3
   ${LIBZ}
