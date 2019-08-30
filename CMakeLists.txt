@@ -62,7 +62,6 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 option(USE_ASAN "Enable Address Sanitizer" OFF)
 option(USE_TSAN "Enable Thread Sanitizer" OFF)
 option(PYBINDINGS "Create makefiles for building python bindings" OFF)
-option(USE_PCH "Use precompiled headers" OFF)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU" AND
     CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.0)
@@ -225,14 +224,6 @@ if (USE_TSAN)
   )
 endif()
 
-if (USE_PCH)
-  message("Precompiled headers are ON")
-  set(OMIM_PCH_TARGET_NAME "omim_pch")
-  add_precompiled_headers(
-    ${OMIM_ROOT}/precompiled_headers.hpp
-    ${OMIM_PCH_TARGET_NAME}
-  )
-endif()
 
 # Include subdirectories
 add_subdirectory(3party/agg)
