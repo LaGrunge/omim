@@ -10,7 +10,6 @@
 
 #include <algorithm>
 
-#include "3party/Alohalytics/src/alohalytics.h"
 
 namespace
 {
@@ -42,8 +41,6 @@ void Manager::Load(LocalMapsInfo && info)
     if (m_diffs.empty())
     {
       m_status = Status::NotAvailable;
-
-      alohalytics::Stats::Instance().LogEvent("Downloader_DiffScheme_OnStart_fallback");
     }
     else
     {
@@ -116,10 +113,6 @@ void Manager::ApplyDiff(ApplyDiffParams && p, base::Cancellable const & cancella
     case DiffApplicationResult::Failed:
     {
       diffFile->DeleteFromDisk(MapOptions::Diff);
-      alohalytics::Stats::Instance().LogEvent(
-          "Downloader_DiffScheme_error",
-          {{"type", "patching"},
-           {"error", isFilePrepared ? "Cannot apply diff" : "Cannot prepare file"}});
 
       std::lock_guard<std::mutex> lock(m_mutex);
       m_status = Status::NotAvailable;

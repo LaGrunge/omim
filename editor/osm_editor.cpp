@@ -39,7 +39,6 @@
 #include <array>
 #include <sstream>
 
-#include "3party/Alohalytics/src/alohalytics.h"
 #include "3party/opening_hours/opening_hours.hpp"
 #include "3party/pugixml/src/pugixml.hpp"
 
@@ -427,7 +426,6 @@ Editor::SaveResult Editor::SaveEditedFeature(EditableMapObject const & emo)
     if (!originalObjectPtr)
     {
       LOG(LERROR, ("A feature with id", fid, "cannot be loaded."));
-      alohalytics::LogEvent("Editor_MissingFeature_Error");
       return SaveResult::SavingError;
     }
     fti.m_object = emo;
@@ -579,7 +577,6 @@ EditableProperties Editor::GetEditableProperties(FeatureType & feature) const
     if (!originalObjectPtr)
     {
       LOG(LERROR, ("A feature with id", fid, "cannot be loaded."));
-      alohalytics::LogEvent("Editor_MissingFeature_Error");
       return {};
     }
 
@@ -636,7 +633,6 @@ void Editor::UploadChanges(string const & key, string const & secret, ChangesetT
 {
   if (m_notes->NotUploadedNotesCount())
   {
-    alohalytics::LogEvent("Editor_UploadNotes", strings::to_string(m_notes->NotUploadedNotesCount()));
     m_notes->Upload(OsmOAuth::ServerAuth({key, secret}));
   }
 
@@ -647,8 +643,6 @@ void Editor::UploadChanges(string const & key, string const & secret, ChangesetT
     LOG(LDEBUG, ("There are no local edits to upload."));
     return;
   }
-
-  alohalytics::LogEvent("Editor_DataSync_started");
 
   auto upload = [this](string key, string secret, ChangesetTags tags, FinishUploadCallback callback)
   {
@@ -737,7 +731,6 @@ void Editor::UploadChanges(string const & key, string const & secret, ChangesetT
             if (!originalObjectPtr)
             {
               LOG(LERROR, ("A feature with id", fti.m_object.GetID(), "cannot be loaded."));
-              alohalytics::LogEvent("Editor_MissingFeature_Error");
               GetPlatform().RunTask(Platform::Thread::Gui, [this, fid = fti.m_object.GetID()]() {
                 RemoveFeatureIfExists(fid);
               });
@@ -767,7 +760,6 @@ void Editor::UploadChanges(string const & key, string const & secret, ChangesetT
             if (!originalObjectPtr)
             {
               LOG(LERROR, ("A feature with id", fti.m_object.GetID(), "cannot be loaded."));
-              alohalytics::LogEvent("Editor_MissingFeature_Error");
               GetPlatform().RunTask(Platform::Thread::Gui, [this, fid = fti.m_object.GetID()]() {
                 RemoveFeatureIfExists(fid);
               });
@@ -807,14 +799,6 @@ void Editor::UploadChanges(string const & key, string const & secret, ChangesetT
         if (uploadInfo.m_uploadStatus != kUploaded)
         {
           ms::LatLon const ll = fti.m_object.GetLatLon();
-          alohalytics::LogEvent(
-              "Editor_DataSync_error",
-              {{"type", fti.m_uploadStatus},
-               {"details", fti.m_uploadError},
-               {"our", ourDebugFeatureString},
-               {"mwm", fti.m_object.GetID().GetMwmName()},
-               {"mwm_version", strings::to_string(fti.m_object.GetID().GetMwmVersion())}},
-              alohalytics::Location::FromLatLon(ll.m_lat, ll.m_lon));
         }
 
         GetPlatform().RunTask(Platform::Thread::Gui,
@@ -825,10 +809,6 @@ void Editor::UploadChanges(string const & key, string const & secret, ChangesetT
       }
     }
 
-    alohalytics::LogEvent("Editor_DataSync_finished",
-                          {{"errors", strings::to_string(errorsCount)},
-                           {"uploaded", strings::to_string(uploadedFeaturesCount)},
-                           {"changeset", strings::to_string(changeset.GetChangesetId())}});
     if (callback)
     {
       UploadResult result = UploadResult::NothingToUpload;
@@ -892,7 +872,6 @@ bool Editor::FillFeatureInfo(FeatureStatus status, XMLFeature const & xml, Featu
     if (!originalObjectPtr)
     {
       LOG(LERROR, ("A feature with id", fid, "cannot be loaded."));
-      alohalytics::LogEvent("Editor_MissingFeature_Error");
       return false;
     }
 
@@ -1132,7 +1111,6 @@ void Editor::MarkFeatureWithStatus(FeaturesContainer & editableFeatures, Feature
   if (!originalObjectPtr)
   {
     LOG(LERROR, ("A feature with id", fid, "cannot be loaded."));
-    alohalytics::LogEvent("Editor_MissingFeature_Error");
     return;
   }
 

@@ -26,7 +26,6 @@ omim_link_libraries(
   protobuf
   pugixml
   expat
-  stats_client
 )
 
 link_qt5_core(${PROJECT_NAME})

@@ -22,7 +22,6 @@ omim_link_libraries(
   oauthcpp
   opening_hours
   pugixml
-  stats_client
   ${LIBZ}
 )
 

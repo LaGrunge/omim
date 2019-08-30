@@ -8,8 +8,6 @@
 #include "base/stl_helpers.hpp"
 #include "base/thread_pool_delayed.hpp"
 
-#include "3party/Alohalytics/src/alohalytics.h"
-
 #include <sstream>
 #include <utility>
 
@@ -43,11 +41,8 @@ void DoPing(string const & url, size_t index, vector<string> & readyUrls)
   }
 }
 
-void SendStatistics(size_t serversLeft)
+void SendStatistics(size_t)
 {
-  alohalytics::Stats::Instance().LogEvent(
-      "Downloader_ServerList_check",
-      {{"lang", languages::GetCurrentNorm()}, {"servers", to_string(serversLeft)}});
 }
 }  // namespace
 

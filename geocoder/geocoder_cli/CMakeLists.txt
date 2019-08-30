@@ -17,7 +17,6 @@ omim_link_libraries(
   platform
   coding
   base
-  stats_client
   jansson
   ${LIBZ}
   gflags

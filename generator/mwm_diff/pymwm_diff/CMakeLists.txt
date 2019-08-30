@@ -16,7 +16,6 @@ omim_link_libraries(
   platform
   coding
   base
-  stats_client
   ${PYTHON_LIBRARIES}
   ${Boost_LIBRARIES}
   ${LIBZ}

@@ -30,7 +30,6 @@
 
 #include <limits>
 
-#include "3party/Alohalytics/src/alohalytics.h"
 
 using namespace downloader;
 using namespace generator::mwm_diff;
@@ -88,10 +87,6 @@ bool ValidateIntegrity(LocalFilePtr mapLocalFile, string const & countryId, stri
   if (mapLocalFile->ValidateIntegrity())
     return true;
 
-  alohalytics::LogEvent("$MapIntegrityFailure",
-                        alohalytics::TStringMap({{"mwm", countryId},
-                                                 {"version", strings::to_string(version)},
-                                                 {"source", source}}));
   return false;
 }
 }  // namespace
@@ -1030,12 +1025,6 @@ void Storage::OnMapDownloadFinished(CountryId const & countryId, HttpRequest::St
   ASSERT_NOT_EQUAL(MapOptions::Nothing, options,
                    ("This method should not be called for empty files set."));
 
-  alohalytics::LogEvent("$OnMapDownloadFinished",
-                        alohalytics::TStringMap(
-                            {{"name", countryId},
-                             {"status", status == HttpRequest::Status::Completed ? "ok" : "failed"},
-                             {"version", strings::to_string(GetCurrentDataVersion())},
-                             {"option", DebugPrint(options)}}));
   GetPlatform().GetMarketingService().SendMarketingEvent(marketing::kDownloaderMapActionFinished,
                                                          {{"action", "download"}});
 

@@ -75,7 +75,6 @@ omim_link_libraries(
   icu
   jansson
   protobuf
-  stats_client
   minizip
   succinct
   pugixml

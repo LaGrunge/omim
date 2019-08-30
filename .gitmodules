@@ -1,9 +1,6 @@
 [submodule "tools/osmctools"]
   path = tools/osmctools
   url = git://github.com/mapsme/osmctools.git
-[submodule "3party/Alohalytics"]
-  path = 3party/Alohalytics
-  url = git://github.com/mapsme/Alohalytics.git
 [submodule "3party/protobuf/protobuf"]
   path = 3party/protobuf/protobuf
   url = git://github.com/mapsme/protobuf.git

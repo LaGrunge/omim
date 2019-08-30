@@ -36,6 +36,7 @@ omim_link_libraries(
   search_tests_support
   generator_tests_support
   platform_tests_support
+  kml
   search
   editor
   indexer
@@ -49,7 +50,6 @@ omim_link_libraries(
   opening_hours
   protobuf
   pugixml
-  stats_client
   succinct
   icu
   ${LIBZ}

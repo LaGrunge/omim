@@ -59,7 +59,6 @@ omim_link_libraries(
   jansson
   minizip
   succinct
-  stats_client
   ${Qt5Widgets_LIBRARIES}
   ${LIBZ}
 )

@@ -29,7 +29,6 @@ omim_link_libraries(
   minizip
   oauthcpp
   protobuf
-  stats_client
   ${LIBZ}
 )
 
