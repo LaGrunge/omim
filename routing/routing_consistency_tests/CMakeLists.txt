@@ -37,12 +37,10 @@ omim_link_libraries(
   protobuf
   bsdiff
   succinct
-  stats_client
   generator
   gflags
   pugixml
   icu
-  agg
   ${Qt5Widgets_LIBRARIES}
   ${LIBZ}
 )

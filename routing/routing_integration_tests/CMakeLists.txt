@@ -50,11 +50,9 @@ omim_link_libraries(
   protobuf
   bsdiff
   succinct
-  stats_client
   pugixml
   opening_hours
   icu
-  agg
   ${LIBZ}
 )
 

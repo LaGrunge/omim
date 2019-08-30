@@ -30,7 +30,6 @@ omim_link_libraries(
   jansson
   oauthcpp
   protobuf
-  stats_client
   gflags
   ${LIBZ}
 )

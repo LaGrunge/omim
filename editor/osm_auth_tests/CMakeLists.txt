@@ -22,7 +22,6 @@ omim_link_libraries(
   jansson
   icu
   oauthcpp
-  stats_client
   ${LIBZ}
   ${Qt5Widgets_LIBRARIES}
 )

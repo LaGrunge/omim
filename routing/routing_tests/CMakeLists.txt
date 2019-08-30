@@ -58,14 +58,12 @@ omim_link_libraries(
   geometry
   coding
   base
-  agg
   jansson
   oauthcpp
   opening_hours
   protobuf
   pugixml
   succinct
-  stats_client
   icu
   generator_tests_support
 
