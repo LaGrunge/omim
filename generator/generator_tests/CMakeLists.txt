@@ -56,19 +56,15 @@ omim_link_libraries(
   ${PROJECT_NAME}
   generator_tests_support
   platform_tests_support
-  generator
-  drape_frontend
-  shaders
   map
+  generator
   routing
   search
   storage
-  drape
   traffic
   routing_common
   descriptions
   transit
-  kml
   editor
   indexer
   platform
