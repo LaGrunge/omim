@@ -9,8 +9,6 @@ set(
   SRC
   affiliation.cpp
   affiliation.hpp
-  altitude_generator.cpp
-  altitude_generator.hpp
   booking_dataset.cpp
   booking_dataset.hpp
   booking_scoring.cpp
@@ -21,18 +19,12 @@ set(
   brands_loader.hpp
   camera_info_collector.cpp
   camera_info_collector.hpp
-  centers_table_builder.cpp
-  centers_table_builder.hpp
   check_model.cpp
   check_model.hpp
   cities_boundaries_builder.cpp
   cities_boundaries_builder.hpp
   cities_boundaries_checker.cpp
   cities_boundaries_checker.hpp
-  cities_ids_builder.cpp
-  cities_ids_builder.hpp
-  city_roads_generator.cpp
-  city_roads_generator.hpp
   coastlines_generator.cpp
   coastlines_generator.hpp
   collection_base.hpp
@@ -49,8 +41,6 @@ set(
   collector_tag.hpp
   data_version.cpp
   data_version.hpp
-  descriptions_section_builder.cpp
-  descriptions_section_builder.hpp
   dumper.cpp
   dumper.hpp
   factory_utils.hpp
@@ -69,8 +59,6 @@ set(
   feature_merger.hpp
   feature_processing_layers.cpp
   feature_processing_layers.hpp
-  feature_sorter.cpp
-  feature_sorter.hpp
   features_processing_helpers.hpp
   filter_collection.cpp
   filter_collection.hpp
@@ -132,12 +120,8 @@ set(
   place_node.hpp
   place_processor.cpp
   place_processor.hpp
-  platform_helpers.cpp
-  platform_helpers.hpp
   popular_places_section_builder.cpp
   popular_places_section_builder.hpp
-  popularity.cpp
-  popularity.hpp
   processor_booking.hpp
   processor_coastline.cpp
   processor_coastline.hpp
@@ -203,8 +187,6 @@ set(
   routing_helpers.hpp
   routing_index_generator.cpp
   routing_index_generator.hpp
-  search_index_builder.cpp
-  search_index_builder.hpp
   sponsored_dataset.hpp
   sponsored_dataset_inl.hpp
   sponsored_object_base.hpp
@@ -230,10 +212,6 @@ set(
   tesselator.hpp
   towns_dumper.cpp
   towns_dumper.hpp
-  traffic_generator.cpp
-  traffic_generator.hpp
-  transit_generator.cpp
-  transit_generator.hpp
   translation.cpp
   translation.hpp
   translator.cpp
@@ -260,8 +238,6 @@ set(
   type_helper.hpp
   ugc_db.cpp
   ugc_db.hpp
-  ugc_section_builder.cpp
-  ugc_section_builder.hpp
   ugc_translator.cpp
   ugc_translator.hpp
   unpack_mwm.cpp
@@ -270,8 +246,6 @@ set(
   utils.hpp
   ways_merger.cpp
   ways_merger.hpp
-  wiki_url_dumper.cpp
-  wiki_url_dumper.hpp
   world_map_generator.hpp
 )
 

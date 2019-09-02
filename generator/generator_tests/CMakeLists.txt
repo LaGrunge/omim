@@ -2,25 +2,20 @@ project(generator_tests)
 
 set(
   SRC
-  altitude_test.cpp
   booking_tests.cpp
   brands_loader_test.cpp
   camera_collector_tests.cpp
   check_mwms.cpp
   cities_boundaries_checker_tests.cpp
-  cities_ids_tests.cpp
-  city_roads_tests.cpp
   coasts_test.cpp
   collector_city_area_tests.cpp
   common.cpp
   common.hpp
-  descriptions_section_builder_tests.cpp
   feature_builder_test.cpp
   feature_merger_test.cpp
   filter_elements_tests.cpp
   geo_objects_tests.cpp
   intermediate_data_test.cpp
-  maxspeeds_tests.cpp
   merge_collectors_tests.cpp
   metadata_parser_test.cpp
   metalines_tests.cpp
@@ -28,16 +23,12 @@ set(
   osm2meta_test.cpp
   osm_o5m_source_test.cpp
   osm_type_test.cpp
-  popularity_builder_tests.cpp
   region_info_collector_tests.cpp
   regions_tests.cpp
   restriction_collector_test.cpp
-  restriction_test.cpp
-  road_access_test.cpp
   source_data.cpp
   source_data.hpp
   source_to_element_test.cpp
-  speed_cameras_test.cpp
   sponsored_storage_tests.cpp
   srtm_parser_test.cpp
   street_geometry_tests.cpp

@@ -1,64 +1,35 @@
-#include "generator/altitude_generator.hpp"
-#include "generator/borders.hpp"
 #include "generator/camera_info_collector.hpp"
-#include "generator/centers_table_builder.hpp"
 #include "generator/check_model.hpp"
-#include "generator/cities_boundaries_builder.hpp"
-#include "generator/cities_ids_builder.hpp"
-#include "generator/city_roads_generator.hpp"
 #include "generator/data_version.hpp"
-#include "generator/descriptions_section_builder.hpp"
 #include "generator/dumper.hpp"
 #include "generator/feature_generator.hpp"
-#include "generator/feature_sorter.hpp"
 #include "generator/generate_info.hpp"
 #include "generator/geo_objects/geo_objects_generator.hpp"
 #include "generator/locality_sorter.hpp"
-#include "generator/maxspeeds_builder.hpp"
 #include "generator/metalines_builder.hpp"
 #include "generator/osm_source.hpp"
-#include "generator/platform_helpers.hpp"
-#include "generator/popular_places_section_builder.hpp"
-#include "generator/popularity.hpp"
 #include "generator/processor_factory.hpp"
-#include "generator/ratings_section_builder.hpp"
 #include "generator/raw_generator.hpp"
 #include "generator/regions/collector_region_info.hpp"
 #include "generator/regions/regions.hpp"
 #include "generator/restriction_generator.hpp"
 #include "generator/road_access_generator.hpp"
-#include "generator/routing_index_generator.hpp"
-#include "generator/search_index_builder.hpp"
 #include "generator/statistics.hpp"
 #include "generator/streets/streets.hpp"
-#include "generator/traffic_generator.hpp"
-#include "generator/transit_generator.hpp"
 #include "generator/translator_collection.hpp"
 #include "generator/translator_factory.hpp"
-#include "generator/ugc_section_builder.hpp"
 #include "generator/unpack_mwm.hpp"
-#include "generator/wiki_url_dumper.hpp"
 
 #include "routing/cross_mwm_ids.hpp"
-#include "routing/speed_camera_prohibition.hpp"
 
-#include "indexer/classificator.hpp"
 #include "indexer/classificator_loader.hpp"
-#include "indexer/data_header.hpp"
-#include "indexer/drawing_rules.hpp"
-#include "indexer/features_offsets_table.hpp"
 #include "indexer/features_vector.hpp"
-#include "indexer/index_builder.hpp"
 #include "indexer/locality_index_builder.hpp"
 #include "indexer/map_style_reader.hpp"
-#include "indexer/rank_table.hpp"
-
-#include "storage/country_parent_getter.hpp"
 
 #include "platform/platform.hpp"
 
 #include "coding/endianness.hpp"
-#include "coding/transliteration.hpp"
 
 #include "base/file_name_utils.hpp"
 #include "base/timer.hpp"
@@ -66,9 +37,7 @@
 #include <csignal>
 #include <cstdlib>
 #include <fstream>
-#include <memory>
 #include <string>
-#include <thread>
 
 #define BOOST_STACKTRACE_GNU_SOURCE_NOT_REQUIRED
 #include <boost/stacktrace.hpp>
@@ -316,12 +285,6 @@ int GeneratorToolMain(int argc, char ** argv)
       FLAGS_generate_geo_objects_features)
   {
     RawGenerator rawGenerator(genInfo, threadsCount);
-    if (FLAGS_generate_features)
-      rawGenerator.GenerateCountries(FLAGS_no_ads);
-    if (FLAGS_generate_world)
-      rawGenerator.GenerateWorld(FLAGS_no_ads);
-    if (FLAGS_make_coasts)
-      rawGenerator.GenerateCoasts();
     if (FLAGS_generate_region_features)
       rawGenerator.GenerateRegionFeatures(FLAGS_output);
     if (FLAGS_generate_streets_features)
@@ -343,12 +306,6 @@ int GeneratorToolMain(int argc, char ** argv)
     for (auto const & fb : feature::ReadAllDatRawFormat(genInfo.GetTmpFileName(FLAGS_output)))
       std::cout << DebugPrint(fb) << std::endl;
   }
-
-  // Load mwm tree only if we need it
-  unique_ptr<storage::CountryParentGetter> countryParentGetter;
-  if (FLAGS_make_routing_index || FLAGS_make_cross_mwm || FLAGS_make_transit_cross_mwm)
-    countryParentGetter = make_unique<storage::CountryParentGetter>();
-
 
   if (!FLAGS_streets_key_value.empty())
   {
@@ -431,245 +388,7 @@ int GeneratorToolMain(int argc, char ** argv)
                              pathOutRepackedRegionsTmpMwm, FLAGS_verbose, threadsCount);
   }
 
-  if (!FLAGS_popularity_csv.empty())
-  {
-    popularity::BuildPopularitySrcFromAllData(genInfo.m_tmpDir, FLAGS_popularity_csv, threadsCount);
-  }
-
-  if (!FLAGS_dump_wikipedia_urls.empty())
-  {
-    auto const tmpPath = base::JoinPath(genInfo.m_intermediateDir, "tmp");
-    auto const datFiles = platform_helpers::GetFullDataTmpFilePaths(tmpPath);
-
-    WikiUrlDumper wikiUrlDumper(FLAGS_dump_wikipedia_urls, datFiles);
-    wikiUrlDumper.Dump(threadsCount);
-
-    if (!FLAGS_idToWikidata.empty())
-    {
-      WikiDataFilter wikiDataFilter(FLAGS_idToWikidata, datFiles);
-      wikiDataFilter.Filter(threadsCount);
-    }
-  }
-
-  // Enumerate over all dat files that were created.
-  size_t const count = genInfo.m_bucketNames.size();
-  for (size_t i = 0; i < count; ++i)
-  {
-    string const & country = genInfo.m_bucketNames[i];
-    string const datFile = base::JoinPath(path, country + DATA_FILE_EXTENSION);
-    string const osmToFeatureFilename =
-        genInfo.GetTargetFileName(country) + OSM2FEATURE_FILE_EXTENSION;
-
-    if (FLAGS_generate_geometry)
-    {
-      using MapType = feature::DataHeader::MapType;
-
-      MapType mapType = MapType::Country;
-      if (country == WORLD_FILE_NAME)
-        mapType = MapType::World;
-      if (country == WORLD_COASTS_FILE_NAME)
-        mapType = MapType::WorldCoasts;
-
-      // On error move to the next bucket without index generation.
-
-      LOG(LINFO, ("Generating result features for", country));
-      if (!feature::GenerateFinalFeatures(genInfo, country, mapType))
-        continue;
-
-      LOG(LINFO, ("Generating offsets table for", datFile));
-      if (!feature::BuildOffsetsTable(datFile))
-        continue;
-
-      if (mapType == MapType::Country)
-      {
-        string const metalinesFilename = genInfo.GetIntermediateFileName(METALINES_FILENAME);
-
-        LOG(LINFO, ("Processing metalines from", metalinesFilename));
-        if (!feature::WriteMetalinesSection(datFile, metalinesFilename, osmToFeatureFilename))
-          LOG(LCRITICAL, ("Error generating metalines section."));
-      }
-    }
-
-    if (FLAGS_generate_index)
-    {
-      LOG(LINFO, ("Generating index for", datFile));
-
-      if (!indexer::BuildIndexFromDataFile(datFile, FLAGS_intermediate_data_path + country))
-        LOG(LCRITICAL, ("Error generating index."));
-    }
-
-    if (FLAGS_generate_search_index)
-    {
-      LOG(LINFO, ("Generating search index for", datFile));
-
-      /// @todo Make threads count according to environment (single mwm build or planet build).
-      if (!indexer::BuildSearchIndexFromDataFile(datFile, true /* forceRebuild */,
-                                                 1 /* threadsCount */))
-        LOG(LCRITICAL, ("Error generating search index."));
-
-      LOG(LINFO, ("Generating rank table for", datFile));
-      if (!search::SearchRankTableBuilder::CreateIfNotExists(datFile))
-        LOG(LCRITICAL, ("Error generating rank table."));
-
-      LOG(LINFO, ("Generating centers table for", datFile));
-      if (!indexer::BuildCentersTableFromDataFile(datFile, true /* forceRebuild */))
-        LOG(LCRITICAL, ("Error generating centers table."));
-    }
-
-    if (FLAGS_generate_cities_boundaries)
-    {
-      CHECK(!FLAGS_cities_boundaries_data.empty(), ());
-      LOG(LINFO, ("Generating cities boundaries for", datFile));
-      generator::OsmIdToBoundariesTable table;
-      if (!generator::DeserializeBoundariesTable(FLAGS_cities_boundaries_data, table))
-        LOG(LCRITICAL, ("Error deserializing boundaries table"));
-      if (!generator::BuildCitiesBoundaries(datFile, osmToFeatureFilename, table))
-        LOG(LCRITICAL, ("Error generating cities boundaries."));
-    }
-
-    if (FLAGS_generate_cities_ids)
-    {
-      LOG(LINFO, ("Generating cities ids for", datFile));
-      if (!generator::BuildCitiesIds(datFile, osmToFeatureFilename))
-        LOG(LCRITICAL, ("Error generating cities ids."));
-    }
-
-    if (!FLAGS_srtm_path.empty())
-      routing::BuildRoadAltitudes(datFile, FLAGS_srtm_path);
-
-    if (!FLAGS_transit_path.empty())
-      routing::transit::BuildTransit(path, country, osmToFeatureFilename, FLAGS_transit_path);
-
-    if (FLAGS_generate_cameras)
-    {
-      if (routing::AreSpeedCamerasProhibited(platform::CountryFile(country)))
-      {
-        LOG(LINFO,
-            ("Cameras info is prohibited for", country, "and speedcams section is not generated."));
-      }
-      else
-      {
-        string const camerasFilename = genInfo.GetIntermediateFileName(CAMERAS_TO_WAYS_FILENAME);
-
-        BuildCamerasInfo(datFile, camerasFilename, osmToFeatureFilename);
-      }
-    }
-
-    if (FLAGS_make_routing_index)
-    {
-      if (!countryParentGetter)
-      {
-        // All the mwms should use proper VehicleModels.
-        LOG(LCRITICAL,
-            ("Countries file is needed. Please set countries file name (countries.txt or "
-             "countries_obsolete.txt). File must be located in data directory."));
-        return EXIT_FAILURE;
-      }
-
-      string const restrictionsFilename = genInfo.GetIntermediateFileName(RESTRICTIONS_FILENAME);
-      string const roadAccessFilename = genInfo.GetIntermediateFileName(ROAD_ACCESS_FILENAME);
-
-      routing::BuildRoutingIndex(datFile, country, *countryParentGetter);
-      routing::BuildRoadRestrictions(path, datFile, country, restrictionsFilename,
-                                     osmToFeatureFilename, *countryParentGetter);
-      routing::BuildRoadAccessInfo(datFile, roadAccessFilename, osmToFeatureFilename);
-    }
-
-    if (FLAGS_make_city_roads)
-    {
-      CHECK(!FLAGS_cities_boundaries_data.empty(), ());
-      LOG(LINFO, ("Generating cities boundaries roads for", datFile));
-      generator::OsmIdToBoundariesTable table;
-      if (!generator::DeserializeBoundariesTable(FLAGS_cities_boundaries_data, table))
-        LOG(LCRITICAL, ("Deserializing boundaries table error."));
-      if (!routing::BuildCityRoads(datFile, table))
-        LOG(LCRITICAL, ("Generating city roads error."));
-    }
-
-    if (FLAGS_generate_maxspeed)
-    {
-      LOG(LINFO, ("Generating maxspeeds section for", datFile));
-      string const maxspeedsFilename = genInfo.GetIntermediateFileName(MAXSPEEDS_FILENAME);
-      routing::BuildMaxspeedsSection(datFile, osmToFeatureFilename, maxspeedsFilename);
-    }
-
-    if (FLAGS_make_cross_mwm || FLAGS_make_transit_cross_mwm)
-    {
-      if (!countryParentGetter)
-      {
-        // All the mwms should use proper VehicleModels.
-        LOG(LCRITICAL,
-            ("Countries file is needed. Please set countries file name (countries.txt or "
-             "countries_obsolete.txt). File must be located in data directory."));
-        return EXIT_FAILURE;
-      }
-
-      if (FLAGS_make_cross_mwm)
-      {
-        routing::BuildRoutingCrossMwmSection(path, datFile, country, *countryParentGetter,
-                                             osmToFeatureFilename,
-                                             FLAGS_disable_cross_mwm_progress);
-      }
-
-      if (FLAGS_make_transit_cross_mwm)
-        routing::BuildTransitCrossMwmSection(path, datFile, country, *countryParentGetter);
-    }
-
-    if (!FLAGS_ugc_data.empty())
-    {
-      if (!BuildUgcMwmSection(FLAGS_ugc_data, datFile, osmToFeatureFilename))
-        LOG(LCRITICAL, ("Error generating UGC mwm section."));
-
-      if (!BuildRatingsMwmSection(FLAGS_ugc_data, datFile, osmToFeatureFilename))
-        LOG(LCRITICAL, ("Error generating ratings mwm section."));
-    }
-
-    if (!FLAGS_wikipedia_pages.empty())
-    {
-      if (!FLAGS_idToWikidata.empty())
-        BuildDescriptionsSection(FLAGS_wikipedia_pages, datFile, FLAGS_idToWikidata);
-      else
-        BuildDescriptionsSection(FLAGS_wikipedia_pages, datFile);
-    }
-
-    if (FLAGS_generate_popular_places)
-    {
-      if (!BuildPopularPlacesMwmSection(genInfo.m_popularPlacesFilename, datFile,
-                                        osmToFeatureFilename))
-      {
-        LOG(LCRITICAL, ("Error generating popular places mwm section."));
-      }
-    }
-
-    if (FLAGS_generate_traffic_keys)
-    {
-      if (!traffic::GenerateTrafficKeysFromDataFile(datFile))
-        LOG(LCRITICAL, ("Error generating traffic keys."));
-    }
-  }
-
   string const datFile = base::JoinPath(path, FLAGS_output + DATA_FILE_EXTENSION);
-
-  if (FLAGS_calc_statistics)
-  {
-    LOG(LINFO, ("Calculating statistics for", datFile));
-
-    stats::FileContainerStatistic(datFile);
-    stats::FileContainerStatistic(datFile + ROUTING_FILE_EXTENSION);
-
-    stats::MapInfo info;
-    stats::CalcStatistic(datFile, info);
-    stats::PrintStatistic(info);
-  }
-
-  if (FLAGS_type_statistics)
-  {
-    LOG(LINFO, ("Calculating type statistics for", datFile));
-
-    stats::MapInfo info;
-    stats::CalcStatistic(datFile, info);
-    stats::PrintTypeStatistic(info);
-  }
 
   if (FLAGS_dump_types)
     feature::DumpTypes(datFile);
@@ -685,15 +404,6 @@ int GeneratorToolMain(int argc, char ** argv)
 
   if (FLAGS_unpack_mwm)
     UnpackMwm(datFile);
-
-  if (!FLAGS_delete_section.empty())
-    DeleteSection(datFile, FLAGS_delete_section);
-
-  if (FLAGS_generate_packed_borders)
-    borders::GeneratePackedBorders(path);
-
-  if (!FLAGS_unpack_borders.empty())
-    borders::UnpackBorders(path, FLAGS_unpack_borders);
 
   if (FLAGS_check_mwm)
     check_model::ReadFeatures(datFile);
