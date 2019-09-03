@@ -49,7 +49,6 @@ omim_link_libraries(
   routing_common
   indexer
   storage
-  editor
   platform
   coding
   geometry

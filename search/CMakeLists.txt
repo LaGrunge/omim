@@ -47,8 +47,6 @@ set(
   downloader_search_callback.hpp
   dummy_rank_table.cpp
   dummy_rank_table.hpp
-  editor_delegate.cpp
-  editor_delegate.hpp
   emitter.hpp
   engine.cpp
   engine.hpp
@@ -165,6 +163,7 @@ set(
   types_skipper.hpp
   utils.cpp
   utils.hpp
+  yes_no_unknown.hpp
 )
 
 omim_add_library(${PROJECT_NAME} ${SRC})

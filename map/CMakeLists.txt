@@ -10,7 +10,6 @@ omim_add_library(${PROJECT_NAME} ${SRC})
 omim_link_libraries(${PROJECT_NAME}
   base
   coding
-  editor
   geometry
   indexer
 )

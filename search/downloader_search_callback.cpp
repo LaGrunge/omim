@@ -2,8 +2,6 @@
 
 #include "search/result.hpp"
 
-#include "editor/editable_data_source.hpp"
-
 #include "indexer/data_source.hpp"
 
 #include "storage/country_info_getter.hpp"

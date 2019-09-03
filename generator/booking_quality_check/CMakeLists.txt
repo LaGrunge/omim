@@ -19,7 +19,6 @@ omim_link_libraries(
   routing
   traffic
   routing_common
-  editor
   indexer
   geometry
   platform

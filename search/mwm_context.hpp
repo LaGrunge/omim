@@ -3,8 +3,6 @@
 #include "search/house_to_street_table.hpp"
 #include "search/lazy_centers_table.hpp"
 
-#include "editor/editable_feature_source.hpp"
-
 #include "indexer/feature_covering.hpp"
 #include "indexer/feature_source.hpp"
 #include "indexer/features_vector.hpp"
@@ -41,9 +39,6 @@ public:
   {
     ForEachIndexImpl(intervals, scale, [&](uint32_t index)
                      {
-                       // TODO: Optimize deleted checks by getting vector of deleted indexes from
-                       // the Editor.
-                       if (GetEditedStatus(index) != FeatureStatus::Deleted)
                          fn(index);
                      });
   }
@@ -89,11 +84,6 @@ public:
   MwmValue & m_value;
 
 private:
-  FeatureStatus GetEditedStatus(uint32_t index) const
-  {
-    return m_editableSource.GetFeatureStatus(index);
-  }
-
   template <class Fn>
   void ForEachIndexImpl(covering::Intervals const & intervals, uint32_t scale, Fn && fn) const
   {
@@ -110,7 +100,6 @@ private:
   FeaturesVector m_vector;
   ScaleIndex<ModelReaderPtr> m_index;
   LazyCentersTable m_centers;
-  EditableFeatureSource m_editableSource;
 
   DISALLOW_COPY_AND_MOVE(MwmContext);
 };

@@ -11,7 +11,6 @@ omim_link_libraries(
   ${PROJECT_NAME}
   kml
   indexer
-  editor
   platform
   coding
   geometry

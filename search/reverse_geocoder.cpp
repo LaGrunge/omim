@@ -6,8 +6,6 @@
 
 #include "storage/country_info_getter.hpp"
 
-#include "editor/osm_editor.hpp"
-
 #include "indexer/data_source.hpp"
 #include "indexer/fake_feature_ids.hpp"
 #include "indexer/feature.hpp"
@@ -258,12 +256,6 @@ bool ReverseGeocoder::GetNearbyAddress(HouseTable & table, Building const & bld,
                                        Address & addr) const
 {
   string street;
-  if (!ignoreEdits && osm::Editor::Instance().GetEditedFeatureStreet(bld.m_id, street))
-  {
-    addr.m_building = bld;
-    addr.m_street.m_name = street;
-    return true;
-  }
 
   uint32_t streetId;
   HouseToStreetTable::StreetIdType type;

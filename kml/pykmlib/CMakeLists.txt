@@ -15,7 +15,6 @@ omim_link_libraries(
   ${Boost_LIBRARIES}
   kml
   indexer
-  editor
   platform
   coding
   geometry

@@ -21,7 +21,6 @@ omim_link_libraries(
   routing_common
   descriptions
   transit
-  editor
   indexer
   platform
   geometry
