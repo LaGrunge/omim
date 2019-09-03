@@ -37,9 +37,6 @@ struct RankingInfo
   // Popularity rank of the feature.
   uint8_t m_popularity = 0;
 
-  // Confidence and UGC rating.
-  std::pair<uint8_t, float> m_rating = {0, 0.0f};
-
   // Score for the feature's name.
   NameScore m_nameScore = NAME_SCORE_ZERO;
 

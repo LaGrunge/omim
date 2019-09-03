@@ -271,7 +271,6 @@ add_subdirectory(search)
 add_subdirectory(storage)
 add_subdirectory(traffic)
 add_subdirectory(transit)
-add_subdirectory(ugc)
 add_subdirectory(generator)
 add_subdirectory(geocoder)
 

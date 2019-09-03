@@ -38,7 +38,6 @@ set(
   translation_test.cpp
   triangles_tree_coding_test.cpp
   types_helper.hpp
-  ugc_test.cpp
 )
 
 omim_add_test(${PROJECT_NAME} ${SRC})
@@ -73,7 +72,6 @@ omim_link_libraries(
   gflags
   oauthcpp
   opening_hours
-  ugc
   # TODO(syershov): Use FindPackage.
   sqlite3
   ${LIBZ}

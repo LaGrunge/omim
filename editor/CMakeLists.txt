@@ -39,7 +39,3 @@ set(
 )
 
 omim_add_library(${PROJECT_NAME} ${SRC})
-
-omim_add_test_subdirectory(editor_tests)
-omim_add_test_subdirectory(editor_tests_support)
-omim_add_test_subdirectory(osm_auth_tests)

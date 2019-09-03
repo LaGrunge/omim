@@ -61,7 +61,6 @@
 #define LOCALS_PAGE_URL ""
 #define PASSPORT_URL ""
 #define PASSPORT_APP_NAME ""
-#define UGC_URL ""
 #define CLOUD_URL ""
 #define MAXIM_CLIENT_ID ""
 #define MAXIM_SERVER_TOKEN ""

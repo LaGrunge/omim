@@ -17,7 +17,6 @@ set(
   editable_map_object_test.cpp
   feature_metadata_test.cpp
   feature_names_test.cpp
-  feature_to_osm_tests.cpp
   features_offsets_table_test.cpp
   features_vector_test.cpp
   index_builder_test.cpp
@@ -26,7 +25,6 @@ set(
   mwm_set_test.cpp
   postcodes_matcher_tests.cpp
   rank_table_test.cpp
-  scale_index_reading_tests.cpp
   scales_test.cpp
   search_string_utils_test.cpp
   sort_and_merge_intervals_test.cpp
@@ -35,7 +33,6 @@ set(
   test_mwm_set.hpp
   test_type.cpp
   trie_test.cpp
-  ugc_types_test.cpp
   visibility_test.cpp
   wheelchair_tests.cpp
 )
@@ -45,7 +42,6 @@ omim_add_test(${PROJECT_NAME} ${SRC})
 omim_link_libraries(
   ${PROJECT_NAME}
   generator_tests_support
-  search_tests_support
   platform_tests_support
   generator
   search

@@ -8,14 +8,12 @@
 
 namespace generator
 {
-ProcessorWorld::ProcessorWorld(std::shared_ptr<FeatureProcessorQueue> const & queue,
-                               std::string const & popularityFilename)
-  : m_popularityFilename(popularityFilename)
-  , m_queue(queue)
+ProcessorWorld::ProcessorWorld(std::shared_ptr<FeatureProcessorQueue> const & queue)
+  : m_queue(queue)
 {
   m_processingChain = std::make_shared<RepresentationLayer>();
   m_processingChain->Add(std::make_shared<PrepareFeatureLayer>());
-  m_processingChain->Add(std::make_shared<WorldLayer>(popularityFilename));
+  m_processingChain->Add(std::make_shared<WorldLayer>());
   auto affiliation = std::make_shared<feature::SingleAffiliation>(WORLD_FILE_NAME);
   m_affiliationsLayer = std::make_shared<AffiliationsFeatureLayer<>>(kAffiliationsBufferSize, affiliation, m_queue);
   m_processingChain->Add(m_affiliationsLayer);
@@ -23,7 +21,7 @@ ProcessorWorld::ProcessorWorld(std::shared_ptr<FeatureProcessorQueue> const & qu
 
 std::shared_ptr<FeatureProcessorInterface> ProcessorWorld::Clone() const
 {
-  return std::make_shared<ProcessorWorld>(m_queue, m_popularityFilename);
+  return std::make_shared<ProcessorWorld>(m_queue);
 }
 
 void ProcessorWorld::Process(feature::FeatureBuilder & feature)
