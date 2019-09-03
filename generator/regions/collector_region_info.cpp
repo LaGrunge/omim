@@ -156,6 +156,12 @@ void CollectorRegionInfo::FillRegionData(base::GeoObjectId const & osmId, OsmEle
   rd.m_osmId = osmId;
   rd.m_place = EncodePlaceType(el.GetTag("place"));
 
+  auto const & placePh = el.GetTag("place:PH");
+  if (placePh == "district")
+    rd.m_place = PlaceType::Suburb;
+  else if (placePh == "barangay")
+    rd.m_place = PlaceType::Quarter;
+
   auto const al = el.GetTag("admin_level");
   if (!al.empty())
   {

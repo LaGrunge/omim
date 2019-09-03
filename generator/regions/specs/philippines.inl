@@ -32,6 +32,7 @@ PlaceLevel PhilippinesSpecifier::GetSpecificCountryLevel(Region const & region) 
   case AdminLevel::Three: return PlaceLevel::Region;    // Regions (Rehiyon)
   case AdminLevel::Four: return PlaceLevel::Subregion;  // Provinces (Lalawigan)
   case AdminLevel::Six: return PlaceLevel::Locality;    // Cities/municipalities (Lungsod/bayan)
+  case AdminLevel::Ten: return PlaceLevel::Sublocality; // Barangays
   default: break;
   }
 

@@ -34,6 +34,8 @@ public:
     {
       if (t.m_key == "place" && regions::EncodePlaceType(t.m_value) != regions::PlaceType::Unknown)
         return true;
+      if (t.m_key == "place:PH" && (t.m_value == "district" || t.m_value == "barangay"))
+        return true;
 
       if (t.m_key == "boundary" && t.m_value == "administrative")
         return true;
