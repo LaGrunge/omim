@@ -16,7 +16,6 @@ omim_link_libraries(
   transit
   search
   storage
-  editor
   indexer
   mwm_diff
   platform

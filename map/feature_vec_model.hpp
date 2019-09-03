@@ -1,8 +1,7 @@
 #pragma once
 
-#include "editor/editable_data_source.hpp"
-
 #include "indexer/data_header.hpp"
+#include "indexer/data_source.hpp"
 #include "indexer/mwm_set.hpp"
 
 #include "geometry/rect2d.hpp"
@@ -35,7 +34,7 @@ class FeaturesFetcher : public MwmSet::Observer
   private:
     m2::RectD m_rect;
 
-    EditableDataSource m_dataSource;
+    FrozenDataSource m_dataSource;
 
     MapDeregisteredCallback m_onMapDeregistered;
 

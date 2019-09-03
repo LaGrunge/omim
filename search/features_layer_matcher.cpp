@@ -3,8 +3,6 @@
 #include "search/house_to_street_table.hpp"
 #include "search/reverse_geocoder.hpp"
 
-#include "editor/osm_editor.hpp"
-
 #include "indexer/scales.hpp"
 
 #include "base/assert.hpp"
@@ -84,19 +82,17 @@ uint32_t FeaturesLayerMatcher::GetMatchingStreet(FeatureType & houseFeature)
 {
   // Check if this feature is modified - the logic will be different.
   string streetName;
-  bool const edited =
-      osm::Editor::Instance().GetEditedFeatureStreet(houseFeature.GetID(), streetName);
 
   // Check the cached result value.
   auto entry = m_matchingStreetsCache.Get(houseFeature.GetID().m_index);
-  if (!edited && !entry.second)
+  if (!entry.second)
     return entry.first;
 
   uint32_t & result = entry.first;
   result = kInvalidId;
 
   FeatureID streetId;
-  if (!edited && m_reverseGeocoder.GetStreetByHouse(houseFeature, streetId))
+  if (m_reverseGeocoder.GetStreetByHouse(houseFeature, streetId))
   {
     result = streetId.m_index;
     return result;
@@ -104,17 +100,6 @@ uint32_t FeaturesLayerMatcher::GetMatchingStreet(FeatureType & houseFeature)
 
   // Get nearby streets and calculate the resulting index.
   auto const & streets = GetNearbyStreets(houseFeature);
-
-  if (edited)
-  {
-    auto const ret = find_if(streets.begin(), streets.end(),
-                             [&streetName](Street const & st) { return st.m_name == streetName; });
-    if (ret != streets.end())
-    {
-      result = ret->m_id.m_index;
-      return result;
-    }
-  }
 
   // If there is no saved street for feature, assume that it's a nearest street if it's too close.
   if (!streets.empty() && streets[0].m_distanceMeters < kMaxApproxStreetDistanceM)

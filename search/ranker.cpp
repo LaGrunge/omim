@@ -9,8 +9,6 @@
 #include "search/token_slice.hpp"
 #include "search/utils.hpp"
 
-#include "editor/editable_data_source.hpp"
-
 #include "indexer/brands_holder.hpp"
 #include "indexer/data_source.hpp"
 #include "indexer/feature_algo.hpp"

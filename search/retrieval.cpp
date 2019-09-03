@@ -8,8 +8,6 @@
 #include "search/search_trie.hpp"
 #include "search/token_slice.hpp"
 
-#include "editor/osm_editor.hpp"
-
 #include "indexer/classificator.hpp"
 #include "indexer/editable_map_object.hpp"
 #include "indexer/feature.hpp"
@@ -36,7 +34,6 @@
 using namespace std;
 using namespace strings;
 using osm::EditableMapObject;
-using osm::Editor;
 
 namespace search
 {
@@ -80,48 +77,6 @@ private:
   uint32_t m_counter;
 };
 
-class EditedFeaturesHolder
-{
-public:
-  explicit EditedFeaturesHolder(MwmSet::MwmId const & id) : m_id(id)
-  {
-    auto & editor = Editor::Instance();
-    m_deleted = editor.GetFeaturesByStatus(id, FeatureStatus::Deleted);
-    m_modified = editor.GetFeaturesByStatus(id, FeatureStatus::Modified);
-    m_created = editor.GetFeaturesByStatus(id, FeatureStatus::Created);
-  }
-
-  bool ModifiedOrDeleted(uint32_t featureIndex) const
-  {
-    return binary_search(m_deleted.begin(), m_deleted.end(), featureIndex) ||
-           binary_search(m_modified.begin(), m_modified.end(), featureIndex);
-  }
-
-  template <typename Fn>
-  void ForEachModifiedOrCreated(Fn && fn)
-  {
-    ForEach(m_modified, fn);
-    ForEach(m_created, fn);
-  }
-
-private:
-  template <typename Fn>
-  void ForEach(vector<uint32_t> const & features, Fn & fn)
-  {
-    auto & editor = Editor::Instance();
-    for (auto const index : features)
-    {
-      auto emo = editor.GetEditedFeature(FeatureID(m_id, index));
-      CHECK(emo, ());
-      fn(*emo, index);
-    }
-  }
-
-  MwmSet::MwmId const & m_id;
-  vector<uint32_t> m_deleted;
-  vector<uint32_t> m_modified;
-  vector<uint32_t> m_created;
-};
 
 Retrieval::ExtendedFeatures SortFeaturesAndBuildResult(vector<uint64_t> && features,
                                                        vector<uint64_t> && exactlyMatchedFeatures)
@@ -241,27 +196,12 @@ Retrieval::ExtendedFeatures RetrieveAddressFeaturesImpl(Retrieval::TrieRoot<Valu
                                                         base::Cancellable const & cancellable,
                                                         SearchTrieRequest<DFA> const & request)
 {
-  EditedFeaturesHolder holder(context.GetId());
   vector<uint64_t> features;
   vector<uint64_t> exactlyMatchedFeatures;
   FeaturesCollector collector(cancellable, features, exactlyMatchedFeatures);
 
-  MatchFeaturesInTrie(
-      request, root,
-      [&holder](Value const & value) {
-        return !holder.ModifiedOrDeleted(base::asserted_cast<uint32_t>(value.m_featureId));
-      } /* filter */,
+  MatchFeaturesInTrie(request, root, [](Value const &) { return true; } /* filter */,
       collector);
-
-  holder.ForEachModifiedOrCreated([&](EditableMapObject const & emo, uint64_t index) {
-    auto const matched = MatchFeatureByNameAndType(emo, request);
-    if (matched.first)
-    {
-      features.emplace_back(index);
-      if (matched.second)
-        exactlyMatchedFeatures.emplace_back(index);
-    }
-  });
 
   return SortFeaturesAndBuildResult(move(features), move(exactlyMatchedFeatures));
 }
@@ -272,22 +212,11 @@ Retrieval::ExtendedFeatures RetrievePostcodeFeaturesImpl(Retrieval::TrieRoot<Val
                                                          base::Cancellable const & cancellable,
                                                          TokenSlice const & slice)
 {
-  EditedFeaturesHolder holder(context.GetId());
   vector<uint64_t> features;
   vector<uint64_t> exactlyMatchedFeatures;
   FeaturesCollector collector(cancellable, features, exactlyMatchedFeatures);
 
-  MatchPostcodesInTrie(
-      slice, root,
-      [&holder](Value const & value) {
-        return !holder.ModifiedOrDeleted(base::asserted_cast<uint32_t>(value.m_featureId));
-      } /* filter */,
-      collector);
-
-  holder.ForEachModifiedOrCreated([&](EditableMapObject const & emo, uint64_t index) {
-    if (MatchFeatureByPostcode(emo, slice))
-      features.push_back(index);
-  });
+  MatchPostcodesInTrie(slice, root, [](Value const&) { return true; } /* filter */, collector);
 
   return SortFeaturesAndBuildResult(move(features));
 }
@@ -296,8 +225,6 @@ Retrieval::ExtendedFeatures RetrieveGeometryFeaturesImpl(MwmContext const & cont
                                                          base::Cancellable const & cancellable,
                                                          m2::RectD const & rect, int scale)
 {
-  EditedFeaturesHolder holder(context.GetId());
-
   covering::Intervals coverage;
   CoverRect(rect, scale, coverage);
 
@@ -308,11 +235,6 @@ Retrieval::ExtendedFeatures RetrieveGeometryFeaturesImpl(MwmContext const & cont
 
   context.ForEachIndex(coverage, scale, collector);
 
-  holder.ForEachModifiedOrCreated([&](EditableMapObject const & emo, uint64_t index) {
-    auto const center = emo.GetMercator();
-    if (rect.IsPointInside(center))
-      features.push_back(index);
-  });
   return SortFeaturesAndBuildResult(move(features), move(exactlyMatchedFeatures));
 }
 

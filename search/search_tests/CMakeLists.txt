@@ -37,7 +37,6 @@ omim_link_libraries(
   platform_tests_support
   kml
   search
-  editor
   indexer
   storage
   platform

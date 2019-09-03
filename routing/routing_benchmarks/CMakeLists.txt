@@ -15,7 +15,6 @@ omim_add_test(${PROJECT_NAME} ${SRC})
 
 omim_link_libraries(
   ${PROJECT_NAME}
-  map
   routing
   traffic
   routing_common
@@ -24,8 +23,8 @@ omim_link_libraries(
   storage
   mwm_diff
   traffic
+  map
   kml
-  editor
   indexer
   platform
   oauthcpp
@@ -39,6 +38,7 @@ omim_link_libraries(
   succinct
   pugixml
   icu
+  oauthcpp
   ${LIBZ}
 )
 

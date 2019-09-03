@@ -16,7 +16,6 @@ omim_link_libraries(
   traffic
   routing_common
   indexer
-  editor
   platform_tests_support
   platform
   coding

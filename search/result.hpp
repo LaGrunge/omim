@@ -4,10 +4,9 @@
 #include "search/hotels_classifier.hpp"
 #include "search/ranking_info.hpp"
 #include "search/tracer.hpp"
+#include "search/yes_no_unknown.hpp"
 
 #include "indexer/feature_decl.hpp"
-
-#include "editor/yes_no_unknown.hpp"
 
 #include "geometry/point2d.hpp"
 

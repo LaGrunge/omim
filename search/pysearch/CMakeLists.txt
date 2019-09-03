@@ -15,7 +15,6 @@ omim_link_libraries(
   search_tests_support
   search
   storage
-  editor
   indexer
   geometry
   platform

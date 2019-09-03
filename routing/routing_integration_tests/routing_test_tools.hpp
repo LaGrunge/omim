@@ -3,9 +3,9 @@
 #include "routing/index_router.hpp"
 #include "routing/routing_callbacks.hpp"
 
-#include "storage/country_info_getter.hpp"
-
 #include "map/feature_vec_model.hpp"
+
+#include "storage/country_info_getter.hpp"
 
 #include "platform/local_country_file.hpp"
 

@@ -16,16 +16,15 @@ omim_add_executable(${PROJECT_NAME} ${SRC})
 
 omim_link_libraries(
   ${PROJECT_NAME}
-  map
   routing
   traffic
   routing_common
   transit
   search
   storage
+  map
   mwm_diff
   kml
-  editor
   indexer
   platform
   geometry
@@ -41,6 +40,7 @@ omim_link_libraries(
   gflags
   pugixml
   icu
+  oauthcpp
   ${Qt5Widgets_LIBRARIES}
   ${LIBZ}
 )

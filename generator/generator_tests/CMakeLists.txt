@@ -5,7 +5,6 @@ set(
   booking_tests.cpp
   brands_loader_test.cpp
   camera_collector_tests.cpp
-  check_mwms.cpp
   cities_boundaries_checker_tests.cpp
   coasts_test.cpp
   collector_city_area_tests.cpp
@@ -46,7 +45,6 @@ omim_link_libraries(
   ${PROJECT_NAME}
   generator_tests_support
   platform_tests_support
-  map
   generator
   routing
   search
@@ -55,7 +53,6 @@ omim_link_libraries(
   routing_common
   descriptions
   transit
-  editor
   indexer
   platform
   geometry

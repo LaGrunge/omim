@@ -4,8 +4,6 @@
 
 #include "testing/testing.hpp"
 
-#include "map/feature_vec_model.hpp"
-
 #include "storage/routing_helpers.hpp"
 
 #include "routing/index_router.hpp"
@@ -14,6 +12,8 @@
 #include "routing/route.hpp"
 #include "routing/router_delegate.hpp"
 #include "routing/routing_callbacks.hpp"
+
+#include "map/feature_vec_model.hpp"
 
 #include "indexer/data_source.hpp"
 
