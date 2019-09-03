@@ -33,7 +33,6 @@ omim_add_test(${PROJECT_NAME} ${SRC})
 
 omim_link_libraries(
   ${PROJECT_NAME}
-  search_tests_support
   generator_tests_support
   platform_tests_support
   kml

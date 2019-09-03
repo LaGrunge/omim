@@ -88,15 +88,11 @@ public:
     size_t pointsCnt = 0;
     size_t airportCnt = 0;
     size_t cityTownOrVillageCnt = 0;
-    size_t popularAttractionCnt = 0;
     for (auto const & fb : fbs)
     {
       pointsCnt += fb.IsPoint() ? 1 : fb.GetPointsCount();
       if (generator::FilterWorld::IsInternationalAirport(fb))
         ++airportCnt;
-
-      if (generator::FilterWorld::IsPopularAttraction(fb, m_genInfo.m_popularPlacesFilename))
-        ++popularAttractionCnt;
 
       if (ftypes::IsCityTownOrVillage(fb.GetTypes()))
         ++cityTownOrVillageCnt;
@@ -106,7 +102,6 @@ public:
     TEST_EQUAL(pointsCnt, 364399, ());
     TEST_EQUAL(airportCnt, 3, ());
     TEST_EQUAL(cityTownOrVillageCnt, 172, ());
-    TEST_EQUAL(popularAttractionCnt, 135, ());
   }
 
   void BuildCountries()

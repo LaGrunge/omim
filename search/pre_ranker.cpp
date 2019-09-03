@@ -5,8 +5,6 @@
 #include "search/pre_ranking_info.hpp"
 #include "search/tracer.hpp"
 
-#include "ugc/types.hpp"
-
 #include "indexer/data_source.hpp"
 #include "indexer/mwm_set.hpp"
 #include "indexer/rank_table.hpp"
@@ -110,7 +108,6 @@ void PreRanker::FillMissingFieldsInPreResults()
 
     r.SetRank(ranks->Get(id.m_index));
     r.SetPopularity(popularityRanks->Get(id.m_index));
-    r.SetRating(ugc::UGC::UnpackRating(ratings->Get(id.m_index)));
 
     m2::PointD center;
     if (centers && centers->Get(id.m_index, center))
