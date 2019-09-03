@@ -9,8 +9,6 @@
 #include <string>
 #include <utility>
 
-#import "3party/Alohalytics/src/alohalytics_objc.h"
-
 #include <IOKit/IOKitLib.h>
 #include <Foundation/NSBundle.h>
 #include <Foundation/NSPathUtilities.h>
