@@ -50,4 +50,3 @@ if (PLATFORM_LINUX)
   )
 endif()
 
-link_qt5_core(${PROJECT_NAME})

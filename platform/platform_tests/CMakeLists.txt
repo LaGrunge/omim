@@ -1,6 +1,5 @@
 project(platform_tests)
 
-add_definitions(-DOMIM_UNIT_TEST_WITH_QT_EVENT_LOOP)
 
 set(
   SRC
@@ -30,18 +29,3 @@ omim_link_libraries(
   oauthcpp
   ${LIBZ}
 )
-
-if (PLATFORM_MAC)
-  omim_link_libraries(
-    ${PROJECT_NAME}
-    ${Qt5Widgets_LIBRARIES}
-    "-framework QuartzCore"
-  )
-endif()
-
-if (PLATFORM_WIN OR PLATFORM_LINUX)
-  omim_link_libraries(
-    ${PROJECT_NAME}
-    ${Qt5Widgets_LIBRARIES}
-  )
-endif()

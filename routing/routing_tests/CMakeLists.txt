@@ -70,4 +70,3 @@ omim_link_libraries(
   ${LIBZ}
 )
 
-link_qt5_core(${PROJECT_NAME})

@@ -1,7 +1,5 @@
 project(traffic_tests)
 
-add_definitions(-DOMIM_UNIT_TEST_WITH_QT_EVENT_LOOP)
-
 include_directories(${OMIM_ROOT}/3party/jansson/src)
 
 set(
@@ -31,18 +29,3 @@ omim_link_libraries(
   ${LIBZ}
 )
 
-if (PLATFORM_MAC)
-  omim_link_libraries(
-    ${PROJECT_NAME}
-    ${Qt5Widgets_LIBRARIES}
-  )
-endif()
-
-if (PLATFORM_WIN OR PLATFORM_LINUX)
-  omim_link_libraries(
-    ${PROJECT_NAME}
-    ${Qt5Network_LIBRARIES}
-  )
-endif()
-
-link_qt5_core(${PROJECT_NAME})

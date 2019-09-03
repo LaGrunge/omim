@@ -156,7 +156,6 @@ if (APPLE)
 endif()
 
 if (PLATFORM_LINUX)
-  link_qt5_network(${PROJECT_NAME})
 endif()
 
 omim_add_test_subdirectory(platform_tests)

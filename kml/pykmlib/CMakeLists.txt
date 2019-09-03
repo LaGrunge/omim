@@ -28,7 +28,6 @@ omim_link_libraries(
   expat
 )
 
-link_qt5_core(${PROJECT_NAME})
 
 if (PLATFORM_MAC)
   omim_link_libraries(${PROJECT_NAME} ${LIBZ})

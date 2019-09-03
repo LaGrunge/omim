@@ -35,7 +35,5 @@ omim_link_libraries(
   ${LIBZ}
 )
 
-link_qt5_core(${PROJECT_NAME})
-link_qt5_network(${PROJECT_NAME})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
