@@ -8,12 +8,15 @@ namespace regions
 {
 void AdminSuburbsMarker::MarkSuburbs(Node::Ptr & tree)
 {
-  auto const & region = tree->GetData();
+  auto & region = tree->GetData();
   if (region.GetLevel() == PlaceLevel::Locality)
   {
     MarkLocality(tree);
     return;
   }
+
+  if (region.GetLevel() > PlaceLevel::Locality)
+    region.SetLevel(PlaceLevel::Unknown);
 
   for (auto & subtree : tree->GetChildren())
     MarkSuburbs(subtree);
