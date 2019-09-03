@@ -140,8 +140,6 @@ DEFINE_string(opentable_data, "", "Path to opentable data in tsv format.");
 DEFINE_string(promo_catalog_cities, "",
               "Path to list geo object ids of cities which contain promo catalog in json format.");
 
-DEFINE_string(ugc_data, "", "Input UGC source database file name.");
-
 DEFINE_string(wikipedia_pages, "", "Input dir with wikipedia pages.");
 DEFINE_string(idToWikidata, "", "Path to file with id to wikidata mapping.");
 DEFINE_string(dump_wikipedia_urls, "", "Output file with wikipedia urls.");

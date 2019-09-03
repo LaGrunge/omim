@@ -4,7 +4,6 @@
 #include "generator/feature_merger.hpp"
 #include "generator/filter_world.hpp"
 #include "generator/generate_info.hpp"
-#include "generator/popular_places_section_builder.hpp"
 
 #include "search/utils.hpp"
 
@@ -280,8 +279,7 @@ public:
 
   void Process(feature::FeatureBuilder & fb)
   {
-    auto const forcePushToWorld = generator::FilterWorld::IsPopularAttraction(fb, m_popularPlacesFilename) ||
-                                  generator::FilterWorld::IsInternationalAirport(fb);
+    auto const forcePushToWorld = generator::FilterWorld::IsInternationalAirport(fb);
 
     if (!m_worldBucket.NeedPushToWorld(fb) && !forcePushToWorld)
       return;

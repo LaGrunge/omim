@@ -120,8 +120,6 @@ set(
   place_node.hpp
   place_processor.cpp
   place_processor.hpp
-  popular_places_section_builder.cpp
-  popular_places_section_builder.hpp
   processor_booking.hpp
   processor_coastline.cpp
   processor_coastline.hpp
@@ -135,8 +133,6 @@ set(
   processor_world.cpp
   processor_world.hpp
   promo_catalog_cities.hpp
-  ratings_section_builder.cpp
-  ratings_section_builder.hpp
   raw_generator.cpp
   raw_generator.hpp
   raw_generator_writer.cpp
@@ -236,10 +232,6 @@ set(
   translators_pool.hpp
   type_helper.cpp
   type_helper.hpp
-  ugc_db.cpp
-  ugc_db.hpp
-  ugc_translator.cpp
-  ugc_translator.hpp
   unpack_mwm.cpp
   unpack_mwm.hpp
   utils.cpp

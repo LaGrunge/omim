@@ -19,8 +19,7 @@ namespace generator
 class ProcessorWorld : public FeatureProcessorInterface
 {
 public:
-  explicit ProcessorWorld(std::shared_ptr<FeatureProcessorQueue> const & queue,
-                          std::string const & popularityFilename);
+  explicit ProcessorWorld(std::shared_ptr<FeatureProcessorQueue> const & queue);
 
   // FeatureProcessorInterface overrides:
   std::shared_ptr<FeatureProcessorInterface> Clone() const override;
@@ -32,7 +31,6 @@ public:
   void MergeInto(ProcessorWorld & other) const override;
 
 private:
-  std::string m_popularityFilename;
   std::shared_ptr<AffiliationsFeatureLayer<>> m_affiliationsLayer;
   std::shared_ptr<FeatureProcessorQueue> m_queue;
   std::shared_ptr<LayerBase> m_processingChain;

@@ -258,11 +258,6 @@ void PrepareCoastlineFeatureLayer::Handle(FeatureBuilder & fb)
   LayerBase::Handle(fb);
 }
 
-WorldLayer::WorldLayer(std::string const & popularityFilename)
-  : m_filter(popularityFilename)
-{
-}
-
 void WorldLayer::Handle(FeatureBuilder & fb)
 {
   if (fb.RemoveInvalidTypes() && m_filter.IsAccepted(fb))

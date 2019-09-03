@@ -134,8 +134,6 @@ public:
 class WorldLayer : public LayerBase
 {
 public:
-  explicit WorldLayer(std::string const & popularityFilename);
-
   // LayerBase overrides:
   void Handle(feature::FeatureBuilder & fb) override;
 
