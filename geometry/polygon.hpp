@@ -62,7 +62,7 @@ template <typename IterT> bool IsPolygonCCW(IterT beg, IterT end)
 
   // find the most down (left) point
   double minY = std::numeric_limits<double>::max();
-  IterT iRes;
+  IterT iRes{};
   for (IterT i = beg; i != end; ++i)
   {
     if ((*i).y < minY || ((*i).y == minY && (*i).x < (*iRes).x))
@@ -161,7 +161,7 @@ namespace detail
 }
 
 /// Make single strip for the range of points [beg, end), started with index = i.
-template <typename F> 
+template <typename F>
 void MakeSingleStripFromIndex(size_t i, size_t n, F f)
 {
   ASSERT_LESS(i, n, ());

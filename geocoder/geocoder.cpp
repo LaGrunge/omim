@@ -63,11 +63,13 @@ double GetWeight(geocoder::Type t)
 }
 
 // todo(@m) This is taken from search/geocoder.hpp. Refactor.
-struct ScopedMarkTokens
+class ScopedMarkTokens
 {
   using Type = geocoder::Type;
 
+public:
   // The range is [l, r).
+  ScopedMarkTokens() = delete;
   ScopedMarkTokens(geocoder::Geocoder::Context & context, Type type, size_t l, size_t r)
     : m_context(context), m_type(type), m_l(l), m_r(r)
   {
@@ -84,6 +86,7 @@ struct ScopedMarkTokens
       m_context.MarkToken(i, Type::Count);
   }
 
+private:
   geocoder::Geocoder::Context & m_context;
   Type const m_type;
   size_t m_l = 0;
@@ -333,7 +336,7 @@ void Geocoder::Go(Context & ctx, Type type) const
         continue;
 
       ScopedMarkTokens mark(ctx, type, i, j + 1);
-      boost::optional<ScopedMarkTokens> streetSynonymMark;
+      auto streetSynonymMark = boost::make_optional(false, ScopedMarkTokens(ctx, type, 0, 0));
 
       double certainty = 0;
       vector<size_t> tokenIds;

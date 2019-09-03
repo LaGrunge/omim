@@ -535,7 +535,7 @@ private:
       if (root.m_values.Empty() && root.m_moves.Size() == 1)
       {
         Node child;
-        Char c;
+        Char c{};
         root.m_moves.ForEach([&](Char const & mc, Node & mn) {
           c = mc;
           child.Swap(mn);
