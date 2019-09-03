@@ -68,8 +68,23 @@ else
   DEVTOOLSET_PATH=
 fi
 
-# Find cmake
-source "$OMIM_PATH/tools/autobuild/detect_cmake.sh"
+function find_cmake() {
+  # If CMAKE variable is set, use it
+  [ -n "${CMAKE-}" -a -x "${CMAKE-}" ] && return 0
+
+  # Find cmake, prefer cmake3
+  for name in cmake3 cmake; do
+    if command -v "$name" > /dev/null; then
+      CMAKE="$name"
+      return 0
+    fi
+  done
+
+  echo 'Error: cmake is not installed.' >&2
+  exit 1
+}
+
+find_cmake
 
 # OS-specific parameters
 if [ "$(uname -s)" == "Darwin" ]; then
