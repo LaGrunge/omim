@@ -6,10 +6,12 @@
 
 #include "base/assert.hpp"
 #include "base/stl_helpers.hpp"
+#include "base/string_utils.hpp"
 #include "base/thread_pool_computational.hpp"
 
 #include <algorithm>
 #include <chrono>
+#include <experimental/unordered_map>
 #include <fstream>
 #include <functional>
 #include <numeric>
@@ -26,6 +28,10 @@ RegionsBuilder::RegionsBuilder(Regions && regions, PlacePointsMap && placePoints
   : m_threadsCount(threadsCount)
 {
   ASSERT(m_threadsCount != 0, ());
+
+  std::experimental::erase_if(placePointsMap, [](auto const & item) {
+    return strings::IsASCIINumeric(item.second.GetName());
+  });
 
   MoveLabelPlacePoints(placePointsMap, regions);
 
@@ -126,7 +132,8 @@ std::vector<Node::Ptr> RegionsBuilder::MakeCountryNodesInAreaOrder(
   {
     if (countryOuter.ContainsRect(region))
     {
-      auto level = countrySpecifier.GetLevel(region);
+      auto level = strings::IsASCIINumeric(region.GetName()) ? PlaceLevel::Unknown
+                                                             : countrySpecifier.GetLevel(region);
       auto node = std::make_shared<Node>(LevelRegion{level, region});
       nodes.emplace_back(std::move(node));
     }
