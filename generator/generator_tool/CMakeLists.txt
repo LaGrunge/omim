@@ -10,7 +10,6 @@ omim_link_libraries(
   ${PROJECT_NAME}
   generator
   descriptions
-  storage
   indexer
   mwm_diff
   platform

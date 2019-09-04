@@ -1,13 +1,9 @@
 #pragma once
 
 #include "generator/factory_utils.hpp"
-#include "generator/processor_booking.hpp"
-#include "generator/processor_coastline.hpp"
-#include "generator/processor_country.hpp"
 #include "generator/processor_interface.hpp"
 #include "generator/processor_noop.hpp"
 #include "generator/processor_simple.hpp"
-#include "generator/processor_world.hpp"
 
 #include "base/assert.hpp"
 

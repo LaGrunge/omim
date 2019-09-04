@@ -45,7 +45,6 @@ omim_link_libraries(
   platform_tests_support
   generator
   indexer
-  storage
   platform
   coding
   geometry

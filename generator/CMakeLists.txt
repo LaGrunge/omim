@@ -10,8 +10,6 @@ set(
   affiliation.cpp
   affiliation.hpp
   boost_helpers.hpp
-  borders.cpp
-  borders.hpp
   brands_loader.cpp
   brands_loader.hpp
   check_model.cpp
@@ -96,18 +94,11 @@ set(
   place.cpp
   place.hpp
   place_node.hpp
-  processor_booking.hpp
-  processor_coastline.cpp
-  processor_coastline.hpp
-  processor_country.cpp
-  processor_country.hpp
   processor_factory.hpp
   processor_interface.hpp
   processor_noop.hpp
   processor_simple.cpp
   processor_simple.hpp
-  processor_world.cpp
-  processor_world.hpp
   promo_catalog_cities.hpp
   raw_generator.cpp
   raw_generator.hpp
