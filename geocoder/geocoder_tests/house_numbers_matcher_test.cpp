@@ -1,6 +1,6 @@
 #include "testing/testing.hpp"
 
-#include "search/house_numbers_matcher.hpp"
+#include "geocoder/house_numbers_matcher.hpp"
 
 #include <string>
 #include <vector>

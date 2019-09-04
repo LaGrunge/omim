@@ -2,7 +2,7 @@
 
 #include "geocoder/hierarchy_reader.hpp"
 
-#include "search/house_numbers_matcher.hpp"
+#include "geocoder/house_numbers_matcher.hpp"
 
 #include "indexer/search_string_utils.hpp"
 

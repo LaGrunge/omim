@@ -49,6 +49,8 @@ set(
   drules_selector_parser.hpp
   drules_struct.pb.cc
   drules_struct.pb.h
+  dummy_rank_table.cpp
+  dummy_rank_table.hpp
   editable_map_object.cpp
   editable_map_object.hpp
   fake_feature_ids.cpp

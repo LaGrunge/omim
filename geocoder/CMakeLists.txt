@@ -10,6 +10,8 @@ set(
   hierarchy.hpp
   hierarchy_reader.cpp
   hierarchy_reader.hpp
+  house_numbers_matcher.cpp
+  house_numbers_matcher.hpp
   index.cpp
   index.hpp
   name_dictionary.cpp
