@@ -1,6 +1,5 @@
 #include "generator/generator_tests/common.hpp"
 
-#include "generator/borders.hpp"
 #include "generator/osm2type.hpp"
 
 #include "indexer/classificator.hpp"
@@ -31,20 +30,6 @@ std::string GetFileName(std::string const & filename)
 {
   auto & platform = GetPlatform();
   return filename.empty() ? platform.TmpPathForFile() : platform.TmpPathForFile(filename);
-}
-
-bool MakeFakeBordersFile(std::string const & intemediatePath, std::string const & filename)
-{
-  auto const borderPath = base::JoinPath(intemediatePath, BORDERS_DIR);
-  auto & platform = GetPlatform();
-  auto const code = platform.MkDir(borderPath);
-  if (code != Platform::EError::ERR_OK && code != Platform::EError::ERR_FILE_ALREADY_EXISTS)
-    return false;
-
-  std::vector<m2::PointD> points = {{-180.0, -90.0}, {180.0, -90.0}, {180.0, 90.0}, {-180.0, 90.0},
-                                    {-180.0, -90.0}};
-  borders::DumpBorderToPolyFile(borderPath, filename, {m2::RegionD{points}});
-  return true;
 }
 
 OsmElement MakeOsmElement(OsmElementData const & elementData)

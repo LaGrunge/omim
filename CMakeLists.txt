@@ -263,7 +263,6 @@ add_subdirectory(geometry)
 add_subdirectory(indexer)
 add_subdirectory(map)
 add_subdirectory(platform)
-add_subdirectory(storage)
 add_subdirectory(generator)
 add_subdirectory(geocoder)
 
