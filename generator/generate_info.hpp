@@ -1,7 +1,5 @@
 #pragma once
 
-#include "generator/cities_boundaries_builder.hpp"
-
 #include "base/file_name_utils.hpp"
 #include "base/logging.hpp"
 

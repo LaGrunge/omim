@@ -1,9 +1,5 @@
 #include "generator/utils.hpp"
 
-#include "search/categories_cache.hpp"
-#include "search/localities_source.hpp"
-#include "search/mwm_context.hpp"
-
 #include "indexer/feature_processor.hpp"
 
 #include "platform/local_country_file.hpp"
@@ -79,16 +75,5 @@ bool ParseFeatureIdToTestIdMapping(std::string const & path,
     mapping.emplace(fid, testId);
   });
   return success;
-}
-
-search::CBV GetLocalities(std::string const & dataPath)
-{
-  FrozenDataSource dataSource;
-  auto const result = dataSource.Register(platform::LocalCountryFile::MakeTemporary(dataPath));
-  CHECK_EQUAL(result.second, MwmSet::RegResult::Success, ("Can't register", dataPath));
-
-  search::MwmContext context(dataSource.GetMwmHandleById(result.first));
-  base::Cancellable const cancellable;
-  return search::CategoriesCache(search::LocalitiesSource{}, cancellable).Get(context);
 }
 }  // namespace generator

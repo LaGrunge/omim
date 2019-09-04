@@ -20,11 +20,9 @@ omim_link_libraries(
   traffic
   routing_common
   transit
-  search
   storage
   map
   mwm_diff
-  kml
   indexer
   platform
   geometry

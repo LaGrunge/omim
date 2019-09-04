@@ -50,7 +50,6 @@ omim_link_libraries(
   traffic
   routing_common
   transit
-  kml
   descriptions
   indexer
   platform

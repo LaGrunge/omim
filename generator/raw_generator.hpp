@@ -20,9 +20,6 @@ public:
   explicit RawGenerator(feature::GenerateInfo & genInfo, size_t threadsCount = 1,
                         size_t chunkSize = 1024);
 
-  void GenerateCountries(bool disableAds = true);
-  void GenerateWorld(bool disableAds = true);
-  void GenerateCoasts();
   void GenerateRegionFeatures(std::string const & filename);
   void GenerateStreetsFeatures(std::string const & filename);
   void GenerateGeoObjectsFeatures(std::string const & filename);
@@ -45,9 +42,6 @@ private:
     }
   };
 
-  FinalProcessorPtr CreateCoslineFinalProcessor();
-  FinalProcessorPtr CreateCountryFinalProcessor();
-  FinalProcessorPtr CreateWorldFinalProcessor();
   bool GenerateFilteredFeatures();
 
   feature::GenerateInfo & m_genInfo;

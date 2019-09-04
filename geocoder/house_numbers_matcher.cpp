@@ -1,4 +1,4 @@
-#include "search/house_numbers_matcher.hpp"
+#include "geocoder/house_numbers_matcher.hpp"
 
 #include "indexer/string_set.hpp"
 

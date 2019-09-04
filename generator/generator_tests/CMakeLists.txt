@@ -2,10 +2,8 @@ project(generator_tests)
 
 set(
   SRC
-  booking_tests.cpp
   brands_loader_test.cpp
   camera_collector_tests.cpp
-  cities_boundaries_checker_tests.cpp
   coasts_test.cpp
   collector_city_area_tests.cpp
   common.cpp
@@ -28,7 +26,6 @@ set(
   source_data.cpp
   source_data.hpp
   source_to_element_test.cpp
-  sponsored_storage_tests.cpp
   srtm_parser_test.cpp
   street_geometry_tests.cpp
   street_regions_tracing_tests.cpp
@@ -47,7 +44,6 @@ omim_link_libraries(
   platform_tests_support
   generator
   routing
-  search
   storage
   traffic
   routing_common

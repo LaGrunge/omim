@@ -14,7 +14,6 @@ omim_link_libraries(
   routing_common
   descriptions
   transit
-  search
   storage
   indexer
   mwm_diff

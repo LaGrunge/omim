@@ -1,6 +1,6 @@
 #include "indexer/caching_rank_table_loader.hpp"
 
-#include "search/dummy_rank_table.hpp"
+#include "indexer/dummy_rank_table.hpp"
 
 #include "indexer/data_source.hpp"
 #include "indexer/feature.hpp"

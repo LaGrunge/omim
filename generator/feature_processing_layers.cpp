@@ -3,7 +3,6 @@
 #include "generator/coastlines_generator.hpp"
 #include "generator/feature_maker.hpp"
 #include "generator/generate_info.hpp"
-#include "generator/place_processor.hpp"
 #include "generator/type_helper.hpp"
 
 #include "indexer/classificator.hpp"

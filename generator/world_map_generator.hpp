@@ -5,8 +5,6 @@
 #include "generator/filter_world.hpp"
 #include "generator/generate_info.hpp"
 
-#include "search/utils.hpp"
-
 #include "indexer/classificator.hpp"
 #include "indexer/scales.hpp"
 

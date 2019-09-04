@@ -32,30 +32,6 @@ std::shared_ptr<FeatureProcessorQueue> RawGenerator::GetQueue()
   return m_queue;
 }
 
-void RawGenerator::GenerateCountries(bool disableAds)
-{
-  auto processor = CreateProcessor(ProcessorType::Country, m_queue, m_genInfo.m_targetDir, "",
-                                   m_genInfo.m_haveBordersForWholeWorld);
-  auto const translatorType = disableAds ? TranslatorType::Country : TranslatorType::CountryWithAds;
-  m_translators->Append(CreateTranslator(translatorType, processor, m_cache, m_genInfo));
-  m_finalProcessors.emplace(CreateCountryFinalProcessor());
-}
-
-void RawGenerator::GenerateWorld(bool disableAds)
-{
-  auto processor = CreateProcessor(ProcessorType::World, m_queue, m_genInfo.m_popularPlacesFilename);
-  auto const translatorType = disableAds ? TranslatorType::World : TranslatorType::WorldWithAds;
-  m_translators->Append(CreateTranslator(translatorType, processor, m_cache, m_genInfo));
-  m_finalProcessors.emplace(CreateWorldFinalProcessor());
-}
-
-void RawGenerator::GenerateCoasts()
-{
-  auto processor = CreateProcessor(ProcessorType::Coastline, m_queue);
-  m_translators->Append(CreateTranslator(TranslatorType::Coastline, processor, m_cache));
-  m_finalProcessors.emplace(CreateCoslineFinalProcessor());
-}
-
 void RawGenerator::GenerateRegionFeatures(string const & filename)
 {
   auto processor = CreateProcessor(ProcessorType::Simple, m_queue, filename);
@@ -113,45 +89,6 @@ bool RawGenerator::Execute()
 std::vector<std::string> const & RawGenerator::GetNames() const
 {
   return m_names;
-}
-
-RawGenerator::FinalProcessorPtr RawGenerator::CreateCoslineFinalProcessor()
-{
-  auto finalProcessor = make_shared<CoastlineFinalProcessor>(
-                          m_genInfo.GetTmpFileName(WORLD_COASTS_FILE_NAME, DATA_FILE_EXTENSION_TMP));
-  finalProcessor->SetCoastlinesFilenames(
-        m_genInfo.GetIntermediateFileName(WORLD_COASTS_FILE_NAME, ".geom"),
-        m_genInfo.GetIntermediateFileName(WORLD_COASTS_FILE_NAME, RAW_GEOM_FILE_EXTENSION));
-  return finalProcessor;
-}
-
-RawGenerator::FinalProcessorPtr RawGenerator::CreateCountryFinalProcessor()
-{
-  auto finalProcessor = make_shared<CountryFinalProcessor>(m_genInfo.m_targetDir, m_genInfo.m_tmpDir,
-                                                           m_genInfo.m_haveBordersForWholeWorld,
-                                                           m_threadsCount);
-  finalProcessor->SetBooking(m_genInfo.m_bookingDataFilename);
-  finalProcessor->SetCitiesAreas(m_genInfo.GetIntermediateFileName(CITIES_AREAS_TMP_FILENAME));
-  finalProcessor->SetPromoCatalog(m_genInfo.m_promoCatalogCitiesFilename);
-  if (m_genInfo.m_emitCoasts)
-  {
-    finalProcessor->SetCoastlines(m_genInfo.GetIntermediateFileName(WORLD_COASTS_FILE_NAME, ".geom"),
-                                  m_genInfo.GetTmpFileName(WORLD_COASTS_FILE_NAME));
-  }
-
-  finalProcessor->DumpCitiesBoundaries(m_genInfo.m_citiesBoundariesFilename);
-  return finalProcessor;
-}
-
-RawGenerator::FinalProcessorPtr RawGenerator::CreateWorldFinalProcessor()
-{
-  auto finalProcessor = make_shared<WorldFinalProcessor>(
-                          m_genInfo.m_tmpDir,
-                          m_genInfo.GetIntermediateFileName(WORLD_COASTS_FILE_NAME, RAW_GEOM_FILE_EXTENSION));
-  finalProcessor->SetPopularPlaces(m_genInfo.m_popularPlacesFilename);
-  finalProcessor->SetCitiesAreas(m_genInfo.GetIntermediateFileName(CITIES_AREAS_TMP_FILENAME));
-  finalProcessor->SetPromoCatalog(m_genInfo.m_promoCatalogCitiesFilename);
-  return finalProcessor;
 }
 
 bool RawGenerator::GenerateFilteredFeatures()

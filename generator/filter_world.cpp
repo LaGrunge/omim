@@ -1,7 +1,5 @@
 #include "generator/filter_world.hpp"
 
-#include "search/utils.hpp"
-
 #include "indexer/categories_holder.hpp"
 #include "indexer/classificator.hpp"
 #include "indexer/scales.hpp"

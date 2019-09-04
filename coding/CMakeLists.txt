@@ -20,6 +20,8 @@ set(
   buffered_file_writer.hpp
   bwt_coder.hpp
   byte_stream.hpp
+  cbv.cpp
+  cbv.hpp
   compressed_bit_vector.cpp
   compressed_bit_vector.hpp
   constants.hpp

@@ -19,12 +19,10 @@ omim_link_libraries(
   traffic
   routing_common
   transit
-  search
   storage
   mwm_diff
   traffic
   map
-  kml
   indexer
   platform
   oauthcpp

@@ -30,14 +30,12 @@ omim_add_test(${PROJECT_NAME} ${SRC})
 omim_link_libraries(
   ${PROJECT_NAME}
   routing
-  search
   storage
   mwm_diff
   traffic
   routing_common
   transit
   map
-  kml
   indexer
   platform
   oauthcpp
