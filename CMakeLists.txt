@@ -222,7 +222,6 @@ endif()
 
 
 # Include subdirectories
-add_subdirectory(3party/bsdiff-courgette)
 add_subdirectory(3party/expat)
 add_subdirectory(3party/gflags)
 add_subdirectory(3party/icu)
@@ -258,7 +257,6 @@ endif()
 add_subdirectory(base)
 add_subdirectory(coding)
 add_subdirectory(descriptions)
-add_subdirectory(generator/mwm_diff)
 add_subdirectory(geometry)
 add_subdirectory(indexer)
 add_subdirectory(map)
