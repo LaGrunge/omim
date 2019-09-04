@@ -21,11 +21,9 @@ omim_link_libraries(
   protobuf
   minizip
   succinct
-  pugixml
   tess2
   gflags
   oauthcpp
-  sqlite3
   ${CMAKE_DL_LIBS}
   ${LIBZ}
 )
