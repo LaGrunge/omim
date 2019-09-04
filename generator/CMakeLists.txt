@@ -10,8 +10,6 @@ set(
   affiliation.cpp
   affiliation.hpp
   boost_helpers.hpp
-  brands_loader.cpp
-  brands_loader.hpp
   check_model.cpp
   check_model.hpp
   collection_base.hpp

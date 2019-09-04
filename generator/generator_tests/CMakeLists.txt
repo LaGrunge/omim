@@ -2,7 +2,6 @@ project(generator_tests)
 
 set(
   SRC
-  brands_loader_test.cpp
   coasts_test.cpp
   collector_city_area_tests.cpp
   common.cpp
@@ -41,7 +40,6 @@ omim_link_libraries(
   generator_tests_support
   platform_tests_support
   generator
-  descriptions
   indexer
   platform
   geometry
