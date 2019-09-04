@@ -9,9 +9,6 @@ set(
   SRC
   affiliation.cpp
   affiliation.hpp
-  booking_dataset.cpp
-  booking_dataset.hpp
-  booking_scoring.cpp
   boost_helpers.hpp
   borders.cpp
   borders.hpp
@@ -21,10 +18,6 @@ set(
   camera_info_collector.hpp
   check_model.cpp
   check_model.hpp
-  cities_boundaries_builder.cpp
-  cities_boundaries_builder.hpp
-  cities_boundaries_checker.cpp
-  cities_boundaries_checker.hpp
   coastlines_generator.cpp
   coastlines_generator.hpp
   collection_base.hpp
@@ -101,9 +94,6 @@ set(
   metalines_builder.hpp
   node_mixer.cpp
   node_mixer.hpp
-  opentable_dataset.cpp
-  opentable_dataset.hpp
-  opentable_scoring.cpp
   osm2meta.cpp
   osm2meta.hpp
   osm2type.cpp
@@ -118,8 +108,6 @@ set(
   place.cpp
   place.hpp
   place_node.hpp
-  place_processor.cpp
-  place_processor.hpp
   processor_booking.hpp
   processor_coastline.cpp
   processor_coastline.hpp
@@ -183,12 +171,6 @@ set(
   routing_helpers.hpp
   routing_index_generator.cpp
   routing_index_generator.hpp
-  sponsored_dataset.hpp
-  sponsored_dataset_inl.hpp
-  sponsored_object_base.hpp
-  sponsored_object_storage.hpp
-  sponsored_scoring.cpp
-  sponsored_scoring.hpp
   srtm_parser.cpp
   srtm_parser.hpp
   statistics.cpp
@@ -245,10 +227,5 @@ omim_add_library(${PROJECT_NAME} ${SRC})
 
 omim_add_test_subdirectory(generator_tests_support)
 omim_add_test_subdirectory(generator_tests)
-omim_add_test_subdirectory(generator_integration_tests)
 
 add_subdirectory(generator_tool)
-add_subdirectory(booking_quality_check)
-add_subdirectory(extract_addr)
-add_subdirectory(feature_segments_checker)
-add_subdirectory(srtm_coverage_checker)

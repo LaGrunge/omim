@@ -2,7 +2,7 @@
 
 #include "generator/gen_mwm_info.hpp"
 
-#include "search/cbv.hpp"
+#include "coding/cbv.hpp"
 
 #include "indexer/data_source.hpp"
 #include "indexer/mwm_set.hpp"

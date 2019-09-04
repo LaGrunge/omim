@@ -394,9 +394,6 @@ int GeneratorToolMain(int argc, char ** argv)
   if (FLAGS_dump_prefixes)
     feature::DumpPrefixes(datFile);
 
-  if (FLAGS_dump_search_tokens)
-    feature::DumpSearchTokens(datFile, 100 /* maxTokensToShow */);
-
   if (FLAGS_dump_feature_names != "")
     feature::DumpFeatureNames(datFile, FLAGS_dump_feature_names);
 
