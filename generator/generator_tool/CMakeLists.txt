@@ -9,11 +9,7 @@ omim_add_executable(${PROJECT_NAME} ${SRC})
 omim_link_libraries(
   ${PROJECT_NAME}
   generator
-  routing
-  traffic
-  routing_common
   descriptions
-  transit
   storage
   indexer
   mwm_diff

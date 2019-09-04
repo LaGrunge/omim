@@ -6,8 +6,6 @@
 #include "generator/osm2type.hpp"
 #include "generator/tag_admixer.hpp"
 
-#include "routing_common/car_model.hpp"
-
 #include "indexer/feature_data.hpp"
 #include "indexer/classificator.hpp"
 #include "indexer/classificator_loader.hpp"
@@ -526,79 +524,6 @@ UNIT_CLASS_TEST(TestWithClassificator, OsmType_Surface)
   TestSurfaceTypes("", "unknown", "", "unpaved_good");
 }
 
-UNIT_CLASS_TEST(TestWithClassificator, OsmType_Ferry)
-{
-  routing::CarModel const & carModel = routing::CarModel::AllLimitsInstance();
-
-  char const * arr[][2] = {
-    { "motorcar", "yes" },
-    { "highway", "primary" },
-    { "bridge", "yes" },
-    { "route", "ferry" },
-  };
-
-  FeatureParams const params = GetFeatureParams(arr, ARRAY_SIZE(arr));
-
-  TEST_EQUAL(params.m_types.size(), 3, (params));
-
-  uint32_t type = GetType({"highway", "primary", "bridge"});
-  TEST(params.IsTypeExist(type), ());
-  TEST(carModel.IsRoadType(type), ());
-
-  type = GetType({"route", "ferry", "motorcar"});
-  TEST(params.IsTypeExist(type), ());
-  TEST(carModel.IsRoadType(type), ());
-
-  type = GetType({"route", "ferry"});
-  TEST(!params.IsTypeExist(type), ());
-  TEST(carModel.IsRoadType(type), ());
-
-  type = GetType({"hwtag", "yescar"});
-  TEST(params.IsTypeExist(type), ());
-}
-
-UNIT_CLASS_TEST(TestWithClassificator, OsmType_YesCarNoCar)
-{
-  routing::CarModel const & carModel = routing::CarModel::AllLimitsInstance();
-
-  {
-    char const* arr[][2] = {
-        {"highway", "secondary"},
-    };
-
-    FeatureParams const params = GetFeatureParams(arr, ARRAY_SIZE(arr));
-
-    TEST_EQUAL(params.m_types.size(), 1, (params));
-    TEST(!params.IsTypeExist(carModel.GetNoCarTypeForTesting()), ());
-    TEST(!params.IsTypeExist(carModel.GetYesCarTypeForTesting()), ());
-  }
-
-  {
-    char const * arr[][2] = {
-        {"highway", "cycleway"},
-        {"motorcar", "yes"},
-    };
-
-    FeatureParams const params = GetFeatureParams(arr, ARRAY_SIZE(arr));
-
-    TEST_EQUAL(params.m_types.size(), 2, (params));
-    TEST(!params.IsTypeExist(carModel.GetNoCarTypeForTesting()), ());
-    TEST(params.IsTypeExist(carModel.GetYesCarTypeForTesting()), ());
-  }
-
-  {
-    char const* arr[][2] = {
-        {"highway", "secondary"},
-        {"motor_vehicle", "no"},
-    };
-
-    FeatureParams const params = GetFeatureParams(arr, ARRAY_SIZE(arr));
-
-    TEST_EQUAL(params.m_types.size(), 2, (params));
-    TEST(params.IsTypeExist(carModel.GetNoCarTypeForTesting()), ());
-    TEST(!params.IsTypeExist(carModel.GetYesCarTypeForTesting()), ());
-  }
-}
 
 UNIT_CLASS_TEST(TestWithClassificator, OsmType_Boundary)
 {

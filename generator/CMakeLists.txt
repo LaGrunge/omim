@@ -14,17 +14,11 @@ set(
   borders.hpp
   brands_loader.cpp
   brands_loader.hpp
-  camera_info_collector.cpp
-  camera_info_collector.hpp
   check_model.cpp
   check_model.hpp
-  coastlines_generator.cpp
-  coastlines_generator.hpp
   collection_base.hpp
   collector_addresses.cpp
   collector_addresses.hpp
-  collector_camera.cpp
-  collector_camera.hpp
   collector_city_area.cpp
   collector_city_area.hpp
   collector_collection.cpp
@@ -84,12 +78,6 @@ set(
   key_value_storage.hpp
   locality_sorter.cpp
   locality_sorter.hpp
-  maxspeeds_builder.cpp
-  maxspeeds_builder.hpp
-  maxspeeds_collector.cpp
-  maxspeeds_collector.hpp
-  maxspeeds_parser.cpp
-  maxspeeds_parser.hpp
   metalines_builder.cpp
   metalines_builder.hpp
   node_mixer.cpp
@@ -159,18 +147,8 @@ set(
   relation_tags.hpp
   relation_tags_enricher.cpp
   relation_tags_enricher.hpp
-  restriction_collector.cpp
-  restriction_collector.hpp
-  restriction_generator.cpp
-  restriction_generator.hpp
-  restriction_writer.cpp
-  restriction_writer.hpp
-  road_access_generator.cpp
-  road_access_generator.hpp
   routing_helpers.cpp
   routing_helpers.hpp
-  routing_index_generator.cpp
-  routing_index_generator.hpp
   srtm_parser.cpp
   srtm_parser.hpp
   statistics.cpp
@@ -194,12 +172,8 @@ set(
   translation.hpp
   translator.cpp
   translator.hpp
-  translator_coastline.cpp
-  translator_coastline.hpp
   translator_collection.cpp
   translator_collection.hpp
-  translator_country.cpp
-  translator_country.hpp
   translator_factory.hpp
   translator_geo_objects.cpp
   translator_geo_objects.hpp
@@ -208,8 +182,6 @@ set(
   translator_region.hpp
   translator_streets.cpp
   translator_streets.hpp
-  translator_world.cpp
-  translator_world.hpp
   translators_pool.cpp
   translators_pool.hpp
   type_helper.cpp

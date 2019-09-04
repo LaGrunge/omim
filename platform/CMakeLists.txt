@@ -33,7 +33,6 @@ set(
   local_country_file_utils.cpp
   local_country_file_utils.hpp
   localization.hpp
-  location.hpp
   marketing_service.cpp
   marketing_service.hpp
   measurement_utils.cpp
@@ -89,13 +88,10 @@ else() # neither iPhone nor Android
     SRC
     http_user_agent_dummy.cpp
     localization_dummy.cpp
-    location_service.cpp
-    location_service.hpp
     marketing_service_dummy.cpp
     network_policy_dummy.cpp
     platform_qt.cpp
     wifi_info.hpp
-    wifi_location_service.cpp
   )
 
   if (${PLATFORM_WIN})
@@ -114,7 +110,6 @@ else() # neither iPhone nor Android
   elseif(${PLATFORM_MAC})
     append(
       SRC
-      apple_location_service.mm
       gui_thread_apple.mm
       http_client_apple.mm
       http_thread_apple.h

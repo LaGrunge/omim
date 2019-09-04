@@ -1,5 +1,5 @@
+#include "platform/measurement_utils.hpp"
 #include "platform/settings.hpp"
-#include "platform/location.hpp"
 #include "platform/platform.hpp"
 
 #include "defines.hpp"
@@ -296,38 +296,6 @@ bool FromString<measurement_utils::Units>(string const & s, measurement_utils::U
   return true;
 }
 
-template <>
-string ToString<location::EMyPositionMode>(location::EMyPositionMode const & v)
-{
-  switch (v)
-  {
-  case location::PendingPosition: return "PendingPosition";
-  case location::NotFollow: return "NotFollow";
-  case location::NotFollowNoPosition: return "NotFollowNoPosition";
-  case location::Follow: return "Follow";
-  case location::FollowAndRotate: return "FollowAndRotate";
-  default: return "Pending";
-  }
-}
-
-template <>
-bool FromString<location::EMyPositionMode>(string const & s, location::EMyPositionMode & v)
-{
-  if (s == "PendingPosition")
-    v = location::PendingPosition;
-  else if (s == "NotFollow")
-    v = location::NotFollow;
-  else if (s == "NotFollowNoPosition")
-    v = location::NotFollowNoPosition;
-  else if (s == "Follow")
-    v = location::Follow;
-  else if (s == "FollowAndRotate")
-    v = location::FollowAndRotate;
-  else
-    return false;
-
-  return true;
-}
 
 template <>
 string ToString<Transliteration::Mode>(Transliteration::Mode const & mode)

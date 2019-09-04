@@ -1,11 +1,5 @@
 #include "generator/feature_builder.hpp"
 
-#include "routing/routing_helpers.hpp"
-
-#include "routing_common/bicycle_model.hpp"
-#include "routing_common/car_model.hpp"
-#include "routing_common/pedestrian_model.hpp"
-
 #include "indexer/feature_algo.hpp"
 #include "indexer/feature_impl.hpp"
 #include "indexer/feature_visibility.hpp"
@@ -253,10 +247,7 @@ bool FeatureBuilder::PreSerialize()
 
   case GeomType::Line:
   {
-    // We need refs for road's numbers.
-    if (!routing::IsRoad(GetTypes()))
-      m_params.ref.clear();
-
+    m_params.ref.clear();
     m_params.rank = 0;
     m_params.house.Clear();
     break;
