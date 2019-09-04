@@ -11,7 +11,6 @@ omim_link_libraries(
   generator
   descriptions
   indexer
-  mwm_diff
   platform
   geometry
   coding
@@ -21,7 +20,6 @@ omim_link_libraries(
   icu
   jansson
   protobuf
-  bsdiff
   minizip
   succinct
   pugixml
