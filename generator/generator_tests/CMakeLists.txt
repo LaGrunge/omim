@@ -3,7 +3,6 @@ project(generator_tests)
 set(
   SRC
   brands_loader_test.cpp
-  camera_collector_tests.cpp
   coasts_test.cpp
   collector_city_area_tests.cpp
   common.cpp
@@ -22,7 +21,6 @@ set(
   osm_type_test.cpp
   region_info_collector_tests.cpp
   regions_tests.cpp
-  restriction_collector_test.cpp
   source_data.cpp
   source_data.hpp
   source_to_element_test.cpp
@@ -43,12 +41,8 @@ omim_link_libraries(
   generator_tests_support
   platform_tests_support
   generator
-  routing
   storage
-  traffic
-  routing_common
   descriptions
-  transit
   indexer
   platform
   geometry

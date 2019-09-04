@@ -44,8 +44,6 @@ omim_link_libraries(
   generator_tests_support
   platform_tests_support
   generator
-  routing
-  routing_common
   indexer
   storage
   platform
@@ -60,7 +58,6 @@ omim_link_libraries(
   opening_hours
   oauthcpp
   pugixml
-  traffic
   ${LIBZ}
 )
 

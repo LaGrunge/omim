@@ -2,8 +2,6 @@
 
 #include "platform/measurement_utils.hpp"
 
-#include "routing/routing_helpers.hpp"
-
 #include "coding/url_encode.hpp"
 
 #include "base/logging.hpp"

@@ -19,9 +19,6 @@ namespace generator
 enum class ProcessorType
 {
   Simple,
-  Country,
-  Coastline,
-  World,
   Noop
   //  Booking
 };
@@ -31,14 +28,8 @@ std::shared_ptr<FeatureProcessorInterface> CreateProcessor(ProcessorType type, A
 {
   switch (type)
   {
-  case ProcessorType::Coastline:
-    return create<ProcessorCoastline>(std::forward<Args>(args)...);
-  case ProcessorType::Country:
-    return create<ProcessorCountry>(std::forward<Args>(args)...);
   case ProcessorType::Simple:
     return create<ProcessorSimple>(std::forward<Args>(args)...);
-  case ProcessorType::World:
-    return create<ProcessorWorld>(std::forward<Args>(args)...);
   case ProcessorType::Noop:
     return create<ProcessorNoop>(std::forward<Args>(args)...);
   }
