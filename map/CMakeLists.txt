@@ -11,6 +11,7 @@ omim_link_libraries(${PROJECT_NAME}
   base
   coding
   geometry
+  platform
   indexer
 )
 

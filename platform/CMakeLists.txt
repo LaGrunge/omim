@@ -1,6 +1,6 @@
 project(platform)
 
-include_directories(${OMIM_ROOT}/3party/jansson/src ${OMIM_ROOT}/platform)
+include_directories(${OMIM_ROOT}/platform)
 
 set(CMAKE_AUTOMOC ON)
 
@@ -145,6 +145,8 @@ endif()
 add_subdirectory(platform_tests_support)
 
 omim_add_library(${PROJECT_NAME} ${SRC})
+omim_link_libraries(${PROJECT_NAME} base coding jansson)
+
 
 if (APPLE)
   target_compile_options(${PROJECT_NAME} PUBLIC "-fobjc-arc")

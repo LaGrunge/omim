@@ -40,24 +40,7 @@ omim_link_libraries(
   generator_tests_support
   platform_tests_support
   generator
-  indexer
-  platform
-  geometry
-  coding
-  base
-  expat
-  icu
-  jansson
-  protobuf
-  minizip
-  succinct
-  tess2
   gflags
-  oauthcpp
-  opening_hours
-  # TODO(syershov): Use FindPackage.
-  sqlite3
-  ${LIBZ}
 )
 
 if (PLATFORM_LINUX)

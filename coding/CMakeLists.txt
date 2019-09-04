@@ -102,5 +102,14 @@ set(
 )
 
 omim_add_library(${PROJECT_NAME} ${SRC})
+omim_link_libraries(${PROJECT_NAME}
+   base
+   icu
+   geometry
+   minizip
+   oauthcpp
+   succinct
+   jansson
+)
 
 omim_add_test_subdirectory(coding_tests)
