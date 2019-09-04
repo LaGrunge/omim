@@ -218,7 +218,7 @@ string FormatSpeed(double metersPerSecond, Units units)
 {
   double constexpr kSecondsPerHour = 3600;
   double constexpr metersPerKilometer = 1000;
-  double unitsPerHour;
+  double unitsPerHour = 0;
   switch (units)
   {
   case Units::Imperial: unitsPerHour = MetersToMiles(metersPerSecond) * kSecondsPerHour; break;
@@ -229,7 +229,7 @@ string FormatSpeed(double metersPerSecond, Units units)
   
 string FormatSpeedLimit(double kilometersPerHour, Units units)
 {
-  double unitsPerHour;
+  double unitsPerHour = 0;
   switch (units)
   {
       case Units::Imperial: unitsPerHour = 0.621371192 * kilometersPerHour; break;

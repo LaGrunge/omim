@@ -22,8 +22,8 @@ template <class T, size_t N> class buffer_vector
 {
 private:
   enum { USE_DYNAMIC = N + 1 };
-  T m_static[N];
-  size_t m_size;
+  T m_static[N] = {};
+  size_t m_size = 0;
   std::vector<T> m_dynamic;
 
   inline bool IsDynamic() const { return m_size == USE_DYNAMIC; }

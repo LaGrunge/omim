@@ -168,28 +168,6 @@ pair<bool, bool> MatchFeatureByNameAndType(EditableMapObject const & emo,
   return {matchedByType.first || matchedByName.first, matchedByType.second || matchedByName.second};
 }
 
-bool MatchFeatureByPostcode(EditableMapObject const & emo, TokenSlice const & slice)
-{
-  string const postcode = emo.GetMetadata().Get(feature::Metadata::FMD_POSTCODE);
-  vector<UniString> tokens;
-  NormalizeAndTokenizeString(postcode, tokens, Delimiters());
-  if (slice.Size() > tokens.size())
-    return false;
-  for (size_t i = 0; i < slice.Size(); ++i)
-  {
-    if (slice.IsPrefix(i))
-    {
-      if (!StartsWith(tokens[i], slice.Get(i).GetOriginal()))
-        return false;
-    }
-    else if (tokens[i] != slice.Get(i).GetOriginal())
-    {
-      return false;
-    }
-  }
-  return true;
-}
-
 template <typename Value, typename DFA>
 Retrieval::ExtendedFeatures RetrieveAddressFeaturesImpl(Retrieval::TrieRoot<Value> const & root,
                                                         MwmContext const & context,

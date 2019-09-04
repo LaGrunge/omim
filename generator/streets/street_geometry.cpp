@@ -325,7 +325,7 @@ HighwayGeometry::AreaPart::AreaPart(base::GeoObjectId const & osmId, std::vector
     boost::geometry::append(boostPolygon, boost_helpers::BoostPoint{p.x, p.y});
   boost::geometry::correct(boostPolygon);
 
-  boost_helpers::BoostPoint center;
+  boost_helpers::BoostPoint center{};
   boost::geometry::centroid(boostPolygon, center);
   m_center = {center.get<0>(), center.get<1>()};
 
