@@ -21,12 +21,6 @@ omim_link_libraries(
   ${PROJECT_NAME}
   platform_tests_support
   platform
-  coding
-  base
-  jansson
-  minizip
-  oauthcpp
-  ${LIBZ}
 )
 
 if (PLATFORM_MAC)

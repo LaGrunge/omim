@@ -221,11 +221,8 @@ add_subdirectory(3party/icu)
 add_subdirectory(3party/jansson)
 add_subdirectory(3party/liboauthcpp)
 add_subdirectory(3party/minizip)
-add_subdirectory(3party/opening_hours)
 add_subdirectory(3party/protobuf)
-add_subdirectory(3party/pugixml)
 add_subdirectory(3party/succinct)
-add_subdirectory(3party/open-location-code)
 add_subdirectory(3party/libtess2)
 
 # Only options related to warnings should be placed here.

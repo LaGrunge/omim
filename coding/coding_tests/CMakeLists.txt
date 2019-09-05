@@ -51,14 +51,8 @@ omim_add_test(${PROJECT_NAME} ${SRC})
 
 omim_link_libraries(
   ${PROJECT_NAME}
+  coding
   platform_tests_support
   platform
-  coding
-  base
-  geometry
-  jansson
-  minizip
-  succinct
   ${Qt5Widgets_LIBRARIES}
-  ${LIBZ}
 )

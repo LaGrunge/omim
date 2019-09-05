@@ -1,33 +1,13 @@
 project(generator_tool)
 
-include_directories(${OMIM_ROOT}/3party/gflags/src)
-
 set(SRC generator_tool.cpp)
 
 omim_add_executable(${PROJECT_NAME} ${SRC})
-
 omim_link_libraries(
   ${PROJECT_NAME}
   generator
-  indexer
-  platform
-  geometry
-  coding
-  base
-  opening_hours
-  expat
-  icu
-  jansson
-  protobuf
-  minizip
-  succinct
-  pugixml
-  tess2
   gflags
-  oauthcpp
-  sqlite3
   ${CMAKE_DL_LIBS}
-  ${LIBZ}
 )
 
 link_qt5_core(${PROJECT_NAME})

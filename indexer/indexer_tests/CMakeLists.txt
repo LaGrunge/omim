@@ -43,21 +43,9 @@ omim_link_libraries(
   ${PROJECT_NAME}
   generator_tests_support
   platform_tests_support
-  generator
   indexer
-  platform
   coding
-  geometry
   base
-  icu
-  jansson
-  tess2
-  protobuf
-  succinct
-  opening_hours
-  oauthcpp
-  pugixml
-  ${LIBZ}
 )
 
 link_qt5_core(${PROJECT_NAME})
