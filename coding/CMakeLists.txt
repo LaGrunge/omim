@@ -110,6 +110,7 @@ omim_link_libraries(${PROJECT_NAME}
    oauthcpp
    succinct
    jansson
+   expat
 )
 
 omim_add_test_subdirectory(coding_tests)

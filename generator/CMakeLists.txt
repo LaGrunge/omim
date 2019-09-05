@@ -193,7 +193,6 @@ omim_link_libraries(${PROJECT_NAME}
   geometry
   jansson
   tess2
-  expat
 )
 
 
