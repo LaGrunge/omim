@@ -19,10 +19,3 @@
 // #endif
 
 void LogMessageFile(base::LogLevel level, base::SrcPoint const & srcPoint, std::string const & msg);
-void LogMemoryInfo();
-
-#ifdef OMIM_ENABLE_LOG_MEMORY_INFO
-# define LOG_MEMORY_INFO()  LogMemoryInfo()
-#else
-# define LOG_MEMORY_INFO()  do {} while(false)
-#endif

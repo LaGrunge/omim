@@ -111,11 +111,6 @@ Platform::Platform()
 
 std::string Platform::UniqueClientId() const { return {}; }
 
-std::string Platform::AdvertisingId() const
-{
-  return {};
-}
-
 std::string Platform::MacAddress(bool md5Decoded) const
 {
   // Not implemented.
@@ -139,12 +134,6 @@ void Platform::RunOnGuiThread(base::TaskLoop::Task && task)
   m_guiThread->Push(std::move(task));
 }
 
-void Platform::RunOnGuiThread(base::TaskLoop::Task const & task)
-{
-  ASSERT(m_guiThread, ());
-  m_guiThread->Push(task);
-}
-
 Platform::EConnectionType Platform::ConnectionStatus()
 {
   struct sockaddr_in zero;
@@ -163,22 +152,5 @@ Platform::EConnectionType Platform::ConnectionStatus()
   if ((flags & userActionRequired) == userActionRequired)
     return EConnectionType::CONNECTION_NONE;
   return EConnectionType::CONNECTION_WIFI;
-}
-
-// static
-Platform::ChargingStatus Platform::GetChargingStatus()
-{
-  return Platform::ChargingStatus::Plugged;
-}
-
-uint8_t Platform::GetBatteryLevel()
-{
-  // This value is always 100 for desktop.
-  return 100;
-}
-
-void Platform::SetGuiThread(std::unique_ptr<base::TaskLoop> guiThread)
-{
-  m_guiThread = std::move(guiThread);
 }
 

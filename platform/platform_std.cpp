@@ -15,13 +15,17 @@
 #include <regex>
 #include <string>
 
+#include <boost/filesystem.hpp>
+#include <boost/range/iterator_range.hpp>
+
+namespace fs = boost::filesystem;
 
 using namespace std;
 
 unique_ptr<ModelReader> Platform::GetReader(string const & file, string const & searchScope) const
 {
-  return make_unique<FileReader>(ReadPathForFile(file, searchScope),
-                                 READER_CHUNK_LOG_SIZE, READER_CHUNK_LOG_COUNT);
+  return make_unique<FileReader>(ReadPathForFile(file, searchScope), READER_CHUNK_LOG_SIZE,
+                                 READER_CHUNK_LOG_COUNT);
 }
 
 bool Platform::GetFileSizeByName(string const & fileName, uint64_t & size) const
@@ -36,28 +40,34 @@ bool Platform::GetFileSizeByName(string const & fileName, uint64_t & size) const
   }
 }
 
-void Platform::GetFilesByRegExp(string const & directory, string const & regexp, FilesList & outFiles)
+void Platform::GetFilesByRegExp(string const & directory, string const & regexp,
+                                FilesList & outFiles)
 {
-}
+  boost::system::error_code ec{};
+  regex exp(regexp);
 
-int Platform::PreCachingDepth() const
-{
-  return 3;
+  for (auto const & entry : boost::make_iterator_range(fs::directory_iterator(directory, ec), {}))
+  {
+    string const name = entry.path().filename().string();
+    if (regex_search(name.begin(), name.end(), exp))
+      outFiles.push_back(name);
+  }
 }
 
 // static
 Platform::EError Platform::MkDir(string const & dirName)
 {
-}
+  boost::system::error_code ec{};
 
-void Platform::SetupMeasurementSystem() const
-{
-  auto units = measurement_utils::Units::Metric;
-  if (settings::Get(settings::kMeasurementUnits, units))
-    return;
-  bool const isMetric = true;
-  units = isMetric ? measurement_utils::Units::Metric : measurement_utils::Units::Imperial;
-  settings::Set(settings::kMeasurementUnits, units);
+  fs::path dirPath{dirName};
+  if (fs::exists(dirPath, ec))
+    return Platform::ERR_FILE_ALREADY_EXISTS;
+  if (!fs::create_directory(dirPath, ec))
+  {
+    LOG(LWARNING, ("Can't create directory: ", dirName));
+    return Platform::ERR_UNKNOWN;
+  }
+  return Platform::ERR_OK;
 }
 
 extern Platform & GetPlatform()

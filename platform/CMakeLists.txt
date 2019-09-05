@@ -15,8 +15,6 @@ set(
   file_logging.hpp
   get_text_by_id.cpp
   get_text_by_id.hpp
-  http_client.cpp
-  http_client.hpp
   http_request.cpp
   http_request.hpp
   http_thread_callback.hpp
@@ -38,11 +36,7 @@ set(
   platform.hpp
   preferred_languages.cpp
   preferred_languages.hpp
-  remote_file.cpp
-  remote_file.hpp
   secure_storage.hpp
-  servers_list.cpp
-  servers_list.hpp
   settings.cpp
   settings.hpp
   socket.hpp
@@ -62,11 +56,9 @@ append(
 if(${PLATFORM_MAC})
   append(
     SRC
-    http_client_apple.mm
     http_thread_apple.h
     http_thread_apple.mm
     http_uploader_apple.mm
-    http_user_agent_dummy.cpp
     platform_mac.mm
     platform_unix_impl.cpp
     platform_unix_impl.hpp
@@ -76,9 +68,7 @@ if(${PLATFORM_MAC})
 elseif(${PLATFORM_LINUX})
   append(
     SRC
-    http_client_curl.cpp
     http_uploader_dummy.cpp
-    http_user_agent_dummy.cpp
     platform_linux.cpp
     platform_unix_impl.cpp
     platform_unix_impl.hpp
@@ -88,7 +78,7 @@ endif()
 add_subdirectory(platform_tests_support)
 
 omim_add_library(${PROJECT_NAME} ${SRC})
-omim_link_libraries(${PROJECT_NAME} base coding jansson)
+omim_link_libraries(${PROJECT_NAME} base coding jansson ${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY})
 
 
 if (APPLE)

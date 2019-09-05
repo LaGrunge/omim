@@ -71,18 +71,10 @@ public:
     CONNECTION_WWAN
   };
 
-  enum class ChargingStatus : uint8_t
-  {
-    Unknown,
-    Plugged,
-    Unplugged
-  };
-
   enum class Thread : uint8_t
   {
     File,
     Network,
-    Gui,
     Background,
   };
 
@@ -107,8 +99,6 @@ protected:
 
   /// Returns last system call error as EError.
   static EError ErrnoToError();
-
-  platform::HttpUserAgent m_appUserAgent;
 
   std::unique_ptr<base::thread_pool::delayed::ThreadPool> m_networkThread;
   std::unique_ptr<base::thread_pool::delayed::ThreadPool> m_fileThread;
@@ -238,11 +228,6 @@ public:
   // DO NOT assume for the same return value between calls.
   unsigned CpuCores() const;
 
-  void GetFontNames(FilesList & res) const;
-
-  int VideoMemoryLimit() const;
-
-  int PreCachingDepth() const;
 
   std::string DeviceName() const;
 
@@ -254,27 +239,8 @@ public:
 
   std::string MacAddress(bool md5Decoded) const;
 
-  /// @return url for clients to download maps
-  //@{
-  std::string MetaServerUrl() const;
-  std::string ResourcesMetaServerUrl() const;
-  //@}
-
-  /// @return JSON-encoded list of urls if metaserver is unreachable
-  std::string DefaultUrlsJSON() const;
-
-  /// @return information about kinds of memory which are relevant for a platform.
-  /// This method is implemented for iOS and Android only.
-  /// @TODO Add implementation
-  std::string GetMemoryInfo() const;
-
   static EConnectionType ConnectionStatus();
   static bool IsConnected() { return ConnectionStatus() != EConnectionType::CONNECTION_NONE; }
-
-  void SetupMeasurementSystem() const;
-
-  platform::HttpUserAgent & GetAppUserAgent() { return m_appUserAgent; }
-  platform::HttpUserAgent const & GetAppUserAgent() const { return m_appUserAgent; }
 
   /// \brief Placing an executable object |task| on a queue of |thread|. Then the object will be
   /// executed on |thread|.
@@ -317,10 +283,6 @@ public:
 private:
   void RunThreads();
   void ShutdownThreads();
-
-
-  void GetSystemFontNames(FilesList & res) const;
 };
 
 std::string DebugPrint(Platform::EError err);
-std::string DebugPrint(Platform::ChargingStatus status);

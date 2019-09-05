@@ -21,13 +21,6 @@ endif()
 omim_set_platform_var(PLATFORM_MAC "macx-.*" ${APPLE})
 omim_set_platform_var(PLATFORM_LINUX "linux-.*" ${LINUX_DETECTED})
 
-if (PLATFORM_LINUX OR PLATFORM_MAC OR PLATFORM_WIN)
-  set(PLATFORM_DESKTOP TRUE)
-else()
-  set(PLATFORM_DESKTOP FALSE)
-endif()
-
-# End of setting the target platform
 
 # Set build type:
 if (NOT CMAKE_BUILD_TYPE)
@@ -131,7 +124,7 @@ find_package(Threads)
 #init_boost()
 #install_boost_headers()
 
-find_package(Boost ${BOOST_VERSION} EXACT)
+find_package(Boost ${BOOST_VERSION} EXACT COMPONENTS system filesystem REQUIRED)
 
 if (PYBINDINGS)
   add_subdirectory(pyhelpers)
@@ -153,13 +146,6 @@ endif()
 find_library(LIBZ NAMES z)
 if (LIBZ STREQUAL "LIBZ-NOTFOUND")
   message(FATAL_ERROR "Failed to find libz library.")
-endif()
-
-if (NOT DEVELOPER_FRAMEWORKS_DIR)
-  message("Doing nothing, because we know nothing about developer frameworks dir")
-  #do nothing
-else()
-  include_directories(${DEVELOPER_FRAMEWORKS_DIR})
 endif()
 
 include_directories(

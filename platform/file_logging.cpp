@@ -56,17 +56,3 @@ void LogMessageFile(base::LogLevel level, base::SrcPoint const & srcPoint, strin
   file->Write(srcString.c_str(), srcString.size());
   file->Flush();
 }
-
-void LogMemoryInfo()
-{
-  static unsigned long counter = 0;
-  const unsigned short writeLogEveryNthCall = 3;
-  if (counter++ % writeLogEveryNthCall == 0)
-  {
-    tm * curTimeTM = GetLocalTime();
-    stringstream timeDate;
-    timeDate << " " << curTimeTM->tm_year + 1900 << "." << curTimeTM->tm_mon + 1 << "." << curTimeTM->tm_mday << " "
-      << curTimeTM->tm_hour << ":" << curTimeTM->tm_min << ":" << curTimeTM->tm_sec << " ";
-    LOG(LINFO, (timeDate.str(), GetPlatform().GetMemoryInfo()));
-  }
-}

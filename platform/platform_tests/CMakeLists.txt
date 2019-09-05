@@ -6,7 +6,6 @@ set(
   get_text_by_id_tests.cpp
   jansson_test.cpp
   language_test.cpp
-  local_country_file_tests.cpp
   measurement_tests.cpp
   mwm_version_test.cpp
   platform_test.cpp
