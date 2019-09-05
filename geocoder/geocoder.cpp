@@ -23,6 +23,8 @@
 
 using namespace std;
 
+namespace geocoder
+{
 namespace
 {
 size_t const kMaxResults = 100;
@@ -45,19 +47,19 @@ size_t const kMaxResults = 100;
 // relevant result (correct city, correct locality, wrong street) in the case where
 // the database does not contain an exact match. So let's make some parts of the
 // query heavier (heuristically). This turns out to work more predictable.
-double GetWeight(geocoder::Type t)
+double GetWeight(Type t)
 {
   switch (t)
   {
-  case geocoder::Type::Country: return 10.0;
-  case geocoder::Type::Region: return 5.0;
-  case geocoder::Type::Subregion: return 4.0;
-  case geocoder::Type::Locality: return 3.0;
-  case geocoder::Type::Suburb: return 3.0;
-  case geocoder::Type::Sublocality: return 2.0;
-  case geocoder::Type::Street: return 1.0;
-  case geocoder::Type::Building: return 0.1;
-  case geocoder::Type::Count: return 0.0;
+  case Type::Country: return 10.0;
+  case Type::Region: return 5.0;
+  case Type::Subregion: return 4.0;
+  case Type::Locality: return 3.0;
+  case Type::Suburb: return 3.0;
+  case Type::Sublocality: return 2.0;
+  case Type::Street: return 1.0;
+  case Type::Building: return 0.1;
+  case Type::Count: return 0.0;
   }
   UNREACHABLE();
 }
@@ -65,12 +67,10 @@ double GetWeight(geocoder::Type t)
 // todo(@m) This is taken from search/geocoder.hpp. Refactor.
 class ScopedMarkTokens
 {
-  using Type = geocoder::Type;
-
 public:
   // The range is [l, r).
   ScopedMarkTokens() = delete;
-  ScopedMarkTokens(geocoder::Geocoder::Context & context, Type type, size_t l, size_t r)
+  ScopedMarkTokens(Geocoder::Context & context, Type type, size_t l, size_t r)
     : m_context(context), m_type(type), m_l(l), m_r(r)
   {
     CHECK_LESS_OR_EQUAL(l, r, ());
@@ -87,27 +87,38 @@ public:
   }
 
 private:
-  geocoder::Geocoder::Context & m_context;
+  Geocoder::Context & m_context;
   Type const m_type;
   size_t m_l = 0;
   size_t m_r = 0;
 };
 
-geocoder::Type NextType(geocoder::Type type)
+void MarkStreetSynonym(Geocoder::Context & ctx, boost::optional<ScopedMarkTokens> & mark)
 {
-  CHECK_NOT_EQUAL(type, geocoder::Type::Count, ());
-  auto t = static_cast<size_t>(type);
-  return static_cast<geocoder::Type>(t + 1);
+  for (size_t tokId = 0; tokId < ctx.GetNumTokens(); ++tokId)
+  {
+    auto const t = ctx.GetTokenType(tokId);
+    if (t == Type::Count && search::IsStreetSynonym(strings::MakeUniString(ctx.GetToken(tokId))))
+    {
+      mark.emplace(ctx, Type::Street, tokId, tokId + 1);
+      return;
+    }
+  }
 }
 
-strings::UniString MakeHouseNumber(geocoder::Tokens const & tokens)
+Type NextType(Type type)
+{
+  CHECK_NOT_EQUAL(type, Type::Count, ());
+  auto t = static_cast<size_t>(type);
+  return static_cast<Type>(t + 1);
+}
+
+strings::UniString MakeHouseNumber(Tokens const & tokens)
 {
   return strings::MakeUniString(strings::JoinStrings(tokens, " "));
 }
 }  // namespace
 
-namespace geocoder
-{
 // Geocoder::Context -------------------------------------------------------------------------------
 Geocoder::Context::Context(string const & query) : m_beam(kMaxResults)
 {
@@ -336,30 +347,12 @@ void Geocoder::Go(Context & ctx, Type type) const
         continue;
 
       ScopedMarkTokens mark(ctx, type, i, j + 1);
+
       auto streetSynonymMark = boost::make_optional(false, ScopedMarkTokens(ctx, type, 0, 0));
+      if (type == Type::Street)
+        MarkStreetSynonym(ctx, streetSynonymMark);
 
-      double certainty = 0;
-      vector<size_t> tokenIds;
-      vector<Type> allTypes;
-      for (size_t tokId = 0; tokId < ctx.GetNumTokens(); ++tokId)
-      {
-        auto const t = ctx.GetTokenType(tokId);
-        if (type == Type::Street && t == Type::Count && !streetSynonymMark)
-        {
-          if (search::IsStreetSynonym(strings::MakeUniString(ctx.GetToken(tokId))))
-            streetSynonymMark.emplace(ctx, Type::Street, tokId, tokId + 1);
-        }
-
-        certainty += GetWeight(t);
-        if (t != Type::Count)
-        {
-          tokenIds.push_back(tokId);
-          allTypes.push_back(t);
-        }
-      }
-
-      for (auto const & docId : curLayer.m_entries)
-        ctx.AddResult(m_index.GetDoc(docId).m_osmId, certainty, type, tokenIds, allTypes);
+      AddResults(ctx, curLayer.m_entries);
 
       ctx.GetLayers().emplace_back(move(curLayer));
       SCOPE_GUARD(pop, [&] { ctx.GetLayers().pop_back(); });
@@ -425,6 +418,29 @@ void Geocoder::FillRegularLayer(Context const & ctx, Type type, Tokens const & s
       curLayer.m_entries.emplace_back(docId);
     }
   });
+}
+
+void Geocoder::AddResults(Context & ctx, std::vector<Index::DocId> const & entries) const
+{
+  double certainty = 0;
+  vector<size_t> tokenIds;
+  vector<Type> allTypes;
+  for (size_t tokId = 0; tokId < ctx.GetNumTokens(); ++tokId)
+  {
+    auto const t = ctx.GetTokenType(tokId);
+    certainty += GetWeight(t);
+    if (t != Type::Count)
+    {
+      tokenIds.push_back(tokId);
+      allTypes.push_back(t);
+    }
+  }
+
+  for (auto const & docId : entries)
+  {
+    auto const & entry = m_index.GetDoc(docId);
+    ctx.AddResult(entry.m_osmId, certainty, entry.m_type, tokenIds, allTypes);
+  }
 }
 
 bool Geocoder::HasParent(vector<Geocoder::Layer> const & layers, Hierarchy::Entry const & e) const
