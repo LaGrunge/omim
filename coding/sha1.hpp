@@ -1,4 +1,5 @@
 #pragma once
+#pragma message("sha1.hpp is dummy header, delete it or suffer the warning")
 
 #include <array>
 #include <string>

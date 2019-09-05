@@ -107,9 +107,9 @@ omim_link_libraries(${PROJECT_NAME}
    icu
    geometry
    minizip
-   oauthcpp
    succinct
    jansson
+   expat
 )
 
 omim_add_test_subdirectory(coding_tests)
