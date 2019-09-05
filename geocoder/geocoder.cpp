@@ -439,7 +439,20 @@ void Geocoder::AddResults(Context & ctx, std::vector<Index::DocId> const & entri
   for (auto const & docId : entries)
   {
     auto const & entry = m_index.GetDoc(docId);
-    ctx.AddResult(entry.m_osmId, certainty, entry.m_type, tokenIds, allTypes);
+
+    auto entryCertainty = certainty;
+    if (entry.m_type == Type::Locality)
+    {
+      auto const localityName = entry.m_normalizedAddress[static_cast<size_t>(Type::Locality)];
+
+      if (entry.m_normalizedAddress[static_cast<size_t>(Type::Region)] == localityName)
+        entryCertainty += GetWeight(Type::Region);
+
+      if (entry.m_normalizedAddress[static_cast<size_t>(Type::Subregion)] == localityName)
+        entryCertainty += GetWeight(Type::Subregion);
+    }
+
+    ctx.AddResult(entry.m_osmId, entryCertainty, entry.m_type, tokenIds, allTypes);
   }
 }
 

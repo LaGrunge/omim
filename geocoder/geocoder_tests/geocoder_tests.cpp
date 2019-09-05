@@ -166,6 +166,23 @@ UNIT_TEST(Geocoder_MismatchedLocality)
   TestGeocoder(geocoder, "Moscow Krymskaya 3", {});
 }
 
+// Geocoder_Moscow* -----------------------------------------------------------------------------
+UNIT_TEST(Geocoder_MoscowLocalityRank)
+{
+  string const kData = R"#(
+10 {"properties": {"locales": {"default": {"address": {"region": "Москва"}}}, "rank": 2}}
+11 {"properties": {"locales": {"default": {"address": {"locality": "Москва", "region": "Москва"}}}, "rank": 4}}
+
+20 {"properties": {"locales": {"default": {"address": {"region": "Тверская Область"}}}, "rank": 2}}
+21 {"properties": {"locales": {"default": {"address": {"locality": "Москва", "region": "Тверская Область"}}}, "rank": 4}}
+)#";
+
+  ScopedFile const regionsJsonFile("regions.jsonl", kData);
+  Geocoder geocoder(regionsJsonFile.GetFullPath());
+
+  TestGeocoder(geocoder, "Москва", {{Id{0x11}, 1.0}, {Id{0x10}, 0.625}, {Id{0x21}, 0.375}});
+}
+
 // Geocoder_StreetWithNumber* ----------------------------------------------------------------------
 UNIT_TEST(Geocoder_StreetWithNumberInCity)
 {
@@ -296,8 +313,8 @@ UNIT_TEST(Geocoder_SubregionInLocality)
 
   TestGeocoder(geocoder, "Северный административный округ", {{Id{0x12}, 1.0}});
   TestGeocoder(geocoder, "Москва, Северный административный округ",
-               {{Id{0x12}, 1.0}, {Id{0x10}, 0.294118}, {Id{0x11}, 0.176471}});
-  TestGeocoder(geocoder, "Москва", {{Id{0x10}, 1.0}, {Id{0x11}, 0.6}});
+               {{Id{0x12}, 1.0}, {Id{0x11}, 0.470588}, {Id{0x10}, 0.294118}});
+  TestGeocoder(geocoder, "Москва", {{Id{0x11}, 1.0}, {Id{0x10}, 0.625}});
 }
 
 // Geocoder_NumericalSuburb* ----------------------------------------------------------------------
