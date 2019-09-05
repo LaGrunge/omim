@@ -6,6 +6,8 @@
 
 #include "3party/jansson/myjansson.hpp"
 
+using namespace std;
+
 namespace
 {
 int8_t ParseHolidayReference(std::string const & ref)

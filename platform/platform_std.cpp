@@ -15,10 +15,6 @@
 #include <regex>
 #include <string>
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDir>
-#include <QtCore/QFileInfo>
-#include <QtCore/QLocale>
 
 using namespace std;
 
@@ -42,17 +38,6 @@ bool Platform::GetFileSizeByName(string const & fileName, uint64_t & size) const
 
 void Platform::GetFilesByRegExp(string const & directory, string const & regexp, FilesList & outFiles)
 {
-  regex exp(regexp);
-
-  QDir dir(QString::fromUtf8(directory.c_str()));
-  int const count = dir.count();
-
-  for (int i = 0; i < count; ++i)
-  {
-    string const name = dir[i].toUtf8().data();
-    if (regex_search(name.begin(), name.end(), exp))
-      outFiles.push_back(name);
-  }
 }
 
 int Platform::PreCachingDepth() const
@@ -60,22 +45,9 @@ int Platform::PreCachingDepth() const
   return 3;
 }
 
-int Platform::VideoMemoryLimit() const
-{
-  return 20 * 1024 * 1024;
-}
-
 // static
 Platform::EError Platform::MkDir(string const & dirName)
 {
-  if (QDir().exists(dirName.c_str()))
-    return Platform::ERR_FILE_ALREADY_EXISTS;
-  if(!QDir().mkdir(dirName.c_str()))
-  {
-    LOG(LWARNING, ("Can't create directory: ", dirName));
-    return Platform::ERR_UNKNOWN;
-  }
-  return Platform::ERR_OK;
 }
 
 void Platform::SetupMeasurementSystem() const
@@ -83,24 +55,10 @@ void Platform::SetupMeasurementSystem() const
   auto units = measurement_utils::Units::Metric;
   if (settings::Get(settings::kMeasurementUnits, units))
     return;
-  bool const isMetric = QLocale::system().measurementSystem() == QLocale::MetricSystem;
+  bool const isMetric = true;
   units = isMetric ? measurement_utils::Units::Metric : measurement_utils::Units::Imperial;
   settings::Set(settings::kMeasurementUnits, units);
 }
-
-#if defined(OMIM_OS_LINUX)
-void Platform::RunOnGuiThread(base::TaskLoop::Task && task)
-{
-  ASSERT(m_guiThread, ());
-  m_guiThread->Push(std::move(task));
-}
-
-void Platform::RunOnGuiThread(base::TaskLoop::Task const & task)
-{
-  ASSERT(m_guiThread, ());
-  m_guiThread->Push(task);
-}
-#endif  // defined(OMIM_OS_LINUX)
 
 extern Platform & GetPlatform()
 {

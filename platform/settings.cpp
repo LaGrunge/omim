@@ -18,6 +18,9 @@
 #include "std/iostream.hpp"
 #include "std/sstream.hpp"
 
+
+using namespace std;
+
 namespace settings
 {
 char const * kLocationStateMode = "LastLocationStateMode";

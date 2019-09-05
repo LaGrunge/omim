@@ -1,11 +1,8 @@
 project(platform_tests)
 
-add_definitions(-DOMIM_UNIT_TEST_WITH_QT_EVENT_LOOP)
-
 set(
   SRC
   country_file_tests.cpp
-  downloader_tests/downloader_test.cpp
   get_text_by_id_tests.cpp
   jansson_test.cpp
   language_test.cpp
@@ -26,7 +23,6 @@ omim_link_libraries(
 if (PLATFORM_MAC)
   omim_link_libraries(
     ${PROJECT_NAME}
-    ${Qt5Widgets_LIBRARIES}
     "-framework QuartzCore"
   )
 endif()
@@ -34,6 +30,5 @@ endif()
 if (PLATFORM_WIN OR PLATFORM_LINUX)
   omim_link_libraries(
     ${PROJECT_NAME}
-    ${Qt5Widgets_LIBRARIES}
   )
 endif()

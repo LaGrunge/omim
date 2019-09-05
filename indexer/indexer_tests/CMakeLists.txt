@@ -47,5 +47,3 @@ omim_link_libraries(
   coding
   base
 )
-
-link_qt5_core(${PROJECT_NAME})

@@ -24,6 +24,8 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 
+using namespace std;
+
 namespace
 {
 // Web service ip to check internet connection. Now it's a mail.ru ip.
@@ -193,8 +195,6 @@ Platform::Platform()
 
   m_privateDir = m_settingsDir;
 
-  m_guiThread = make_unique<platform::GuiThread>();
-
   LOG(LDEBUG, ("Resources directory:", m_resourcesDir));
   LOG(LDEBUG, ("Writable directory:", m_writableDir));
   LOG(LDEBUG, ("Tmp directory:", m_tmpDir));
@@ -257,20 +257,4 @@ Platform::EConnectionType Platform::ConnectionStatus()
     return EConnectionType::CONNECTION_NONE;
 
   return EConnectionType::CONNECTION_WIFI;
-}
-
-Platform::ChargingStatus Platform::GetChargingStatus()
-{
-  return Platform::ChargingStatus::Plugged;
-}
-
-uint8_t Platform::GetBatteryLevel()
-{
-  // This value is always 100 for desktop.
-  return 100;
-}
-
-void Platform::SetGuiThread(unique_ptr<base::TaskLoop> guiThread)
-{
-  m_guiThread = move(guiThread);
 }

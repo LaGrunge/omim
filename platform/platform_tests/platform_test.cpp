@@ -17,6 +17,8 @@
 #include "std/initializer_list.hpp"
 #include "std/set.hpp"
 
+using namespace std;
+
 namespace
 {
 char const * TEST_FILE_NAME = "some_temporary_unit_test_file.tmp";

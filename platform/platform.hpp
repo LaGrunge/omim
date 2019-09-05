@@ -1,11 +1,7 @@
 #pragma once
 
-#include "platform/battery_tracker.hpp"
 #include "platform/country_defines.hpp"
-#include "platform/gui_thread.hpp"
 #include "platform/http_user_agent.hpp"
-#include "platform/marketing_service.hpp"
-#include "platform/secure_storage.hpp"
 
 #include "coding/reader.hpp"
 
@@ -108,31 +104,15 @@ protected:
   /// Extended resource files.
   /// Used in Android only (downloaded zip files as a container).
   std::vector<std::string> m_extResFiles;
-  /// Default search scope for resource files.
-  /// Used in Android only and initialized according to the market type (Play, Amazon, Samsung).
-  std::string m_androidDefResScope;
-
-  /// Used in Android only to get corret GUI elements layout.
-  bool m_isTablet;
 
   /// Returns last system call error as EError.
   static EError ErrnoToError();
 
-  /// Platform-dependent marketing services.
-  MarketingService m_marketingService;
-
-  /// Platform-dependent secure storage.
-  platform::SecureStorage m_secureStorage;
-
   platform::HttpUserAgent m_appUserAgent;
-
-  std::unique_ptr<base::TaskLoop> m_guiThread;
 
   std::unique_ptr<base::thread_pool::delayed::ThreadPool> m_networkThread;
   std::unique_ptr<base::thread_pool::delayed::ThreadPool> m_fileThread;
   std::unique_ptr<base::thread_pool::delayed::ThreadPool> m_backgroundThread;
-
-  platform::BatteryLevelTracker m_batteryTracker;
 
 public:
   Platform();
@@ -283,8 +263,6 @@ public:
   /// @return JSON-encoded list of urls if metaserver is unreachable
   std::string DefaultUrlsJSON() const;
 
-  bool IsTablet() const { return m_isTablet; }
-
   /// @return information about kinds of memory which are relevant for a platform.
   /// This method is implemented for iOS and Android only.
   /// @TODO Add implementation
@@ -293,16 +271,8 @@ public:
   static EConnectionType ConnectionStatus();
   static bool IsConnected() { return ConnectionStatus() != EConnectionType::CONNECTION_NONE; }
 
-  static ChargingStatus GetChargingStatus();
-
-  // Returns current battery level. Possible values are from 0 to 100.
-  // Returns 100 when actual level is unknown.
-  static uint8_t GetBatteryLevel();
-
   void SetupMeasurementSystem() const;
 
-  MarketingService & GetMarketingService() { return m_marketingService; }
-  platform::SecureStorage & GetSecureStorage() { return m_secureStorage; }
   platform::HttpUserAgent & GetAppUserAgent() { return m_appUserAgent; }
   platform::HttpUserAgent const & GetAppUserAgent() const { return m_appUserAgent; }
 
@@ -322,9 +292,6 @@ public:
     case Thread::Network:
       m_networkThread->Push(std::forward<Task>(task));
       break;
-    case Thread::Gui:
-      RunOnGuiThread(std::forward<Task>(task));
-      break;
     case Thread::Background: m_backgroundThread->Push(std::forward<Task>(task)); break;
     }
   }
@@ -341,26 +308,16 @@ public:
     case Thread::Network:
       m_networkThread->PushDelayed(delay, std::forward<Task>(task));
       break;
-    case Thread::Gui:
-      CHECK(false, ("Delayed tasks for gui thread are not supported yet"));
-      break;
     case Thread::Background:
       m_backgroundThread->PushDelayed(delay, std::forward<Task>(task));
       break;
     }
   }
 
-  // Use this method for testing purposes only.
-  void SetGuiThread(std::unique_ptr<base::TaskLoop> guiThread);
-
-  platform::BatteryLevelTracker & GetBatteryTracker() { return m_batteryTracker; }
-
 private:
   void RunThreads();
   void ShutdownThreads();
 
-  void RunOnGuiThread(base::TaskLoop::Task && task);
-  void RunOnGuiThread(base::TaskLoop::Task const & task);
 
   void GetSystemFontNames(FilesList & res) const;
 };

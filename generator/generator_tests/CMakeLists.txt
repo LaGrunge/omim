@@ -42,12 +42,3 @@ omim_link_libraries(
   generator
   gflags
 )
-
-if (PLATFORM_LINUX)
-  omim_link_libraries(
-    ${PROJECT_NAME}
-    dl
-  )
-endif()
-
-link_qt5_core(${PROJECT_NAME})

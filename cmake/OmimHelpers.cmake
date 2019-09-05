@@ -18,10 +18,6 @@ function(omim_set_platform_var PLATFORM_VAR pattern)
   endif()
 endfunction()
 
-macro(find_qt5_desktop_package package)
-  find_package(${package})
-endmacro()
-
 # Functions for using in subdirectories
 function(omim_add_executable executable)
   add_executable(${executable} ${ARGN})
@@ -109,50 +105,6 @@ endfunction()
 
 function(append VAR)
   set(${VAR} ${${VAR}} ${ARGN} PARENT_SCOPE)
-endfunction()
-
-function(link_opengl target)
-    if (PLATFORM_MAC)
-      omim_link_libraries(
-        ${target}
-        "-framework OpenGL"
-      )
-    endif()
-
-    if (PLATFORM_LINUX)
-      omim_link_libraries(
-        ${target}
-        ${OPENGL_gl_LIBRARY}
-      )
-    endif()
-endfunction()
-
-function(link_qt5_core target)
-  omim_link_libraries(
-    ${target}
-    ${Qt5Core_LIBRARIES}
-  )
-
-  if (PLATFORM_MAC)
-    omim_link_libraries(
-      ${target}
-      "-framework IOKit"
-    )
-  endif()
-endfunction()
-
-function(link_qt5_network target)
-  omim_link_libraries(
-    ${target}
-    ${Qt5Network_LIBRARIES}
-  )
-endfunction()
-
-function(link_qt5_webengine target)
-  omim_link_libraries(
-    ${target}
-    ${Qt5WebEngineWidgets_LIBRARIES}
-  )
 endfunction()
 
 function(add_clang_compile_options)
