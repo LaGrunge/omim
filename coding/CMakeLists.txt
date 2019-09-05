@@ -107,7 +107,6 @@ omim_link_libraries(${PROJECT_NAME}
    icu
    geometry
    minizip
-   oauthcpp
    succinct
    jansson
    expat
