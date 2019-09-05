@@ -53,7 +53,6 @@
 #define TRANSIT_CROSS_MWM_FILE_TAG "transit_cross_mwm"
 #define TRANSIT_FILE_TAG "transit"
 #define CITY_ROADS_FILE_TAG "city_roads"
-#define DESCRIPTIONS_FILE_TAG "descriptions"
 #define MAXSPEEDS_FILE_TAG "maxspeeds"
 
 #define LOCALITY_DATA_FILE_TAG "locdata"

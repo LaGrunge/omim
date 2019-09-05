@@ -14,18 +14,11 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(LINUX_DETECTED TRUE)
 endif()
 
-if (CMAKE_SYSTEM_NAME MATCHES "Android")
-  set(ANDROID_DETECTED TRUE)
-endif()
-
 if (ANDROID_DETECTED AND (${OS} MATCHES "mac"))
   set(DARWIN TRUE)
 endif()
 
-omim_set_platform_var(PLATFORM_IPHONE "iphone-.*")
-omim_set_platform_var(PLATFORM_ANDROID "android-.*" ${ANDROID_DETECTED})
 omim_set_platform_var(PLATFORM_MAC "macx-.*" ${APPLE})
-omim_set_platform_var(PLATFORM_WIN "win32-.*" ${WIN32})
 omim_set_platform_var(PLATFORM_LINUX "linux-.*" ${LINUX_DETECTED})
 
 if (PLATFORM_LINUX OR PLATFORM_MAC OR PLATFORM_WIN)
@@ -256,7 +249,6 @@ endif()
 
 add_subdirectory(base)
 add_subdirectory(coding)
-add_subdirectory(descriptions)
 add_subdirectory(geometry)
 add_subdirectory(indexer)
 add_subdirectory(map)
