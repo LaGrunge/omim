@@ -144,6 +144,7 @@ private:
                           Layer & curLayer) const;
   void FillRegularLayer(Context const & ctx, Type type, Tokens const & subquery,
                         Layer & curLayer) const;
+  void AddResults(Context & ctx, std::vector<Index::DocId> const & entries) const;
 
   // Returns whether any of the paths through |layers| can be extended
   // by appending |e|.
