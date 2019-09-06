@@ -46,7 +46,6 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 
 option(USE_ASAN "Enable Address Sanitizer" OFF)
 option(USE_TSAN "Enable Thread Sanitizer" OFF)
-option(PYBINDINGS "Create makefiles for building python bindings" OFF)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU" AND
     CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.0)
@@ -125,23 +124,6 @@ find_package(Threads)
 #install_boost_headers()
 
 find_package(Boost ${BOOST_VERSION} EXACT COMPONENTS system filesystem REQUIRED)
-
-if (PYBINDINGS)
-  add_subdirectory(pyhelpers)
-  if (PYTHON_VERSION VERSION_GREATER 3.0)
-    set(_Boost_PYTHON3_HEADERS "boost/python.hpp")
-    if (NOT DEFINED BOOST_PYTHON_LIBNAME)
-      set(BOOST_PYTHON_LIBNAME python3)
-    endif()
-  else()
-    if (NOT DEFINED BOOST_PYTHON_LIBNAME)
-      set(BOOST_PYTHON_LIBNAME python)
-    endif()
-  endif()
-  find_package(Boost ${BOOST_VERSION} EXACT REQUIRED COMPONENTS ${BOOST_PYTHON_LIBNAME})
-  find_package(PythonLibs ${PYTHON_VERSION} REQUIRED)
-  include_directories(${PYTHON_INCLUDE_DIRS})
-endif()
 
 find_library(LIBZ NAMES z)
 if (LIBZ STREQUAL "LIBZ-NOTFOUND")
