@@ -149,21 +149,6 @@ string Platform::ReadPathForFile(string const & file, string searchScope) const
                                 "Have been looking in:\n", possiblePaths));
 }
 
-string Platform::ResourcesMetaServerUrl() const
-{
-  return RESOURCES_METASERVER_URL;
-}
-
-string Platform::MetaServerUrl() const
-{
-  return METASERVER_URL;
-}
-
-string Platform::DefaultUrlsJSON() const
-{
-  return DEFAULT_URLS_JSON;
-}
-
 bool Platform::RemoveFileIfExists(string const & filePath)
 {
   return IsFileExistsByFullPath(filePath) ? base::DeleteFileX(filePath) : true;
@@ -173,28 +158,6 @@ string Platform::TmpPathForFile() const
 {
   size_t const kNameLen = 32;
   return TmpDir() + RandomString(kNameLen);
-}
-
-void Platform::GetFontNames(FilesList & res) const
-{
-  ASSERT(res.empty(), ());
-
-  /// @todo Actually, this list should present once in all our code.
-  /// We can take it from data/external_resources.txt
-  char const * arrDef[] = {
-    "01_dejavusans.ttf",
-    "02_droidsans-fallback.ttf",
-    "03_jomolhari-id-a3d.ttf",
-    "04_padauk.ttf",
-    "05_khmeros.ttf",
-    "06_code2000.ttf",
-    "07_roboto_medium.ttf"
-  };
-  res.insert(res.end(), arrDef, arrDef + ARRAY_SIZE(arrDef));
-
-  GetSystemFontNames(res);
-
-  LOG(LINFO, ("Available font files:", (res)));
 }
 
 void Platform::GetFilesByExt(string const & directory, string const & ext, FilesList & outFiles)
@@ -330,8 +293,6 @@ void Platform::ShutdownThreads()
 {
   ASSERT(m_networkThread && m_fileThread && m_backgroundThread, ());
 
-  m_batteryTracker.UnsubscribeAll();
-
   m_networkThread->ShutdownAndJoin();
   m_fileThread->ShutdownAndJoin();
   m_backgroundThread->ShutdownAndJoin();
@@ -366,17 +327,6 @@ string DebugPrint(Platform::EError err)
     return "Too many symbolic links were encountered in translating path.";
   case Platform::ERR_IO_ERROR: return "An I/O error occurred.";
   case Platform::ERR_UNKNOWN: return "Unknown";
-  }
-  UNREACHABLE();
-}
-
-string DebugPrint(Platform::ChargingStatus status)
-{
-  switch (status)
-  {
-  case Platform::ChargingStatus::Unknown: return "Unknown";
-  case Platform::ChargingStatus::Plugged: return "Plugged";
-  case Platform::ChargingStatus::Unplugged: return "Unplugged";
   }
   UNREACHABLE();
 }

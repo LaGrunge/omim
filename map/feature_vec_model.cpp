@@ -13,6 +13,7 @@
 
 using platform::CountryFile;
 using platform::LocalCountryFile;
+using namespace std;
 
 namespace model
 {

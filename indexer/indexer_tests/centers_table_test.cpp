@@ -33,44 +33,6 @@ struct CentersTableTest
   CentersTableTest() { classificator::Load(); }
 };
 
-UNIT_CLASS_TEST(CentersTableTest, Smoke)
-{
-  string const kMap = base::JoinPath(GetPlatform().WritableDir(), "minsk-pass.mwm");
-
-  feature::DataHeader header(kMap);
-  auto const codingParams = header.GetDefGeometryCodingParams();
-
-  FeaturesVectorTest fv(kMap);
-
-  TBuffer buffer;
-
-  {
-    CentersTableBuilder builder;
-
-    builder.SetGeometryCodingParams(codingParams);
-    fv.GetVector().ForEach(
-        [&](FeatureType & ft, uint32_t id) { builder.Put(id, feature::GetCenter(ft)); });
-
-    MemWriter<TBuffer> writer(buffer);
-    builder.Freeze(writer);
-  }
-
-  {
-    MemReader reader(buffer.data(), buffer.size());
-    auto table = CentersTable::Load(reader, codingParams);
-    TEST(table.get(), ());
-
-    fv.GetVector().ForEach([&](FeatureType & ft, uint32_t id) {
-      m2::PointD actual;
-      TEST(table->Get(id, actual), ());
-
-      m2::PointD expected = feature::GetCenter(ft);
-
-      TEST_LESS_OR_EQUAL(MercatorBounds::DistanceOnEarth(actual, expected), 1, (id));
-    });
-  }
-}
-
 UNIT_CLASS_TEST(CentersTableTest, Subset)
 {
   vector<pair<uint32_t, m2::PointD>> const features = {

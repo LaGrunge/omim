@@ -17,23 +17,8 @@
 
 #include "std/target_os.hpp"
 
-#ifdef TARGET_OS_IPHONE
-# include <CoreFoundation/CoreFoundation.h>
-#endif
-
 #ifndef OMIM_UNIT_TEST_DISABLE_PLATFORM_INIT
 # include "platform/platform.hpp"
-#endif
-
-#if defined(OMIM_UNIT_TEST_WITH_QT_EVENT_LOOP) && !defined(OMIM_OS_IPHONE)
-  #include <QtCore/Qt>
-  #ifdef OMIM_OS_MAC // on Mac OS X native run loop works only for QApplication :(
-    #include <QtWidgets/QApplication>
-    #define QAPP QApplication
-  #else
-    #include <QtCore/QCoreApplication>
-    #define QAPP QCoreApplication
-  #endif
 #endif
 
 using namespace std;
@@ -45,24 +30,6 @@ base::Waiter g_waiter;
 
 namespace testing
 {
-
-void RunEventLoop()
-{
-#if defined(OMIM_OS_IPHONE)
-  CFRunLoopRun();
-#elif defined (QAPP)
-  QAPP::exec();
-#endif
-}
-
-void StopEventLoop()
-{
-#if defined(OMIM_OS_IPHONE)
-  CFRunLoopStop(CFRunLoopGetMain());
-#elif defined(QAPP)
-  QAPP::exit();
-#endif
-}
 
 void Wait()
 {
@@ -150,18 +117,9 @@ CommandLineOptions const & GetTestingOptions()
 
 int main(int argc, char * argv[])
 {
-#if defined(OMIM_UNIT_TEST_WITH_QT_EVENT_LOOP) && !defined(OMIM_OS_IPHONE)
-  QAPP theApp(argc, argv);
-  UNUSED_VALUE(theApp);
-#else
-  UNUSED_VALUE(argc);
-  UNUSED_VALUE(argv);
-#endif
 
   base::ScopedLogLevelChanger const infoLogLevel(LINFO);
-#if defined(OMIM_OS_MAC) || defined(OMIM_OS_LINUX) || defined(OMIM_OS_IPHONE)
   base::SetLogMessageFn(base::LogMessageTests);
-#endif
 
   vector<string> testnames;
   vector<bool> testResults;

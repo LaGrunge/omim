@@ -17,6 +17,8 @@
 #include "std/initializer_list.hpp"
 #include "std/set.hpp"
 
+using namespace std;
+
 namespace
 {
 char const * TEST_FILE_NAME = "some_temporary_unit_test_file.tmp";
@@ -65,9 +67,7 @@ UNIT_TEST(GetReader)
 {
   char const * NON_EXISTING_FILE = "mgbwuerhsnmbui45efhdbn34.tmp";
   char const * arr[] = {
-    "resources-mdpi_clear/symbols.sdf",
     "classificator.txt",
-    "minsk-pass.mwm"
   };
 
   Platform & p = GetPlatform();

@@ -18,10 +18,6 @@ function(omim_set_platform_var PLATFORM_VAR pattern)
   endif()
 endfunction()
 
-macro(find_qt5_desktop_package package)
-  find_package(${package})
-endmacro()
-
 # Functions for using in subdirectories
 function(omim_add_executable executable)
   add_executable(${executable} ${ARGN})
@@ -111,50 +107,6 @@ function(append VAR)
   set(${VAR} ${${VAR}} ${ARGN} PARENT_SCOPE)
 endfunction()
 
-function(link_opengl target)
-    if (PLATFORM_MAC)
-      omim_link_libraries(
-        ${target}
-        "-framework OpenGL"
-      )
-    endif()
-
-    if (PLATFORM_LINUX)
-      omim_link_libraries(
-        ${target}
-        ${OPENGL_gl_LIBRARY}
-      )
-    endif()
-endfunction()
-
-function(link_qt5_core target)
-  omim_link_libraries(
-    ${target}
-    ${Qt5Core_LIBRARIES}
-  )
-
-  if (PLATFORM_MAC)
-    omim_link_libraries(
-      ${target}
-      "-framework IOKit"
-    )
-  endif()
-endfunction()
-
-function(link_qt5_network target)
-  omim_link_libraries(
-    ${target}
-    ${Qt5Network_LIBRARIES}
-  )
-endfunction()
-
-function(link_qt5_webengine target)
-  omim_link_libraries(
-    ${target}
-    ${Qt5WebEngineWidgets_LIBRARIES}
-  )
-endfunction()
-
 function(add_clang_compile_options)
   if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(${ARGV})
@@ -240,75 +192,3 @@ function(add_pic_pch_target header pch_target_name
   )
 endfunction()
 
-function(add_precompiled_headers header pch_target_name)
-  set(pch_flags_file "${CMAKE_BINARY_DIR}/${pch_target_name}_flags_file")
-  export_directory_flags("${pch_flags_file}")
-  set(compiler_flags "@${pch_flags_file}")
-
-  # CMAKE_CXX_STANDARD 14 flags:
-  set(c_standard_flags "-std=c++14" "-std=gnu++14")
-  get_filename_component(pch_file_name ${header} NAME)
-
-  add_pic_pch_target(${header} ${pch_target_name} ${pch_file_name} lib "-fPIC")
-  add_pic_pch_target(${header} ${pch_target_name} ${pch_file_name} exe "-fPIE")
-
-  add_custom_target(
-    "${pch_target_name}"
-    COMMENT "Waiting for both lib and exe precompiled headers to build"
-    DEPENDS "${pch_target_name}_lib" "${pch_target_name}_exe"
-  )
-  set_target_properties(
-    ${pch_target_name}
-    PROPERTIES
-    PCH_NAME
-    "${pch_file_name}"
-  )
-endfunction()
-
-function(add_precompiled_headers_to_target target pch_target)
-  add_dependencies(${target} "${pch_target}")
-  get_property(sources TARGET ${target} PROPERTY SOURCES)
-  get_target_property(target_type ${target} TYPE)
-  get_target_property(pch_file_name ${pch_target} PCH_NAME)
-
-  if (target_type STREQUAL "EXECUTABLE")
-    set(include_compiled_header_dir "${CMAKE_BINARY_DIR}/pch_exe")
-    # CMake automatically adds additional compile options after linking.
-    # For example '-fPIC' flag on skin_generator_tool, because it is linked to Qt libs.
-    # We force correct flag for executables.
-    set(additional_clang_flags "-fPIE")
-  endif()
-
-  if (target_type MATCHES "LIBRARY")
-    set(include_compiled_header_dir "${CMAKE_BINARY_DIR}/pch_lib")
-  endif()
-
-  # Force gcc first search gch header in pch_exe/pch_lib:
-  target_include_directories(
-    ${target}
-    BEFORE
-    PUBLIC
-    ${include_compiled_header_dir}
-  )
-
-  foreach(source ${sources})
-    if(source MATCHES \\.\(cc|cpp|h|hpp\)$)
-      if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-        set_source_files_properties(
-          ${source}
-          PROPERTIES
-          COMPILE_FLAGS
-          "${additional_clang_flags} -include-pch \
-${include_compiled_header_dir}/${pch_file_name}.${PCH_EXTENSION}"
-        )
-      endif()
-      if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-        set_source_files_properties(
-          ${source}
-          PROPERTIES
-          COMPILE_FLAGS "-include ${pch_file_name}"
-        )
-      endif()
-    endif()
-  endforeach()
-endfunction()

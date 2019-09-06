@@ -18,5 +18,3 @@ omim_link_libraries(
   base
   jansson
 )
-
-link_qt5_core(${PROJECT_NAME})

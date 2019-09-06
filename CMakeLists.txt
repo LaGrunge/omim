@@ -21,13 +21,6 @@ endif()
 omim_set_platform_var(PLATFORM_MAC "macx-.*" ${APPLE})
 omim_set_platform_var(PLATFORM_LINUX "linux-.*" ${LINUX_DETECTED})
 
-if (PLATFORM_LINUX OR PLATFORM_MAC OR PLATFORM_WIN)
-  set(PLATFORM_DESKTOP TRUE)
-else()
-  set(PLATFORM_DESKTOP FALSE)
-endif()
-
-# End of setting the target platform
 
 # Set build type:
 if (NOT CMAKE_BUILD_TYPE)
@@ -95,18 +88,6 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
-if (DEFINED ENV{QT_PATH})
-  message("Qt path is set to: " $ENV{QT_PATH})
-  set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} $ENV{QT_PATH})
-else()
-  file(GLOB QT_PATH_LIST "/usr/local/opt/qt*" "/usr/lib/x86_64-linux-gnu/qt*")
-  if (QT_PATH_LIST)
-    list(GET QT_PATH_LIST 0 QT_PATH)
-    message("Found Qt path: " ${QT_PATH})
-    set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${QT_PATH})
-  endif()
-endif()
-
 if (NOT SKIP_TESTS)
   set(SKIP_TESTS FALSE)
 endif()
@@ -143,7 +124,7 @@ find_package(Threads)
 #init_boost()
 #install_boost_headers()
 
-find_package(Boost ${BOOST_VERSION} EXACT)
+find_package(Boost ${BOOST_VERSION} EXACT COMPONENTS system filesystem REQUIRED)
 
 if (PYBINDINGS)
   add_subdirectory(pyhelpers)
@@ -162,37 +143,13 @@ if (PYBINDINGS)
   include_directories(${PYTHON_INCLUDE_DIRS})
 endif()
 
-if (NOT PLATFORM_IPHONE AND NOT PLATFORM_ANDROID)
-  find_package(Qt5Core)
-  if (NOT Qt5Core_FOUND)
-    message(FATAL_ERROR "Qt5 cmake files were not found, please set QT_PATH environment variable")
-  endif()
-  if (Qt5Core_VERSION VERSION_LESS 5.5.0)
-    message(FATAL_ERROR "Minimum supported Qt5 version is 5.5")
-  endif()
-  find_package(Qt5Network REQUIRED)
-  if (NOT SKIP_TESTS OR PYBINDINGS)
-    find_package(Qt5Widgets)
-  endif()
-endif()
-
-
 find_library(LIBZ NAMES z)
 if (LIBZ STREQUAL "LIBZ-NOTFOUND")
   message(FATAL_ERROR "Failed to find libz library.")
 endif()
 
-if (NOT DEVELOPER_FRAMEWORKS_DIR)
-  message("Doing nothing, because we know nothing about developer frameworks dir")
-  #do nothing
-else()
-  include_directories(${DEVELOPER_FRAMEWORKS_DIR})
-endif()
-
 include_directories(
   ${CMAKE_HOME_DIRECTORY}
-  ${Qt5Core_INCLUDE_DIRS}
-  ${Qt5Network_INCLUDE_DIRS}
 )
 
 include_directories(SYSTEM ${Boost_INCLUDE_DIRS})

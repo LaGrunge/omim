@@ -54,5 +54,4 @@ omim_link_libraries(
   coding
   platform_tests_support
   platform
-  ${Qt5Widgets_LIBRARIES}
 )
