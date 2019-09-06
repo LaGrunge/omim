@@ -1,7 +1,6 @@
 #pragma once
 
 #include "testing/testing.hpp"
-#include "testing/testregister.hpp"
 
 #include "base/timer.hpp"
 
@@ -49,10 +48,7 @@ private:
 };
 }  // namespace base
 
-#define BENCHMARK_TEST(name)                                                                 \
-  void Benchmark_##name();                                                                   \
-  TestRegister g_BenchmarkRegister_##name("Benchmark::" #name, __FILE__, &Benchmark_##name); \
-  void Benchmark_##name()
+#define BENCHMARK_TEST(name) GTEST_TEST(Benchmark, name)
 
 #define BENCHMARK_N_TIMES(times, maxTimeToSucceed)                                                \
   for (::base::BenchmarkNTimes benchmark(times, maxTimeToSucceed); benchmark.ContinueIterating(); \
