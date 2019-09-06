@@ -291,6 +291,13 @@ TArchive & operator<<(TArchive & ar, m2::Point<PointT> const & pt)
   return ar;
 }
 
+template <class T>
+inline std::ostream & operator<<(std::ostream & out,  Point<T> const & r)
+{
+  out << "m2::Point(" << r.x << ", " << r.y << ")";
+  return out;
+}
+
 template <typename T>
 bool operator<(Point<T> const & l, Point<T> const & r)
 {
