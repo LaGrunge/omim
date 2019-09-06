@@ -28,7 +28,7 @@ double CalculateLength(vector<TrafficGPSEncoder::DataPoint> const & path)
   return res;
 }
 
-void Test(vector<TrafficGPSEncoder::DataPoint> & points)
+void TestMe(vector<TrafficGPSEncoder::DataPoint> & points)
 {
   double const kEps = 1e-5;
 
@@ -67,13 +67,13 @@ UNIT_TEST(Traffic_Serialization_Smoke)
   vector<TrafficGPSEncoder::DataPoint> data = {
       {0, ms::LatLon(0.0, 1.0), 1}, {0, ms::LatLon(0.0, 2.0), 2},
   };
-  Test(data);
+  TestMe(data);
 }
 
 UNIT_TEST(Traffic_Serialization_EmptyPath)
 {
   vector<TrafficGPSEncoder::DataPoint> data;
-  Test(data);
+  TestMe(data);
 }
 
 UNIT_TEST(Traffic_Serialization_StraightLine100m)
@@ -81,7 +81,7 @@ UNIT_TEST(Traffic_Serialization_StraightLine100m)
   vector<TrafficGPSEncoder::DataPoint> path = {
       {0, ms::LatLon(0.0, 0.0), 1}, {0, ms::LatLon(0.0, 1e-3), 2},
   };
-  Test(path);
+  TestMe(path);
 }
 
 UNIT_TEST(Traffic_Serialization_StraightLine50Km)
@@ -89,7 +89,7 @@ UNIT_TEST(Traffic_Serialization_StraightLine50Km)
   vector<TrafficGPSEncoder::DataPoint> path = {
       {0, ms::LatLon(0.0, 0.0), 1}, {0, ms::LatLon(0.0, 0.5), 2},
   };
-  Test(path);
+  TestMe(path);
 }
 
 UNIT_TEST(Traffic_Serialization_Zigzag500m)
@@ -101,7 +101,7 @@ UNIT_TEST(Traffic_Serialization_Zigzag500m)
     double const y = i % 2 == 0 ? 0 : 1e-3;
     path.emplace_back(TrafficGPSEncoder::DataPoint(0, ms::LatLon(y, x), 3));
   }
-  Test(path);
+  TestMe(path);
 }
 
 UNIT_TEST(Traffic_Serialization_Zigzag10Km)
@@ -113,7 +113,7 @@ UNIT_TEST(Traffic_Serialization_Zigzag10Km)
     double const y = i % 2 == 0 ? 0 : 1e-2;
     path.emplace_back(TrafficGPSEncoder::DataPoint(0, ms::LatLon(y, x), 0));
   }
-  Test(path);
+  TestMe(path);
 }
 
 UNIT_TEST(Traffic_Serialization_Zigzag100Km)
@@ -125,7 +125,7 @@ UNIT_TEST(Traffic_Serialization_Zigzag100Km)
     double const y = i % 2 == 0 ? 0 : 1e-1;
     path.emplace_back(TrafficGPSEncoder::DataPoint(0, ms::LatLon(y, x), 0));
   }
-  Test(path);
+  TestMe(path);
 }
 
 UNIT_TEST(Traffic_Serialization_Circle20KmRadius)
@@ -140,7 +140,7 @@ UNIT_TEST(Traffic_Serialization_Circle20KmRadius)
     double const y = radius * sin(alpha);
     path.emplace_back(TrafficGPSEncoder::DataPoint(0, ms::LatLon(y, x), 0));
   }
-  Test(path);
+  TestMe(path);
 }
 
 UNIT_TEST(Traffic_Serialization_ExtremeLatLon)
@@ -148,6 +148,6 @@ UNIT_TEST(Traffic_Serialization_ExtremeLatLon)
   vector<TrafficGPSEncoder::DataPoint> path = {
       {0, ms::LatLon(-90, -180), 0}, {0, ms::LatLon(90, 180), 0},
   };
-  Test(path);
+  TestMe(path);
 }
 }  // namespace coding
