@@ -121,19 +121,6 @@ UNIT_TEST(AlmostEqualULPs_MaxULPs_float)
   TestMaxULPs<float>();
 }
 
-UNIT_TEST(TEST_FLOAT_DOUBLE_EQUAL_macros)
-{
-  float const fx = 3;
-  float const fy = NextFloat(NextFloat(NextFloat(fx)));
-  TEST_ALMOST_EQUAL_ULPS(fx, fy, ());
-  TEST_NOT_ALMOST_EQUAL_ULPS(fx, 2.0f, ());
-
-  double const dx = 3;
-  double const dy = NextFloat(NextFloat(NextFloat(dx)));
-  TEST_ALMOST_EQUAL_ULPS(dx, dy, ());
-  TEST_NOT_ALMOST_EQUAL_ULPS(dx, 2.0, ());
-}
-
 UNIT_TEST(IsIntersect_Intervals)
 {
   TEST(base::IsIntersect(0, 100, 100, 200), ());
