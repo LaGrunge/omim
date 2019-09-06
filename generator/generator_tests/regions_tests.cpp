@@ -310,12 +310,13 @@ UNIT_TEST(RegionsBuilderTest_GetCountries)
   RegionsBuilder builder(MakeTestDataSet1(collector), {} /* placePointsMap */);
   auto const & countries = builder.GetCountriesOuters();
   TEST_EQUAL(countries.size(), 3, ());
-  TEST_EQUAL(std::count_if(std::begin(countries), std::end(countries),
-                           [](const Region & r) { return r.GetName() == "Country_1"; }),
-             1, ());
-  TEST_EQUAL(std::count_if(std::begin(countries), std::end(countries),
-                           [](const Region & r) { return r.GetName() == "Country_2"; }),
-             2, ());
+  size_t countries1 = std::count_if(std::begin(countries), std::end(countries),
+                                    [](const Region & r) { return r.GetName() == "Country_1"; });
+  TEST_EQUAL(countries1, 1, ());
+
+  size_t countries2 = std::count_if(std::begin(countries), std::end(countries),
+                                    [](const Region & r) { return r.GetName() == "Country_2"; });
+  TEST_EQUAL(countries2, 2, ());
 }
 
 UNIT_TEST(RegionsBuilderTest_GetCountryTrees)
@@ -480,8 +481,7 @@ UNIT_TEST(RegionsBuilderTest_GenerateCapitalPointRegionAndAdminRegionWithSameBou
 
   TEST_EQUAL(regions.size(), 2, (regions));
   TEST(HasName(regions, u8"Country"), (regions));
-  TEST(HasName(regions, u8"Country, locality: Washington [(0.10, 0.10), (0.20, 0.20)]"),
-       (regions));
+  TEST(HasName(regions, u8"Country, locality: Washington [(0.10, 0.10), (0.20, 0.20)]"), (regions));
 }
 
 // Russia regions tests ----------------------------------------------------------------------------
