@@ -42,9 +42,6 @@ set(
   var_serial_vector_test.cpp
   varint_test.cpp
   writer_test.cpp
-  zip_creator_test.cpp
-  zip_reader_test.cpp
-  zlib_test.cpp
 )
 
 omim_add_test(${PROJECT_NAME} ${SRC})
