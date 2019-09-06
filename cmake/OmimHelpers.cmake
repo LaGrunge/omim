@@ -70,14 +70,6 @@ function(omim_add_test_subdirectory subdir)
   endif()
 endfunction()
 
-function(omim_add_pybindings_subdirectory subdir)
-  if (PYBINDINGS)
-    add_subdirectory(${subdir})
-  else()
-    message("Skipping pybindings subdirectory ${subdir}")
-  endif()
-endfunction()
-
 function(omim_link_platform_deps target)
   if ("${ARGN}" MATCHES "platform")
     if (PLATFORM_MAC)
@@ -130,65 +122,3 @@ function(add_gcc_cpp_compile_options)
     add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:${ARGV}>")
   endif()
 endfunction()
-
-function(export_directory_flags filename)
-  get_directory_property(include_directories INCLUDE_DIRECTORIES)
-  get_directory_property(definitions COMPILE_DEFINITIONS)
-  get_directory_property(flags COMPILE_FLAGS)
-  get_directory_property(options COMPILE_OPTIONS)
-
-  if (PLATFORM_ANDROID)
-    set(
-      include_directories
-      ${include_directories}
-      ${CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES}
-    )
-    set(
-      platform_flags
-      "${ANDROID_COMPILER_FLAGS} ${ANDROID_COMPILER_FLAGS_CXX}"
-    )
-    set(
-      flags
-      "--target=${CMAKE_C_COMPILER_TARGET}"
-      "--sysroot=${CMAKE_SYSROOT}" ${flags}
-    )
-  endif()
-
-  # Append Release/Debug flags:
-  string(TOUPPER "${CMAKE_BUILD_TYPE}" upper_build_type)
-  set(flags ${flags} ${CMAKE_CXX_FLAGS_${upper_build_type}})
-
-  set(
-    include_directories
-    "$<$<BOOL:${include_directories}>\:-I$<JOIN:${include_directories},\n-I>\n>"
-  )
-  set(definitions "$<$<BOOL:${definitions}>:-D$<JOIN:${definitions},\n-D>\n>")
-  set(flags "$<$<BOOL:${flags}>:$<JOIN:${flags},\n>\n>")
-  set(options "$<$<BOOL:${options}>:$<JOIN:${options},\n>\n>")
-  file(
-    GENERATE OUTPUT
-    ${filename}
-    CONTENT
-    "${definitions}${include_directories}${platform_flags}\n${flags}${options}\n"
-  )
-endfunction()
-
-function(add_pic_pch_target header pch_target_name
-         pch_file_name suffix pic_flag)
-  file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/pch_${suffix}")
-  file(COPY "${header}" DESTINATION "${CMAKE_BINARY_DIR}/pch_${suffix}")
-  set(_header "${CMAKE_BINARY_DIR}/pch_${suffix}/${pch_file_name}")
-  set(
-    _compiled_header
-    "${CMAKE_BINARY_DIR}/pch_${suffix}/${pch_file_name}.${PCH_EXTENSION}"
-  )
-  add_custom_target(
-    "${pch_target_name}_${suffix}"
-    COMMAND
-    "${CMAKE_CXX_COMPILER}" ${compiler_flags} ${c_standard_flags} ${pic_flag}
-                            -x c++-header
-                            -c "${_header}" -o "${_compiled_header}"
-    COMMENT "Building precompiled omim CXX ${suffix} header"
-  )
-endfunction()
-
