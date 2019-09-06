@@ -59,6 +59,9 @@ function(omim_add_test executable)
       ${ARGN}
       ${OMIM_ROOT}/testing/testingmain.cpp
      )
+     omim_link_libraries(${executable} gtest_main)
+     target_include_directories(${executable} PRIVATE ${CMAKE_SOURCE_DIR})
+     add_test(NAME "geocore_${executable}" COMMAND ${executable})
   endif()
 endfunction()
 
@@ -121,4 +124,30 @@ function(add_gcc_cpp_compile_options)
   if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:${ARGV}>")
   endif()
+endfunction()
+
+function(configure_gtest)
+  #download and unpack googletest at configure time
+  configure_file(cmake/gtest-download.cmake.in googletest-download/CMakeLists.txt)
+  configure_file(testing/path.hpp.in testing/path.hpp)
+  execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+    RESULT_VARIABLE result
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+  if(result)
+    message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+  endif()
+  execute_process(COMMAND ${CMAKE_COMMAND} --build .
+    RESULT_VARIABLE result
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+  if(result)
+    message(FATAL_ERROR "Build step for googletest failed: ${result}")
+  endif()
+
+  # Add googletest directly to our build. This defines
+  # the gtest and gtest_main targets.
+  add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
+                   ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
+                   EXCLUDE_FROM_ALL)
+  include_directories("${gtest_SOURCE_DIR}/include")
+
 endfunction()
