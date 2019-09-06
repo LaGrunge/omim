@@ -26,9 +26,7 @@ set(
   street_geometry_tests.cpp
   street_regions_tracing_tests.cpp
   tag_admixer_test.cpp
-  tesselator_test.cpp
   translation_test.cpp
-  triangles_tree_coding_test.cpp
   types_helper.hpp
 )
 

@@ -160,7 +160,6 @@ add_subdirectory(3party/icu)
 add_subdirectory(3party/jansson)
 add_subdirectory(3party/protobuf)
 add_subdirectory(3party/succinct)
-add_subdirectory(3party/libtess2)
 
 # Only options related to warnings should be placed here.
 # Other options should be set before all add_subdirectory calls.

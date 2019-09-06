@@ -3,7 +3,6 @@
 #include "generator/feature_builder.hpp"
 #include "generator/feature_generator.hpp"
 #include "generator/feature_helpers.hpp"
-#include "generator/tesselator.hpp"
 
 #include "geometry/parametrized_segment.hpp"
 #include "geometry/point2d.hpp"
@@ -126,13 +125,6 @@ public:
     return true;
   }
 
-  void AddTriangles(Polygons const & polys, int scaleIndex)
-  {
-    CHECK(m_buffer.m_innerTrg.empty(), ());
-    m_trgInner = false;
-
-    WriteOuterTriangles(polys, scaleIndex);
-  }
 
 private:
   class StripEmitter
@@ -168,44 +160,6 @@ private:
     m_buffer.m_ptsOffset.push_back(pos);
 
     serial::SaveOuterPath(toSave, cp, m_geoFileGetter(i));
-  }
-
-  void WriteOuterTriangles(Polygons const & polys, int i)
-  {
-    CHECK(m_trgFileGetter, ("m_trgFileGetter must be set to write outer triangles."));
-
-    // tesselation
-    tesselator::TrianglesInfo info;
-    if (0 == tesselator::TesselateInterior(polys, info))
-    {
-      LOG(LINFO, ("NO TRIANGLES in", polys));
-      return;
-    }
-
-    auto const cp = m_header.GetGeometryCodingParams(i);
-
-    serial::TrianglesChainSaver saver(cp);
-
-    // points conversion
-    tesselator::PointsInfo points;
-    m2::PointU (*D2U)(m2::PointD const &, uint8_t) = &PointDToPointU;
-    info.GetPointsInfo(saver.GetBasePoint(), saver.GetMaxPoint(),
-                       std::bind(D2U, std::placeholders::_1, cp.GetCoordBits()), points);
-
-    // triangles processing (should be optimal)
-    info.ProcessPortions(points, saver, true);
-
-    // check triangles processing (to compare with optimal)
-    // serial::TrianglesChainSaver checkSaver(cp);
-    // info.ProcessPortions(points, checkSaver, false);
-
-    // CHECK_LESS_OR_EQUAL(saver.GetBufferSize(), checkSaver.GetBufferSize(), ());
-
-    // saving to file
-    m_buffer.m_trgMask |= (1 << i);
-    auto const pos = feature::CheckedFilePosCast(m_trgFileGetter(i));
-    m_buffer.m_trgOffset.push_back(pos);
-    saver.Save(m_trgFileGetter(i));
   }
 
   void FillInnerPointsMask(Points const & points, uint32_t scaleIndex)

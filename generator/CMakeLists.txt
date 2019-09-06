@@ -56,6 +56,7 @@ set(
   final_processor_intermediate_mwm.hpp
   gen_mwm_info.hpp
   generate_info.hpp
+  geometry_holder.hpp
   geo_objects/geo_objects.cpp
   geo_objects/geo_objects.hpp
   geo_objects/geo_objects_filter.cpp
@@ -64,7 +65,6 @@ set(
   geo_objects/geo_objects_generator.hpp
   geo_objects/geo_objects_maintainer.cpp
   geo_objects/geo_objects_maintainer.hpp
-  geometry_holder.hpp
   holes.cpp
   holes.hpp
   intermediate_data.cpp
@@ -151,8 +151,6 @@ set(
   streets/streets_filter.cpp
   streets/streets_filter.hpp
   tag_admixer.hpp
-  tesselator.cpp
-  tesselator.hpp
   towns_dumper.cpp
   towns_dumper.hpp
   translation.cpp
@@ -190,7 +188,6 @@ omim_link_libraries(${PROJECT_NAME}
   platform
   geometry
   jansson
-  tess2
 )
 
 
