@@ -23,7 +23,6 @@ set(
   source_data.cpp
   source_data.hpp
   source_to_element_test.cpp
-  srtm_parser_test.cpp
   street_geometry_tests.cpp
   street_regions_tracing_tests.cpp
   tag_admixer_test.cpp

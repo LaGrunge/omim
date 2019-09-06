@@ -138,8 +138,6 @@ set(
   relation_tags_enricher.hpp
   routing_helpers.cpp
   routing_helpers.hpp
-  srtm_parser.cpp
-  srtm_parser.hpp
   statistics.cpp
   statistics.hpp
   streets/street_geometry.cpp
