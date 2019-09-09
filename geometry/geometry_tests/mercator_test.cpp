@@ -8,6 +8,8 @@
 
 UNIT_TEST(Mercator_Grid)
 {
+  const double kEpsilon = 0.00000001;
+
   for (int lat = -85; lat <= 85; ++lat)
   {
     for (int lon = -180; lon <= 180; ++lon)
@@ -18,8 +20,8 @@ UNIT_TEST(Mercator_Grid)
       double const lon1 = MercatorBounds::XToLon(x);
 
       // Normal assumption for any projection.
-      TEST_NEAR(static_cast<double>(lat), lat1, 0.00000001, ());
-      TEST_NEAR(static_cast<double>(lon), lon1, 0.00000001, ());
+      TEST_NEAR(static_cast<double>(lat), lat1, kEpsilon, ());
+      TEST_NEAR(static_cast<double>(lon), lon1, kEpsilon, ());
 
       // x is actually lon unmodified.
       TEST_ALMOST_EQUAL_ULPS(x, static_cast<double>(lon), ());

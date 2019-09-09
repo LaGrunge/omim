@@ -1,11 +1,13 @@
 #pragma once
-#define GTEST_DONT_DEFINE_TEST 1
 
 #include "base/exception.hpp"
 #include "base/logging.hpp"
 #include "base/math.hpp"
 #include "base/src_point.hpp"
+
+#define GTEST_DONT_DEFINE_TEST 1
 #include "gtest/gtest.h"
+
 using namespace std;
 
 #define UNIT_TEST(X) GTEST_TEST(geocore, X)
