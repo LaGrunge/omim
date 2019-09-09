@@ -11,6 +11,7 @@ UNIT_TEST(id)
     TEST_EQUAL(base::id(true), true, ());
     TEST_EQUAL(base::id(1), 1.0, ());
     TEST_EQUAL(base::id(1.0), 1, ());
+    TEST_EQUAL(1, 33, ());
 }
 
 UNIT_TEST(SizeAligned)
