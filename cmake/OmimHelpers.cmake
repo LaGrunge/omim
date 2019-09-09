@@ -60,7 +60,7 @@ function(omim_add_test executable)
       ${OMIM_ROOT}/testing/testingmain.cpp
      )
      omim_link_libraries(${executable} gtest_main)
-     target_include_directories(${executable} PRIVATE ${CMAKE_SOURCE_DIR})
+     target_include_directories(${executable} PRIVATE ${CMAKE_BINARY_DIR})
      add_test(NAME "geocore_${executable}" COMMAND ${executable})
   endif()
 endfunction()

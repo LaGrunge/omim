@@ -3,7 +3,7 @@
 #include "testing/testing.hpp"
 
 #ifndef OMIM_UNIT_TEST_DISABLE_PLATFORM_INIT
-#include "../../testing/path.hpp"
+#include "testing/path.hpp"
 #include "platform/platform.hpp"
 #endif
 
