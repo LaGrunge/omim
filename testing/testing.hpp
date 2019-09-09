@@ -14,7 +14,7 @@ using namespace std;
 #define TEST_NOT_EQUAL(X, Y, msg) EXPECT_NE(X, Y)
 #define TEST_LESS(X, Y, msg) EXPECT_LT(X, Y)
 #define TEST_LESS_OR_EQUAL(X, Y, msg) EXPECT_LE(X, Y)
-#define TEST_GREATER(X, Y, msg) EXPECT_GT(Y, Y)
+#define TEST_GREATER(X, Y, msg) EXPECT_GT(X, Y)
 #define TEST_GREATER_OR_EQUAL(X, Y, msg) EXPECT_GE(X, Y)
 #define TEST_ALMOST_EQUAL_ULPS(X, Y, msg) EXPECT_DOUBLE_EQ(X, Y)
 #define TEST_THROW(X, exception, msg) EXPECT_THROW(X, exception)
