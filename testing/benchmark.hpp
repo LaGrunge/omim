@@ -33,7 +33,7 @@ public:
       else
         std::cout << static_cast<int>(secondsElapsed / m_repeatCount * 1000000000) << "ns each";
     }
-    std::cout << " ...";
+    std::cout << std::endl;
   }
 
   int Iteration() const { return m_iteration; }
