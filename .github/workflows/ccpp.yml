@@ -9,6 +9,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
     - name: configure
       run: cmake -DBOOST_ROOT=$BOOST_ROOT .
     - name: make
