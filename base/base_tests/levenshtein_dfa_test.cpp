@@ -39,17 +39,6 @@ struct Result
   size_t m_prefixErrorsMade = 0;
 };
 
-string DebugPrint(Status status)
-{
-  switch (status)
-  {
-  case Status::Accepts: return "Accepts";
-  case Status::Rejects: return "Rejects";
-  case Status::Intermediate: return "Intermediate";
-  }
-  UNREACHABLE();
-}
-
 Result GetResult(LevenshteinDFA const & dfa, std::string const & s)
 {
   auto it = dfa.Begin();
