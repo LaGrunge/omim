@@ -7,6 +7,7 @@
 #include "indexer/search_string_utils.hpp"
 
 #include "base/assert.hpp"
+#include "base/exception.hpp"
 #include "base/logging.hpp"
 #include "base/scope_guard.hpp"
 #include "base/stl_helpers.hpp"
@@ -14,11 +15,17 @@
 #include "base/timer.hpp"
 
 #include <algorithm>
+#include <fstream>
 #include <numeric>
 #include <set>
 #include <thread>
 #include <utility>
 
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/iostreams/device/file.hpp>
+#include <boost/iostreams/filter/gzip.hpp>
+#include <boost/iostreams/filtering_streambuf.hpp>
 #include <boost/optional.hpp>
 
 using namespace std;
@@ -272,19 +279,44 @@ bool Geocoder::Context::ContainsTokenIds(BeamKey const & beamKey, set<size_t> co
 }
 
 // Geocoder ----------------------------------------------------------------------------------------
-Geocoder::Geocoder(string const & pathToJsonHierarchy, unsigned int loadThreadsCount)
-  : Geocoder{HierarchyReader{pathToJsonHierarchy}.Read(loadThreadsCount), loadThreadsCount}
+void Geocoder::LoadFromJsonl(std::string const & pathToJsonHierarchy, unsigned int loadThreadsCount)
 {
+  using namespace boost::iostreams;
+  filtering_istreambuf fileStreamBuf;
+
+  if (strings::EndsWith(pathToJsonHierarchy, ".gz"))
+    fileStreamBuf.push(gzip_decompressor());
+
+  file_source file(pathToJsonHierarchy);
+  if (!file.is_open())
+    MYTHROW(OpenException, ("Failed to open file", pathToJsonHierarchy));
+  fileStreamBuf.push(file);
+
+  std::istream fileStream(&fileStreamBuf);
+  m_hierarchy = HierarchyReader{fileStream}.Read(loadThreadsCount);
+  m_index.BuildIndex(loadThreadsCount);
 }
 
-Geocoder::Geocoder(istream & jsonHierarchy, unsigned int loadThreadsCount)
-  : Geocoder{HierarchyReader{jsonHierarchy}.Read(loadThreadsCount), loadThreadsCount}
+void Geocoder::LoadFromBinaryIndex(std::string const & pathToNameIndex)
 {
+  std::ifstream ifs{pathToNameIndex};
+  if (!ifs)
+    MYTHROW(OpenException, ("Failed to open file", pathToNameIndex));
+  ifs.exceptions(std::ifstream::badbit | std::ifstream::failbit);
+
+  boost::archive::binary_iarchive ia{ifs};
+  ia >> *this;
 }
 
-Geocoder::Geocoder(Hierarchy && hierarchy, unsigned int loadThreadsCount)
-  : m_hierarchy(move(hierarchy)), m_index(m_hierarchy, loadThreadsCount)
+void Geocoder::SaveToBinaryIndex(std::string const & pathToNameIndex) const
 {
+  std::ofstream ofs{pathToNameIndex};
+  if (!ofs)
+    MYTHROW(OpenException, ("Failed to open file", pathToNameIndex));
+  ofs.exceptions(std::ifstream::badbit | std::ifstream::failbit);
+
+  boost::archive::binary_oarchive oa{ofs};
+  oa << *this;
 }
 
 void Geocoder::ProcessQuery(string const & query, vector<Result> & results) const

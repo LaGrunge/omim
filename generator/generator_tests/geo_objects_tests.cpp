@@ -135,7 +135,7 @@ void TestFindReverse(std::vector<OsmElementData> const & osmElements,
 
   auto const geoObjectsIndex = MakeTempGeoObjectsIndex(geoObjectsFeatures.GetFullPath());
 
-  TEST(geoObjectsIndex.has_value(), ("Temporary index build failed"));
+  TEST(geoObjectsIndex, ("Temporary index build failed"));
 
   for (auto const & point : where)
   {

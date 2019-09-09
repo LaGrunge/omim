@@ -16,6 +16,8 @@
 #include "generator/translator_factory.hpp"
 #include "generator/unpack_mwm.hpp"
 
+#include "geocoder/geocoder.hpp"
+
 #include "indexer/classificator_loader.hpp"
 #include "indexer/features_vector.hpp"
 #include "indexer/locality_index_builder.hpp"
@@ -185,6 +187,9 @@ DEFINE_string(popularity_csv, "", "Output csv for popularity.");
 
 DEFINE_bool(dump_mwm_tmp, false, "Prints feature builder objects from .mwm.tmp");
 
+DEFINE_bool(generate_geocoder_name_index, false, "Generate geocoder name index.");
+DEFINE_string(key_value, "", "Input key-value file (.jsonl or .jsonl.gz).");
+
 // Common.
 DEFINE_bool(verbose, false, "Provide more detailed output.");
 
@@ -261,12 +266,12 @@ int GeneratorToolMain(int argc, char ** argv)
   // Generate intermediate files.
   if (FLAGS_preprocess)
   {
+    DataVersion{FLAGS_osm_file_name}.DumpToPath(genInfo.m_intermediateDir);
+
     LOG(LINFO, ("Generating intermediate data ...."));
     if (!GenerateIntermediateData(genInfo))
       return EXIT_FAILURE;
   }
-
-  DataVersion{FLAGS_osm_file_name}.DumpToPath(genInfo.m_intermediateDir);
 
   // Generate .mwm.tmp files.
   if (FLAGS_generate_features ||
@@ -378,6 +383,21 @@ int GeneratorToolMain(int argc, char ** argv)
     auto const pathOutRegionsKv = genInfo.GetIntermediateFileName(genInfo.m_fileName, ".jsonl");
     regions::GenerateRegions(pathInRegionsTmpMwm, pathInRegionsCollector, pathOutRegionsKv,
                              pathOutRepackedRegionsTmpMwm, FLAGS_verbose, threadsCount);
+  }
+
+  if (FLAGS_generate_geocoder_name_index)
+  {
+    if (FLAGS_key_value.empty())
+    {
+      LOG(LCRITICAL, ("Unspecified key-value file."));
+      return EXIT_FAILURE;
+    }
+
+    geocoder::Geocoder geocoder;
+    geocoder.LoadFromJsonl(FLAGS_key_value, threadsCount);
+
+    auto const nameIndexFile = base::JoinPath(path, FLAGS_output);
+    geocoder.SaveToBinaryIndex(nameIndexFile);
   }
 
   string const datFile = base::JoinPath(path, FLAGS_output + DATA_FILE_EXTENSION);

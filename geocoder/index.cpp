@@ -24,11 +24,18 @@ size_t const kLogBatch = 100000;
 
 namespace geocoder
 {
-Index::Index(Hierarchy const & hierarchy, unsigned int loadThreadsCount)
+Index::Index(Hierarchy const & hierarchy)
   : m_docs(hierarchy.GetEntries())
   , m_hierarchy{hierarchy}
 {
+}
+
+void Index::BuildIndex(unsigned int loadThreadsCount)
+{
   CHECK_GREATER_OR_EQUAL(loadThreadsCount, 1, ());
+
+  m_docIdsByTokens.clear();
+  m_relatedBuildings.clear();
 
   LOG(LINFO, ("Indexing hierarchy entries..."));
   AddEntries();

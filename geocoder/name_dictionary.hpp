@@ -1,9 +1,15 @@
 #pragma once
 
+#include "base/assert.hpp"
+
 #include <cstdint>
 #include <string>
 #include <unordered_map>
 #include <vector>
+
+#include <boost/serialization/string.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/version.hpp>
 
 namespace geocoder
 {
@@ -13,6 +19,13 @@ public:
   using const_iterator = std::vector<std::string>::const_iterator;
 
   explicit MultipleNames(std::string const & mainName = {});
+
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    CHECK_EQUAL(version, 1, ());
+    ar & m_names;
+  }
 
   std::string const & GetMainName() const noexcept;
   std::vector<std::string> const & GetNames() const noexcept;
@@ -46,6 +59,13 @@ public:
   NameDictionary(NameDictionary const &) = delete;
   NameDictionary & operator=(NameDictionary const &) = delete;
 
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    CHECK_EQUAL(version, 1, ());
+    ar & m_stock;
+  }
+
   MultipleNames const & Get(Position position) const;
   Position Add(MultipleNames && s);
 
@@ -73,3 +93,6 @@ private:
   std::unordered_map<MultipleNames, NameDictionary::Position, Hash> m_index;
 };
 }  // namespace geocoder
+
+BOOST_CLASS_VERSION(geocoder::MultipleNames, 1)
+BOOST_CLASS_VERSION(geocoder::NameDictionary, 1)
