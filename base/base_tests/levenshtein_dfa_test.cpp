@@ -39,27 +39,6 @@ struct Result
   size_t m_prefixErrorsMade = 0;
 };
 
-string DebugPrint(Status status)
-{
-  switch (status)
-  {
-  case Status::Accepts: return "Accepts";
-  case Status::Rejects: return "Rejects";
-  case Status::Intermediate: return "Intermediate";
-  }
-  UNREACHABLE();
-}
-
-string DebugPrint(Result const & result)
-{
-  ostringstream os;
-  os << "Result [ ";
-  os << "status: " << DebugPrint(result.m_status) << ", ";
-  os << "errorsMade: " << result.m_errorsMade << ", ";
-  os << "prefixErrorsMade: " << result.m_prefixErrorsMade << " ]";
-  return os.str();
-}
-
 Result GetResult(LevenshteinDFA const & dfa, std::string const & s)
 {
   auto it = dfa.Begin();

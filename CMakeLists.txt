@@ -10,6 +10,13 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${OMIM_ROOT}/cmake")
 
 include(OmimHelpers)
 
+if (NOT SKIP_TESTS)
+  set(SKIP_TESTS FALSE)
+  ENABLE_TESTING()
+  configure_gtest()
+endif()
+
+
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(LINUX_DETECTED TRUE)
 endif()
@@ -87,25 +94,13 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
-if (NOT SKIP_TESTS)
-  set(SKIP_TESTS FALSE)
-endif()
-
 if (NOT PYTHON_VERSION)
   set(PYTHON_VERSION 2.7)
 endif()
 
 # End of setting environment variables
 
-# Scripts
 
-execute_process(
-    COMMAND "${OMIM_ROOT}/tools/unix/check_cert.sh"
-    RESULT_VARIABLE CheckCertResult
-)
-if (CheckCertResult)
-    message(FATAL_ERROR "Certificate check failed")
-endif()
 
 # Find installed packages
 

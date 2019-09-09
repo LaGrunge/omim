@@ -20,11 +20,6 @@ struct ExpectedName
   string m_value;
 };
 
-string DebugPrint(ExpectedName const & expectedName)
-{
-  return expectedName.m_lang + ", " + expectedName.m_value;
-}
-
 void CheckExpectations(StringUtf8Multilang const & s, vector<ExpectedName> const & expectations)
 {
   size_t counter = 0;
@@ -34,8 +29,10 @@ void CheckExpectations(StringUtf8Multilang const & s, vector<ExpectedName> const
       return GetLangCode(item.m_lang.c_str()) == code;
     });
 
-    if (it == expectations.end())
+    if (it == expectations.end()) 
+    {
       TEST(false, ("Unexpected language code: ", code, ". Expectations: ", expectations));
+    }
 
     TEST_EQUAL(name, it->m_value, ());
     ++counter;

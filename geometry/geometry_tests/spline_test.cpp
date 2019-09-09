@@ -3,19 +3,31 @@
 #include "geometry/geometry_tests/equality.hpp"
 #include "geometry/spline.hpp"
 
+#include <cmath>
 #include <vector>
 
 using namespace std;
 
-using m2::Spline;
 using m2::PointD;
+using m2::Spline;
 
 void TestPointDDir(PointD const & dst, PointD const & src)
 {
   double len1 = dst.Length();
   double len2 = src.Length();
-  TEST_ALMOST_EQUAL_ULPS(dst.x/len1, src.x/len2, ());
-  TEST_ALMOST_EQUAL_ULPS(dst.y/len1, src.y/len2, ());
+  double resx1 = dst.x / len1;
+  double resx2 = src.x / len2;
+  if (!std::isnan(resx1) && !std::isnan(resx2))
+  {
+    TEST_ALMOST_EQUAL_ULPS(resx1, resx2, ());
+  }
+
+  double resy1 = dst.y / len1;
+  double resy2 = src.y / len2;
+  if (!std::isnan(resy1) && !std::isnan(resy2))
+  {
+    TEST_ALMOST_EQUAL_ULPS(resy1, resy2, ());
+  }
 }
 
 UNIT_TEST(SmoothedDirections)
@@ -208,4 +220,3 @@ UNIT_TEST(Length)
   double len2 = l1 + l2 + l3 + l4;
   TEST_ALMOST_EQUAL_ULPS(len1, len2, ());
 }
-

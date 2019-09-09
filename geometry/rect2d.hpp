@@ -387,4 +387,12 @@ std::string DebugPrint(m2::Rect<T> const & r)
   out << "m2::Rect(" << r.minX() << ", " << r.minY() << ", " << r.maxX() << ", " << r.maxY() << ")";
   return out.str();
 }
+
+template <class T>
+inline std::ostream & operator<<(std::ostream & out, m2::Rect<T> const & r)
+{
+  out << "m2::Rect(" << r.minX() << ", " << r.minY() << ", " << r.maxX() << ", " << r.maxY() << ")";
+  return out;
+}
+
 }  // namespace m2

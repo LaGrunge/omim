@@ -69,6 +69,7 @@ UNIT_TEST(OSM_O5M_Source_Way_read_test)
         nodes.insert(em.id);
         for (auto const & tag : em.Tags())
         {
+          UNUSED_VALUE(tag);
           TEST(false, ("Unexpected tag:", tag.key, tag.value));
         }
         break;
@@ -154,6 +155,7 @@ UNIT_TEST(OSM_O5M_Source_Relation_read_test)
         TEST_EQUAL(nodes.size(), ndCounter, ());
         for (auto const & tag : em.Tags())
         {
+          UNUSED_VALUE(tag);      
           TEST(false, ("Unexpected tag:", tag.key, tag.value));
         }
         break;

@@ -2,13 +2,14 @@
 
 #include "geometry/mercator.hpp"
 
-#include "base/math.hpp"
-#include "base/macros.hpp"
 #include "base/logging.hpp"
-
+#include "base/macros.hpp"
+#include "base/math.hpp"
 
 UNIT_TEST(Mercator_Grid)
 {
+  const double kEpsilon = 0.00000001;
+
   for (int lat = -85; lat <= 85; ++lat)
   {
     for (int lon = -180; lon <= 180; ++lon)
@@ -19,8 +20,8 @@ UNIT_TEST(Mercator_Grid)
       double const lon1 = MercatorBounds::XToLon(x);
 
       // Normal assumption for any projection.
-      TEST_ALMOST_EQUAL_ULPS(static_cast<double>(lat), lat1, ());
-      TEST_ALMOST_EQUAL_ULPS(static_cast<double>(lon), lon1, ());
+      TEST_NEAR(static_cast<double>(lat), lat1, kEpsilon, ());
+      TEST_NEAR(static_cast<double>(lon), lon1, kEpsilon, ());
 
       // x is actually lon unmodified.
       TEST_ALMOST_EQUAL_ULPS(x, static_cast<double>(lon), ());
@@ -45,7 +46,7 @@ UNIT_TEST(Mercator_DirectInferseF)
 
 UNIT_TEST(Mercator_ErrorToRadius)
 {
-  double const points[] = { -85.0, -45.0, -10.0, -1.0, -0.003, 0.0, 0.003, 1.0, 10.0, 45.0, 85.0 };
+  double const points[] = {-85.0, -45.0, -10.0, -1.0, -0.003, 0.0, 0.003, 1.0, 10.0, 45.0, 85.0};
 
   double const error1 = 1.0;    // 1 metre
   double const error10 = 10.0;  // 10 metres
