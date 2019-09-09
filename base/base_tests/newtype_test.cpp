@@ -10,13 +10,6 @@ namespace
 {
 NEWTYPE(int, Int);
 
-std::string DebugPrint(Int const & i)
-{
-  std::stringstream sstr;
-  sstr << "Int(" << i.Get() << ')';
-  return sstr.str();
-}
-
 UNIT_TEST(NewType_TypeChecks)
 {
   TEST((std::is_constructible<Int, int>::value), ());

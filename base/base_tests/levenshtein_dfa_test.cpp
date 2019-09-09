@@ -50,16 +50,6 @@ string DebugPrint(Status status)
   UNREACHABLE();
 }
 
-string DebugPrint(Result const & result)
-{
-  ostringstream os;
-  os << "Result [ ";
-  os << "status: " << DebugPrint(result.m_status) << ", ";
-  os << "errorsMade: " << result.m_errorsMade << ", ";
-  os << "prefixErrorsMade: " << result.m_prefixErrorsMade << " ]";
-  return os.str();
-}
-
 Result GetResult(LevenshteinDFA const & dfa, std::string const & s)
 {
   auto it = dfa.Begin();
