@@ -20,7 +20,7 @@ using namespace std;
 #define TEST_THROW(X, exception, msg) EXPECT_THROW(X, exception)
 #define TEST_NO_THROW(X, msg) EXPECT_NO_THROW(X)
 #define TEST_ANY_THROW(X, msg) EXPECT_ANY_THROW(X)
-
+#define TEST_NEAR(X, Y, abs_err, msg) EXPECT_NEAR(X, Y, abs_err)
 #define UNIT_CLASS_TEST(CLASS, NAME)               \
   struct UnitClass_##CLASS##_##NAME : public CLASS \
   {                                                \
