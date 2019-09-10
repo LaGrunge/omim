@@ -145,6 +145,15 @@ private:
     ToJSONObject(*feature, "geometry", geometry);
     ToJSONObject(*feature, "properties", properties);
 
+    auto const & bbox = main.GetRect();
+    auto const & leftBottom = MercatorBounds::ToLatLon({bbox.min_corner().get<0>(),
+                                                        bbox.min_corner().get<1>()});
+    auto const & rightTop = MercatorBounds::ToLatLon({bbox.max_corner().get<0>(),
+                                                      bbox.max_corner().get<1>()});
+    auto const & bboxArray =
+        std::vector<double>{leftBottom.m_lon, leftBottom.m_lat, rightTop.m_lon, rightTop.m_lat};
+    ToJSONObject(*feature, "bbox", bboxArray);
+
     return feature;
   }
 
