@@ -1,17 +1,18 @@
 name: C/C++ CI
 
 on: [push]
-
 jobs:
   build:
     runs-on: ubuntu-18.04
-   
     steps:
-    - uses: actions/checkout@v1 actions/checkout-submodules@v2
+    - name: Install all boost
+      run:  sudo apt install libboost-all-dev
+    - uses: actions/checkout@v1
+    - uses: textbook/git-checkout-submodule-action@2.0.0
     - name: cmake
-      run: cmake -DBOOST_ROOT=${BOOST_ROOT} . 
+      run: cmake . 
     - name: make
-      run: make
+      run: make -j 8
     - name: make test
       run: env CTEST_OUTPUT_ON_FAILURE=1 make test
 
