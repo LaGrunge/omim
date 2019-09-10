@@ -371,11 +371,11 @@ UNIT_TEST(Geocoder_Serialization)
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
   geocoderFromJsonl.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
-  ScopedFile const regionsNameIndexFile("regions-name-index", ScopedFile::Mode::DoNotCreate);
-  geocoderFromJsonl.SaveToBinaryIndex(regionsNameIndexFile.GetFullPath());
+  ScopedFile const regionsTokenIndexFile("regions.tokidx", ScopedFile::Mode::DoNotCreate);
+  geocoderFromJsonl.SaveToBinaryIndex(regionsTokenIndexFile.GetFullPath());
 
-  Geocoder geocoderFromNameIndex;
-  geocoderFromNameIndex.LoadFromBinaryIndex(regionsNameIndexFile.GetFullPath());
+  Geocoder geocoderFromTokenIndex;
+  geocoderFromTokenIndex.LoadFromBinaryIndex(regionsTokenIndexFile.GetFullPath());
 
   for (auto const & name : {"russia", "россия", "москва", "арбат"})
   {
@@ -388,17 +388,17 @@ UNIT_TEST(Geocoder_Serialization)
       });
     });
 
-    vector<base::GeoObjectId> objectsFromNameIndex;
-    geocoderFromNameIndex.GetIndex().ForEachDocId({name}, [&](Index::DocId const & docId) {
-      objectsFromNameIndex.emplace_back(geocoderFromNameIndex.GetIndex().GetDoc(docId).m_osmId);
+    vector<base::GeoObjectId> objectsFromTokenIndex;
+    geocoderFromTokenIndex.GetIndex().ForEachDocId({name}, [&](Index::DocId const & docId) {
+      objectsFromTokenIndex.emplace_back(geocoderFromTokenIndex.GetIndex().GetDoc(docId).m_osmId);
 
-      geocoderFromNameIndex.GetIndex().ForEachRelatedBuilding(docId, [&](Index::DocId const & docId) {
-        objectsFromNameIndex.emplace_back(geocoderFromNameIndex.GetIndex().GetDoc(docId).m_osmId);
+      geocoderFromTokenIndex.GetIndex().ForEachRelatedBuilding(docId, [&](Index::DocId const & docId) {
+        objectsFromTokenIndex.emplace_back(geocoderFromTokenIndex.GetIndex().GetDoc(docId).m_osmId);
       });
     });
 
-    TEST_GREATER_OR_EQUAL(objectsFromJsonl.size(), 1, (name));
-    TEST_EQUAL(objectsFromNameIndex, objectsFromJsonl, ());
+    TEST_GREATER_OR_EQUAL(objectsFromJsonl.size(), 1, ());
+    TEST_EQUAL(objectsFromTokenIndex, objectsFromJsonl, ());
   }
 }
 

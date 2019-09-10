@@ -1,5 +1,7 @@
 #pragma once
 
+#include "geocoder/types.hpp"
+
 #include "base/assert.hpp"
 
 #include <cstdint>
@@ -23,7 +25,7 @@ public:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version)
   {
-    CHECK_EQUAL(version, 1, ());
+    CHECK_EQUAL(version, kIndexFormatVersion, ());
     ar & m_names;
   }
 
@@ -62,7 +64,7 @@ public:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version)
   {
-    CHECK_EQUAL(version, 1, ());
+    CHECK_EQUAL(version, kIndexFormatVersion, ());
     ar & m_stock;
   }
 
@@ -94,5 +96,5 @@ private:
 };
 }  // namespace geocoder
 
-BOOST_CLASS_VERSION(geocoder::MultipleNames, 1)
-BOOST_CLASS_VERSION(geocoder::NameDictionary, 1)
+BOOST_CLASS_VERSION(geocoder::MultipleNames, geocoder::kIndexFormatVersion)
+BOOST_CLASS_VERSION(geocoder::NameDictionary, geocoder::kIndexFormatVersion)

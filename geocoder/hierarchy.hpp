@@ -69,7 +69,7 @@ public:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-      CHECK_EQUAL(version, 1, ());
+      CHECK_EQUAL(version, kIndexFormatVersion, ());
       ar & m_osmId;
       ar & m_name;
       ar & m_type;
@@ -114,7 +114,7 @@ public:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version)
   {
-    CHECK_EQUAL(version, 1, ());
+    CHECK_EQUAL(version, kIndexFormatVersion, ());
     ar & m_entries;
     ar & m_normalizedNameDictionary;
     ar & m_dataVersion;
@@ -138,8 +138,8 @@ private:
 };
 }  // namespace geocoder
 
-BOOST_CLASS_VERSION(geocoder::Hierarchy, 1)
-BOOST_CLASS_VERSION(geocoder::Hierarchy::Entry, 1)
+BOOST_CLASS_VERSION(geocoder::Hierarchy, geocoder::kIndexFormatVersion)
+BOOST_CLASS_VERSION(geocoder::Hierarchy::Entry, geocoder::kIndexFormatVersion)
 
 namespace boost
 {

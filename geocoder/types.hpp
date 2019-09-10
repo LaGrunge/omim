@@ -7,6 +7,8 @@
 
 namespace geocoder
 {
+enum : unsigned int { kIndexFormatVersion = 1 };
+
 using Tokens = std::vector<std::string>;
 
 enum class Type

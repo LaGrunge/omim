@@ -23,6 +23,8 @@
 
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/exception/exception.hpp>
+#include <boost/exception/diagnostic_information.hpp>
 #include <boost/iostreams/device/file.hpp>
 #include <boost/iostreams/filter/gzip.hpp>
 #include <boost/iostreams/filtering_streambuf.hpp>
@@ -280,6 +282,7 @@ bool Geocoder::Context::ContainsTokenIds(BeamKey const & beamKey, set<size_t> co
 
 // Geocoder ----------------------------------------------------------------------------------------
 void Geocoder::LoadFromJsonl(std::string const & pathToJsonHierarchy, unsigned int loadThreadsCount)
+try
 {
   using namespace boost::iostreams;
   filtering_istreambuf fileStreamBuf;
@@ -296,27 +299,53 @@ void Geocoder::LoadFromJsonl(std::string const & pathToJsonHierarchy, unsigned i
   m_hierarchy = HierarchyReader{fileStream}.Read(loadThreadsCount);
   m_index.BuildIndex(loadThreadsCount);
 }
-
-void Geocoder::LoadFromBinaryIndex(std::string const & pathToNameIndex)
+catch (boost::exception const & err)
 {
-  std::ifstream ifs{pathToNameIndex};
+  MYTHROW(Exception, ("Failed to load jsonl:", boost::diagnostic_information(err)));
+}
+catch (std::exception const & err)
+{
+  MYTHROW(Exception, ("Failed to load jsonl:", err.what()));
+}
+
+void Geocoder::LoadFromBinaryIndex(std::string const & pathToTokenIndex)
+try
+{
+  std::ifstream ifs{pathToTokenIndex};
   if (!ifs)
-    MYTHROW(OpenException, ("Failed to open file", pathToNameIndex));
+    MYTHROW(OpenException, ("Failed to open file", pathToTokenIndex));
   ifs.exceptions(std::ifstream::badbit | std::ifstream::failbit);
 
   boost::archive::binary_iarchive ia{ifs};
   ia >> *this;
 }
-
-void Geocoder::SaveToBinaryIndex(std::string const & pathToNameIndex) const
+catch (boost::exception const & err)
 {
-  std::ofstream ofs{pathToNameIndex};
+  MYTHROW(Exception, ("Failed to load geocoder index:", boost::diagnostic_information(err)));
+}
+catch (std::exception const & err)
+{
+  MYTHROW(Exception, ("Failed to load geocoder index:", err.what()));
+}
+
+void Geocoder::SaveToBinaryIndex(std::string const & pathToTokenIndex) const
+try
+{
+  std::ofstream ofs{pathToTokenIndex};
   if (!ofs)
-    MYTHROW(OpenException, ("Failed to open file", pathToNameIndex));
+    MYTHROW(OpenException, ("Failed to open file", pathToTokenIndex));
   ofs.exceptions(std::ifstream::badbit | std::ifstream::failbit);
 
   boost::archive::binary_oarchive oa{ofs};
   oa << *this;
+}
+catch (boost::exception const & err)
+{
+  MYTHROW(Exception, ("Failed to save geocoder index:", boost::diagnostic_information(err)));
+}
+catch (std::exception const & err)
+{
+  MYTHROW(Exception, ("Failed to save geocoder index:", err.what()));
 }
 
 void Geocoder::ProcessQuery(string const & query, vector<Result> & results) const

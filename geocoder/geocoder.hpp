@@ -42,9 +42,8 @@ namespace geocoder
 class Geocoder
 {
 public:
-  enum : unsigned int { kIndexFormatVersion = 1 };
-
-  DECLARE_EXCEPTION(OpenException, RootException);
+  DECLARE_EXCEPTION(Exception, RootException);
+  DECLARE_EXCEPTION(OpenException, Exception);
 
   // A Layer contains all entries matched by a subquery of consecutive tokens.
   struct Layer
@@ -134,8 +133,8 @@ public:
 
   void LoadFromJsonl(std::string const & pathToJsonHierarchy, unsigned int loadThreadsCount = 1);
 
-  void LoadFromBinaryIndex(std::string const & pathToNameIndex);
-  void SaveToBinaryIndex(std::string const & pathToNameIndex) const;
+  void LoadFromBinaryIndex(std::string const & pathToTokenIndex);
+  void SaveToBinaryIndex(std::string const & pathToTokenIndex) const;
 
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version)
@@ -172,4 +171,4 @@ private:
 };
 }  // namespace geocoder
 
-BOOST_CLASS_VERSION(geocoder::Geocoder, geocoder::Geocoder::kIndexFormatVersion)
+BOOST_CLASS_VERSION(geocoder::Geocoder, geocoder::kIndexFormatVersion)

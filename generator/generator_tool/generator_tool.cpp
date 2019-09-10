@@ -187,7 +187,7 @@ DEFINE_string(popularity_csv, "", "Output csv for popularity.");
 
 DEFINE_bool(dump_mwm_tmp, false, "Prints feature builder objects from .mwm.tmp");
 
-DEFINE_bool(generate_geocoder_name_index, false, "Generate geocoder name index.");
+DEFINE_bool(generate_geocoder_token_index, false, "Generate geocoder token index.");
 DEFINE_string(key_value, "", "Input key-value file (.jsonl or .jsonl.gz).");
 
 // Common.
@@ -385,7 +385,7 @@ int GeneratorToolMain(int argc, char ** argv)
                              pathOutRepackedRegionsTmpMwm, FLAGS_verbose, threadsCount);
   }
 
-  if (FLAGS_generate_geocoder_name_index)
+  if (FLAGS_generate_geocoder_token_index)
   {
     if (FLAGS_key_value.empty())
     {
@@ -396,8 +396,8 @@ int GeneratorToolMain(int argc, char ** argv)
     geocoder::Geocoder geocoder;
     geocoder.LoadFromJsonl(FLAGS_key_value, threadsCount);
 
-    auto const nameIndexFile = base::JoinPath(path, FLAGS_output);
-    geocoder.SaveToBinaryIndex(nameIndexFile);
+    auto const tokenIndexFile = base::JoinPath(path, FLAGS_output);
+    geocoder.SaveToBinaryIndex(tokenIndexFile);
   }
 
   string const datFile = base::JoinPath(path, FLAGS_output + DATA_FILE_EXTENSION);
