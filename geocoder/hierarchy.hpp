@@ -3,6 +3,7 @@
 #include "geocoder/name_dictionary.hpp"
 #include "geocoder/types.hpp"
 
+#include "base/assert.hpp"
 #include "base/geo_object_id.hpp"
 
 #include <array>
@@ -10,6 +11,12 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+
+#include <boost/serialization/array.hpp>
+#include <boost/serialization/split_free.hpp>
+#include <boost/serialization/string.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/version.hpp>
 
 #include "3party/jansson/myjansson.hpp"
 
@@ -59,6 +66,16 @@ public:
   // part of the geojson entry.
   struct Entry
   {
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+      CHECK_EQUAL(version, kIndexFormatVersion, ());
+      ar & m_osmId;
+      ar & m_name;
+      ar & m_type;
+      ar & m_normalizedAddress;
+    }
+
     bool DeserializeFromJSON(std::string const & jsonStr,
                              NameDictionaryBuilder & normalizedNameDictionaryBuilder,
                              ParsingStats & stats);
@@ -90,8 +107,18 @@ public:
     std::array<NameDictionary::Position, static_cast<size_t>(Type::Count)> m_normalizedAddress{};
   };
 
+  Hierarchy() = default;
   Hierarchy(std::vector<Entry> && entries, NameDictionary && normalizeNameDictionary,
             std::string && dataVersion);
+
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    CHECK_EQUAL(version, kIndexFormatVersion, ());
+    ar & m_entries;
+    ar & m_normalizedNameDictionary;
+    ar & m_dataVersion;
+  }
 
   std::vector<Entry> const & GetEntries() const;
   NameDictionary const & GetNormalizedNameDictionary() const;
@@ -110,3 +137,32 @@ private:
   std::string m_dataVersion;
 };
 }  // namespace geocoder
+
+BOOST_CLASS_VERSION(geocoder::Hierarchy, geocoder::kIndexFormatVersion)
+BOOST_CLASS_VERSION(geocoder::Hierarchy::Entry, geocoder::kIndexFormatVersion)
+
+namespace boost
+{
+namespace serialization
+{
+template<class Archive>
+inline void serialize(Archive & ar, base::GeoObjectId & t, const unsigned int version)
+{
+  split_free(ar, t, version);
+}
+
+template<class Archive>
+inline void save(Archive & ar, base::GeoObjectId const & t, const unsigned int version)
+{
+  ar & t.GetEncodedId();
+}
+
+template<class Archive>
+inline void load(Archive & ar, base::GeoObjectId & t, const unsigned int version)
+{
+  uint64_t encodedId = 0;
+  ar & encodedId;
+  t = base::GeoObjectId(encodedId);
+}
+}  // namespace serialization
+}  // namespace boost

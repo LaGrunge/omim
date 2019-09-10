@@ -52,8 +52,9 @@ void TestGeocoder(Geocoder & geocoder, string const & query, vector<Result> && e
 
 UNIT_TEST(Geocoder_Smoke)
 {
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kRegionsData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   base::GeoObjectId const florenciaId(0xc00000000059d6b5);
   base::GeoObjectId const cubaId(0xc00000000004b279);
@@ -65,8 +66,9 @@ UNIT_TEST(Geocoder_Smoke)
 
 UNIT_TEST(Geocoder_Hierarchy)
 {
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kRegionsData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
   auto const & hierarchy = geocoder.GetHierarchy();
   auto const & dictionary = hierarchy.GetNormalizedNameDictionary();
 
@@ -91,8 +93,9 @@ UNIT_TEST(Geocoder_EnglishNames)
 11 {"properties": {"locales": {"default": {"address": {"locality": "Москва", "street": "улица Новый Арбат"}}, "en": {"address": {"locality": "Moscow", "street": "New Arbat Avenue"}}}}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   TestGeocoder(geocoder, "Moscow, New Arbat", {{Id{0x11}, 1.0}, {Id{0x10}, 0.6}});
 }
@@ -113,8 +116,9 @@ UNIT_TEST(Geocoder_OnlyBuildings)
 42 {"properties": {"locales": {"default": {"address": {"building": "3", "street": "MaybeNumbered", "locality": "Some Locality"}}}}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   base::GeoObjectId const localityId(0x10);
   base::GeoObjectId const goodStreetId(0x21);
@@ -155,8 +159,9 @@ UNIT_TEST(Geocoder_MismatchedLocality)
 32 {"properties": {"locales": {"default": {"address": {"building": "3", "street": "Krymskaya", "locality": "Paris"}}}}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   base::GeoObjectId const building2(0x22);
 
@@ -177,8 +182,9 @@ UNIT_TEST(Geocoder_MoscowLocalityRank)
 21 {"properties": {"locales": {"default": {"address": {"locality": "Москва", "region": "Тверская Область"}}}, "rank": 4}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   TestGeocoder(geocoder, "Москва", {{Id{0x11}, 1.0}, {Id{0x10}, 0.625}, {Id{0x21}, 0.375}});
 }
@@ -194,8 +200,9 @@ UNIT_TEST(Geocoder_StreetWithNumberInCity)
 28 {"properties": {"locales": {"default": {"address": {"locality": "Краснокамск", "street": "улица 1905 года"}}}}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   TestGeocoder(geocoder, "Москва, улица 1905 года", {{Id{0x11}, 1.0}});
 }
@@ -207,8 +214,9 @@ UNIT_TEST(Geocoder_StreetWithNumberInClassifiedCity)
 11 {"properties": {"locales": {"default": {"address": {"locality": "Москва", "street": "улица 1905 года"}}}}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   TestGeocoder(geocoder, "город Москва, улица 1905 года", {{Id{0x11}, 1.0}});
 }
@@ -223,8 +231,9 @@ UNIT_TEST(Geocoder_StreetWithNumberInAnyCity)
 28 {"properties": {"locales": {"default": {"address": {"locality": "Краснокамск", "street": "улица 1905 года"}}}}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   TestGeocoder(geocoder, "улица 1905 года", {{Id{0x11}, 1.0}, {Id{0x28}, 1.0}});
 }
@@ -236,8 +245,9 @@ UNIT_TEST(Geocoder_StreetWithNumberAndWithoutStreetSynonym)
 11 {"properties": {"locales": {"default": {"address": {"locality": "Москва", "street": "улица 1905 года"}}}}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   TestGeocoder(geocoder, "Москва, 1905 года", {{Id{0x11}, 1.0}});
 }
@@ -249,8 +259,9 @@ UNIT_TEST(Geocoder_UntypedStreetWithNumberAndStreetSynonym)
 13 {"properties": {"locales": {"default": {"address": {"locality": "Москва", "street": "8 Марта"}}}}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   TestGeocoder(geocoder, "Москва, улица 8 Марта", {{Id{0x13}, 1.0}});
 }
@@ -264,8 +275,9 @@ UNIT_TEST(Geocoder_StreetWithTwoNumbers)
 13 {"properties": {"locales": {"default": {"address": {"locality": "Москва", "street": "улица 8 Марта"}}}}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   TestGeocoder(geocoder, "Москва, 4-я улица 8 Марта", {{Id{0x12}, 1.0}});
 }
@@ -278,8 +290,9 @@ UNIT_TEST(Geocoder_BuildingOnStreetWithNumber)
 15 {"properties": {"locales": {"default": {"address": {"locality": "Москва", "street": "улица 8 Марта", "building": "4"}}}}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   TestGeocoder(geocoder, "Москва, улица 8 Марта, 4", {{Id{0x15}, 1.0}});
 }
@@ -293,8 +306,11 @@ UNIT_TEST(Geocoder_LocalityBuilding)
 31 {"properties": {"locales": {"default": {"address": {"street": "Krymskaya", "locality": "Zelenograd"}}}}}
 32 {"properties": {"locales": {"default": {"address": {"building": "2", "street": "Krymskaya", "locality": "Zelenograd"}}}}}
 )#";
+
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
+
   base::GeoObjectId const building2(0x22);
   TestGeocoder(geocoder, "Zelenograd 2", {{building2, 1.0}});
 }
@@ -308,8 +324,9 @@ UNIT_TEST(Geocoder_SubregionInLocality)
 12 {"properties": {"locales": {"default": {"address": {"subregion": "Северный административный округ", "locality": "Москва", "region": "Москва"}}}, "rank": 3}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   TestGeocoder(geocoder, "Северный административный округ", {{Id{0x12}, 1.0}});
   TestGeocoder(geocoder, "Москва, Северный административный округ",
@@ -329,8 +346,9 @@ UNIT_TEST(Geocoder_NumericalSuburbRelevance)
 22 {"properties": {"locales": {"default": {"address": {"building": "60", "street": "Щорса", "locality": "Белгород"}}}}}
 )#";
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", kData);
-  Geocoder geocoder(regionsJsonFile.GetFullPath());
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath());
 
   TestGeocoder(geocoder, "Caloocan, 60", {{Id{0x12}, 1.0}});
   TestGeocoder(geocoder, "60", {});
@@ -338,11 +356,58 @@ UNIT_TEST(Geocoder_NumericalSuburbRelevance)
   TestGeocoder(geocoder, "Белгород, Щорса, 60", {{Id{0x22}, 1.0}});
 }
 
+// Geocoder_Serialization --------------------------------------------------------------------------
+UNIT_TEST(Geocoder_Serialization)
+{
+  string const kData = R"#(
+10 {"properties": {"locales": {"default": {"address": {"country": "Россия"}}, "en": {"address": {"country": "Russia"}}}, "rank": 1}}
+11 {"properties": {"locales": {"default": {"address": {"region": "Москва", "country": "Россия"}}}, "rank": 2}}
+12 {"properties": {"locales": {"default": {"address": {"locality": "Москва", "region": "Москва", "country": "Россия"}}}, "rank": 4}}
+13 {"properties": {"locales": {"default": {"address": {"street": "Арбат", "locality": "Москва", "region": "Москва", "country": "Россия"}}}, "rank": 7}}
+15 {"properties": {"locales": {"default": {"address": {"building": "4", "street": "Арбат", "locality": "Москва", "region": "Москва", "country": "Россия"}}}, "rank": 8}}
+)#";
+
+  Geocoder geocoderFromJsonl;
+  ScopedFile const regionsJsonFile("regions.jsonl", kData);
+  geocoderFromJsonl.LoadFromJsonl(regionsJsonFile.GetFullPath());
+
+  ScopedFile const regionsTokenIndexFile("regions.tokidx", ScopedFile::Mode::DoNotCreate);
+  geocoderFromJsonl.SaveToBinaryIndex(regionsTokenIndexFile.GetFullPath());
+
+  Geocoder geocoderFromTokenIndex;
+  geocoderFromTokenIndex.LoadFromBinaryIndex(regionsTokenIndexFile.GetFullPath());
+
+  for (auto const & name : {"russia", "россия", "москва", "арбат"})
+  {
+    vector<base::GeoObjectId> objectsFromJsonl;
+    geocoderFromJsonl.GetIndex().ForEachDocId({name}, [&](Index::DocId const & docId) {
+      objectsFromJsonl.emplace_back(geocoderFromJsonl.GetIndex().GetDoc(docId).m_osmId);
+
+      geocoderFromJsonl.GetIndex().ForEachRelatedBuilding(docId, [&](Index::DocId const & docId) {
+        objectsFromJsonl.emplace_back(geocoderFromJsonl.GetIndex().GetDoc(docId).m_osmId);
+      });
+    });
+
+    vector<base::GeoObjectId> objectsFromTokenIndex;
+    geocoderFromTokenIndex.GetIndex().ForEachDocId({name}, [&](Index::DocId const & docId) {
+      objectsFromTokenIndex.emplace_back(geocoderFromTokenIndex.GetIndex().GetDoc(docId).m_osmId);
+
+      geocoderFromTokenIndex.GetIndex().ForEachRelatedBuilding(docId, [&](Index::DocId const & docId) {
+        objectsFromTokenIndex.emplace_back(geocoderFromTokenIndex.GetIndex().GetDoc(docId).m_osmId);
+      });
+    });
+
+    TEST_GREATER_OR_EQUAL(objectsFromJsonl.size(), 1, ());
+    TEST_EQUAL(objectsFromTokenIndex, objectsFromJsonl, ());
+  }
+}
+
 //--------------------------------------------------------------------------------------------------
 UNIT_TEST(Geocoder_EmptyFileConcurrentRead)
 {
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", "");
-  Geocoder geocoder(regionsJsonFile.GetFullPath(), 8 /* reader threads */);
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath(), 8 /* reader threads */);
 
   TEST_EQUAL(geocoder.GetHierarchy().GetEntries().size(), 0, ());
 }
@@ -363,8 +428,9 @@ UNIT_TEST(Geocoder_BigFileConcurrentRead)
       << "}\n";
   }
 
+  Geocoder geocoder;
   ScopedFile const regionsJsonFile("regions.jsonl", s.str());
-  Geocoder geocoder(regionsJsonFile.GetFullPath(), 8 /* reader threads */);
+  geocoder.LoadFromJsonl(regionsJsonFile.GetFullPath(), 8 /* reader threads */);
 
   TEST_EQUAL(geocoder.GetHierarchy().GetEntries().size(), kEntryCount, ());
 }

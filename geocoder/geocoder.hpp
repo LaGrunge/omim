@@ -18,6 +18,8 @@
 #include <utility>
 #include <vector>
 
+#include <boost/serialization/version.hpp>
+
 namespace geocoder
 {
 // This class performs geocoding by using the data that we are currently unable
@@ -40,6 +42,9 @@ namespace geocoder
 class Geocoder
 {
 public:
+  DECLARE_EXCEPTION(Exception, RootException);
+  DECLARE_EXCEPTION(OpenException, Exception);
+
   // A Layer contains all entries matched by a subquery of consecutive tokens.
   struct Layer
   {
@@ -126,8 +131,18 @@ public:
     std::vector<Layer> m_layers;
   };
 
-  explicit Geocoder(std::string const & pathToJsonHierarchy, unsigned int loadThreadsCount = 1);
-  explicit Geocoder(std::istream & jsonHierarchy, unsigned int loadThreadsCount = 1);
+  void LoadFromJsonl(std::string const & pathToJsonHierarchy, unsigned int loadThreadsCount = 1);
+
+  void LoadFromBinaryIndex(std::string const & pathToTokenIndex);
+  void SaveToBinaryIndex(std::string const & pathToTokenIndex) const;
+
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    CHECK_EQUAL(version, kIndexFormatVersion, ());
+    ar & m_hierarchy;
+    ar & m_index;
+  }
 
   void ProcessQuery(std::string const & query, std::vector<Result> & results) const;
 
@@ -136,8 +151,6 @@ public:
   Index const & GetIndex() const;
 
 private:
-  explicit Geocoder(Hierarchy && hierarchy, unsigned int loadThreadsCount);
-
   void Go(Context & ctx, Type type) const;
 
   void FillBuildingsLayer(Context & ctx, Tokens const & subquery, std::vector<size_t> const & subqueryTokenIds,
@@ -154,7 +167,8 @@ private:
   bool HasMemberLocalityInMatching(Context const & ctx, Hierarchy::Entry const & member) const;
 
   Hierarchy m_hierarchy;
-
-  Index m_index;
+  Index m_index{m_hierarchy};
 };
 }  // namespace geocoder
+
+BOOST_CLASS_VERSION(geocoder::Geocoder, geocoder::kIndexFormatVersion)

@@ -51,12 +51,10 @@ void PrintResults(Hierarchy const & hierarchy, vector<Result> const & results)
   }
 }
 
-void ProcessQueriesFromFile(string const & path)
+void ProcessQueriesFromFile(Geocoder const & geocoder, string const & path)
 {
   ifstream stream(path.c_str());
   CHECK(stream.is_open(), ("Can't open", path));
-
-  Geocoder geocoder(FLAGS_hierarchy_path);
 
   vector<Result> results;
   string s;
@@ -73,10 +71,8 @@ void ProcessQueriesFromFile(string const & path)
   }
 }
 
-void ProcessQueriesFromCommandLine()
+void ProcessQueriesFromCommandLine(Geocoder const & geocoder)
 {
-  Geocoder geocoder(FLAGS_hierarchy_path);
-
   string query;
   vector<Result> results;
   while (true)
@@ -98,12 +94,23 @@ int main(int argc, char * argv[])
   google::SetUsageMessage("Geocoder command line interface.");
   google::ParseCommandLineFlags(&argc, &argv, true);
 
+  Geocoder geocoder;
+  if (strings::EndsWith(FLAGS_hierarchy_path, ".jsonl") ||
+      strings::EndsWith(FLAGS_hierarchy_path, ".jsonl.gz"))
+  {
+    geocoder.LoadFromJsonl(FLAGS_hierarchy_path);
+  }
+  else
+  {
+    geocoder.LoadFromBinaryIndex(FLAGS_hierarchy_path);
+  }
+
   if (!FLAGS_queries_path.empty())
   {
-    ProcessQueriesFromFile(FLAGS_queries_path);
+    ProcessQueriesFromFile(geocoder, FLAGS_queries_path);
     return 0;
   }
 
-  ProcessQueriesFromCommandLine();
+  ProcessQueriesFromCommandLine(geocoder);
   return 0;
 }

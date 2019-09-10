@@ -10,6 +10,9 @@
 #include <unordered_map>
 #include <vector>
 
+#include <boost/serialization/unordered_map.hpp>
+#include <boost/serialization/version.hpp>
+
 namespace geocoder
 {
 class Index
@@ -21,7 +24,17 @@ public:
   // that the index was constructed from.
   using DocId = std::vector<Doc>::size_type;
 
-  explicit Index(Hierarchy const & hierarchy, unsigned int loadThreadsCount = 1);
+  explicit Index(Hierarchy const & hierarchy);
+
+  void BuildIndex(unsigned int loadThreadsCount = 1);
+
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    CHECK_EQUAL(version, kIndexFormatVersion, ());
+    ar & m_docIdsByTokens;
+    ar & m_relatedBuildings;
+  }
 
   Doc const & GetDoc(DocId const id) const;
 
@@ -80,3 +93,5 @@ private:
   std::unordered_map<DocId, std::vector<DocId>> m_relatedBuildings;
 };
 }  // namespace geocoder
+
+BOOST_CLASS_VERSION(geocoder::Index, geocoder::kIndexFormatVersion)
