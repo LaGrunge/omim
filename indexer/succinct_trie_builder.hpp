@@ -103,8 +103,8 @@ void BuildSuccinctTrie(TWriter & writer, TIter const beg, TIter const end)
 
   TNode * root = new TNode();
   SCOPE_GUARD(cleanup, std::bind(&DeleteTrie<TNode>, root));
-  TTrieString prevKey;
-  TEntry prevEntry;
+  TTrieString prevKey{};
+  TEntry prevEntry{};
 
   std::vector<TEntry> entries;
   std::vector<strings::UniString> entryStrings;

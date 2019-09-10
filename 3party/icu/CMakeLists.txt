@@ -11,7 +11,7 @@ add_definitions(
 )
 
 add_clang_compile_options("-Wno-deprecated-declarations")
-add_gcc_compile_options("-Wno-deprecated-declarations")
+add_gcc_compile_options("-Wno-deprecated-declarations" "-Wno-stringop-overflow")
 
 set(CMAKE_PREFIX_PATH ./)
 

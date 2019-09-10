@@ -209,7 +209,7 @@ public:
     for (uint64_t i = 0; i < m_ids.num_ones(); ++i)
     {
       auto const j = static_cast<uint32_t>(m_ids.select(i));
-      Value value;
+      Value value{};
       bool const ok = Get(j, value);
       CHECK(ok, ());
       fn(j, value);

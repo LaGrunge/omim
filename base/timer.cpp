@@ -104,17 +104,10 @@ std::string TimestampToString(time_t time)
   if (time == INVALID_TIME_STAMP)
     return std::string("INVALID_TIME_STAMP");
 
-  tm * t = gmtime(&time);
-  char buf[21] = { 0 };
-#ifdef OMIM_OS_WINDOWS
-  sprintf_s(buf, ARRAY_SIZE(buf), "%04d-%02d-%02dT%02d:%02d:%02dZ", t->tm_year + 1900,
-            t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
-#else
-  ::snprintf(buf, ARRAY_SIZE(buf), "%04d-%02d-%02dT%02d:%02d:%02dZ", t->tm_year + 1900,
-             t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
-#endif
-
-  return buf;
+  std::tm * tm = std::gmtime(&time);
+  std::ostringstream ss;
+  ss << std::put_time(tm, "%FT%TZ");
+  return ss.str();
 }
 
 std::string SecondsSinceEpochToString(uint64_t secondsSinceEpoch)
