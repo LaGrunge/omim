@@ -1,5 +1,0 @@
-htmlmin
-requests
-bs4
-wikidata
-wikipedia-api

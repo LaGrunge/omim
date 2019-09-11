@@ -1,3 +1,0 @@
--r ../post_generation/requirements.txt
--r ../descriptions/requirements.txt
-filelock==3.0.10
