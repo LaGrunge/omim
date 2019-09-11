@@ -144,6 +144,10 @@ set(
 
 file(COPY ${OTHER_FILES} DESTINATION ${CMAKE_BINARY_DIR})
 
+#because of protobuf
+add_clang_compile_options("-Wno-shorten-64-to-32" "-Wno-unused-parameter")
+
+
 omim_add_library(${PROJECT_NAME} ${SRC})
 omim_link_libraries(${PROJECT_NAME}
   base

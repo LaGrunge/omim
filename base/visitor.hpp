@@ -44,6 +44,7 @@ private:
   template <typename Visitor>         \
   void Visit(Visitor & visitor)       \
   {                                   \
+    UNUSED_VALUE(visitor);            \
     __VA_ARGS__;                      \
   }                                   \
   template <typename Visitor>         \
