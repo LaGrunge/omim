@@ -276,6 +276,7 @@ UNIT_TEST(FeatureBuilder_SerializeAccuratelyForIntermediate)
 {
   FeatureBuilder fb1;
   FeatureParams params;
+  classificator::Load();
 
   char const * arr2[][2] = {
     { "railway", "rail" },
