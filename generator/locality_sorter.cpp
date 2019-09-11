@@ -195,7 +195,7 @@ using NeedSerialize = function<bool(FeatureBuilder & fb1)>;
 bool GenerateLocalityDataImpl(FeaturesCollector & collector,
                               CalculateMidPoints::MinDrawableScalePolicy const & minDrawableScalePolicy,
                               NeedSerialize const & needSerialize,
-                              string const & featuresFile, string const & dataFile)
+                              string const & featuresFile, string const & /*dataFile*/)
 {
   // Transform features from raw format to LocalityObject format.
   try

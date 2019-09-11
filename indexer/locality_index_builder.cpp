@@ -26,7 +26,7 @@ public:
   template <class ToDo>
   void ForEach(ToDo && toDo) const
   {
-    m_recordReader.ForEachRecord([&](uint32_t pos, char const * data, uint32_t /*size*/) {
+    m_recordReader.ForEachRecord([&](uint32_t /*pos*/, char const * data, uint32_t /*size*/) {
       LocalityObject o;
       o.Deserialize(data);
       toDo(o);

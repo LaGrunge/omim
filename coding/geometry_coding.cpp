@@ -122,7 +122,7 @@ void EncodePolylinePrev1(InPointsT const & points, m2::PointU const & basePoint,
     for (size_t i = 1; i < count; ++i)
       deltas.push_back(EncodePointDeltaAsUint(points[i], points[i - 1]));
   }
-
+  UNUSED_VALUE(maxPoint);
   ASSERT(TestDecoding(points, basePoint, maxPoint, deltas, &DecodePolylinePrev1), ());
 }
 

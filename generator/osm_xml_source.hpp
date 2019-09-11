@@ -65,7 +65,7 @@ public:
     return true;
   }
 
-  void Pop(std::string const & v)
+  void Pop(std::string const & /*v*/)
   {
     switch (--m_depth)
     {

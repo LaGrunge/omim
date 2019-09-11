@@ -231,7 +231,7 @@ boost::optional<indexer::GeoObjectsIndex<IndexReader>> MakeTempGeoObjectsIndex(
 
 void AddBuildingsAndThingsWithHousesThenEnrichAllWithRegionAddresses(
     GeoObjectMaintainer & geoObjectMaintainer, std::string const & pathInGeoObjectsTmpMwm,
-    bool verbose, size_t threadsCount)
+    bool /*verbose*/, size_t threadsCount)
 {
   auto const concurrentTransformer = [&](FeatureBuilder & fb, uint64_t /* currPos */) {
     geoObjectMaintainer.StoreAndEnrich(fb);
@@ -267,7 +267,7 @@ void AddPoisEnrichedWithHouseAddresses(GeoObjectMaintainer & geoObjectMaintainer
                                        NullBuildingsInfo const & buildingsInfo,
                                        std::string const & pathInGeoObjectsTmpMwm,
                                        std::ostream & streamPoiIdsToAddToLocalityIndex,
-                                       bool verbose, size_t threadsCount)
+                                       bool /*verbose*/, size_t threadsCount)
 {
   std::atomic_size_t counter{0};
   std::mutex streamMutex;

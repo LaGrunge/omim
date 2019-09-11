@@ -350,7 +350,7 @@ UNIT_TEST(BufferVector_EraseIf)
   TEST_EQUAL(v[0], 2, ());
   TEST_EQUAL(v[1], 4, ());
 
-  v.erase_if([] (int x) { return true; });
+  v.erase_if([] (int) { return true; });
   TEST_EQUAL(v.size(), 0, ());
 }
 

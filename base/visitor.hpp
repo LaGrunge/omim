@@ -1,5 +1,7 @@
 #pragma once
 
+#include "base/macros.hpp"
+
 #include <sstream>
 #include <string>
 
@@ -47,6 +49,7 @@ private:
   template <typename Visitor>         \
   void Visit(Visitor & visitor) const \
   {                                   \
+    UNUSED_VALUE(visitor);            \
     __VA_ARGS__;                      \
   }
 

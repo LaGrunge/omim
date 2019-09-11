@@ -80,7 +80,7 @@ UNIT_TEST(MultilangString_ForEach)
     size_t index = 0;
     vector<string> const expected = {"default", "en", "ru"};
     vector<string> actual;
-    s.ForEach([&index, &actual](char lang, string const & utf8s) {
+    s.ForEach([&index, &actual](char /*lang*/, string const & /*utf8s*/) {
       actual.push_back(gArr[index].m_lang);
       ++index;
       if (index == 3)
@@ -174,7 +174,7 @@ UNIT_TEST(MultilangString_ForEachLanguage)
   vector<string> const preferredLanguages = {"cs", "eu", "be", "zh"};
   vector<string> const preferredTranslations = {"Skotsko", "Eskozia", "Шатландыя", "苏格兰"};
 
-  auto const fn = [&testAccumulator, &usedTranslations](int8_t code, string const & name) {
+  auto const fn = [&testAccumulator, &usedTranslations](int8_t /*code*/, string const & name) {
     testAccumulator.insert(name);
     if (usedTranslations.size() > testAccumulator.size())
       return base::ControlFlow::Continue;

@@ -42,14 +42,14 @@ unique_ptr<FeatureType> FeatureSource::GetOriginalFeature(uint32_t index) const
   return ft;
 }
 
-FeatureStatus FeatureSource::GetFeatureStatus(uint32_t index) const
+FeatureStatus FeatureSource::GetFeatureStatus(uint32_t /*index*/) const
 {
   return FeatureStatus::Untouched;
 }
 
-unique_ptr<FeatureType> FeatureSource::GetModifiedFeature(uint32_t index) const { return {}; }
+unique_ptr<FeatureType> FeatureSource::GetModifiedFeature(uint32_t /*index*/) const { return {}; }
 
-void FeatureSource::ForEachAdditionalFeature(m2::RectD const & rect, int scale,
-                                             function<void(uint32_t)> const & fn) const
+void FeatureSource::ForEachAdditionalFeature(m2::RectD const & /*rect*/, int /*scale*/,
+                                             function<void(uint32_t)> const & /*fn*/) const
 {
 }

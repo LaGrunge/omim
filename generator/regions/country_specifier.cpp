@@ -4,7 +4,7 @@ namespace generator
 {
 namespace regions
 {
-void CountrySpecifier::AdjustRegionsLevel(Node::PtrList & outers)
+void CountrySpecifier::AdjustRegionsLevel(Node::PtrList & /*outers*/)
 { }
 
 PlaceLevel CountrySpecifier::GetLevel(Region const & region) const

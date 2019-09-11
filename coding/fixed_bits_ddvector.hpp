@@ -79,6 +79,7 @@ class FixedBitsDDVector
     , m_size(size)
   #endif
   {
+    UNUSED_VALUE(size);
   }
 
 public:
