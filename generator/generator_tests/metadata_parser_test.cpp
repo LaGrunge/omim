@@ -199,6 +199,7 @@ UNIT_TEST(Metadata_ValidateAndFormat_wikipedia)
 UNIT_TEST(Metadata_ValidateAndFormat_duration)
 {
   FeatureParams params;
+  classificator::Load();
   params.AddType(classif().GetTypeByPath({"route", "ferry"}));
   MetadataTagProcessor p(params);
   Metadata & md = params.GetMetadata();
