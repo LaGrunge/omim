@@ -25,23 +25,10 @@
 
 @implementation HttpThreadImpl
 
-#ifdef OMIM_OS_IPHONE
-static id<DownloadIndicatorProtocol> downloadIndicator = nil;
-
-+ (void)setDownloadIndicatorProtocol:(id<DownloadIndicatorProtocol>)indicator
-{
-  downloadIndicator = indicator;
-}
-#endif
-
 - (void)dealloc
 {
   LOG(LDEBUG, ("ID:", [self hash], "Connection is destroyed"));
   [m_dataTask cancel];
-#ifdef OMIM_OS_IPHONE
-  [downloadIndicator enableStandby];
-  [downloadIndicator disableDownloadIndicator];
-#endif
 }
 
 - (void)cancel
@@ -100,11 +87,6 @@ static id<DownloadIndicatorProtocol> downloadIndicator = nil;
     static string const uid = GetPlatform().UniqueClientId();
     [request addValue:@(uid.c_str()) forHTTPHeaderField:@"User-Agent"];
   }
-  
-#ifdef OMIM_OS_IPHONE
-  [downloadIndicator disableStandby];
-  [downloadIndicator enableDownloadIndicator];
-#endif
   
   // create the task with the request and start loading the data
   m_dataTask = [[HttpSessionManager sharedManager] dataTaskWithRequest:request
