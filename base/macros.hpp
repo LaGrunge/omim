@@ -85,8 +85,8 @@ inline void ForceUseValue(T const & t)
 #define WARN_UNUSED_RESULT
 #endif  // defined(__GNUC__)
 
-#ifndef __clang__
+#if defined(__GNUC__) && !defined(__clang__)
 #define FALLTHROUGH __attribute__ ((fallthrough));
 #else
 #define FALLTHROUGH
-#endif  // ifndef clang
+#endif  // FALLTHROUGH for gcc

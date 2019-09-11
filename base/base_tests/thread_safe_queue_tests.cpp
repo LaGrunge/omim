@@ -103,7 +103,6 @@ UNIT_TEST(ThreadSafeQueue_ExampleWithDataWrapper)
       }
       else
       {
-        ASSERT_GREATER_OR_EQUAL(dw.Get(), 0, ());
         ASSERT_LESS_OR_EQUAL(dw.Get(), kSize, ());
       }
     }

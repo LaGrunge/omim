@@ -22,7 +22,7 @@ namespace feature
     static char const arrChar[] = { '0', '1', '2', '3' };
     static_assert(ARRAY_SIZE(arrChar) >= ARRAY_SIZE(g_arrWorldScales), "");
     static_assert(ARRAY_SIZE(arrChar) >= ARRAY_SIZE(g_arrCountryScales), "");
-    ASSERT(ind >= 0 && ind < ARRAY_SIZE(arrChar), (ind));
+    ASSERT(ind < ARRAY_SIZE(arrChar), (ind));
 
     str += arrChar[ind];
     return str;
