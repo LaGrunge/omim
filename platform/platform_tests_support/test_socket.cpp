@@ -11,7 +11,7 @@ namespace tests_support
 {
 TestSocket::~TestSocket() { m_isConnected = false; }
 
-bool TestSocket::Open(string const & host, uint16_t port)
+bool TestSocket::Open(string const & /*host*/, uint16_t /*port*/)
 {
   if (m_isConnected)
     return false;

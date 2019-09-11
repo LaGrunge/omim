@@ -129,6 +129,7 @@ add_subdirectory(3party/succinct)
 # Other options should be set before all add_subdirectory calls.
 add_compile_options(
   "-Wall"
+  "-Wextra"
   "-Werror"
 )
 
