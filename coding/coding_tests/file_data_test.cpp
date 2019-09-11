@@ -28,20 +28,6 @@ namespace
     base::FileData f(name, base::FileData::OP_WRITE_TRUNCATE);
     f.Write(string(size, c).c_str(), size);
   }
-
-#ifdef OMIM_OS_WINDOWS
-  void CheckFileOK(string const & name)
-  {
-    base::FileData f(name, base::FileData::OP_READ);
-
-    uint64_t const size = f.Size();
-    TEST_EQUAL ( size, name.size(), () );
-
-    vector<char> buffer(size);
-    f.Read(0, &buffer[0], size);
-    TEST ( equal(name.begin(), name.end(), buffer.begin()), () );
-  }
-#endif
 }
 
 UNIT_TEST(FileData_ApiSmoke)
@@ -63,65 +49,6 @@ UNIT_TEST(FileData_ApiSmoke)
 
   TEST(!base::GetFileSize(name2, sz), ());
 }
-
-/*
-UNIT_TEST(FileData_NoDiskSpace)
-{
-  char const * name = "/Volumes/KINDLE/file.bin";
-  vector<uint8_t> bytes(100000000);
-
-  try
-  {
-    base::FileData f(name, base::FileData::OP_WRITE_TRUNCATE);
-
-    for (size_t i = 0; i < 100; ++i)
-      f.Write(&bytes[0], bytes.size());
-  }
-  catch (Writer::Exception const & ex)
-  {
-    LOG(LINFO, ("Writer exception catched"));
-  }
-
-  (void)base::DeleteFileX(name);
-}
-*/
-
-/*
-#ifdef OMIM_OS_WINDOWS
-UNIT_TEST(FileData_SharingAV_Windows)
-{
-  {
-    MakeFile(name1);
-
-    // lock file, will check sharing access
-    base::FileData f1(name1, base::FileData::OP_READ);
-
-    // try rename or delete locked file
-    TEST(!base::RenameFileX(name1, name2), ());
-    TEST(!base::DeleteFileX(name1), ());
-
-    MakeFile(name2);
-
-    // try rename or copy to locked file
-    TEST(!base::RenameFileX(name2, name1), ());
-    TEST(!base::CopyFileX(name2, name1), ());
-
-    // files should be unchanged
-    CheckFileOK(name1);
-    CheckFileOK(name2);
-
-    //TEST(base::CopyFile(name1, name2), ());
-  }
-
-  // renaming to existing file is not allowed
-  TEST(!base::RenameFileX(name1, name2), ());
-  TEST(!base::RenameFileX(name2, name1), ());
-
-  TEST(base::DeleteFileX(name1), ());
-  TEST(base::DeleteFileX(name2), ());
-}
-#endif
-*/
 
 UNIT_TEST(Equal_Function_Test)
 {

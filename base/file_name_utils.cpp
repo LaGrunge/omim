@@ -62,11 +62,7 @@ string GetDirectory(string const & name)
 
 string GetNativeSeparator()
 {
-#ifdef OMIM_OS_WINDOWS
-    return "\\";
-#else
     return "/";
-#endif
 }
 
 string AddSlashIfNeeded(string const & path)

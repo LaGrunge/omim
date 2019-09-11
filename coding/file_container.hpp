@@ -199,12 +199,7 @@ public:
   Handle Map(uint64_t offset, uint64_t size, std::string const & tag) const;
 
 private:
-#ifdef OMIM_OS_WINDOWS
-  void * m_hFile = (void *)-1;
-  void * m_hMapping = (void *)-1;
-#else
   int m_fd = -1;
-#endif
 
   DISALLOW_COPY(MappedFile);
 };

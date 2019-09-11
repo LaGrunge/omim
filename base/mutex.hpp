@@ -2,13 +2,7 @@
 
 #include "base/assert.hpp"
 
-#include "std/target_os.hpp"
-
-#if defined(OMIM_OS_WINDOWS_NATIVE)
-  #include "std/windows.hpp"
-#else
-  #include <pthread.h>
-#endif
+#include <pthread.h>
 
 namespace threads
 {
@@ -28,11 +22,7 @@ namespace threads
   {
   private:
 
-#if defined(OMIM_OS_WINDOWS_NATIVE)
-    CRITICAL_SECTION m_Mutex;
-#else
     pthread_mutex_t m_Mutex;
-#endif
 
     Mutex & operator=(Mutex const &);
     Mutex(Mutex const &);
@@ -45,47 +35,27 @@ namespace threads
 
     Mutex()
     {
-#if defined(OMIM_OS_WINDOWS_NATIVE)
-      ::InitializeCriticalSection(&m_Mutex);
-#else
       ::pthread_mutex_init(&m_Mutex, 0);
-#endif
     }
 
     ~Mutex()
     {
-#if defined(OMIM_OS_WINDOWS_NATIVE)
-      ::DeleteCriticalSection(&m_Mutex);
-#else
       ::pthread_mutex_destroy(&m_Mutex);
-#endif
     }
     
     void Lock()
     {
-#if defined(OMIM_OS_WINDOWS_NATIVE)
-      ::EnterCriticalSection(&m_Mutex);
-#else
       VERIFY(0 == ::pthread_mutex_lock(&m_Mutex), ());
-#endif
     }
 
     bool TryLock()
     {
-#if defined(OMIM_OS_WINDOWS_NATIVE)
-      return (TRUE == ::TryEnterCriticalSection(&m_Mutex));
-#else
       return (0 == ::pthread_mutex_trylock(&m_Mutex));
-#endif
     }
 
     void Unlock()
     {
-#if defined(OMIM_OS_WINDOWS_NATIVE)
-      ::LeaveCriticalSection(&m_Mutex);
-#else
       VERIFY(0 == ::pthread_mutex_unlock(&m_Mutex), ());
-#endif
     }
 
   };

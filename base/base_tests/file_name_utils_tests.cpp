@@ -40,10 +40,6 @@ UNIT_TEST(FileName_Smoke)
   TEST_EQUAL(name, "test", ());
 }
 
-// TODO (@gorshenin): implement a Clean() method to clean file path
-// (remove redundant separators, correctly collapse dots, dot-dots, etc.).
-#ifndef OMIM_OS_WINDOWS
-
 UNIT_TEST(FileName_GetDirectory)
 {
   TEST_EQUAL("/tmp", base::GetDirectory("/tmp/evil\\file"), ());
@@ -81,5 +77,3 @@ UNIT_TEST(FilePath_Join)
   TEST_EQUAL("../../omim/strings.txt", base::JoinPath("..", "..", "omim", "strings.txt"), ());
   TEST_EQUAL("../../omim/strings.txt", base::JoinPath("../", "..", "omim/", "strings.txt"), ());
 }
-
-#endif // OMIM_OS_WINDOWS
