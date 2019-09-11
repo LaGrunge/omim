@@ -52,7 +52,7 @@ std::vector<base::GeoObjectId> CollectFeatures(
   return expectedIds;
 }
 
-std::unique_ptr<GeoObjectsGenerator> TearUp(std::vector<OsmElementData> const & osmElements,
+std::unique_ptr<GeoObjectsGenerator> TearUp(std::vector<OsmElementData> const & /*osmElements*/,
                                             ScopedFile const & geoObjectsFeatures,
                                             ScopedFile const & idsWithoutAddresses,
                                             ScopedFile const & geoObjectsKeyValue)
@@ -98,8 +98,8 @@ std::unique_ptr<GeoObjectsGenerator> TearUp(std::vector<OsmElementData> const & 
                }
              })"));
 
-  auto regionInfoGetter = [value](auto && point) { return KeyValue{1, value}; };
-  auto regionIdGetter = [value](auto && point) { return value; };
+  auto regionInfoGetter = [value](auto && /*point*/) { return KeyValue{1, value}; };
+  auto regionIdGetter = [value](auto && /*point*/) { return value; };
   auto result = std::make_unique<GeoObjectsGenerator>(
       regionInfoGetter, regionIdGetter, geoObjectsFeatures.GetFullPath(), idsWithoutAddresses.GetFullPath(),
       geoObjectsKeyValue.GetFullPath(), false /* verbose */, 1 /* threadsCount */);

@@ -152,13 +152,13 @@ inline void serialize(Archive & ar, base::GeoObjectId & t, const unsigned int ve
 }
 
 template<class Archive>
-inline void save(Archive & ar, base::GeoObjectId const & t, const unsigned int version)
+inline void save(Archive & ar, base::GeoObjectId const & t, const unsigned int /*version*/)
 {
   ar & t.GetEncodedId();
 }
 
 template<class Archive>
-inline void load(Archive & ar, base::GeoObjectId & t, const unsigned int version)
+inline void load(Archive & ar, base::GeoObjectId & t, const unsigned int /*version*/)
 {
   uint64_t encodedId = 0;
   ar & encodedId;

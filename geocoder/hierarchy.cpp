@@ -115,7 +115,7 @@ bool Hierarchy::Entry::DeserializeAddressFromJSON(
 // static
 bool Hierarchy::Entry::FetchAddressFieldNames(
     json_t * const locales, Type type, MultipleNames & multipleNames,
-    NameDictionaryBuilder & normalizedNameDictionaryBuilder, ParsingStats & stats)
+    NameDictionaryBuilder & /*normalizedNameDictionaryBuilder*/, ParsingStats & /*stats*/)
 {
   char const * localeName = nullptr;
   json_t * localisedNames = nullptr;

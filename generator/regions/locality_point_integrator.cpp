@@ -171,7 +171,7 @@ void LocalityPointIntegrator::EmboundBy(LevelRegion const & region)
 
 // static
 LevelRegion LocalityPointIntegrator::MakeAroundRegion(PlacePoint const & localityPoint,
-    CountrySpecifier const & countrySpecifier)
+    CountrySpecifier const & /*countrySpecifier*/)
 {
   auto const placeType = localityPoint.GetPlaceType();
   auto const radius = GetRadiusByPlaceType(placeType);

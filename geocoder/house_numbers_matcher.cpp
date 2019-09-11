@@ -214,16 +214,16 @@ public:
           break;
         if (!m_matcher.Has(token.m_value, token.m_prefix))
           return false;
-        // fallthrough
+         __attribute__ ((fallthrough));
       }
       case Token::TYPE_LETTER:
       {
         if (j == 0 && IsStopWord(token.m_value, token.m_prefix))
           break;
-        // fallthrough
+         __attribute__ ((fallthrough));
       }
-      case Token::TYPE_NUMBER:         // fallthrough
-      case Token::TYPE_BUILDING_PART:  // fallthrough
+      case Token::TYPE_NUMBER:        __attribute__ ((fallthrough));
+      case Token::TYPE_BUILDING_PART: __attribute__ ((fallthrough));
       case Token::TYPE_BUILDING_PART_OR_LETTER:
         parse[i] = move(parse[j]);
         ++i;

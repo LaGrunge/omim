@@ -46,6 +46,7 @@ void TestCoder(std::string const & name)
       uint64_t const expected = kMask & mask;
       if (expected == 0)
         continue;
+      UNUSED_VALUE(name);
       TEST_EQUAL(expected, TCoder::Decode(bits), (name, i));
     }
   }

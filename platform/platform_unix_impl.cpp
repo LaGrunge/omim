@@ -65,7 +65,7 @@ bool Platform::IsFileExistsByFullPath(string const & filePath)
 }
 
 //static
-void Platform::DisableBackupForFile(string const & filePath) {}
+void Platform::DisableBackupForFile(string const & /*filePath*/) {}
 
 // static
 string Platform::GetCurrentWorkingDirectory() noexcept

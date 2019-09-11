@@ -346,7 +346,9 @@ void FeatureType::ParseHeader2()
     if (ptsCount == 0)
       ptsMask = bitSource.Read(4);
     else
+    {
       ASSERT_GREATER(ptsCount, 1, ());
+    }
   }
   else if (headerGeomType == HeaderGeomType::Area)
   {

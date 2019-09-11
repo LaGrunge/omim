@@ -72,7 +72,7 @@ public:
 private:
   void GenerateRegions(RegionsBuilder & builder)
   {
-    builder.ForEachCountry([&](std::string const & name, Node::PtrList const & outers) {
+    builder.ForEachCountry([&](std::string const & /*name*/, Node::PtrList const & outers) {
       auto const & countryPlace = outers.front()->GetData();
       auto const & countryName =
           countryPlace.GetTranslatedOrTransliteratedName(StringUtf8Multilang::GetLangIndex("en"));
