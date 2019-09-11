@@ -1293,58 +1293,6 @@ int scale_expansion_zeroelim(int elen, REAL * e, REAL b, REAL * h)   /* e and h 
   return hindex;
 }
 
-/*****************************************************************************/
-/*                                                                           */
-/*  compress()   Compress an expansion.                                      */
-/*                                                                           */
-/*  See the long version of my paper for details.                            */
-/*                                                                           */
-/*  Maintains the nonoverlapping property.  If round-to-even is used (as     */
-/*  with IEEE 754), then any nonoverlapping expansion is converted to a      */
-/*  nonadjacent expansion.                                                   */
-/*                                                                           */
-/*****************************************************************************/
-
-/*
-commented because of compile error:
-
-/omim-tizen-emulator-debug/out/debug/libzlib.a(compress.o): In function `compress':
-omim/3party/zlib/compress.c:67: multiple definition of `compress'
-omim-tizen-emulator-debug/out/debug/libgeometry.a(robust_orientation.o):/Users/Sergey/omim/geometry/../3party/robust/predicates.c:1297: first defined here
-
-int compress(int elen, REAL * e, REAL * h)             */            /* e and h may be the same. */
-/*{
-  REAL Q, q;
-  INEXACT REAL Qnew;
-  int eindex, hindex;
-  INEXACT REAL bvirt;
-  REAL enow, hnow;
-  int top, bottom;
-
-  bottom = elen - 1;
-  Q = e[bottom];
-  for (eindex = elen - 2; eindex >= 0; eindex--) {
-    enow = e[eindex];
-    Fast_Two_Sum(Q, enow, Qnew, q);
-    if (q != 0) {
-      h[bottom--] = Qnew;
-      Q = q;
-    } else {
-      Q = Qnew;
-    }
-  }
-  top = 0;
-  for (hindex = bottom + 1; hindex < elen; hindex++) {
-    hnow = h[hindex];
-    Fast_Two_Sum(hnow, Q, Qnew, q);
-    if (q != 0) {
-      h[top++] = q;
-    }
-    Q = Qnew;
-  }
-  h[top] = Q;
-  return top + 1;
-}*/
 
 /*****************************************************************************/
 /*                                                                           */
