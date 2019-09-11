@@ -54,6 +54,7 @@ endfunction()
 
 function(omim_add_test executable)
   if (NOT SKIP_TESTS)
+    include(GoogleTest)
     omim_add_executable(
       ${executable}
       ${ARGN}
@@ -61,7 +62,7 @@ function(omim_add_test executable)
      )
      omim_link_libraries(${executable} gtest_main)
      target_include_directories(${executable} PRIVATE ${CMAKE_BINARY_DIR})
-     add_test(NAME "geocore_${executable}" COMMAND ${executable})
+     gtest_discover_tests(${executable} TEST_PREFIX "${executable}:")
   endif()
 endfunction()
 
@@ -149,5 +150,4 @@ function(configure_gtest)
                    ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
                    EXCLUDE_FROM_ALL)
   include_directories("${gtest_SOURCE_DIR}/include")
-
 endfunction()

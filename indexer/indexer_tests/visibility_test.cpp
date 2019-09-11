@@ -79,6 +79,7 @@ public:
 
 UNIT_TEST(VisibleScales_Highway)
 {
+  classificator::Load();
   Classificator const & c = classif();
 
   char const * arr[] = { "highway" };
