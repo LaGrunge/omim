@@ -141,11 +141,7 @@ UNIT_TEST(Metadata_ValidateAndFormat_wikipedia)
   MetadataTagProcessor p(params);
   Metadata & md = params.GetMetadata();
 
-#ifdef OMIM_OS_MOBILE
-  #define WIKIHOST "m.wikipedia.org"
-#else
   #define WIKIHOST "wikipedia.org"
-#endif
 
   p(kWikiKey, "en:Bad %20Data");
   TEST_EQUAL(md.Get(Metadata::FMD_WIKIPEDIA), "en:Bad %20Data", ());
