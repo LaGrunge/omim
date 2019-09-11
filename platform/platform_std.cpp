@@ -15,10 +15,12 @@
 #include <regex>
 #include <string>
 
-#include <boost/filesystem.hpp>
+#include <filesystem>
+#include <system_error>
+
 #include <boost/range/iterator_range.hpp>
 
-namespace fs = boost::filesystem;
+namespace fs = std::filesystem;
 
 using namespace std;
 
@@ -43,7 +45,7 @@ bool Platform::GetFileSizeByName(string const & fileName, uint64_t & size) const
 void Platform::GetFilesByRegExp(string const & directory, string const & regexp,
                                 FilesList & outFiles)
 {
-  boost::system::error_code ec{};
+  std::error_code ec{};
   regex exp(regexp);
 
   for (auto const & entry : boost::make_iterator_range(fs::directory_iterator(directory, ec), {}))
@@ -57,7 +59,7 @@ void Platform::GetFilesByRegExp(string const & directory, string const & regexp,
 // static
 Platform::EError Platform::MkDir(string const & dirName)
 {
-  boost::system::error_code ec{};
+  std::error_code ec{};
 
   fs::path dirPath{dirName};
   if (fs::exists(dirPath, ec))
