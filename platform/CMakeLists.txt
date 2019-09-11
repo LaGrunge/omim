@@ -78,7 +78,7 @@ endif()
 omim_add_test_subdirectory(platform_tests_support)
 
 omim_add_library(${PROJECT_NAME} ${SRC})
-omim_link_libraries(${PROJECT_NAME} base coding jansson ${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY})
+omim_link_libraries(${PROJECT_NAME} base coding jansson stdc++fs)
 
 
 if (APPLE)

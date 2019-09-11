@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 
 project(omim C CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 get_filename_component(OMIM_ROOT . ABSOLUTE)
 
@@ -90,7 +90,7 @@ find_package(Threads)
 #init_boost()
 #install_boost_headers()
 
-find_package(Boost ${BOOST_VERSION} EXACT COMPONENTS system filesystem serialization iostreams REQUIRED)
+find_package(Boost ${BOOST_VERSION} EXACT COMPONENTS serialization iostreams REQUIRED)
 set(Boost_USE_MULTITHREADED ON)
 if (PLATFORM_MAC)
     set(Boost_USE_STATIC_LIBS ON)
