@@ -3,31 +3,35 @@ name: C/C++ CI
 on: [push]
 jobs:
   build_gcc:
-    name: GCC build and unit tests
+    name: Ubuntu GCC build and unit tests
     runs-on: ubuntu-18.04
     steps:
-    - name: Install all boost
+    - name: Install Boost
       run:  sudo apt install libboost-all-dev
-    - uses: actions/checkout@v1
-    - uses: textbook/git-checkout-submodule-action@2.0.0
-    - name: cmake
-      run: cmake . 
-    - name: make
-      run: make -j 8
-    - name: make test
-      run: env CTEST_OUTPUT_ON_FAILURE=1 make test
+    - name: Git clone repo
+      uses: actions/checkout@v1
+      with:
+              submodules: true
+    - name: Configure
+      run:  cmake . 
+    - name: Build
+      run:  make -j 8
+    - name: Unit tests
+      run:  env CTEST_OUTPUT_ON_FAILURE=1 make test
 
   build_clang:
-    name: Clang build and unit tests
-    runs-on: ubuntu-18.04
+    name: MacOS Clang build and unit tests
+    runs-on: macOS-latest
     steps:
-    - name: Install all boost
-      run:  sudo apt install libboost-all-dev
-    - uses: actions/checkout@v1
-    - uses: textbook/git-checkout-submodule-action@2.0.0
-    - name: cmake
-      run: CC=`which clang` CXX=`which clang++` cmake .
-    - name: make
-      run: make -j 8
-    - name: make test
-      run: env CTEST_OUTPUT_ON_FAILURE=1 make test
+    - name: Install Boost
+      run:  brew install boost
+    - name: Git clone repo
+      uses: actions/checkout@v1
+      with: 
+        submodules: true
+    - name: Configure
+      run:  cmake .
+    - name: Build
+      run:  make -j 8
+    - name: Unit tests
+      run:  env CTEST_OUTPUT_ON_FAILURE=1 make test
