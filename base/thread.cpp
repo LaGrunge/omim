@@ -5,10 +5,6 @@
 #include <chrono>
 #include <exception>
 
-#if defined(OMIM_OS_ANDROID)
-void AndroidThreadAttachToJVM();
-void AndroidThreadDetachFromJVM();
-#endif  // defined(OMIM_OS_ANDROID)
 
 namespace threads
 {
@@ -17,15 +13,7 @@ namespace
 /// Prepares worker thread and runs routine.
 void RunRoutine(std::shared_ptr<IRoutine> routine)
 {
-#if defined(OMIM_OS_ANDROID)
-  AndroidThreadAttachToJVM();
-#endif  // defined(OMIM_OS_ANDROID)
-
   routine->Do();
-
-#if defined(OMIM_OS_ANDROID)
-  AndroidThreadDetachFromJVM();
-#endif  // defined(OMIM_OS_ANDROID)
 }
 }  // namespace
 
@@ -92,14 +80,6 @@ ThreadID GetCurrentThreadID() { return std::this_thread::get_id(); }
 
 void SimpleThread::ThreadFunc(std::function<void()> && fn)
 {
-#if defined(OMIM_OS_ANDROID)
-  AndroidThreadAttachToJVM();
-#endif  // defined(OMIM_OS_ANDROID)
-
   fn();
-
-#if defined(OMIM_OS_ANDROID)
-  AndroidThreadDetachFromJVM();
-#endif  // defined(OMIM_OS_ANDROID)
 }
 }  // namespace threads

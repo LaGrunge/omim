@@ -47,7 +47,6 @@ public:
   using MetadataTagProcessorImpl::MetadataTagProcessorImpl;
   /// Since it is used as a functor which stops iteration in ftype::ForEachTag
   /// and the is no need for interrupting it always returns false.
-  /// TODO(mgsergio): Move to cpp after merge with https://github.com/mapsme/omim/pull/1314
   bool operator() (std::string const & k, std::string const & v)
   {
     if (v.empty())

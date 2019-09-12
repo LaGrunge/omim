@@ -15,10 +15,6 @@
 
 #include <boost/noncopyable.hpp>
 
-#ifdef OMIM_OS_WINDOWS
-#include "std/windows.hpp"  // for DWORD
-#endif
-
 namespace threads
 {
 class IRoutine : public base::Cancellable

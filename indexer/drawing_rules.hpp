@@ -98,10 +98,8 @@ namespace drule
     uint32_t GetBgColor(int scale) const;
     uint32_t GetColor(std::string const & name) const;
 
-#ifdef OMIM_OS_DESKTOP
     void LoadFromTextProto(std::string const & buffer);
     static void SaveToBinaryProto(std::string const & buffer, std::ostream & s);
-#endif
 
     void LoadFromBinaryProto(std::string const & s);
 

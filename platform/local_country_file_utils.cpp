@@ -55,11 +55,7 @@ size_t const kMaxTimestampLength = 18;
 
 string GetSpecialFilesSearchScope()
 {
-#if defined(OMIM_OS_ANDROID)
-  return "er";
-#else
   return "r";
-#endif  // defined(OMIM_OS_ANDROID)
 }
 
 bool IsSpecialName(string const & name) { return name == "." || name == ".."; }

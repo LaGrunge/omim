@@ -28,19 +28,9 @@ Timer::Timer(bool start/* = true*/)
 // static
 double Timer::LocalTime()
 {
-#ifdef OMIM_OS_WINDOWS_NATIVE
-  FILETIME ft;
-  GetSystemTimeAsFileTime(&ft);
-  uint64_t val = ft.dwHighDateTime;
-  val <<= 32;
-  val += ft.dwLowDateTime;
-  return val / 10000000.0;
-
-#else
   timeval tv;
   ::gettimeofday(&tv, 0);
   return tv.tv_sec + tv.tv_usec / 1000000.0;
-#endif
 }
 
 std::string FormatCurrentTime()

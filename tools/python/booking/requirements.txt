@@ -1,4 +1,0 @@
-eviltransform
-ratelimit
-requests
-tqdm

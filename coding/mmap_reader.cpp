@@ -4,17 +4,10 @@
 
 #include <cstring>
 
-// @TODO we don't support windows at the moment
-#ifndef OMIM_OS_WINDOWS
-  #include <unistd.h>
-  #include <sys/mman.h>
-  #include <sys/stat.h>
-  #ifdef OMIM_OS_ANDROID
-    #include <fcntl.h>
-  #else
-    #include <sys/fcntl.h>
-  #endif
-#endif
+#include <unistd.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/fcntl.h>
 
 using namespace std;
 
@@ -28,8 +21,6 @@ public:
 
   explicit MmapData(string const & fileName)
   {
-    // @TODO add windows support
-#ifndef OMIM_OS_WINDOWS
     m_fd = open(fileName.c_str(), O_RDONLY | O_NONBLOCK);
     if (m_fd == -1)
       MYTHROW(OpenException, ("open failed for file", fileName));
@@ -46,16 +37,12 @@ public:
       close(m_fd);
       MYTHROW(OpenException, ("mmap failed for file", fileName));
     }
-#endif
   }
 
   ~MmapData()
   {
-    // @TODO add windows support
-#ifndef OMIM_OS_WINDOWS
     munmap(m_memory, static_cast<size_t>(m_size));
     close(m_fd);
-#endif
   }
 };
 

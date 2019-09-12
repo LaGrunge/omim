@@ -98,11 +98,7 @@ UNIT_TEST(Feature_Metadata_GetWikipedia)
   Metadata::EType const wikiType = Metadata::FMD_WIKIPEDIA;
   m.Set(wikiType, "en:Article");
   TEST_EQUAL(m.Get(wikiType), "en:Article", ());
-#ifdef OMIM_OS_MOBILE
-  TEST_EQUAL(m.GetWikiURL(), "https://en.m.wikipedia.org/wiki/Article", ());
-#else
   TEST_EQUAL(m.GetWikiURL(), "https://en.wikipedia.org/wiki/Article", ());
-#endif
 }
 
 UNIT_TEST(Feature_Metadata_RegionData_Languages)

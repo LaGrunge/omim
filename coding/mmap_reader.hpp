@@ -7,7 +7,6 @@
 #include <memory>
 #include <string>
 
-/// @TODO Add Windows support
 class MmapReader : public ModelReader
 {
 public:

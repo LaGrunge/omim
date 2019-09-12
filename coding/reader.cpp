@@ -20,9 +20,5 @@ std::vector<uint8_t> Reader::ReadAsBytes() const
 
 bool Reader::IsEqual(std::string const & name1, std::string const & name2)
 {
-#if defined(OMIM_OS_WINDOWS)
-  return strings::EqualNoCase(name1, name2);
-#else
   return (name1 == name2);
-#endif
 }

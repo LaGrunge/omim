@@ -178,33 +178,3 @@ UNIT_TEST(CellID_CheckRectPoints)
     }
   }
 }
-
-/*
-UNIT_TEST(WorldCoasts_CheckBounds)
-{
-  vector<string> vID;
-
-  // bounds
-  vID.push_back("2222");
-  vID.push_back("3333");
-  vID.push_back("0000");
-  vID.push_back("1111");
-
-  // bad cells
-  vID.push_back("2021");
-  vID.push_back("2333");
-  vID.push_back("3313");
-  vID.push_back("1231");
-  vID.push_back("32003");
-  vID.push_back("21330");
-  vID.push_back("20110");
-  vID.push_back("03321");
-  vID.push_back("12323");
-  vID.push_back("1231");
-  vID.push_back("1311");
-
-  //DoPrintCoasts doProcess(vID);
-  DoCopyCoasts doProcess("/Users/alena/omim/omim/data/WorldCoasts.mwm.tmp", vID);
-  ForEachFromDatRawFormat("/Users/alena/omim/omim-indexer-tmp/WorldCoasts.mwm.tmp", doProcess);
-}
-*/

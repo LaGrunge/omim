@@ -11,16 +11,6 @@
 #include <functional>
 #include <string>
 
-#ifdef OMIM_OS_TIZEN
-namespace Tizen
-{
-  namespace Io
-  {
-    class File;
-  }
-}
-#endif
-
 namespace base
 {
 class FileData
@@ -47,11 +37,7 @@ public:
 
 private:
 
-#ifdef OMIM_OS_TIZEN
-  Tizen::Io::File * m_File;
-#else
   FILE * m_File;
-#endif
   std::string m_FileName;
   Op m_Op;
 
