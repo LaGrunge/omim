@@ -9,9 +9,10 @@
 #include "base/string_utils.hpp"
 #include "base/thread_pool_computational.hpp"
 
+#include "std/unordered_map.hpp"
+
 #include <algorithm>
 #include <chrono>
-#include <experimental/unordered_map>
 #include <fstream>
 #include <functional>
 #include <numeric>
@@ -29,7 +30,7 @@ RegionsBuilder::RegionsBuilder(Regions && regions, PlacePointsMap && placePoints
 {
   ASSERT(m_threadsCount != 0, ());
 
-  std::experimental::erase_if(placePointsMap, [](auto const & item) {
+  std::erase_if(placePointsMap, [](auto const & item) {
     return strings::IsASCIINumeric(item.second.GetName());
   });
 
