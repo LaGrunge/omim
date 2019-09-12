@@ -38,9 +38,6 @@ Platform::Platform()
   }
   else if (resourcesPath == bundlePath)
   {
-#ifdef STANDALONE_APP
-    m_resourcesDir = resourcesPath + "/";
-#else // STANDALONE_APP
     // we're the console app, probably unit test, and path is our directory
     m_resourcesDir = bundlePath + "/../../data/";
     if (!IsFileExistsByFullPath(m_resourcesDir))
@@ -52,7 +49,6 @@ Platform::Platform()
       else
         m_resourcesDir = "./data/";
     }
-#endif // STANDALONE_APP
     m_writableDir = m_resourcesDir;
   }
   else
@@ -101,8 +97,6 @@ Platform::Platform()
   m_tmpDir = tempDir.UTF8String;
   m_tmpDir += '/';
 
-  m_guiThread = std::make_unique<platform::GuiThread>();
-
   LOG(LDEBUG, ("Resources Directory:", m_resourcesDir));
   LOG(LDEBUG, ("Writable Directory:", m_writableDir));
   LOG(LDEBUG, ("Tmp Directory:", m_tmpDir));
@@ -126,12 +120,6 @@ std::string Platform::DeviceName() const
 std::string Platform::DeviceModel() const
 {
   return {};
-}
-
-void Platform::RunOnGuiThread(base::TaskLoop::Task && task)
-{
-  ASSERT(m_guiThread, ());
-  m_guiThread->Push(std::move(task));
 }
 
 Platform::EConnectionType Platform::ConnectionStatus()

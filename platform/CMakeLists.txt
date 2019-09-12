@@ -18,7 +18,6 @@ set(
   http_request.cpp
   http_request.hpp
   http_thread_callback.hpp
-  http_uploader.hpp
   http_user_agent.cpp
   http_user_agent.hpp
   local_country_file.cpp
@@ -56,9 +55,6 @@ append(
 if(${PLATFORM_MAC})
   append(
     SRC
-    http_thread_apple.h
-    http_thread_apple.mm
-    http_uploader_apple.mm
     platform_mac.mm
     platform_unix_impl.cpp
     platform_unix_impl.hpp
@@ -68,7 +64,6 @@ if(${PLATFORM_MAC})
 elseif(${PLATFORM_LINUX})
   append(
     SRC
-    http_uploader_dummy.cpp
     platform_linux.cpp
     platform_unix_impl.cpp
     platform_unix_impl.hpp
