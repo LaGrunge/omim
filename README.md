@@ -2,7 +2,7 @@
 
 Bunch of code for geoservices
 
-[![Actions Status](https://xxx.execute-api.us-west-2.amazonaws.com/production/badge/LaGrunge/geocore)](https://xxx.execute-api.us-west-2.amazonaws.com/production/results/LaGrunge/geocore)
+[![Actions Status](http://aliyunfc.tarocch1.com/github-actions-badge/LaGrunge/omim/?style=flat-square)]
 
 ## Submodules
 
