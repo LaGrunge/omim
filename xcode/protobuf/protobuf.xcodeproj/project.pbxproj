@@ -235,8 +235,8 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/protobuf/protobuf/src",
-					"$(OMIM_ROOT)/3party/protobuf/",
+					"$(GEOCORE_ROOT)/3party/protobuf/protobuf/src",
+					"$(GEOCORE_ROOT)/3party/protobuf/",
 				);
 			};
 			name = Debug;
@@ -248,8 +248,8 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/protobuf/protobuf/src",
-					"$(OMIM_ROOT)/3party/protobuf/",
+					"$(GEOCORE_ROOT)/3party/protobuf/protobuf/src",
+					"$(GEOCORE_ROOT)/3party/protobuf/",
 				);
 			};
 			name = Release;
@@ -277,8 +277,8 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/protobuf/protobuf/src",
-					"$(OMIM_ROOT)/3party/protobuf/",
+					"$(GEOCORE_ROOT)/3party/protobuf/protobuf/src",
+					"$(GEOCORE_ROOT)/3party/protobuf/",
 				);
 			};
 			name = "Production Full";

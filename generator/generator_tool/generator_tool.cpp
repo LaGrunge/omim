@@ -201,8 +201,8 @@ int GeneratorToolMain(int argc, char ** argv)
 
   google::SetUsageMessage(
         "Takes OSM XML data from stdin and creates data and index files in several passes.");
-  google::SetVersionString(std::to_string(omim::build_version::git::kTimestamp) + " " +
-                           omim::build_version::git::kHash);
+  google::SetVersionString(std::to_string(geocore::build_version::git::kTimestamp) + " " +
+                           geocore::build_version::git::kHash);
   google::ParseCommandLineFlags(&argc, &argv, true);
 
   Platform & pl = GetPlatform();

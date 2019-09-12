@@ -44,9 +44,9 @@ set(
   writer_test.cpp
 )
 
-omim_add_test(${PROJECT_NAME} ${SRC})
+geocore_add_test(${PROJECT_NAME} ${SRC})
 
-omim_link_libraries(
+geocore_link_libraries(
   ${PROJECT_NAME}
   coding
   platform_tests_support

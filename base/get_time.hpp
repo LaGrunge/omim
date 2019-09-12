@@ -2,7 +2,7 @@
 
 #include "std/target_os.hpp"
 
-#if defined(OMIM_OS_LINUX)
+#if defined(GEOCORE_OS_LINUX)
 #include <cassert>
 #endif
 
@@ -10,7 +10,7 @@
 
 namespace base
 {
-#if defined(OMIM_OS_LINUX)
+#if defined(GEOCORE_OS_LINUX)
 
 namespace detail
 {

@@ -165,7 +165,7 @@
 		347F33341C4540F0009758CC /* simple_dense_coding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simple_dense_coding.cpp; sourceTree = "<group>"; };
 		347F33351C4540F0009758CC /* simple_dense_coding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = simple_dense_coding.hpp; sourceTree = "<group>"; };
 		347F33361C4540F0009758CC /* succinct_mapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = succinct_mapper.hpp; sourceTree = "<group>"; };
-		3496AB6D1DC1F53500C5DDBA /* libalohalitics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libalohalitics.a; path = "../../../omim-build/xcode/Debug-iphonesimulator/libalohalitics.a"; sourceTree = "<group>"; };
+		3496AB6D1DC1F53500C5DDBA /* libalohalitics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libalohalitics.a; path = "../../../geocore-build/xcode/Debug-iphonesimulator/libalohalitics.a"; sourceTree = "<group>"; };
 		34A129D11DF99E43001B4531 /* zlib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zlib.cpp; sourceTree = "<group>"; };
 		34A129D21DF99E43001B4531 /* zlib.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = zlib.hpp; sourceTree = "<group>"; };
 		34A72A431DBE4989003D1F5F /* common-debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "common-debug.xcconfig"; path = "../common-debug.xcconfig"; sourceTree = "<group>"; };
@@ -174,9 +174,9 @@
 		3949171F1BAC3BE0002A8C4F /* testingmain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = testingmain.cpp; path = ../../testing/testingmain.cpp; sourceTree = "<group>"; };
 		394917221BAC3C2F002A8C4F /* huffman.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = huffman.cpp; sourceTree = "<group>"; };
 		394917231BAC3C2F002A8C4F /* huffman.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = huffman.hpp; sourceTree = "<group>"; };
-		394917271BAC3CAC002A8C4F /* libbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbase.a; path = "../../../omim-xcode-build/Debug/libbase.a"; sourceTree = "<group>"; };
-		394917281BAC3CAC002A8C4F /* libminizip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libminizip.a; path = "../../../omim-xcode-build/Debug/libminizip.a"; sourceTree = "<group>"; };
-		394917291BAC3CAC002A8C4F /* libsuccinct.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsuccinct.a; path = "../../../omim-xcode-build/Debug/libsuccinct.a"; sourceTree = "<group>"; };
+		394917271BAC3CAC002A8C4F /* libbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbase.a; path = "../../../geocore-xcode-build/Debug/libbase.a"; sourceTree = "<group>"; };
+		394917281BAC3CAC002A8C4F /* libminizip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libminizip.a; path = "../../../geocore-xcode-build/Debug/libminizip.a"; sourceTree = "<group>"; };
+		394917291BAC3CAC002A8C4F /* libsuccinct.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsuccinct.a; path = "../../../geocore-xcode-build/Debug/libsuccinct.a"; sourceTree = "<group>"; };
 		3949172F1BAC3CC9002A8C4F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		395D1A8B207BBB95001164A5 /* bwt_coder_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bwt_coder_tests.cpp; sourceTree = "<group>"; };
 		395D1A8D207BBB9E001164A5 /* text_storage_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = text_storage_tests.cpp; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 		39F376CA207D329F0058E8E0 /* test_polylines.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_polylines.cpp; sourceTree = "<group>"; };
 		39F376CB207D329F0058E8E0 /* geometry_coding_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geometry_coding_test.cpp; sourceTree = "<group>"; };
 		39F376CC207D329F0058E8E0 /* geometry_serialization_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geometry_serialization_test.cpp; sourceTree = "<group>"; };
-		3D489BB51D3D21510052AA38 /* libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libplatform.a; path = "../../../omim-xcode-build/Debug/libplatform.a"; sourceTree = "<group>"; };
+		3D489BB51D3D21510052AA38 /* libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libplatform.a; path = "../../../geocore-xcode-build/Debug/libplatform.a"; sourceTree = "<group>"; };
 		3D489BB71D3D217E0052AA38 /* elias_coder_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = elias_coder_test.cpp; sourceTree = "<group>"; };
 		3D489BB81D3D217E0052AA38 /* fixed_bits_ddvector_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fixed_bits_ddvector_test.cpp; sourceTree = "<group>"; };
 		3D489BB91D3D217E0052AA38 /* simple_dense_coding_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simple_dense_coding_test.cpp; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 		4563B05E205909280057556D /* serdes_binary_header.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = serdes_binary_header.hpp; sourceTree = "<group>"; };
 		4563B05F205909280057556D /* sha1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sha1.cpp; sourceTree = "<group>"; };
 		4563B060205909280057556D /* sha1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sha1.hpp; sourceTree = "<group>"; };
-		45C108B91E9CFF8E000FE1F6 /* libgeometry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgeometry.a; path = "/Users/r.kuznetsov/Dev/Projects/omim/xcode/geometry/../../../omim-build/xcode/Debug/libgeometry.a"; sourceTree = "<absolute>"; };
+		45C108B91E9CFF8E000FE1F6 /* libgeometry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgeometry.a; path = "/Users/r.kuznetsov/Dev/Projects/geocore/xcode/geometry/../../../geocore-build/xcode/Debug/libgeometry.a"; sourceTree = "<absolute>"; };
 		670D04B31B0BA9050013A7AC /* expat_impl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = expat_impl.h; sourceTree = "<group>"; };
 		670D04B41B0BA9050013A7AC /* file64_api.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = file64_api.hpp; sourceTree = "<group>"; };
 		670D04B51B0BA9050013A7AC /* file_data.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_data.cpp; sourceTree = "<group>"; };
@@ -300,7 +300,7 @@
 		BB537C5E1E8490120074D9D3 /* transliteration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transliteration.hpp; sourceTree = "<group>"; };
 		BB87BF8322F9E2D1008A8A72 /* serdes_json_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = serdes_json_test.cpp; sourceTree = "<group>"; };
 		F65AFA351F18B8AB00979A50 /* libplatform_tests_support.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libplatform_tests_support.a; path = ../platform/build/Debug/libplatform_tests_support.a; sourceTree = "<group>"; };
-		F65AFA371F18C7A500979A50 /* libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libplatform.a; path = "../../../../Library/Developer/Xcode/DerivedData/omim-fbvotunmmtqmjnezabjibwxwryev/Build/Products/Debug/libplatform.a"; sourceTree = "<group>"; };
+		F65AFA371F18C7A500979A50 /* libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libplatform.a; path = "../../../../Library/Developer/Xcode/DerivedData/geocore-fbvotunmmtqmjnezabjibwxwryev/Build/Products/Debug/libplatform.a"; sourceTree = "<group>"; };
 		F6C269FD1F176FFE00EB6519 /* csv_reader_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csv_reader_test.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -762,7 +762,7 @@
 		394916941BAC3A5F002A8C4F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(OMIM_ROOT)/iphone/Maps/MAPSME.plist";
+				INFOPLIST_FILE = "$(GEOCORE_ROOT)/iphone/Maps/MAPSME.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = maps.me.coding_tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -771,7 +771,7 @@
 		394916951BAC3A5F002A8C4F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(OMIM_ROOT)/iphone/Maps/MAPSME.plist";
+				INFOPLIST_FILE = "$(GEOCORE_ROOT)/iphone/Maps/MAPSME.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = maps.me.coding_tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -787,10 +787,10 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)",
+					"$(GEOCORE_ROOT)",
 					"$(BOOST_ROOT)",
-					"$(OMIM_ROOT)/3party/icu/common",
-					"$(OMIM_ROOT)/3party/icu/i18n",
+					"$(GEOCORE_ROOT)/3party/icu/common",
+					"$(GEOCORE_ROOT)/3party/icu/i18n",
 				);
 			};
 			name = Debug;
@@ -805,10 +805,10 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)",
+					"$(GEOCORE_ROOT)",
 					"$(BOOST_ROOT)",
-					"$(OMIM_ROOT)/3party/icu/common",
-					"$(OMIM_ROOT)/3party/icu/i18n",
+					"$(GEOCORE_ROOT)/3party/icu/common",
+					"$(GEOCORE_ROOT)/3party/icu/i18n",
 				);
 			};
 			name = Release;
@@ -817,7 +817,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "$(OMIM_ROOT)/precompiled_headers.hpp";
+				GCC_PREFIX_HEADER = "$(GEOCORE_ROOT)/precompiled_headers.hpp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -826,7 +826,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "$(OMIM_ROOT)/precompiled_headers.hpp";
+				GCC_PREFIX_HEADER = "$(GEOCORE_ROOT)/precompiled_headers.hpp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -841,10 +841,10 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)",
+					"$(GEOCORE_ROOT)",
 					"$(BOOST_ROOT)",
-					"$(OMIM_ROOT)/3party/icu/common",
-					"$(OMIM_ROOT)/3party/icu/i18n",
+					"$(GEOCORE_ROOT)/3party/icu/common",
+					"$(GEOCORE_ROOT)/3party/icu/i18n",
 				);
 			};
 			name = "Production Full";
@@ -853,7 +853,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "$(OMIM_ROOT)/precompiled_headers.hpp";
+				GCC_PREFIX_HEADER = "$(GEOCORE_ROOT)/precompiled_headers.hpp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Production Full";
@@ -861,7 +861,7 @@
 		A8E541421F9FBD6B00A1B8FA /* Production Full */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(OMIM_ROOT)/iphone/Maps/MAPSME.plist";
+				INFOPLIST_FILE = "$(GEOCORE_ROOT)/iphone/Maps/MAPSME.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = maps.me.coding_tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

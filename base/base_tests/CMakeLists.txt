@@ -1,6 +1,6 @@
 project(base_tests)
 
-add_definitions(-DOMIM_UNIT_TEST_DISABLE_PLATFORM_INIT)
+add_definitions(-DGEOCORE_UNIT_TEST_DISABLE_PLATFORM_INIT)
 
 set(
   SRC
@@ -52,5 +52,5 @@ set(
   visitor_tests.cpp
 )
 
-omim_add_test(${PROJECT_NAME} ${SRC})
-omim_link_libraries(${PROJECT_NAME} base)
+geocore_add_test(${PROJECT_NAME} ${SRC})
+geocore_link_libraries(${PROJECT_NAME} base)

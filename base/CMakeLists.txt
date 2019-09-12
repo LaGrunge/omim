@@ -106,6 +106,6 @@ set(
   visitor.hpp
 )
 
-omim_add_library(${PROJECT_NAME} ${SRC})
+geocore_add_library(${PROJECT_NAME} ${SRC})
 
-omim_add_test_subdirectory(base_tests)
+geocore_add_test_subdirectory(base_tests)

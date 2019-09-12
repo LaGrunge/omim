@@ -32,9 +32,9 @@ set(
   wheelchair_tests.cpp
 )
 
-omim_add_test(${PROJECT_NAME} ${SRC})
+geocore_add_test(${PROJECT_NAME} ${SRC})
 
-omim_link_libraries(
+geocore_link_libraries(
   ${PROJECT_NAME}
   generator_tests_support
   platform_tests_support

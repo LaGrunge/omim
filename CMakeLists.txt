@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(omim C CXX)
+project(geocore C CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 
-get_filename_component(OMIM_ROOT . ABSOLUTE)
+get_filename_component(GEOCORE_ROOT . ABSOLUTE)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${OMIM_ROOT}/cmake")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${GEOCORE_ROOT}/cmake")
 
-include(OmimHelpers)
+include(GeoCoreHelpers)
 
 if (NOT SKIP_TESTS)
   set(SKIP_TESTS FALSE)
@@ -21,8 +21,8 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(LINUX_DETECTED TRUE)
 endif()
 
-omim_set_platform_var(PLATFORM_MAC "macx-.*" ${APPLE})
-omim_set_platform_var(PLATFORM_LINUX "linux-.*" ${LINUX_DETECTED})
+geocore_set_platform_var(PLATFORM_MAC "macx-.*" ${APPLE})
+geocore_set_platform_var(PLATFORM_LINUX "linux-.*" ${LINUX_DETECTED})
 
 
 # Set build type:
@@ -151,8 +151,8 @@ add_subdirectory(geocoder)
 add_custom_target(BuildVersion ALL
   COMMAND ${CMAKE_COMMAND}
   ARGS
-  -D MAPSME_CURRENT_PROJECT_ROOT=${OMIM_ROOT}
-  -D PATH_WITH_BUILD_VERSION_HPP=${OMIM_ROOT}
+  -D MAPSME_CURRENT_PROJECT_ROOT=${GEOCORE_ROOT}
+  -D PATH_WITH_BUILD_VERSION_HPP=${GEOCORE_ROOT}
   -D PROJECT_NAME=${PROJECT_NAME}
-  -P ${OMIM_ROOT}/cmake/BuildVersion.cmake
+  -P ${GEOCORE_ROOT}/cmake/BuildVersion.cmake
 )

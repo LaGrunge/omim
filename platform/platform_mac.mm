@@ -46,7 +46,7 @@ Platform::Platform()
     if (!IsFileExistsByFullPath(m_resourcesDir))
     {
       // Check development environment without symlink but with git repo
-      std::string const repoPath = bundlePath + "/../../../omim/data/";
+      std::string const repoPath = bundlePath + "/../../../geocore/data/";
       if (IsFileExistsByFullPath(repoPath))
         m_resourcesDir = repoPath;
       else
@@ -66,14 +66,14 @@ Platform::Platform()
     else
     {
       // Check development environment without symlink but with git repo
-      dataPath = "../../../../../../omim/data/";
+      dataPath = "../../../../../../geocore/data/";
       if (IsFileExistsByFullPath(m_resourcesDir + dataPath))
         m_writableDir = m_resourcesDir + dataPath;
       if (m_writableDir.empty())
       {
-        auto p = m_resourcesDir.find("/omim/");
+        auto p = m_resourcesDir.find("/geocore/");
         if (p != std::string::npos)
-          m_writableDir = m_resourcesDir.substr(0, p) + "/omim/data/";
+          m_writableDir = m_resourcesDir.substr(0, p) + "/geocore/data/";
       }
     }
 
@@ -120,7 +120,7 @@ std::string Platform::MacAddress(bool md5Decoded) const
 
 std::string Platform::DeviceName() const
 {
-  return OMIM_OS_NAME;
+  return GEOCORE_OS_NAME;
 }
 
 std::string Platform::DeviceModel() const

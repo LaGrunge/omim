@@ -3,15 +3,15 @@ project(coding)
 add_definitions(-DU_DISABLE_RENAMING)
 
 include_directories(
-  ${OMIM_ROOT}/coding
-  ${OMIM_ROOT}/3party/expat
-  ${OMIM_ROOT}/3party/icu/common
-  ${OMIM_ROOT}/3party/icu/i18n
+  ${GEOCORE_ROOT}/coding
+  ${GEOCORE_ROOT}/3party/expat
+  ${GEOCORE_ROOT}/3party/icu/common
+  ${GEOCORE_ROOT}/3party/icu/i18n
 )
 
 set(
   SRC
-  ${OMIM_ROOT}/3party/expat/expat_impl.h
+  ${GEOCORE_ROOT}/3party/expat/expat_impl.h
   base64.cpp
   base64.hpp
   bit_streams.hpp
@@ -95,8 +95,8 @@ set(
   writer.hpp
 )
 
-omim_add_library(${PROJECT_NAME} ${SRC})
-omim_link_libraries(${PROJECT_NAME}
+geocore_add_library(${PROJECT_NAME} ${SRC})
+geocore_link_libraries(${PROJECT_NAME}
    base
    icu
    geometry
@@ -105,4 +105,4 @@ omim_link_libraries(${PROJECT_NAME}
    expat
 )
 
-omim_add_test_subdirectory(coding_tests)
+geocore_add_test_subdirectory(coding_tests)

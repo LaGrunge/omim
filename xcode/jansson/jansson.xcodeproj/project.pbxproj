@@ -227,7 +227,7 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/jansson/src",
+					"$(GEOCORE_ROOT)/3party/jansson/src",
 				);
 			};
 			name = Debug;
@@ -239,7 +239,7 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/jansson/src",
+					"$(GEOCORE_ROOT)/3party/jansson/src",
 				);
 			};
 			name = Release;
@@ -267,7 +267,7 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/jansson/src",
+					"$(GEOCORE_ROOT)/3party/jansson/src",
 				);
 			};
 			name = "Production Full";

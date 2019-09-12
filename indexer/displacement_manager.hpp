@@ -55,7 +55,7 @@ private:
   uint32_t m_bucket;
 };
 static_assert(sizeof(CellFeatureBucketTuple) == 16, "");
-#ifndef OMIM_OS_LINUX
+#ifndef GEOCORE_OS_LINUX
 static_assert(std::is_trivially_copyable<CellFeatureBucketTuple>::value, "");
 #endif
 

@@ -223,15 +223,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3462FD901DC1E1C400906FD7 /* libalohalitics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libalohalitics.a; path = "../../../omim-build/xcode/Release/libalohalitics.a"; sourceTree = "<group>"; };
-		3462FD921DC1E1DD00906FD7 /* libeditor.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeditor.a; path = "../../../omim-build/xcode/Release/libeditor.a"; sourceTree = "<group>"; };
-		3462FD941DC1E1EF00906FD7 /* libpugixml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpugixml.a; path = "../../../omim-build/xcode/Release/libpugixml.a"; sourceTree = "<group>"; };
-		3462FD961DC1E1FC00906FD7 /* liboauthcpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liboauthcpp.a; path = "../../../omim-build/xcode/Release/liboauthcpp.a"; sourceTree = "<group>"; };
-		3462FD991DC1E24400906FD7 /* libjansson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjansson.a; path = "../../../omim-build/xcode/Debug/libjansson.a"; sourceTree = "<group>"; };
-		3462FD9E1DC1E28D00906FD7 /* libsearch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsearch.a; path = "../../../omim-build/xcode/Debug/libsearch.a"; sourceTree = "<group>"; };
-		3462FDA01DC1E29E00906FD7 /* libsuccinct.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsuccinct.a; path = "../../../omim-build/xcode/Debug/libsuccinct.a"; sourceTree = "<group>"; };
-		3462FDA61DC1E30B00906FD7 /* libopening_hours.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopening_hours.a; path = "../../../omim-build/xcode/Debug/libopening_hours.a"; sourceTree = "<group>"; };
-		3462FDA81DC1E31E00906FD7 /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libprotobuf.a; path = "../../../omim-build/xcode/Debug/libprotobuf.a"; sourceTree = "<group>"; };
+		3462FD901DC1E1C400906FD7 /* libalohalitics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libalohalitics.a; path = "../../../geocore-build/xcode/Release/libalohalitics.a"; sourceTree = "<group>"; };
+		3462FD921DC1E1DD00906FD7 /* libeditor.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeditor.a; path = "../../../geocore-build/xcode/Release/libeditor.a"; sourceTree = "<group>"; };
+		3462FD941DC1E1EF00906FD7 /* libpugixml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpugixml.a; path = "../../../geocore-build/xcode/Release/libpugixml.a"; sourceTree = "<group>"; };
+		3462FD961DC1E1FC00906FD7 /* liboauthcpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liboauthcpp.a; path = "../../../geocore-build/xcode/Release/liboauthcpp.a"; sourceTree = "<group>"; };
+		3462FD991DC1E24400906FD7 /* libjansson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjansson.a; path = "../../../geocore-build/xcode/Debug/libjansson.a"; sourceTree = "<group>"; };
+		3462FD9E1DC1E28D00906FD7 /* libsearch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsearch.a; path = "../../../geocore-build/xcode/Debug/libsearch.a"; sourceTree = "<group>"; };
+		3462FDA01DC1E29E00906FD7 /* libsuccinct.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsuccinct.a; path = "../../../geocore-build/xcode/Debug/libsuccinct.a"; sourceTree = "<group>"; };
+		3462FDA61DC1E30B00906FD7 /* libopening_hours.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopening_hours.a; path = "../../../geocore-build/xcode/Debug/libopening_hours.a"; sourceTree = "<group>"; };
+		3462FDA81DC1E31E00906FD7 /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libprotobuf.a; path = "../../../geocore-build/xcode/Debug/libprotobuf.a"; sourceTree = "<group>"; };
 		34F558531DBF3ACC00A4FC11 /* common-debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "common-debug.xcconfig"; path = "../common-debug.xcconfig"; sourceTree = "<group>"; };
 		34F558541DBF3ACC00A4FC11 /* common-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "common-release.xcconfig"; path = "../common-release.xcconfig"; sourceTree = "<group>"; };
 		34F558561DBF3CD800A4FC11 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -245,7 +245,7 @@
 		401E3188225C988500DE7EB8 /* libdescriptions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libdescriptions.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4491F490213D46380011834F /* speed_cameras_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = speed_cameras_test.cpp; sourceTree = "<group>"; };
 		562147261F6AA36A002D2214 /* libbsdiff.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbsdiff.a; path = ../bsdiff/build/Debug/libbsdiff.a; sourceTree = "<group>"; };
-		562147281F6AA37E002D2214 /* libmwm_diff.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmwm_diff.a; path = "../../../../Library/Developer/Xcode/DerivedData/omim-gsfdicnjgjjbizhdmwedavcucpok/Build/Products/Debug/libmwm_diff.a"; sourceTree = "<group>"; };
+		562147281F6AA37E002D2214 /* libmwm_diff.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmwm_diff.a; path = "../../../../Library/Developer/Xcode/DerivedData/geocore-gsfdicnjgjjbizhdmwedavcucpok/Build/Products/Debug/libmwm_diff.a"; sourceTree = "<group>"; };
 		562D42951FD8460500A995F3 /* libugc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libugc.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		56829A4A2134238700A09A28 /* cities_boundaries_checker_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cities_boundaries_checker_tests.cpp; sourceTree = "<group>"; };
 		56829A4B2134238800A09A28 /* city_roads_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = city_roads_tests.cpp; sourceTree = "<group>"; };
@@ -257,13 +257,13 @@
 		56A6C3D1219AFDEE00A52855 /* region_info_collector_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = region_info_collector_tests.cpp; sourceTree = "<group>"; };
 		56EE14CE1FE803EA0036F20C /* libtransit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libtransit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		56EE14D01FE803FE0036F20C /* libtransit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libtransit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		670E7BBB1EF9832200A8E9ED /* libicu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicu.a; path = "../../../../Library/Developer/Xcode/DerivedData/omim-gzleizqujktwggdwiejzkgjrsgvp/Build/Products/Debug/libicu.a"; sourceTree = "<group>"; };
-		670E7BBD1EF9839C00A8E9ED /* librouting_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librouting_common.a; path = "../../../../Library/Developer/Xcode/DerivedData/omim-gzleizqujktwggdwiejzkgjrsgvp/Build/Products/Debug/librouting_common.a"; sourceTree = "<group>"; };
-		670E7BBF1EF983A400A8E9ED /* libtraffic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtraffic.a; path = "../../../../Library/Developer/Xcode/DerivedData/omim-gzleizqujktwggdwiejzkgjrsgvp/Build/Products/Debug/libtraffic.a"; sourceTree = "<group>"; };
+		670E7BBB1EF9832200A8E9ED /* libicu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicu.a; path = "../../../../Library/Developer/Xcode/DerivedData/geocore-gzleizqujktwggdwiejzkgjrsgvp/Build/Products/Debug/libicu.a"; sourceTree = "<group>"; };
+		670E7BBD1EF9839C00A8E9ED /* librouting_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librouting_common.a; path = "../../../../Library/Developer/Xcode/DerivedData/geocore-gzleizqujktwggdwiejzkgjrsgvp/Build/Products/Debug/librouting_common.a"; sourceTree = "<group>"; };
+		670E7BBF1EF983A400A8E9ED /* libtraffic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtraffic.a; path = "../../../../Library/Developer/Xcode/DerivedData/geocore-gzleizqujktwggdwiejzkgjrsgvp/Build/Products/Debug/libtraffic.a"; sourceTree = "<group>"; };
 		670E7BC41EF9860100A8E9ED /* ugc_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ugc_test.cpp; sourceTree = "<group>"; };
 		670E7BC61EF992F600A8E9ED /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		670F88781CE4CA81003F68BA /* libopening_hours.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopening_hours.a; path = "../../../omim-xcode-build/Release/libopening_hours.a"; sourceTree = "<group>"; };
-		6719DD5D1B95AB0F0018166F /* libtess2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtess2.a; path = "../../../omim-xcode-build/Debug/libtess2.a"; sourceTree = "<group>"; };
+		670F88781CE4CA81003F68BA /* libopening_hours.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopening_hours.a; path = "../../../geocore-xcode-build/Release/libopening_hours.a"; sourceTree = "<group>"; };
+		6719DD5D1B95AB0F0018166F /* libtess2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtess2.a; path = "../../../geocore-xcode-build/Debug/libtess2.a"; sourceTree = "<group>"; };
 		671C2D7A22AFDAB4008B2B8B /* street_geometry_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = street_geometry_tests.cpp; sourceTree = "<group>"; };
 		671C2D7B22AFDAB4008B2B8B /* descriptions_section_builder_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = descriptions_section_builder_tests.cpp; sourceTree = "<group>"; };
 		671C2D7C22AFDAB4008B2B8B /* camera_collector_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera_collector_tests.cpp; sourceTree = "<group>"; };
@@ -295,20 +295,20 @@
 		6726C2401A4C2D9F005EEA39 /* testingmain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = testingmain.cpp; path = ../../testing/testingmain.cpp; sourceTree = "<group>"; };
 		6737465F1CF4639F005E6D1F /* booking_quality_check */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = booking_quality_check; sourceTree = BUILT_PRODUCTS_DIR; };
 		673746661CF4641B005E6D1F /* booking_quality_check.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = booking_quality_check.cpp; sourceTree = "<group>"; };
-		674A28C71B1C7FC9001A525C /* libexpat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libexpat.a; path = "../../../omim-xcode-build/Debug/libexpat.a"; sourceTree = "<group>"; };
-		674A28C91B1C7FED001A525C /* libcoding.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcoding.a; path = "../../../omim-xcode-build/Debug/libcoding.a"; sourceTree = "<group>"; };
-		674A28CA1B1C7FED001A525C /* libgenerator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgenerator.a; path = "../../../omim-xcode-build/Debug/libgenerator.a"; sourceTree = "<group>"; };
-		674A28CB1B1C7FED001A525C /* libgeometry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgeometry.a; path = "../../../omim-xcode-build/Debug/libgeometry.a"; sourceTree = "<group>"; };
-		674A28CC1B1C7FED001A525C /* libgflags.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgflags.a; path = "../../../omim-xcode-build/Debug/libgflags.a"; sourceTree = "<group>"; };
-		674A28CD1B1C7FED001A525C /* libindexer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libindexer.a; path = "../../../omim-xcode-build/Debug/libindexer.a"; sourceTree = "<group>"; };
-		674A28D31B1C8001001A525C /* libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libplatform.a; path = "../../../omim-xcode-build/Debug/libplatform.a"; sourceTree = "<group>"; };
-		674A28D41B1C8001001A525C /* librouting.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librouting.a; path = "../../../omim-xcode-build/Debug/librouting.a"; sourceTree = "<group>"; };
-		674A28D71B1C800D001A525C /* libbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbase.a; path = "../../../omim-xcode-build/Debug/libbase.a"; sourceTree = "<group>"; };
-		674A28DB1B1C801D001A525C /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libprotobuf.a; path = "../../../omim-xcode-build/Debug/libprotobuf.a"; sourceTree = "<group>"; };
-		674A28EB1B1C80F4001A525C /* libstorage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libstorage.a; path = "../../../omim-xcode-build/Debug/libstorage.a"; sourceTree = "<group>"; };
-		674A28ED1B1C80FB001A525C /* libjansson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjansson.a; path = "../../../omim-xcode-build/Debug/libjansson.a"; sourceTree = "<group>"; };
-		674A28EF1B1C8104001A525C /* libsearch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsearch.a; path = "../../../omim-xcode-build/Debug/libsearch.a"; sourceTree = "<group>"; };
-		674A28F11B1C8119001A525C /* libsuccinct.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsuccinct.a; path = "../../../omim-xcode-build/Debug/libsuccinct.a"; sourceTree = "<group>"; };
+		674A28C71B1C7FC9001A525C /* libexpat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libexpat.a; path = "../../../geocore-xcode-build/Debug/libexpat.a"; sourceTree = "<group>"; };
+		674A28C91B1C7FED001A525C /* libcoding.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcoding.a; path = "../../../geocore-xcode-build/Debug/libcoding.a"; sourceTree = "<group>"; };
+		674A28CA1B1C7FED001A525C /* libgenerator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgenerator.a; path = "../../../geocore-xcode-build/Debug/libgenerator.a"; sourceTree = "<group>"; };
+		674A28CB1B1C7FED001A525C /* libgeometry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgeometry.a; path = "../../../geocore-xcode-build/Debug/libgeometry.a"; sourceTree = "<group>"; };
+		674A28CC1B1C7FED001A525C /* libgflags.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgflags.a; path = "../../../geocore-xcode-build/Debug/libgflags.a"; sourceTree = "<group>"; };
+		674A28CD1B1C7FED001A525C /* libindexer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libindexer.a; path = "../../../geocore-xcode-build/Debug/libindexer.a"; sourceTree = "<group>"; };
+		674A28D31B1C8001001A525C /* libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libplatform.a; path = "../../../geocore-xcode-build/Debug/libplatform.a"; sourceTree = "<group>"; };
+		674A28D41B1C8001001A525C /* librouting.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librouting.a; path = "../../../geocore-xcode-build/Debug/librouting.a"; sourceTree = "<group>"; };
+		674A28D71B1C800D001A525C /* libbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbase.a; path = "../../../geocore-xcode-build/Debug/libbase.a"; sourceTree = "<group>"; };
+		674A28DB1B1C801D001A525C /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libprotobuf.a; path = "../../../geocore-xcode-build/Debug/libprotobuf.a"; sourceTree = "<group>"; };
+		674A28EB1B1C80F4001A525C /* libstorage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libstorage.a; path = "../../../geocore-xcode-build/Debug/libstorage.a"; sourceTree = "<group>"; };
+		674A28ED1B1C80FB001A525C /* libjansson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjansson.a; path = "../../../geocore-xcode-build/Debug/libjansson.a"; sourceTree = "<group>"; };
+		674A28EF1B1C8104001A525C /* libsearch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsearch.a; path = "../../../geocore-xcode-build/Debug/libsearch.a"; sourceTree = "<group>"; };
+		674A28F11B1C8119001A525C /* libsuccinct.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsuccinct.a; path = "../../../geocore-xcode-build/Debug/libsuccinct.a"; sourceTree = "<group>"; };
 		674A39D21B727589001DDB91 /* source_to_element_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = source_to_element_test.cpp; sourceTree = "<group>"; };
 		675341581A3F54D800A0A8C3 /* generator_tool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = generator_tool; sourceTree = BUILT_PRODUCTS_DIR; };
 		675341621A3F54F600A0A8C3 /* generator_tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = generator_tool.cpp; sourceTree = "<group>"; };
@@ -323,22 +323,22 @@
 		6796245D1D100F2500AE4E3C /* booking_addr_match */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = booking_addr_match; sourceTree = BUILT_PRODUCTS_DIR; };
 		679624731D1012B700AE4E3C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		679624761D1012C700AE4E3C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		6796247C1D1012F500AE4E3C /* libopening_hours.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopening_hours.a; path = "../../../omim-xcode-build/Debug/libopening_hours.a"; sourceTree = "<group>"; };
-		6796249E1D1013AD00AE4E3C /* libsearch_tests_support.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsearch_tests_support.a; path = "../../../omim-xcode-build/Debug/libsearch_tests_support.a"; sourceTree = "<group>"; };
-		679624B61D11775300AE4E3C /* libapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libapi.a; path = "../../../omim-xcode-build/Debug/libapi.a"; sourceTree = "<group>"; };
-		679624B71D11775300AE4E3C /* libdrape_frontend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdrape_frontend.a; path = "../../../omim-xcode-build/Debug/libdrape_frontend.a"; sourceTree = "<group>"; };
-		679624B81D11775300AE4E3C /* libdrape.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdrape.a; path = "../../../omim-xcode-build/Debug/libdrape.a"; sourceTree = "<group>"; };
-		679624B91D11775300AE4E3C /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = "../../../omim-xcode-build/Debug/libfreetype.a"; sourceTree = "<group>"; };
-		679624BC1D11775300AE4E3C /* libminizip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libminizip.a; path = "../../../omim-xcode-build/Debug/libminizip.a"; sourceTree = "<group>"; };
-		679624BD1D11775300AE4E3C /* libplatform_tests_support.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libplatform_tests_support.a; path = "../../../omim-xcode-build/Debug/libplatform_tests_support.a"; sourceTree = "<group>"; };
-		679624BE1D11775300AE4E3C /* libsdf_image.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsdf_image.a; path = "../../../omim-xcode-build/Debug/libsdf_image.a"; sourceTree = "<group>"; };
-		679624BF1D11775300AE4E3C /* libstb_image.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libstb_image.a; path = "../../../omim-xcode-build/Debug/libstb_image.a"; sourceTree = "<group>"; };
-		679624CC1D11775F00AE4E3C /* libagg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libagg.a; path = "../../../omim-xcode-build/Debug/libagg.a"; sourceTree = "<group>"; };
+		6796247C1D1012F500AE4E3C /* libopening_hours.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopening_hours.a; path = "../../../geocore-xcode-build/Debug/libopening_hours.a"; sourceTree = "<group>"; };
+		6796249E1D1013AD00AE4E3C /* libsearch_tests_support.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsearch_tests_support.a; path = "../../../geocore-xcode-build/Debug/libsearch_tests_support.a"; sourceTree = "<group>"; };
+		679624B61D11775300AE4E3C /* libapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libapi.a; path = "../../../geocore-xcode-build/Debug/libapi.a"; sourceTree = "<group>"; };
+		679624B71D11775300AE4E3C /* libdrape_frontend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdrape_frontend.a; path = "../../../geocore-xcode-build/Debug/libdrape_frontend.a"; sourceTree = "<group>"; };
+		679624B81D11775300AE4E3C /* libdrape.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdrape.a; path = "../../../geocore-xcode-build/Debug/libdrape.a"; sourceTree = "<group>"; };
+		679624B91D11775300AE4E3C /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = "../../../geocore-xcode-build/Debug/libfreetype.a"; sourceTree = "<group>"; };
+		679624BC1D11775300AE4E3C /* libminizip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libminizip.a; path = "../../../geocore-xcode-build/Debug/libminizip.a"; sourceTree = "<group>"; };
+		679624BD1D11775300AE4E3C /* libplatform_tests_support.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libplatform_tests_support.a; path = "../../../geocore-xcode-build/Debug/libplatform_tests_support.a"; sourceTree = "<group>"; };
+		679624BE1D11775300AE4E3C /* libsdf_image.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsdf_image.a; path = "../../../geocore-xcode-build/Debug/libsdf_image.a"; sourceTree = "<group>"; };
+		679624BF1D11775300AE4E3C /* libstb_image.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libstb_image.a; path = "../../../geocore-xcode-build/Debug/libstb_image.a"; sourceTree = "<group>"; };
+		679624CC1D11775F00AE4E3C /* libagg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libagg.a; path = "../../../geocore-xcode-build/Debug/libagg.a"; sourceTree = "<group>"; };
 		679624CE1D11779700AE4E3C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		67AB92B31B738DE800AB5194 /* source_data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = source_data.cpp; sourceTree = "<group>"; };
 		67AB92B41B738DE800AB5194 /* source_data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = source_data.hpp; sourceTree = "<group>"; };
-		67AB92C61B73D03500AB5194 /* libmap.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmap.a; path = "../../../omim-xcode-build/Debug/libmap.a"; sourceTree = "<group>"; };
-		67AB92CA1B73D10B00AB5194 /* libsuccinct.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsuccinct.a; path = "../../../omim-xcode-build/Debug/libsuccinct.a"; sourceTree = "<group>"; };
+		67AB92C61B73D03500AB5194 /* libmap.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmap.a; path = "../../../geocore-xcode-build/Debug/libmap.a"; sourceTree = "<group>"; };
+		67AB92CA1B73D10B00AB5194 /* libsuccinct.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsuccinct.a; path = "../../../geocore-xcode-build/Debug/libsuccinct.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -873,7 +873,7 @@
 					DEBUG,
 					_DEBUG,
 					HAVE_PTHREAD,
-					"OMIM_UNIT_TEST_DISABLE_PLATFORM_INIT=1",
+					"GEOCORE_UNIT_TEST_DISABLE_PLATFORM_INIT=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				PRODUCT_NAME = generator_tests;
@@ -911,9 +911,9 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/gflags/src/",
-					"$(OMIM_ROOT)/3party/glm",
-					"$(OMIM_ROOT)/3party/jansson/src",
+					"$(GEOCORE_ROOT)/3party/gflags/src/",
+					"$(GEOCORE_ROOT)/3party/glm",
+					"$(GEOCORE_ROOT)/3party/jansson/src",
 				);
 			};
 			name = Debug;
@@ -924,9 +924,9 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/gflags/src/",
-					"$(OMIM_ROOT)/3party/glm",
-					"$(OMIM_ROOT)/3party/jansson/src",
+					"$(GEOCORE_ROOT)/3party/gflags/src/",
+					"$(GEOCORE_ROOT)/3party/glm",
+					"$(GEOCORE_ROOT)/3party/jansson/src",
 				);
 			};
 			name = Release;
@@ -935,7 +935,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_PREFIX_HEADER = "$(OMIM_ROOT)/precompiled_headers.hpp";
+				GCC_PREFIX_HEADER = "$(GEOCORE_ROOT)/precompiled_headers.hpp";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -945,7 +945,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_PREFIX_HEADER = "$(OMIM_ROOT)/precompiled_headers.hpp";
+				GCC_PREFIX_HEADER = "$(GEOCORE_ROOT)/precompiled_headers.hpp";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -971,9 +971,9 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/gflags/src/",
-					"$(OMIM_ROOT)/3party/glm",
-					"$(OMIM_ROOT)/3party/jansson/src",
+					"$(GEOCORE_ROOT)/3party/gflags/src/",
+					"$(GEOCORE_ROOT)/3party/glm",
+					"$(GEOCORE_ROOT)/3party/jansson/src",
 				);
 			};
 			name = "Production Full";
@@ -982,7 +982,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_PREFIX_HEADER = "$(OMIM_ROOT)/precompiled_headers.hpp";
+				GCC_PREFIX_HEADER = "$(GEOCORE_ROOT)/precompiled_headers.hpp";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

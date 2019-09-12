@@ -34,7 +34,7 @@
                                      &writeStream);
 
   NSDictionary * settings = @{
-#ifndef OMIM_PRODUCTION
+#ifndef GEOCORE_PRODUCTION
                               (id)kCFStreamSSLValidatesCertificateChain : @NO,
 #endif
                               (id)kCFStreamSSLLevel : (id)kCFStreamSocketSecurityLevelNegotiatedSSL

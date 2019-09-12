@@ -2527,10 +2527,10 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)",
+					"$(GEOCORE_ROOT)",
 					"$(BOOST_ROOT)",
-					"$(OMIM_ROOT)/3party/icu/i18n",
-					"$(OMIM_ROOT)/3party/icu/common",
+					"$(GEOCORE_ROOT)/3party/icu/i18n",
+					"$(GEOCORE_ROOT)/3party/icu/common",
 				);
 			};
 			name = "Production Full";
@@ -2559,10 +2559,10 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)",
+					"$(GEOCORE_ROOT)",
 					"$(BOOST_ROOT)",
-					"$(OMIM_ROOT)/3party/icu/i18n",
-					"$(OMIM_ROOT)/3party/icu/common",
+					"$(GEOCORE_ROOT)/3party/icu/i18n",
+					"$(GEOCORE_ROOT)/3party/icu/common",
 				);
 			};
 			name = Debug;
@@ -2583,10 +2583,10 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)",
+					"$(GEOCORE_ROOT)",
 					"$(BOOST_ROOT)",
-					"$(OMIM_ROOT)/3party/icu/i18n",
-					"$(OMIM_ROOT)/3party/icu/common",
+					"$(GEOCORE_ROOT)/3party/icu/i18n",
+					"$(GEOCORE_ROOT)/3party/icu/common",
 				);
 			};
 			name = Release;

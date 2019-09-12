@@ -187,9 +187,9 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)",
+					"$(GEOCORE_ROOT)",
 					"$(BOOST_ROOT)",
-					"$(OMIM_ROOT)/3party/libtess2/Include",
+					"$(GEOCORE_ROOT)/3party/libtess2/Include",
 				);
 			};
 			name = Debug;
@@ -201,9 +201,9 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)",
+					"$(GEOCORE_ROOT)",
 					"$(BOOST_ROOT)",
-					"$(OMIM_ROOT)/3party/libtess2/Include",
+					"$(GEOCORE_ROOT)/3party/libtess2/Include",
 				);
 			};
 			name = Release;
@@ -231,9 +231,9 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)",
+					"$(GEOCORE_ROOT)",
 					"$(BOOST_ROOT)",
-					"$(OMIM_ROOT)/3party/libtess2/Include",
+					"$(GEOCORE_ROOT)/3party/libtess2/Include",
 				);
 			};
 			name = "Production Full";

@@ -11,23 +11,23 @@ set(
   platform_test.cpp
 )
 
-omim_add_test(${PROJECT_NAME} ${SRC})
+geocore_add_test(${PROJECT_NAME} ${SRC})
 
-omim_link_libraries(
+geocore_link_libraries(
   ${PROJECT_NAME}
   platform_tests_support
   platform
 )
 
 if (PLATFORM_MAC)
-  omim_link_libraries(
+  geocore_link_libraries(
     ${PROJECT_NAME}
     "-framework QuartzCore"
   )
 endif()
 
 if (PLATFORM_WIN OR PLATFORM_LINUX)
-  omim_link_libraries(
+  geocore_link_libraries(
     ${PROJECT_NAME}
   )
 endif()
