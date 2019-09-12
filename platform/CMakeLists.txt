@@ -55,8 +55,6 @@ append(
 if(${PLATFORM_MAC})
   append(
     SRC
-    http_thread_apple.h
-    http_thread_apple.mm
     platform_mac.mm
     platform_unix_impl.cpp
     platform_unix_impl.hpp
