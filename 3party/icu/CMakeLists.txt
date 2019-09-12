@@ -10,7 +10,7 @@ add_definitions(
   -DU_ENABLE_DYLOAD=0
 )
 
-add_clang_compile_options("-Wno-deprecated-declarations")
+add_clang_compile_options("-Wno-deprecated-declarations" "-Wno-enum-compare-switch")
 add_gcc_compile_options("-Wno-deprecated-declarations" "-Wno-stringop-overflow")
 
 set(CMAKE_PREFIX_PATH ./)
