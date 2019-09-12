@@ -70,7 +70,7 @@ NameDictionary::Position NameDictionary::Add(MultipleNames && names)
   CHECK(!names.GetMainName().empty(), ());
   CHECK_LESS(m_stock.size(), std::numeric_limits<uint32_t>::max(), ());
   m_stock.push_back(std::move(names));
-  return m_stock.size();  // index + 1
+  return static_cast<uint32_t>(m_stock.size());  // index + 1
 }
 
 // NameDictionaryBuilder::Hash ---------------------------------------------------------------------
