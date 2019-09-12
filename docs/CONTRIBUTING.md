@@ -35,4 +35,3 @@ Some of these contain their own README files.
 * `cmake` - CMake helper files.
 * `data` - data files for the application: maps, styles, country borders.
 * `testing` - common interfaces for tests.
-* `tools` - tools for building packages and maps, for testing etc.
