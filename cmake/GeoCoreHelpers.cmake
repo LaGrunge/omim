@@ -1,5 +1,5 @@
 # Function for setting target platform:
-function(omim_set_platform_var PLATFORM_VAR pattern)
+function(geocore_set_platform_var PLATFORM_VAR pattern)
   set(${PLATFORM_VAR} FALSE PARENT_SCOPE)
 
   if (NOT PLATFORM)
@@ -19,7 +19,7 @@ function(omim_set_platform_var PLATFORM_VAR pattern)
 endfunction()
 
 # Functions for using in subdirectories
-function(omim_add_executable executable)
+function(geocore_add_executable executable)
   add_executable(${executable} ${ARGN})
   add_dependencies(${executable} BuildVersion)
   if (USE_ASAN)
@@ -41,26 +41,26 @@ function(omim_add_executable executable)
   endif()
 endfunction()
 
-function(omim_add_library library)
+function(geocore_add_library library)
   add_library(${library} ${ARGN})
   add_dependencies(${library} BuildVersion)
 endfunction()
 
-function(omim_add_test executable)
+function(geocore_add_test executable)
   if (NOT SKIP_TESTS)
     include(GoogleTest)
-    omim_add_executable(
+    geocore_add_executable(
       ${executable}
       ${ARGN}
-      ${OMIM_ROOT}/testing/testingmain.cpp
+      ${GEOCORE_ROOT}/testing/testingmain.cpp
      )
-     omim_link_libraries(${executable} gtest_main)
+     geocore_link_libraries(${executable} gtest_main)
      target_include_directories(${executable} PRIVATE ${CMAKE_BINARY_DIR})
      gtest_discover_tests(${executable} TEST_PREFIX "${executable}:")
   endif()
 endfunction()
 
-function(omim_add_test_subdirectory subdir)
+function(geocore_add_test_subdirectory subdir)
   if (NOT SKIP_TESTS)
     add_subdirectory(${subdir})
   else()
@@ -68,7 +68,7 @@ function(omim_add_test_subdirectory subdir)
   endif()
 endfunction()
 
-function(omim_link_platform_deps target)
+function(geocore_link_platform_deps target)
   if ("${ARGN}" MATCHES "platform")
     if (PLATFORM_MAC)
       target_link_libraries(
@@ -83,10 +83,10 @@ function(omim_link_platform_deps target)
   endif()
 endfunction()
 
-function(omim_link_libraries target)
+function(geocore_link_libraries target)
   if (TARGET ${target})
     target_link_libraries(${target} ${ARGN} ${CMAKE_THREAD_LIBS_INIT})
-    omim_link_platform_deps(${target} ${ARGN})
+    geocore_link_platform_deps(${target} ${ARGN})
   else()
     message("~> Skipping linking the libraries to the target ${target} as it"
             " does not exist")

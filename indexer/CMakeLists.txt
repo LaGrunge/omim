@@ -148,8 +148,8 @@ file(COPY ${OTHER_FILES} DESTINATION ${CMAKE_BINARY_DIR})
 add_clang_compile_options("-Wno-shorten-64-to-32" "-Wno-unused-parameter")
 
 
-omim_add_library(${PROJECT_NAME} ${SRC})
-omim_link_libraries(${PROJECT_NAME}
+geocore_add_library(${PROJECT_NAME} ${SRC})
+geocore_link_libraries(${PROJECT_NAME}
   base
   coding
   geometry
@@ -157,4 +157,4 @@ omim_link_libraries(${PROJECT_NAME}
   succinct
   protobuf
 )
-omim_add_test_subdirectory(indexer_tests)
+geocore_add_test_subdirectory(indexer_tests)

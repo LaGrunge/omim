@@ -1308,10 +1308,10 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/gflags/src",
+					"$(GEOCORE_ROOT)/3party/gflags/src",
 					"$(QT_PATH)/include",
-					"$(OMIM_ROOT)/3party/glm",
-					"$(OMIM_ROOT)/3party/jansson/src",
+					"$(GEOCORE_ROOT)/3party/glm",
+					"$(GEOCORE_ROOT)/3party/jansson/src",
 				);
 			};
 			name = Debug;
@@ -1322,10 +1322,10 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/gflags/src",
+					"$(GEOCORE_ROOT)/3party/gflags/src",
 					"$(QT_PATH)/include",
-					"$(OMIM_ROOT)/3party/glm",
-					"$(OMIM_ROOT)/3party/jansson/src",
+					"$(GEOCORE_ROOT)/3party/glm",
+					"$(GEOCORE_ROOT)/3party/jansson/src",
 				);
 			};
 			name = Release;
@@ -1334,7 +1334,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "$(OMIM_ROOT)/precompiled_headers.hpp";
+				GCC_PREFIX_HEADER = "$(GEOCORE_ROOT)/precompiled_headers.hpp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1343,7 +1343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "$(OMIM_ROOT)/precompiled_headers.hpp";
+				GCC_PREFIX_HEADER = "$(GEOCORE_ROOT)/precompiled_headers.hpp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1370,10 +1370,10 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/gflags/src",
+					"$(GEOCORE_ROOT)/3party/gflags/src",
 					"$(QT_PATH)/include",
-					"$(OMIM_ROOT)/3party/glm",
-					"$(OMIM_ROOT)/3party/jansson/src",
+					"$(GEOCORE_ROOT)/3party/glm",
+					"$(GEOCORE_ROOT)/3party/jansson/src",
 				);
 			};
 			name = "Production Full";
@@ -1382,7 +1382,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
-				GCC_PREFIX_HEADER = "$(OMIM_ROOT)/precompiled_headers.hpp";
+				GCC_PREFIX_HEADER = "$(GEOCORE_ROOT)/precompiled_headers.hpp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Production Full";

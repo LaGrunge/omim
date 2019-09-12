@@ -1,8 +1,8 @@
 project(generator)
 
 include_directories(
-  ${OMIM_ROOT}/3party/gflags/src
-  ${OMIM_ROOT}/3party/jansson/src
+  ${GEOCORE_ROOT}/3party/gflags/src
+  ${GEOCORE_ROOT}/3party/jansson/src
 )
 
 set(
@@ -180,8 +180,8 @@ set(
   world_map_generator.hpp
 )
 
-omim_add_library(${PROJECT_NAME} ${SRC})
-omim_link_libraries(${PROJECT_NAME}
+geocore_add_library(${PROJECT_NAME} ${SRC})
+geocore_link_libraries(${PROJECT_NAME}
   base
   coding
   indexer
@@ -192,7 +192,7 @@ omim_link_libraries(${PROJECT_NAME}
 
 
 
-omim_add_test_subdirectory(generator_tests_support)
-omim_add_test_subdirectory(generator_tests)
+geocore_add_test_subdirectory(generator_tests_support)
+geocore_add_test_subdirectory(generator_tests)
 
 add_subdirectory(generator_tool)

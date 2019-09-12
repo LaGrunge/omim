@@ -151,7 +151,7 @@ Platform::Platform()
   else
   {
     string const devBuildWithSymlink = base::JoinPath(path, "..", "..", "data");
-    string const devBuildWithoutSymlink = base::JoinPath(path, "..", "..", "..", "omim", "data");
+    string const devBuildWithoutSymlink = base::JoinPath(path, "..", "..", "..", "geocore", "data");
     string const installedVersionWithPackages = base::JoinPath(path, "..", "share");
     string const installedVersionWithoutPackages = base::JoinPath(path, "..", "MapsWithMe");
     string const customInstall = path;
@@ -232,7 +232,7 @@ string Platform::MacAddress(bool md5Decoded) const
 
 string Platform::DeviceName() const
 {
-  return OMIM_OS_NAME;
+  return GEOCORE_OS_NAME;
 }
 
 string Platform::DeviceModel() const

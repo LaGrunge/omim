@@ -29,7 +29,7 @@ private:
   inline bool IsDynamic() const { return m_size == USE_DYNAMIC; }
 
   /// @todo clang on linux doesn't have is_trivially_copyable.
-#ifndef OMIM_OS_LINUX
+#ifndef GEOCORE_OS_LINUX
   template <class U = T>
   std::enable_if_t<std::is_trivially_copyable<U>::value, void> MoveStatic(buffer_vector<T, N> & rhs)
   {

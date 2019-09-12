@@ -8,6 +8,6 @@
 
 struct TestindDataPath
 {
-  static constexpr char const * const kDataPath = "${OMIM_ROOT}/data";
+  static constexpr char const * const kDataPath = "${GEOCORE_ROOT}/data";
   static constexpr char const * const kProjectName = "${PROJECT_NAME}";
 };

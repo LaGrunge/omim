@@ -147,7 +147,7 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/gflags/src",
+					"$(GEOCORE_ROOT)/3party/gflags/src",
 				);
 			};
 			name = Debug;
@@ -159,7 +159,7 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/gflags/src",
+					"$(GEOCORE_ROOT)/3party/gflags/src",
 				);
 			};
 			name = Release;
@@ -187,7 +187,7 @@
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(OMIM_ROOT)/3party/gflags/src",
+					"$(GEOCORE_ROOT)/3party/gflags/src",
 				);
 			};
 			name = "Production Full";

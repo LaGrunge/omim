@@ -8,4 +8,4 @@ set(
   test_with_classificator.hpp
 )
 
-omim_add_library(${PROJECT_NAME} ${SRC})
+geocore_add_library(${PROJECT_NAME} ${SRC})

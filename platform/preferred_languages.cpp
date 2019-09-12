@@ -8,10 +8,10 @@
 #include "std/set.hpp"
 #include "std/vector.hpp"
 
-#if defined(OMIM_OS_MAC)
+#if defined(GEOCORE_OS_MAC)
   #include <CoreFoundation/CFLocale.h>
   #include <CoreFoundation/CFString.h>
-#elif defined(OMIM_OS_LINUX)
+#elif defined(GEOCORE_OS_LINUX)
   #include "std/cstdlib.hpp"
 #endif
 
@@ -20,7 +20,7 @@ namespace languages
 
 void GetSystemPreferred(vector<string> & languages)
 {
-#if defined(OMIM_OS_MAC) || defined(OMIM_OS_LINUX)
+#if defined(GEOCORE_OS_MAC) || defined(GEOCORE_OS_LINUX)
   // check environment variables
   char const * p = getenv("LANGUAGE");
   if (p && strlen(p))  // LANGUAGE can contain several values divided by ':'
@@ -36,7 +36,7 @@ void GetSystemPreferred(vector<string> & languages)
     languages.push_back(p);
   else if ((p = getenv("LANG")))
     languages.push_back(p);
-#if defined(OMIM_OS_MAC)
+#if defined(GEOCORE_OS_MAC)
   else
   {
     // Mac and iOS implementation
@@ -50,8 +50,8 @@ void GetSystemPreferred(vector<string> & languages)
     }
     CFRelease(langs);
   }
-#endif // defined(OMIM_OS_MAC)
-#endif // defined(OMIM_OS_MAC) || defined(OMIM_OS_LINUX)
+#endif // defined(GEOCORE_OS_MAC)
+#endif // defined(GEOCORE_OS_MAC) || defined(GEOCORE_OS_LINUX)
 }
 
 string GetPreferred()

@@ -47,7 +47,7 @@ template <typename Primitive>
 class SingleValueSerializer
 {
 public:
-#if !defined(OMIM_OS_LINUX)
+#if !defined(GEOCORE_OS_LINUX)
   static_assert(std::is_trivially_copyable<Primitive>::value, "");
 #endif
 
@@ -65,7 +65,7 @@ public:
   using Value = Primitive;
   using Serializer = SingleValueSerializer<Value>;
 
-#if !defined(OMIM_OS_LINUX)
+#if !defined(GEOCORE_OS_LINUX)
   static_assert(std::is_trivially_copyable<Primitive>::value, "");
 #endif
 

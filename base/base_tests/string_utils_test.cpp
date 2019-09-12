@@ -25,7 +25,7 @@ UNIT_TEST(LowerUniChar)
 
   // To use Platform class here, we need to add many link stuff into .pro file ...
   // string const fName = GetPlatform().WritablePathForFile("CaseFolding.test");
-  std::string const fName = "../../../omim/data/CaseFolding.test";
+  std::string const fName = "../../../geocore/data/CaseFolding.test";
 
   std::ifstream file(fName.c_str());
   if (!file.good())

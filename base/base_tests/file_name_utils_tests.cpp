@@ -72,8 +72,8 @@ UNIT_TEST(FilePath_Slash)
 
 UNIT_TEST(FilePath_Join)
 {
-  TEST_EQUAL("omim/strings.txt", base::JoinPath("omim", "strings.txt"), ());
-  TEST_EQUAL("omim/strings.txt", base::JoinPath("omim/", "strings.txt"), ());
-  TEST_EQUAL("../../omim/strings.txt", base::JoinPath("..", "..", "omim", "strings.txt"), ());
-  TEST_EQUAL("../../omim/strings.txt", base::JoinPath("../", "..", "omim/", "strings.txt"), ());
+  TEST_EQUAL("geocore/strings.txt", base::JoinPath("geocore", "strings.txt"), ());
+  TEST_EQUAL("geocore/strings.txt", base::JoinPath("geocore/", "strings.txt"), ());
+  TEST_EQUAL("../../geocore/strings.txt", base::JoinPath("..", "..", "geocore", "strings.txt"), ());
+  TEST_EQUAL("../../geocore/strings.txt", base::JoinPath("../", "..", "geocore/", "strings.txt"), ());
 }

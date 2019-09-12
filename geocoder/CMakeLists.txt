@@ -20,8 +20,8 @@ set(
   types.hpp
 )
 
-omim_add_library(${PROJECT_NAME} ${SRC})
-omim_link_libraries(
+geocore_add_library(${PROJECT_NAME} ${SRC})
+geocore_link_libraries(
   ${PROJECT_NAME}
   base
   indexer
@@ -30,4 +30,4 @@ omim_link_libraries(
   ${Boost_IOSTREAMS_LIBRARY})
 
 add_subdirectory(geocoder_cli)
-omim_add_test_subdirectory(geocoder_tests)
+geocore_add_test_subdirectory(geocoder_tests)

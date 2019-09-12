@@ -1,6 +1,6 @@
 project(platform)
 
-include_directories(${OMIM_ROOT}/platform)
+include_directories(${GEOCORE_ROOT}/platform)
 
 set(
   SRC
@@ -75,14 +75,14 @@ elseif(${PLATFORM_LINUX})
   )
 endif()
 
-omim_add_test_subdirectory(platform_tests_support)
+geocore_add_test_subdirectory(platform_tests_support)
 
-omim_add_library(${PROJECT_NAME} ${SRC})
-omim_link_libraries(${PROJECT_NAME} base coding jansson ${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY})
+geocore_add_library(${PROJECT_NAME} ${SRC})
+geocore_link_libraries(${PROJECT_NAME} base coding jansson ${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY})
 
 
 if (APPLE)
   target_compile_options(${PROJECT_NAME} PUBLIC "-fobjc-arc")
 endif()
 
-omim_add_test_subdirectory(platform_tests)
+geocore_add_test_subdirectory(platform_tests)

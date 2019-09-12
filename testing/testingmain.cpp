@@ -2,14 +2,14 @@
 
 #include "testing/testing.hpp"
 
-#ifndef OMIM_UNIT_TEST_DISABLE_PLATFORM_INIT
+#ifndef GEOCORE_UNIT_TEST_DISABLE_PLATFORM_INIT
 #include "testing/path.hpp"
 #include "platform/platform.hpp"
 #endif
 
 int main(int argc, char * argv[])
 {
-#ifndef OMIM_UNIT_TEST_DISABLE_PLATFORM_INIT
+#ifndef GEOCORE_UNIT_TEST_DISABLE_PLATFORM_INIT
   // Setting stored paths from testingmain.cpp
   Platform & pl = GetPlatform();
   pl.SetWritableDirForTests(TestindDataPath::kDataPath);

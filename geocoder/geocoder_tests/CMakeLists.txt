@@ -6,9 +6,9 @@ set(
   house_numbers_matcher_test.cpp
 )
 
-omim_add_test(${PROJECT_NAME} ${SRC})
+geocore_add_test(${PROJECT_NAME} ${SRC})
 
-omim_link_libraries(
+geocore_link_libraries(
   ${PROJECT_NAME}
   platform_tests_support
   geocoder

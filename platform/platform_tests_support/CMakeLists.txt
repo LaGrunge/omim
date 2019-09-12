@@ -15,4 +15,4 @@ set(
   writable_dir_changer.hpp
 )
 
-omim_add_library(${PROJECT_NAME} ${SRC})
+geocore_add_library(${PROJECT_NAME} ${SRC})

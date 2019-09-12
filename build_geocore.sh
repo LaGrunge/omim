@@ -30,11 +30,11 @@ while getopts ":cdrgjp:" opt; do
       OPT_PATH="$OPTARG"
       ;;
     *)
-      echo "This tool builds omim"
+      echo "This tool builds geocore"
       echo "Usage: $0 [-d] [-r] [-c] [-s] [-t] [-a] [-g] [-j] [-p PATH] [target1 target2 ...]"
       echo
-      echo -e "-d\tBuild omim-debug"
-      echo -e "-r\tBuild omim-release"
+      echo -e "-d\tBuild geocore-debug"
+      echo -e "-r\tBuild geocore-release"
       echo -e "-c\tClean before building"
       echo -e "-g\tForce use GCC (only for MacOS X platform)"
       echo -e "-p\tDirectory for built binaries"
@@ -54,9 +54,9 @@ if [ -z "$OPT_DEBUG$OPT_RELEASE" ]; then
   OPT_RELEASE=1
 fi
 
-OMIM_PATH="$(cd "${OMIM_PATH:-$(dirname "$0")/../..}"; pwd)"
-if ! grep "DEFAULT_URLS_JSON" "$OMIM_PATH/private.h" >/dev/null 2>/dev/null; then
-  echo "Please run $OMIM_PATH/configure.sh"
+GEOCORE_PATH="$(cd "${GEOCORE_PATH:-$(dirname "$0")/../..}"; pwd)"
+if ! grep "DEFAULT_URLS_JSON" "$GEOCORE_PATH/private.h" >/dev/null 2>/dev/null; then
+  echo "Please run $GEOCORE_PATH/configure.sh"
   exit 2
 fi
 
@@ -105,19 +105,19 @@ build()
 {
   CONF=$1
   if [ -n "$OPT_PATH" ]; then
-    DIRNAME="$OPT_PATH/omim-build-$(echo "$CONF" | tr '[:upper:]' '[:lower:]')"
+    DIRNAME="$OPT_PATH/geocore-build-$(echo "$CONF" | tr '[:upper:]' '[:lower:]')"
   else
-    DIRNAME="$OMIM_PATH/../omim-build-$(echo "$CONF" | tr '[:upper:]' '[:lower:]')"
+    DIRNAME="$GEOCORE_PATH/../geocore-build-$(echo "$CONF" | tr '[:upper:]' '[:lower:]')"
   fi
   [ -d "$DIRNAME" -a -n "$OPT_CLEAN" ] && rm -r "$DIRNAME"
   if [ ! -d "$DIRNAME" ]; then
     mkdir -p "$DIRNAME"
-    ln -s "$OMIM_PATH/data" "$DIRNAME/data"
+    ln -s "$GEOCORE_PATH/data" "$DIRNAME/data"
   fi
   cd "$DIRNAME"
   TMP_FILE="build_error.log"
   PROCESSES=$(nproc)
-  "$CMAKE" "$OMIM_PATH" -DCMAKE_BUILD_TYPE="$CONF" ${CMAKE_CONFIG:-}
+  "$CMAKE" "$GEOCORE_PATH" -DCMAKE_BUILD_TYPE="$CONF" ${CMAKE_CONFIG:-}
   echo ""
   if ! make $OPT_TARGET -j $PROCESSES 2> "$TMP_FILE"; then
     echo '--------------------'
@@ -126,7 +126,7 @@ build()
   fi
 
   if [ -n "$OPT_COMPILE_DATABASE" ]; then
-    cp "$DIRNAME/compile_commands.json" "$OMIM_PATH"
+    cp "$DIRNAME/compile_commands.json" "$GEOCORE_PATH"
   fi
 }
 

@@ -15,7 +15,7 @@
 
 // Writing information about free memory to log file.
 // #ifdef DEBUG
-// # define OMIM_ENABLE_LOG_MEMORY_INFO
+// # define GEOCORE_ENABLE_LOG_MEMORY_INFO
 // #endif
 
 void LogMessageFile(base::LogLevel level, base::SrcPoint const & srcPoint, std::string const & msg);

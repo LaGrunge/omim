@@ -60,6 +60,6 @@ set(
   region2d/boost_concept.hpp
 )
 
-omim_add_library(${PROJECT_NAME} ${SRC})
+geocore_add_library(${PROJECT_NAME} ${SRC})
 
-omim_add_test_subdirectory(geometry_tests)
+geocore_add_test_subdirectory(geometry_tests)
