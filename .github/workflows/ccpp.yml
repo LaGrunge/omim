@@ -8,10 +8,10 @@ jobs:
     steps:
     - name: Install Boost
       run:  sudo apt install libboost-all-dev
-    - name: Git clone repo
+    - name: Clone repo
       uses: actions/checkout@v1
       with:
-              submodules: true
+        submodules: true
     - name: Configure
       run:  cmake . 
     - name: Build
@@ -25,7 +25,7 @@ jobs:
     steps:
     - name: Install Boost
       run:  brew install boost
-    - name: Git clone repo
+    - name: Clone repo
       uses: actions/checkout@v1
       with: 
         submodules: true
