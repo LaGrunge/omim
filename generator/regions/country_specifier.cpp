@@ -4,6 +4,10 @@ namespace generator
 {
 namespace regions
 {
+void CountrySpecifier::RectifyBoundary(std::vector<Region> & /* outers */,
+                                       std::vector<Region> const & /* planet */)
+{ }
+
 void CountrySpecifier::AdjustRegionsLevel(Node::PtrList & /*outers*/)
 { }
 

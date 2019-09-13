@@ -106,10 +106,12 @@ RegionsBuilder::StringsList RegionsBuilder::GetCountryInternationalNames() const
   return result;
 }
 
-Node::Ptr RegionsBuilder::BuildCountryRegionTree(Region const & outer,
-                                                 CountrySpecifier const & countrySpecifier) const
+Node::Ptr RegionsBuilder::BuildCountryRegionTree(
+    Region const & outer,
+    boost::optional<std::string> const & isoCode,
+    CountrySpecifier const & countrySpecifier) const
 {
-  auto nodes = MakeCountryNodesInAreaOrder(outer, m_regionsInAreaOrder, countrySpecifier);
+  auto nodes = MakeCountryNodesInAreaOrder(outer, m_regionsInAreaOrder, isoCode, countrySpecifier);
 
   for (auto i = std::crbegin(nodes), end = std::crend(nodes); i != end; ++i)
   {
@@ -125,12 +127,17 @@ Node::Ptr RegionsBuilder::BuildCountryRegionTree(Region const & outer,
 
 std::vector<Node::Ptr> RegionsBuilder::MakeCountryNodesInAreaOrder(
     Region const & countryOuter, Regions const & regionsInAreaOrder,
+    boost::optional<std::string> const & isoCode,
     CountrySpecifier const & countrySpecifier) const
 {
   std::vector<Node::Ptr> nodes{
       std::make_shared<Node>(LevelRegion{PlaceLevel::Country, countryOuter})};
   for (auto const & region : regionsInAreaOrder)
   {
+    auto && regionIsoCode = region.GetIsoCode();
+    if (regionIsoCode && isoCode && regionIsoCode != isoCode)
+      continue;
+
     if (countryOuter.ContainsRect(region))
     {
       auto level = strings::IsASCIINumeric(region.GetName()) ? PlaceLevel::Unknown
@@ -304,6 +311,8 @@ void RegionsBuilder::ForEachCountry(CountryFn fn)
 
 Node::PtrList RegionsBuilder::BuildCountry(std::string const & countryName) const
 {
+  auto countrySpecifier = CountrySpecifierBuilder::GetInstance().MakeCountrySpecifier(countryName);
+
   Regions outers;
   auto const & countries = GetCountriesOuters();
   auto const pred = [&](Region const & country) {
@@ -311,8 +320,10 @@ Node::PtrList RegionsBuilder::BuildCountry(std::string const & countryName) cons
   };
   std::copy_if(std::begin(countries), std::end(countries), std::back_inserter(outers), pred);
 
-  auto countrySpecifier = CountrySpecifierBuilder::GetInstance().MakeCountrySpecifier(countryName);
-  auto countryTrees = BuildCountryRegionTrees(outers, *countrySpecifier);
+  countrySpecifier->RectifyBoundary(outers, m_regionsInAreaOrder);
+
+  auto isoCode = FindCountryIsoCode(outers);
+  auto countryTrees = BuildCountryRegionTrees(outers, isoCode, *countrySpecifier);
 
   PlacePointsIntegrator pointsIntegrator{m_placePointsMap, *countrySpecifier};
   LOG(LINFO, ("Start integrate place points for", countryName));
@@ -330,13 +341,25 @@ Node::PtrList RegionsBuilder::BuildCountry(std::string const & countryName) cons
   return countryTrees;
 }
 
+boost::optional<std::string> RegionsBuilder::FindCountryIsoCode(Regions const & outers) const
+{
+  for (auto const & outer : outers)
+  {
+    if (auto isoCode = outer.GetIsoCode())
+      return isoCode;
+  }
+  return {};
+}
+
 Node::PtrList RegionsBuilder::BuildCountryRegionTrees(
-    Regions const & outers, CountrySpecifier const & countrySpecifier) const
+    Regions const & outers,
+    boost::optional<std::string> const & isoCode,
+    CountrySpecifier const & countrySpecifier) const
 {
   Node::PtrList trees;
   for (auto const & outer : outers)
   {
-    auto tree = BuildCountryRegionTree(outer, countrySpecifier);
+    auto tree = BuildCountryRegionTree(outer, isoCode, countrySpecifier);
     trees.push_back(std::move(tree));
   }
 

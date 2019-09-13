@@ -61,5 +61,7 @@ private:
   BoostRect m_rect;
   double m_area;
 };
+
+void ExcludeRegionArea(std::vector<Region> & fromRegion, Region const & excludedRegion);
 }  // namespace regions
 }  // namespace generator

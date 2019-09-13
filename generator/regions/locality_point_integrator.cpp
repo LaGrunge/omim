@@ -163,10 +163,10 @@ void LocalityPointIntegrator::EmboundBy(LevelRegion const & region)
     }
   }
 
-  LOG(LWARNING, ("Failed to embound",
-                 StringifyPlaceType(m_localityRegion.GetPlaceType()), "place",
-                 m_localityRegion.GetId(), "(", GetRegionNotation(m_localityRegion), ")",
-                 "by", region.GetId(), "(", GetRegionNotation(region), ")"));
+  LOG(LDEBUG, ("Failed to embound",
+               StringifyPlaceType(m_localityRegion.GetPlaceType()), "place",
+               m_localityRegion.GetId(), "(", GetRegionNotation(m_localityRegion), ")",
+               "by", region.GetId(), "(", GetRegionNotation(region), ")"));
 }
 
 // static

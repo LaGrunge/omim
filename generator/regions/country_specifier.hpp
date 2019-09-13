@@ -5,6 +5,8 @@
 #include "generator/regions/node.hpp"
 #include "generator/regions/region.hpp"
 
+#include <vector>
+
 namespace generator
 {
 namespace regions
@@ -13,6 +15,8 @@ class CountrySpecifier
 {
 public:
   virtual ~CountrySpecifier() = default;
+
+  virtual void RectifyBoundary(std::vector<Region> & outers, std::vector<Region> const & planet);
   virtual void AdjustRegionsLevel(Node::PtrList & outers);
   PlaceLevel GetLevel(Region const & region) const;
 

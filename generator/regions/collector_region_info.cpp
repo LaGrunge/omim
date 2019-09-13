@@ -122,13 +122,10 @@ void CollectorRegionInfo::Collect(OsmElement const & el)
   RegionData regionData;
   FillRegionData(osmId, el, regionData);
   m_mapRegionData.emplace(osmId, regionData);
-  // If the region is a country.
-  if (regionData.m_place == PlaceType::Country || regionData.m_adminLevel == AdminLevel::Two)
-  {
-    IsoCode isoCode;
-    FillIsoCode(osmId, el, isoCode);
-    m_mapIsoCode.emplace(osmId, isoCode);
-  }
+
+  IsoCode isoCode;
+  FillIsoCode(osmId, el, isoCode);
+  m_mapIsoCode.emplace(osmId, isoCode);
 }
 
 void CollectorRegionInfo::Save()
@@ -191,6 +188,14 @@ void CollectorRegionInfo::FillIsoCode(base::GeoObjectId const & osmId, OsmElemen
                                       IsoCode & rd)
 {
   rd.m_osmId = osmId;
+
+  rd.SetAlpha2(el.GetTag("is_in:country_code"));
+
+  auto const & iso3166_2 = el.GetTag("ISO3166-2");
+  if (iso3166_2.size() > 3 && iso3166_2[2] == '-')
+    rd.SetAlpha2(iso3166_2.substr(0, 2));
+
+  rd.SetAlpha2(el.GetTag("ISO3166-1"));
   rd.SetAlpha2(el.GetTag("ISO3166-1:alpha2"));
   rd.SetAlpha3(el.GetTag("ISO3166-1:alpha3"));
   rd.SetNumeric(el.GetTag("ISO3166-1:numeric"));

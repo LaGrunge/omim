@@ -176,5 +176,39 @@ bool Region::Contains(BoostPoint const & point) const
   return boost::geometry::covered_by(point, m_rect) &&
          boost::geometry::covered_by(point, *m_polygon);
 }
+
+//--------------------------------------------------------------------------------------------------
+void ExcludeRegionArea(std::vector<Region> & fromRegions, Region const & excludedRegion)
+{
+  auto const & excludedPolygon = *excludedRegion.GetPolygon();
+
+  auto regions = std::move(fromRegions);
+  for (auto & region : regions)
+  {
+    auto const & polygon = *region.GetPolygon();
+
+    if (!boost::geometry::intersects(polygon, excludedPolygon))
+    {
+      fromRegions.push_back(std::move(region));
+      continue;
+    }
+
+    auto newPolygon = boost::geometry::model::multi_polygon<BoostPolygon>{};
+    boost::geometry::difference(polygon, excludedPolygon, newPolygon);
+
+    for (auto const & polygon : newPolygon)
+    {
+      if (boost::geometry::covered_by(excludedRegion.GetCenter(), newPolygon))
+      {
+        LOG(LWARNING, ("Incomplete exclude of area", excludedRegion.GetId(),
+                       "(", GetRegionNotation(excludedRegion), ")",
+                       "from", region.GetId(), "(", GetRegionNotation(region), ")"));
+      }
+
+      region.SetPolygon(std::make_shared<BoostPolygon>(std::move(polygon)));
+      fromRegions.push_back(region);
+    }
+  }
+}
 }  // namespace regions
 }  // namespace generator
