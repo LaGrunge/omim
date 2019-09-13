@@ -119,7 +119,6 @@ endif()
 
 # Include subdirectories
 add_subdirectory(3party/expat)
-add_subdirectory(3party/gflags)
 add_subdirectory(3party/icu)
 add_subdirectory(3party/jansson)
 add_subdirectory(3party/protobuf)

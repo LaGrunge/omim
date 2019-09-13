@@ -15,7 +15,6 @@ add_gcc_compile_options("-Wno-deprecated-declarations" "-Wno-stringop-overflow")
 
 set(CMAKE_PREFIX_PATH ./)
 
-include_directories(common i18n common/unicode ./)
 
 set(
   SRC
@@ -817,3 +816,4 @@ set(
 )
 
 add_library(${PROJECT_NAME} ${SRC})
+target_include_directories(${PROJECT_NAME} PUBLIC common i18n common/unicode ./)
