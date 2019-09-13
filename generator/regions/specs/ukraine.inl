@@ -48,7 +48,9 @@ private:
 
   void FixAdministrativeRegion1(std::vector<Region> & outers, std::vector<Region> const & planet)
   {
-    auto const * region = FindAdministrativeRegion1(planet);
+    auto const labelPoint = ms::LatLon({45.1890034, 34.7401104});
+    auto region = FindCorrectingAdministrativeRegion(planet, {"Республика Крым", "Крым"},
+                                                     labelPoint);
     if (!region)
     {
       LOG(LWARNING, ("Failed to fix region1 for Ukraine"));
@@ -60,7 +62,8 @@ private:
 
   void FixAdministrativeRegion2(std::vector<Region> & outers, std::vector<Region> const & planet)
   {
-    auto const * region = FindAdministrativeRegion2(planet);
+    auto const labelPoint = ms::LatLon({44.5547288, 33.4720239});
+    auto region = FindCorrectingAdministrativeRegion(planet, {"Севастополь"}, labelPoint);
     if (!region)
     {
       LOG(LWARNING, ("Failed to fix region2 for Ukraine"));
@@ -70,9 +73,10 @@ private:
     ExcludeRegionArea(outers, *region);
   }
 
-  Region const * FindAdministrativeRegion1(std::vector<Region> const & planet)
+  boost::optional<Region> FindCorrectingAdministrativeRegion(std::vector<Region> const & planet,
+      std::vector<std::string> const & multiName, ms::LatLon coveredPoint)
   {
-    auto const center = MercatorBounds::FromLatLon({45.1890034, 34.7401104});
+    auto const checkPoint = MercatorBounds::FromLatLon(coveredPoint);
     for (auto const & region : planet)
     {
       if (region.GetAdminLevel() == AdminLevel::Unknown)
@@ -82,35 +86,14 @@ private:
       if (!isoCode || *isoCode != "RU")
         continue;
 
-      auto const & name = region.GetName();
-      if ((name == "Республика Крым" || name == "Крым") &&
-          region.Contains({center.x, center.y}))
+      if (std::count(multiName.begin(), multiName.end(), region.GetName()) &&
+          region.Contains({checkPoint.x, checkPoint.y}))
       {
-        return &region;
+        return {region};
       }
     }
 
-    return nullptr;
-  }
-
-  Region const * FindAdministrativeRegion2(std::vector<Region> const & planet)
-  {
-    auto const center = MercatorBounds::FromLatLon({44.5547288, 33.4720239});
-    for (auto const & region : planet)
-    {
-      if (region.GetAdminLevel() == AdminLevel::Unknown)
-        continue;
-
-      auto && isoCode = region.GetIsoCode();
-      if (!isoCode || *isoCode != "RU")
-        continue;
-
-      auto const & name = region.GetName();
-      if (name == "Севастополь" && region.Contains({center.x, center.y}))
-        return &region;
-    }
-
-    return nullptr;
+    return {};
   }
 };
 
