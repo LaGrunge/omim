@@ -11,6 +11,8 @@
 #include <string>
 #include <vector>
 
+#include <boost/optional.hpp>
+
 namespace generator
 {
 namespace regions
@@ -45,12 +47,16 @@ private:
   Regions FormRegionsInAreaOrder(Regions && regions);
   Regions ExtractCountriesOuters(Regions & regions);
   Node::PtrList BuildCountry(std::string const & countryName) const;
+  boost::optional<std::string> FindCountryIsoCode(Regions const & outers) const;
   Node::PtrList BuildCountryRegionTrees(Regions const & outers,
+                                        boost::optional<std::string> const & isoCode,
                                         CountrySpecifier const & countrySpecifier) const;
   Node::Ptr BuildCountryRegionTree(Region const & outer,
+                                   boost::optional<std::string> const & isoCode,
                                    CountrySpecifier const & countrySpecifier) const;
   std::vector<Node::Ptr> MakeCountryNodesInAreaOrder(
       Region const & countryOuter, Regions const & regionsInAreaOrder,
+      boost::optional<std::string> const & isoCode,
       CountrySpecifier const & countrySpecifier) const;
   Node::Ptr ChooseParent(std::vector<Node::Ptr> const & nodesInAreaOrder,
                          std::vector<Node::Ptr>::const_reverse_iterator forItem,
