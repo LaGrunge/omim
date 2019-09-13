@@ -4,21 +4,19 @@
 #include "base/internal/message.hpp"
 #include "base/string_utils.hpp"
 
+#include <boost/program_options.hpp>
+
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
 
-#include "3party/gflags/src/gflags/gflags.h"
-
 using namespace geocoder;
 using namespace std;
 
-DEFINE_string(hierarchy_path, "", "Path to the hierarchy file for the geocoder");
-DEFINE_string(queries_path, "", "Path to the file with queries");
-DEFINE_int32(top, 5, "Number of top results to show for every query, -1 to show all results");
+namespace po = boost::program_options;
 
-void PrintResults(Hierarchy const & hierarchy, vector<Result> const & results)
+void PrintResults(Hierarchy const & hierarchy, vector<Result> const & results, int32_t top)
 {
   cout << "Found results: " << results.size() << endl;
   if (results.empty())
@@ -28,7 +26,7 @@ void PrintResults(Hierarchy const & hierarchy, vector<Result> const & results)
   auto const & dictionary = hierarchy.GetNormalizedNameDictionary();
   for (size_t i = 0; i < results.size(); ++i)
   {
-    if (FLAGS_top >= 0 && static_cast<int32_t>(i) >= FLAGS_top)
+    if (top >= 0 && static_cast<int32_t>(i) >= top)
       break;
     cout << "  " << DebugPrint(results[i]);
     if (auto const && e = hierarchy.GetEntryForOsmId(results[i].m_osmId))
@@ -51,7 +49,7 @@ void PrintResults(Hierarchy const & hierarchy, vector<Result> const & results)
   }
 }
 
-void ProcessQueriesFromFile(Geocoder const & geocoder, string const & path)
+void ProcessQueriesFromFile(Geocoder const & geocoder, string const & path, int32_t top)
 {
   ifstream stream(path.c_str());
   CHECK(stream.is_open(), ("Can't open", path));
@@ -66,12 +64,12 @@ void ProcessQueriesFromFile(Geocoder const & geocoder, string const & path)
 
     cout << s << endl;
     geocoder.ProcessQuery(s, results);
-    PrintResults(geocoder.GetHierarchy(), results);
+    PrintResults(geocoder.GetHierarchy(), results, top);
     cout << endl;
   }
 }
 
-void ProcessQueriesFromCommandLine(Geocoder const & geocoder)
+void ProcessQueriesFromCommandLine(Geocoder const & geocoder, int32_t top)
 {
   string query;
   vector<Result> results;
@@ -83,34 +81,73 @@ void ProcessQueriesFromCommandLine(Geocoder const & geocoder)
     if (query == "q" || query == ":q" || query == "quit")
       break;
     geocoder.ProcessQuery(query, results);
-    PrintResults(geocoder.GetHierarchy(), results);
+    PrintResults(geocoder.GetHierarchy(), results, top);
   }
+}
+
+struct CliCommandOptions
+{
+  std::string m_hierarchy_path;
+  std::string m_queries_path;
+  int32_t m_top;
+};
+
+CliCommandOptions DefineOptions(int argc, char * argv[])
+{
+  CliCommandOptions o;
+  po::options_description optionsDescription;
+
+  optionsDescription.add_options()
+    ("hierarchy_path", po::value(&o.m_hierarchy_path), "Path to the hierarchy file for the geocoder")
+    ("queries_path", po::value(&o.m_queries_path)->default_value(""), "Path to the file with queries")
+    ("top", po::value(&o.m_top)->default_value(5), "Number of top results to show for every query, -1 to show all results")
+    ("help", "produce help message");
+
+  po::variables_map vm;
+
+  po::store(po::parse_command_line(argc, argv, optionsDescription), vm);
+  po::notify(vm);
+
+  if (vm.count("help"))
+  {
+    std::cout << optionsDescription << std::endl;
+    exit(1);
+  }
+
+  return o;
 }
 
 int main(int argc, char * argv[])
 {
   ios_base::sync_with_stdio(false);
-
-  google::SetUsageMessage("Geocoder command line interface.");
-  google::ParseCommandLineFlags(&argc, &argv, true);
+  CliCommandOptions options;
+  try
+  {
+    options = DefineOptions(argc, argv);
+  }
+  catch(po::error& e)
+  {
+    std::cerr << "ERROR: " << e.what() << std::endl << std::endl;
+    return 1;
+  }
 
   Geocoder geocoder;
-  if (strings::EndsWith(FLAGS_hierarchy_path, ".jsonl") ||
-      strings::EndsWith(FLAGS_hierarchy_path, ".jsonl.gz"))
+  if (strings::EndsWith(options.m_hierarchy_path, ".jsonl") ||
+      strings::EndsWith(options.m_hierarchy_path, ".jsonl.gz"))
   {
-    geocoder.LoadFromJsonl(FLAGS_hierarchy_path);
+    geocoder.LoadFromJsonl(options.m_hierarchy_path);
   }
   else
   {
-    geocoder.LoadFromBinaryIndex(FLAGS_hierarchy_path);
+    geocoder.LoadFromBinaryIndex(options.m_hierarchy_path);
   }
 
-  if (!FLAGS_queries_path.empty())
+  if (!options.m_queries_path.empty())
   {
-    ProcessQueriesFromFile(geocoder, FLAGS_queries_path);
+    ProcessQueriesFromFile(geocoder, options.m_queries_path, options.m_top);
     return 0;
   }
 
-  ProcessQueriesFromCommandLine(geocoder);
+  ProcessQueriesFromCommandLine(geocoder, options.m_top);
   return 0;
 }
