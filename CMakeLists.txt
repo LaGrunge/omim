@@ -90,7 +90,7 @@ find_package(Threads)
 #init_boost()
 #install_boost_headers()
 
-find_package(Boost ${BOOST_VERSION} EXACT COMPONENTS system filesystem serialization iostreams REQUIRED)
+find_package(Boost ${BOOST_VERSION} EXACT COMPONENTS system filesystem serialization iostreams program_options REQUIRED)
 set(Boost_USE_MULTITHREADED ON)
 if (PLATFORM_MAC)
     set(Boost_USE_STATIC_LIBS ON)
