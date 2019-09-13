@@ -205,15 +205,8 @@ int GeneratorToolMain(int argc, char ** argv)
   CHECK(IsLittleEndian(), ("Only little-endian architectures are supported."));
 
   CliCommandOptions options;
-  try
-  {
-    options = DefineOptions(argc, argv);
-  }
-  catch(po::error& e)
-  {
-    std::cerr << "ERROR: " << e.what() << std::endl << std::endl;
-    return 1;
-  }
+
+  options = DefineOptions(argc, argv);
 
   Platform & pl = GetPlatform();
   auto threadsCount = pl.CpuCores();
@@ -233,8 +226,8 @@ int GeneratorToolMain(int argc, char ** argv)
   feature::GenerateInfo genInfo;
   genInfo.m_verbose = options.m_verbose;
   genInfo.m_intermediateDir = options.m_intermediate_data_path.empty()
-                              ? path
-                              : base::AddSlashIfNeeded(options.m_intermediate_data_path);
+                                  ? path
+                                  : base::AddSlashIfNeeded(options.m_intermediate_data_path);
   genInfo.m_targetDir = genInfo.m_tmpDir = path;
 
   /// @todo Probably, it's better to add separate option for .mwm.tmp files.
@@ -268,10 +261,8 @@ int GeneratorToolMain(int argc, char ** argv)
   }
 
   // Generate .mwm.tmp files.
-  if (options.m_generate_features ||
-      options.m_generate_region_features ||
-      options.m_generate_streets_features ||
-      options.m_generate_geo_objects_features)
+  if (options.m_generate_features || options.m_generate_region_features ||
+      options.m_generate_streets_features || options.m_generate_geo_objects_features)
   {
     RawGenerator rawGenerator(genInfo, threadsCount);
     if (options.m_generate_region_features)
@@ -292,16 +283,17 @@ int GeneratorToolMain(int argc, char ** argv)
 
   if (!options.m_streets_key_value.empty())
   {
-    streets::GenerateStreets(options.m_regions_index, options.m_regions_key_value, options.m_streets_features,
-                             options.m_geo_objects_features, options.m_streets_key_value, options.m_verbose,
-                             threadsCount);
+    streets::GenerateStreets(options.m_regions_index, options.m_regions_key_value,
+                             options.m_streets_features, options.m_geo_objects_features,
+                             options.m_streets_key_value, options.m_verbose, threadsCount);
   }
 
   if (!options.m_geo_objects_key_value.empty())
   {
-    if (!geo_objects::GenerateGeoObjects(options.m_regions_index, options.m_regions_key_value,
-                                         options.m_geo_objects_features, options.m_ids_without_addresses,
-                                         options.m_geo_objects_key_value, options.m_verbose, threadsCount))
+    if (!geo_objects::GenerateGeoObjects(
+            options.m_regions_index, options.m_regions_key_value, options.m_geo_objects_features,
+            options.m_ids_without_addresses, options.m_geo_objects_key_value, options.m_verbose,
+            threadsCount))
       return EXIT_FAILURE;
   }
 
@@ -317,8 +309,8 @@ int GeneratorToolMain(int argc, char ** argv)
     auto const outFile = base::JoinPath(path, options.m_output + LOC_IDX_FILE_EXTENSION);
     if (options.m_generate_geo_objects_index)
     {
-      if (!feature::GenerateGeoObjectsData(options.m_geo_objects_features, options.m_nodes_list_path,
-                                           locDataFile))
+      if (!feature::GenerateGeoObjectsData(options.m_geo_objects_features,
+                                           options.m_nodes_list_path, locDataFile))
       {
         LOG(LCRITICAL, ("Error generating geo objects data."));
         return EXIT_FAILURE;
@@ -326,8 +318,8 @@ int GeneratorToolMain(int argc, char ** argv)
 
       LOG(LINFO, ("Saving geo objects index to", outFile));
       if (!indexer::BuildGeoObjectsIndexFromDataFile(
-            locDataFile, outFile, DataVersion::LoadFromPath(path).GetVersionJson(),
-            DataVersion::kFileTag))
+              locDataFile, outFile, DataVersion::LoadFromPath(path).GetVersionJson(),
+              DataVersion::kFileTag))
       {
         LOG(LCRITICAL, ("Error generating geo objects index."));
         return EXIT_FAILURE;
@@ -386,8 +378,6 @@ int GeneratorToolMain(int argc, char ** argv)
     geocoder.SaveToBinaryIndex(tokenIndexFile);
   }
 
-  string const datFile = base::JoinPath(path, options.m_output + DATA_FILE_EXTENSION);
-
   return 0;
 }
 
@@ -425,6 +415,18 @@ int main(int argc, char ** argv)
 {
   signal(SIGABRT, ErrorHandler);
   signal(SIGSEGV, ErrorHandler);
-
-  return GeneratorToolMain(argc, argv);
+  try
+  {
+    return GeneratorToolMain(argc, argv);
+  }
+  catch (po::error & e)
+  {
+    std::cerr << "ERROR: " << e.what() << std::endl << std::endl;
+    return 1;
+  }
+  catch (std::exception & e)
+  {
+    std::cerr << "ERROR: " << e.what() << std::endl << std::endl;
+    return 1;
+  }
 }
