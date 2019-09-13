@@ -41,53 +41,7 @@ using std::stable_sort;
 using std::swap;
 using std::unique;
 using std::upper_bound;
-// Bug workaround, see http://connect.microsoft.com/VisualStudio/feedbackdetail/view/840578/algorithm-possible-c-compiler-bug-when-using-std-set-difference-with-custom-comperator
-#ifdef _MSC_VER
-namespace vs_bug
-{
-template<class InputIt1, class InputIt2, class OutputIt, class Compare>
-OutputIt set_difference( InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2, OutputIt d_first, Compare comp)
-{
-  while (first1 != last1)
-  {
-    if (first2 == last2)
-      return std::copy(first1, last1, d_first);
-    if (comp(*first1, *first2))
-      *d_first++ = *first1++;
-    else
-    {
-      if (!comp(*first2, *first1))
-        ++first1;
-      ++first2;
-    }
-  }
-  return d_first;
-}
-
-template<class InputIt1, class InputIt2, class OutputIt>
-OutputIt set_difference(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2, OutputIt d_first)
-{
-  while (first1 != last1)
-  {
-    if (first2 == last2)
-      return std::copy(first1, last1, d_first);
-
-    if (*first1 < *first2)
-      *d_first++ = *first1++;
-    else
-    {
-      if (! (*first2 < *first1))
-        ++first1;
-      ++first2;
-    }
-  }
-  return d_first;
-}
-
-} // namespace vc_bug
-#else
 using std::set_difference;
-#endif
 using std::distance;
 using std::generate;
 using std::pop_heap;
