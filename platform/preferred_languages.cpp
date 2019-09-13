@@ -12,7 +12,7 @@
   #include <CoreFoundation/CFLocale.h>
   #include <CoreFoundation/CFString.h>
 #elif defined(GEOCORE_OS_LINUX)
-  #include "std/cstdlib.hpp"
+  #include <cstdlib>
 #endif
 
 namespace languages

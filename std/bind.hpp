@@ -1,8 +1,5 @@
 #pragma once
 
-#ifdef new
-#undef new
-#endif
 
 #include <functional>
 using std::bind;
@@ -16,7 +13,3 @@ using std::placeholders::_5;
 using std::placeholders::_6;
 using std::placeholders::_7;
 using std::placeholders::_8;
-
-#ifdef DEBUG_NEW
-#define new DEBUG_NEW
-#endif

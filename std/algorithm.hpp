@@ -1,9 +1,5 @@
 #pragma once
 
-#ifdef new
-#undef new
-#endif
-
 #include <algorithm>
 
 using std::all_of;
@@ -50,7 +46,3 @@ using std::remove_copy_if;
 using std::set_symmetric_difference;
 using std::sort_heap;
 using std::transform;
-
-#ifdef DEBUG_NEW
-#define new DEBUG_NEW
-#endif
