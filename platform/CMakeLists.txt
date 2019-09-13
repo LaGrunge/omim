@@ -41,6 +41,7 @@ set(
   socket.hpp
   string_storage_base.cpp
   string_storage_base.hpp
+  target_os.hpp
 )
 
 append(

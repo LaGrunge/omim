@@ -13,7 +13,7 @@
 #include "geometry/screenbase.hpp"
 #include "geometry/tree4d.hpp"
 
-#include "std/target_os.hpp"
+#include "platform/target_os.hpp"
 
 #include <algorithm>
 #include <functional>

@@ -7,7 +7,7 @@
 #include "3party/jansson/myjansson.hpp"
 
 #include "std/algorithm.hpp"
-#include "std/target_os.hpp"
+#include "platform/target_os.hpp"
 
 namespace
 {

@@ -5,7 +5,7 @@
 #include "base/thread.hpp"
 #include "base/timer.hpp"
 
-#include "std/target_os.hpp"
+#include "platform/target_os.hpp"
 
 #include <algorithm>
 #include <cassert>

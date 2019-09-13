@@ -3,7 +3,7 @@
 #include "base/file_name_utils.hpp"
 #include "base/logging.hpp"
 
-#include "std/target_os.hpp"
+#include "platform/target_os.hpp"
 
 #include <memory>
 #include <string>

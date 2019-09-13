@@ -14,7 +14,7 @@
 #include <random>
 #include <thread>
 
-#include "std/target_os.hpp"
+#include "platform/target_os.hpp"
 
 #include "private.h"
 

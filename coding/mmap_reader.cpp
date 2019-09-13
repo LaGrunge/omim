@@ -1,6 +1,6 @@
 #include "coding/mmap_reader.hpp"
 
-#include "std/target_os.hpp"
+#include "platform/target_os.hpp"
 
 #include <cstring>
 

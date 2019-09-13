@@ -19,7 +19,7 @@
 #include <unordered_map>
 #include <utility>
 
-#include "std/target_os.hpp"
+#include "platform/target_os.hpp"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // FeaturesCollector implementation
