@@ -50,8 +50,6 @@ set(
   string_format.hpp
   string_utils.cpp
   string_utils.hpp
-  suffix_array.cpp
-  suffix_array.hpp
   sunrise_sunset.cpp
   sunrise_sunset.hpp
   task_loop.hpp

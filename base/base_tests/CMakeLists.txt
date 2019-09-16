@@ -26,7 +26,6 @@ set(
   stl_helpers_tests.cpp
   string_format_test.cpp
   string_utils_test.cpp
-  suffix_array_tests.cpp
   sunrise_sunset_test.cpp
   thread_pool_computational_tests.cpp
   thread_pool_delayed_tests.cpp
