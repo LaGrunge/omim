@@ -23,7 +23,6 @@ set(
   csv_reader.cpp
   csv_reader.hpp
   dd_vector.hpp
-  diff.hpp
   elias_coder.hpp
   endianness.hpp
   file_container.cpp
