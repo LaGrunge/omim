@@ -26,8 +26,6 @@ set(
   mercator.cpp
   mercator.hpp
   meter.hpp
-  packer.cpp
-  packer.hpp
   parametrized_segment.hpp
   point2d.hpp
   polygon.hpp
