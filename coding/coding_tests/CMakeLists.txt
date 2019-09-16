@@ -32,7 +32,6 @@ set(
   test_polylines.cpp
   test_polylines.hpp
   traffic_test.cpp
-  uri_test.cpp
   url_encode_test.cpp
   value_opt_string_test.cpp
   var_record_reader_test.cpp
