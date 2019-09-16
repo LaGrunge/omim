@@ -26,7 +26,6 @@ set(
   platform.hpp
   preferred_languages.cpp
   preferred_languages.hpp
-  secure_storage.hpp
   settings.cpp
   settings.hpp
   socket.hpp
