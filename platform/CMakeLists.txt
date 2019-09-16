@@ -13,8 +13,6 @@ set(
   country_file.hpp
   get_text_by_id.cpp
   get_text_by_id.hpp
-  http_request.cpp
-  http_request.hpp
   http_thread_callback.hpp
   http_user_agent.cpp
   http_user_agent.hpp
