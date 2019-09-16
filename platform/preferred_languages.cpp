@@ -4,7 +4,7 @@
 #include "base/logging.hpp"
 #include "base/macros.hpp"
 
-#include "std/target_os.hpp"
+#include "platform/target_os.hpp"
 #include "std/set.hpp"
 #include "std/vector.hpp"
 
@@ -12,7 +12,7 @@
   #include <CoreFoundation/CFLocale.h>
   #include <CoreFoundation/CFString.h>
 #elif defined(GEOCORE_OS_LINUX)
-  #include "std/cstdlib.hpp"
+  #include <cstdlib>
 #endif
 
 namespace languages

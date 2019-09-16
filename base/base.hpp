@@ -32,4 +32,4 @@ static_assert(MY_DEBUG_DEFINED ^ MY_RELEASE_DEFINED, "Either Debug or Release sh
 #endif
 
 // platform macroses
-#include "std/target_os.hpp"
+#include "platform/target_os.hpp"

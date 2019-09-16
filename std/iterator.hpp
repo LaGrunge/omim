@@ -1,9 +1,5 @@
 #pragma once
 
-#ifdef new
-#undef new
-#endif
-
 #include <iterator>
 
 using std::advance;
@@ -20,6 +16,3 @@ using std::iterator_traits;
 using std::next;
 using std::reverse_iterator;
 
-#ifdef DEBUG_NEW
-#define new DEBUG_NEW
-#endif

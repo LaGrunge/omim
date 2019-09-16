@@ -1,6 +1,6 @@
 #pragma once
 
-#include "std/target_os.hpp"
+#include "platform/target_os.hpp"
 
 #if defined(GEOCORE_OS_LINUX)
 #include <cassert>

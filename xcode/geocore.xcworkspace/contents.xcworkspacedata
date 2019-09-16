@@ -134,7 +134,7 @@
          location = "group:../std/string.hpp">
       </FileRef>
       <FileRef
-         location = "group:../std/target_os.hpp">
+         location = "group:../platform/target_os.hpp">
       </FileRef>
       <FileRef
          location = "group:../std/tuple.hpp">
