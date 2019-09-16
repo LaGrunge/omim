@@ -19,7 +19,6 @@ set(
   dfa_helpers.hpp
   exception.cpp
   exception.hpp
-  fifo_cache.hpp
   file_name_utils.cpp
   file_name_utils.hpp
   geo_object_id.cpp
