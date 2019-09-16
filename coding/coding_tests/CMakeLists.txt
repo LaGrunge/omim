@@ -7,7 +7,6 @@ set(
   compressed_bit_vector_test.cpp
   csv_reader_test.cpp
   dd_vector_test.cpp
-  diff_test.cpp
   elias_coder_test.cpp
   endianness_test.cpp
   file_container_test.cpp
