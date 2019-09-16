@@ -69,7 +69,6 @@ set(
   string_utf8_multilang.hpp
   succinct_mapper.hpp
   tesselator_decl.hpp
-  text_storage.hpp
   traffic.cpp
   traffic.hpp
   transliteration.cpp

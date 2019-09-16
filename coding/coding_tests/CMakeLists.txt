@@ -31,7 +31,6 @@ set(
   succinct_mapper_test.cpp
   test_polylines.cpp
   test_polylines.hpp
-  text_storage_tests.cpp
   traffic_test.cpp
   uri_test.cpp
   url_encode_test.cpp
