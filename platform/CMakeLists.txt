@@ -38,7 +38,6 @@ set(
 append(
   SRC
   localization_dummy.cpp
-  network_policy_dummy.cpp
   platform_std.cpp
   wifi_info.hpp
 )
