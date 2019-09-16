@@ -26,8 +26,6 @@ set(
   classificator.hpp
   classificator_loader.cpp
   classificator_loader.hpp
-  cuisines.cpp
-  cuisines.hpp
   data_factory.cpp
   data_factory.hpp
   data_header.cpp

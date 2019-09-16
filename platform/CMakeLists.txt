@@ -9,8 +9,6 @@ set(
   country_defines.hpp
   country_file.cpp
   country_file.hpp
-  get_text_by_id.cpp
-  get_text_by_id.hpp
   local_country_file.cpp
   local_country_file.hpp
   local_country_file_utils.cpp

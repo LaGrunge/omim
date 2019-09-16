@@ -3,7 +3,6 @@ project(platform_tests)
 set(
   SRC
   country_file_tests.cpp
-  get_text_by_id_tests.cpp
   jansson_test.cpp
   language_test.cpp
   measurement_tests.cpp

@@ -1,11 +1,12 @@
 #include "indexer/editable_map_object.hpp"
 #include "indexer/classificator.hpp"
-#include "indexer/cuisines.hpp"
 #include "indexer/postcodes_matcher.hpp"
 
 #include "base/control_flow.hpp"
 #include "base/macros.hpp"
 #include "base/string_utils.hpp"
+
+#include "platform/preferred_languages.hpp"
 
 #include <algorithm>
 #include <codecvt>
@@ -539,11 +540,6 @@ void EditableMapObject::SetLevel(string const & level)
 }
 
 LocalizedStreet const & EditableMapObject::GetStreet() const { return m_street; }
-
-void EditableMapObject::SetCuisines(vector<string> const & cuisine)
-{
-  m_metadata.Set(feature::Metadata::FMD_CUISINE, strings::JoinStrings(cuisine, ';'));
-}
 
 void EditableMapObject::SetOpeningHours(string const & openingHours)
 {
