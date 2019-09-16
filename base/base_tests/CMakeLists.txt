@@ -35,7 +35,6 @@ set(
   timegm_test.cpp
   timer_test.cpp
   uni_string_dfa_test.cpp
-  url_helpers_tests.cpp
   visitor_tests.cpp
 )
 
