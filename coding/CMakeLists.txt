@@ -62,8 +62,6 @@ set(
   reader_wrapper.hpp
   reader_writer_ops.cpp
   reader_writer_ops.hpp
-  serdes_binary_header.hpp
-  serdes_json.hpp
   sha1.cpp
   sha1.hpp
   simple_dense_coding.cpp
