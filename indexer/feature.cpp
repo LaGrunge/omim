@@ -19,7 +19,6 @@
 
 #include "base/assert.hpp"
 #include "base/logging.hpp"
-#include "base/range_iterator.hpp"
 #include "base/stl_helpers.hpp"
 
 #include <algorithm>
