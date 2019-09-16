@@ -16,8 +16,6 @@ set(
   condition.cpp
   condition.hpp
   control_flow.hpp
-  deferred_task.cpp
-  deferred_task.hpp
   dfa_helpers.hpp
   exception.cpp
   exception.hpp
