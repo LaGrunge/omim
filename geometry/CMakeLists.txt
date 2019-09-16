@@ -29,7 +29,6 @@ set(
   parametrized_segment.hpp
   point2d.hpp
   polygon.hpp
-  polyline2d.hpp
   rect2d.hpp
   rect_intersect.hpp
   region2d.hpp
