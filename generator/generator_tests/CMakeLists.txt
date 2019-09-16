@@ -37,5 +37,4 @@ geocore_link_libraries(
   generator_tests_support
   platform_tests_support
   generator
-  gflags
 )

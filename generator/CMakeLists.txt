@@ -1,10 +1,5 @@
 project(generator)
 
-include_directories(
-  ${GEOCORE_ROOT}/3party/gflags/src
-  ${GEOCORE_ROOT}/3party/jansson/src
-)
-
 set(
   SRC
   affiliation.cpp
@@ -189,8 +184,6 @@ geocore_link_libraries(${PROJECT_NAME}
   geometry
   jansson
 )
-
-
 
 geocore_add_test_subdirectory(generator_tests_support)
 geocore_add_test_subdirectory(generator_tests)

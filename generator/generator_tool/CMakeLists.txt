@@ -7,6 +7,6 @@ geocore_link_libraries(
   ${PROJECT_NAME}
   generator
   geocoder
-  gflags
-  ${CMAKE_DL_LIBS}  
+  ${Boost_PROGRAM_OPTIONS_LIBRARY}
+  ${CMAKE_DL_LIBS}
 )

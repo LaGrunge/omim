@@ -4,14 +4,10 @@ add_definitions(-DU_DISABLE_RENAMING)
 
 include_directories(
   ${GEOCORE_ROOT}/coding
-  ${GEOCORE_ROOT}/3party/expat
-  ${GEOCORE_ROOT}/3party/icu/common
-  ${GEOCORE_ROOT}/3party/icu/i18n
 )
 
 set(
   SRC
-  ${GEOCORE_ROOT}/3party/expat/expat_impl.h
   base64.cpp
   base64.hpp
   bit_streams.hpp
