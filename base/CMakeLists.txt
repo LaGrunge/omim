@@ -13,7 +13,6 @@ set(
   cache.hpp
   cancellable.hpp
   checked_cast.hpp
-  clustering_map.hpp
   collection_cast.hpp
   condition.cpp
   condition.hpp
