@@ -55,10 +55,6 @@ if [ -z "$OPT_DEBUG$OPT_RELEASE" ]; then
 fi
 
 GEOCORE_PATH="$(cd "${GEOCORE_PATH:-$(dirname "$0")/../..}"; pwd)"
-if ! grep "DEFAULT_URLS_JSON" "$GEOCORE_PATH/private.h" >/dev/null 2>/dev/null; then
-  echo "Please run $GEOCORE_PATH/configure.sh"
-  exit 2
-fi
 
 DEVTOOLSET_PATH=/opt/rh/devtoolset-7
 if [ -d "$DEVTOOLSET_PATH" ]; then

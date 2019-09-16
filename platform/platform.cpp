@@ -16,8 +16,6 @@
 
 #include "std/target_os.hpp"
 
-#include "private.h"
-
 #include <errno.h>
 
 using namespace std;
