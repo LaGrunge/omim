@@ -40,7 +40,6 @@ set(
   normalize_unicode.cpp
   observer_list.hpp
   ref_counted.hpp
-  rolling_hash.hpp
   scope_guard.hpp
   set_operations.hpp
   shared_buffer_manager.cpp
