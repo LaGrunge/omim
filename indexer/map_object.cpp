@@ -1,6 +1,5 @@
 #include "map_object.hpp"
 
-#include "indexer/cuisines.hpp"
 #include "indexer/feature.hpp"
 #include "indexer/feature_algo.hpp"
 #include "indexer/ftypes_matcher.hpp"
@@ -156,22 +155,6 @@ Internet MapObject::GetInternet() const
     return Internet::No;
   return Internet::Unknown;
 }
-
-vector<string> MapObject::GetCuisines() const
-{
-  vector<string> cuisines;
-  Cuisines::Instance().Parse(m_metadata.Get(feature::Metadata::FMD_CUISINE), cuisines);
-  return cuisines;
-}
-
-vector<string> MapObject::GetLocalizedCuisines() const
-{
-  vector<string> localized;
-  Cuisines::Instance().ParseAndLocalize(m_metadata.Get(feature::Metadata::FMD_CUISINE), localized);
-  return localized;
-}
-
-string MapObject::FormatCuisines() const { return strings::JoinStrings(GetLocalizedCuisines(), " • "); }
 
 string MapObject::GetOpeningHours() const
 {

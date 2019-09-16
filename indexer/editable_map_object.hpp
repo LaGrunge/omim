@@ -149,8 +149,6 @@ public:
 
   void SetBuildingLevels(std::string const & buildingLevels);
   void SetLevel(std::string const & level);
-  /// @param[in] cuisine is a vector of osm cuisine ids.
-  void SetCuisines(std::vector<std::string> const & cuisine);
   void SetOpeningHours(std::string const & openingHours);
 
   /// Special mark that it's a point feature, not area or line.

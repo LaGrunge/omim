@@ -77,12 +77,6 @@ public:
   std::string GetEmail() const;
   std::string GetWebsite() const;
   Internet GetInternet() const;
-  /// @returns not localized cuisines keys.
-  std::vector<std::string> GetCuisines() const;
-  /// @returns translated cuisine(s).
-  std::vector<std::string> GetLocalizedCuisines() const;
-  /// @returns translated and formatted cuisines.
-  std::string FormatCuisines() const;
   std::string GetOpeningHours() const;
   std::string GetOperator() const;
   int GetStars() const;
