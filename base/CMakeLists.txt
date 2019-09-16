@@ -41,7 +41,6 @@ set(
   observer_list.hpp
   ref_counted.hpp
   scope_guard.hpp
-  set_operations.hpp
   src_point.cpp
   src_point.hpp
   stats.hpp

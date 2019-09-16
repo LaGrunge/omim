@@ -17,7 +17,6 @@ set(
   clipping.hpp
   convex_hull.cpp
   convex_hull.hpp
-  covering.hpp
   covering_utils.hpp
   diamond_box.cpp
   diamond_box.hpp

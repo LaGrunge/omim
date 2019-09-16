@@ -13,7 +13,6 @@ set(
   clipping_test.cpp
   common_test.cpp
   convex_hull_tests.cpp
-  covering_test.cpp
   diamond_box_tests.cpp
   distance_on_sphere_test.cpp
   equality.hpp
