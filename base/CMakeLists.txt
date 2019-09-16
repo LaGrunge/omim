@@ -50,8 +50,6 @@ set(
   string_format.hpp
   string_utils.cpp
   string_utils.hpp
-  sunrise_sunset.cpp
-  sunrise_sunset.hpp
   task_loop.hpp
   thread.cpp
   thread.hpp
