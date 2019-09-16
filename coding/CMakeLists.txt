@@ -35,7 +35,6 @@ set(
   file_sort.hpp
   file_writer.cpp
   file_writer.hpp
-  fixed_bits_ddvector.hpp
   geometry_coding.cpp
   geometry_coding.hpp
   hex.cpp
