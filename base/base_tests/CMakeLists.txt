@@ -19,7 +19,6 @@ set(
   math_test.cpp
   matrix_test.cpp
   mem_trie_test.cpp
-  newtype_test.cpp
   non_intersecting_intervals_tests.cpp
   observer_list_test.cpp
   range_iterator_test.cpp

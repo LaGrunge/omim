@@ -37,7 +37,6 @@ set(
   matrix.hpp
   mem_trie.hpp
   mutex.hpp
-  newtype.hpp
   normalize_unicode.cpp
   non_intersecting_intervals.hpp
   observer_list.hpp
