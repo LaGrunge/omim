@@ -7,7 +7,6 @@ set(
   angles.cpp
   angles.hpp
   any_rect2d.hpp
-  avg_vector.hpp
   bounding_box.cpp
   bounding_box.hpp
   calipers_box.cpp

@@ -37,7 +37,6 @@ set(
   test_regions.hpp
   transformations_test.cpp
   tree_test.cpp
-  vector_test.cpp
 )
 
 geocore_add_test(${PROJECT_NAME} ${SRC})
