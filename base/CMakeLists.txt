@@ -46,7 +46,6 @@ set(
   src_point.hpp
   stats.hpp
   stl_helpers.hpp
-  stl_iterator.hpp
   string_format.cpp
   string_format.hpp
   string_utils.cpp
