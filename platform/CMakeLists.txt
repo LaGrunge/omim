@@ -20,8 +20,6 @@ set(
   localization.hpp
   measurement_utils.cpp
   measurement_utils.hpp
-  mwm_traits.cpp
-  mwm_traits.hpp
   mwm_version.cpp
   mwm_version.hpp
   platform.cpp
