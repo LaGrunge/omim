@@ -23,7 +23,6 @@ set(
   ref_counted_tests.cpp
   regexp_test.cpp
   scope_guard_test.cpp
-  small_set_test.cpp
   stl_helpers_tests.cpp
   string_format_test.cpp
   string_utils_test.cpp
