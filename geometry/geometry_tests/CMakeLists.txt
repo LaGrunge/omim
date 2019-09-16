@@ -30,7 +30,6 @@ set(
   screen_test.cpp
   segment2d_tests.cpp
   simplification_test.cpp
-  spline_test.cpp
   test_regions.hpp
   transformations_test.cpp
   tree_test.cpp

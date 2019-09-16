@@ -39,8 +39,6 @@ set(
   segment2d.cpp
   segment2d.hpp
   simplification.hpp
-  spline.cpp
-  spline.hpp
   transformations.hpp
   tree4d.hpp
   triangle2d.cpp
