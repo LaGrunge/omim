@@ -18,12 +18,16 @@ set(
   local_country_file_utils.cpp
   local_country_file_utils.hpp
   localization.hpp
+  localization_dummy.cpp
   measurement_utils.cpp
   measurement_utils.hpp
   mwm_version.cpp
   mwm_version.hpp
   platform.cpp
   platform.hpp
+  platform_std.cpp
+  platform_unix_impl.cpp
+  platform_unix_impl.hpp
   preferred_languages.cpp
   preferred_languages.hpp
   settings.cpp
@@ -34,28 +38,16 @@ set(
   target_os.hpp
 )
 
-append(
-  SRC
-  localization_dummy.cpp
-  platform_std.cpp
-  wifi_info.hpp
-)
-
 if(${PLATFORM_MAC})
   append(
     SRC
     platform_mac.mm
-    platform_unix_impl.cpp
-    platform_unix_impl.hpp
     socket_apple.mm
-    http_session_manager.mm
   )
 elseif(${PLATFORM_LINUX})
   append(
     SRC
     platform_linux.cpp
-    platform_unix_impl.cpp
-    platform_unix_impl.hpp
   )
 endif()
 
