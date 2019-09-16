@@ -10,8 +10,6 @@ set(
   bidirectional_map.hpp
   bits.hpp
   buffer_vector.hpp
-  bwt.cpp
-  bwt.hpp
   cache.hpp
   cancellable.hpp
   checked_cast.hpp
