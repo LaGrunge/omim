@@ -10,7 +10,6 @@ set(
   bounding_box_tests.cpp
   calipers_box_tests.cpp
   cellid_test.cpp
-  clipping_test.cpp
   common_test.cpp
   convex_hull_tests.cpp
   diamond_box_tests.cpp
