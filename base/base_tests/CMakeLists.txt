@@ -20,7 +20,6 @@ set(
   matrix_test.cpp
   mem_trie_test.cpp
   observer_list_test.cpp
-  range_iterator_test.cpp
   ref_counted_tests.cpp
   regexp_test.cpp
   rolling_hash_test.cpp
