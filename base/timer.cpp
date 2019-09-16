@@ -1,7 +1,6 @@
 #include "base/timer.hpp"
 
 #include "base/assert.hpp"
-#include "base/get_time.hpp"
 #include "base/gmtime.hpp"
 #include "base/macros.hpp"
 #include "base/timegm.hpp"
@@ -19,6 +18,8 @@
 
 namespace base
 {
+using std::get_time;
+
 Timer::Timer(bool start/* = true*/)
 {
   if (start)
