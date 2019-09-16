@@ -1,7 +1,6 @@
 #pragma once
 
 #include "platform/country_defines.hpp"
-#include "platform/http_user_agent.hpp"
 
 #include "coding/reader.hpp"
 

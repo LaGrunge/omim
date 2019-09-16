@@ -13,8 +13,6 @@ set(
   country_file.hpp
   get_text_by_id.cpp
   get_text_by_id.hpp
-  http_user_agent.cpp
-  http_user_agent.hpp
   local_country_file.cpp
   local_country_file.hpp
   local_country_file_utils.cpp
@@ -41,7 +39,6 @@ set(
 
 append(
   SRC
-  http_user_agent_dummy.cpp
   localization_dummy.cpp
   network_policy_dummy.cpp
   platform_std.cpp
