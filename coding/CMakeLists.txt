@@ -73,8 +73,6 @@ set(
   traffic.hpp
   transliteration.cpp
   transliteration.hpp
-  uri.cpp
-  uri.hpp
   url_encode.hpp
   value_opt_string.hpp
   var_record_reader.hpp
