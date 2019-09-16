@@ -39,8 +39,6 @@ set(
   mutex.hpp
   normalize_unicode.cpp
   observer_list.hpp
-  random.cpp
-  random.hpp
   range_iterator.hpp
   ref_counted.hpp
   rolling_hash.hpp
