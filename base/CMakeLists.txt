@@ -38,7 +38,6 @@ set(
   mem_trie.hpp
   mutex.hpp
   normalize_unicode.cpp
-  non_intersecting_intervals.hpp
   observer_list.hpp
   pprof.cpp
   pprof.hpp
