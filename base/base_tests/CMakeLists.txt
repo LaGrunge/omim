@@ -11,7 +11,6 @@ set(
   buffer_vector_test.cpp
   cache_test.cpp
   condition_test.cpp
-  containers_test.cpp
   control_flow_tests.cpp
   file_name_utils_tests.cpp
   geo_object_id_tests.cpp
