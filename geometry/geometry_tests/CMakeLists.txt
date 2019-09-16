@@ -20,7 +20,6 @@ set(
   latlon_test.cpp
   line2d_tests.cpp
   mercator_test.cpp
-  nearby_points_sweeper_test.cpp
   packer_test.cpp
   parametrized_segment_tests.cpp
   point_test.cpp
