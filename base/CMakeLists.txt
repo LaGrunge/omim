@@ -36,8 +36,6 @@ set(
   math.hpp
   matrix.hpp
   mem_trie.hpp
-  move_to_front.cpp
-  move_to_front.hpp
   mutex.hpp
   newtype.hpp
   normalize_unicode.cpp
