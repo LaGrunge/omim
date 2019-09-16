@@ -11,8 +11,6 @@ set(
   country_defines.hpp
   country_file.cpp
   country_file.hpp
-  file_logging.cpp
-  file_logging.hpp
   get_text_by_id.cpp
   get_text_by_id.hpp
   http_request.cpp
