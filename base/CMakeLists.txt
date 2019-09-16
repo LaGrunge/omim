@@ -42,8 +42,6 @@ set(
   ref_counted.hpp
   scope_guard.hpp
   set_operations.hpp
-  shared_buffer_manager.cpp
-  shared_buffer_manager.hpp
   small_set.hpp
   src_point.cpp
   src_point.hpp
