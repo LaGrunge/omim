@@ -8,16 +8,22 @@ jobs:
     steps:
     - name: Install Boost
       run:  sudo apt install libboost-all-dev
+    - name: Install lcov
+      run:  sudo apt install lcov
     - name: Clone repo
       uses: actions/checkout@v1
       with:
         submodules: true
     - name: Configure
-      run:  cmake . 
+      run:  cmake -DCODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug .
     - name: Build
-      run:  make -j 8
+      run:  make -j $(nproc)
     - name: Unit tests
       run:  env CTEST_OUTPUT_ON_FAILURE=1 make test
+    - name: Coverage
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: ./coverage.sh
 
   build_clang:
     name: MacOS Clang build and unit tests
@@ -32,6 +38,6 @@ jobs:
     - name: Configure
       run:  cmake .
     - name: Build
-      run:  make -j 8
+      run:  make -j $(nproc)
     - name: Unit tests
       run:  env CTEST_OUTPUT_ON_FAILURE=1 make test

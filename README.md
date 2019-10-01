@@ -3,6 +3,13 @@
 Bunch of code for geoservices
 
 ![Actions Status](http://aliyunfc.tarocch1.com/github-actions-badge/LaGrunge/omim/?style=flat-square)
+[codecov-badge]:   https://codecov.io/gh/LaGrunge/omim/branch/master/graph/badge.svg
+[codecov-link]:    https://codecov.io/gh/LaGrunge/omim
+[![codecov][codecov-badge]][codecov-link]
+
+
+
+
 
 ## Submodules
 
